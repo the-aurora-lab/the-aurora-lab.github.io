@@ -234,3 +234,56 @@ figcaption b { color: var(--paper-text); }
 .footer .brand { color: var(--muted); font-weight: 500; }
 .footer nav { display: flex; gap: 18px; }
 .footer nav a { color: var(--muted); }
+
+/* ---------- Docs pages ---------- */
+.docs-hero { padding: 56px 0 32px; border-bottom: 1px solid var(--line); position: relative; overflow: hidden; isolation: isolate; }
+.docs-hero .aurora { opacity: .35; }
+.crumbs { font: 500 13px var(--mono); color: var(--muted); margin: 0 0 14px; }
+.crumbs a { color: var(--muted); }
+.docs-hero h1 { font-size: clamp(34px, 5.5vw, 52px); }
+.docs-hero .lede { margin-top: 14px; }
+.meta { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 22px; padding: 0; list-style: none; }
+.meta li { font: 500 12.5px var(--mono); color: var(--muted); border: 1px solid var(--line); border-radius: 999px; padding: 5px 11px; background: var(--surface); }
+.docs { display: grid; gap: 40px; padding-top: 48px; padding-bottom: 88px; }
+@media (min-width: 980px) { .docs { grid-template-columns: 220px minmax(0, 1fr); gap: 56px; } }
+.toc { font-size: 14px; }
+@media (min-width: 980px) { .toc { position: sticky; top: 84px; align-self: start; max-height: calc(100vh - 100px); overflow: auto; } }
+.toc p { margin: 0 0 8px; font: 500 12px var(--mono); letter-spacing: .08em; text-transform: uppercase; color: var(--accent); }
+.toc ol { list-style: none; margin: 0; padding: 0; display: grid; gap: 2px; }
+@media (max-width: 979px) { .toc ol { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+.toc a { display: block; padding: 6px 10px; border-radius: 8px; color: var(--muted); text-decoration: none; }
+.toc a:hover { color: var(--text); background: var(--surface); }
+.prose-doc { max-width: 760px; min-width: 0; }
+.prose-doc section { scroll-margin-top: 84px; padding-bottom: 8px; }
+.prose-doc h2 { font-size: 28px; margin: 48px 0 14px; }
+.prose-doc section:first-child h2 { margin-top: 0; }
+.prose-doc h3 { font-size: 19px; margin: 26px 0 8px; }
+.prose-doc p, .prose-doc li { color: var(--muted); }
+.prose-doc p strong, .prose-doc li strong { color: var(--text); }
+.prose-doc ul, .prose-doc ol.steps-list { padding-left: 20px; }
+.prose-doc li { margin-bottom: 6px; }
+.prose-doc li::marker { color: var(--accent); }
+.prose-doc code { background: var(--surface); border: 1px solid var(--line); border-radius: 6px; padding: 1px 6px; color: var(--text); }
+.prose-doc pre code { background: none; border: 0; padding: 0; color: inherit; }
+.prose-doc pre { margin: 14px 0 18px; }
+.callout { border: 1px solid var(--line); border-left: 3px solid var(--accent); background: var(--surface); border-radius: 0 12px 12px 0; padding: 14px 18px; margin: 18px 0; }
+.callout p { margin: 0; }
+.doc-table { overflow-x: auto; border: 1px solid var(--line); border-radius: 12px; margin: 14px 0 20px; }
+.doc-table table { font-size: 14px; }
+.doc-table th { background: var(--surface); color: var(--text); }
+.doc-table th, .doc-table td { border-bottom: 1px solid var(--line); white-space: normal; vertical-align: top; }
+.doc-table td { color: var(--muted); }
+.doc-table td code { white-space: nowrap; }
+.shots { display: grid; gap: 18px; margin: 16px 0 8px; }
+.shots figure { margin: 0; }
+.shots img { border-radius: 12px; border: 1px solid var(--line); background: #fff; width: 100%; }
+.shots figcaption { color: var(--muted); padding: 8px 2px 0; font-size: 14px; }
+.prompt { font-family: var(--serif); font-style: italic; font-size: 17px; color: var(--text) !important; }
+.skill-cards { display: grid; gap: 16px; margin-top: 36px; }
+@media (min-width: 820px) { .skill-cards { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+.skill-card { display: flex; gap: 16px; align-items: flex-start; padding: 20px; border: 1px solid var(--line); border-radius: var(--radius); background: var(--surface); color: var(--text); text-decoration: none; }
+.skill-card:hover { border-color: var(--accent); }
+.skill-card img { width: 56px; height: 56px; border-radius: 12px; flex: none; }
+.skill-card h3 { font-size: 20px; margin: 0 0 6px; }
+.skill-card p { margin: 0; color: var(--muted); font-size: 15px; }
+.skill-card .soon { opacity: .6; }
