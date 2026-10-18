@@ -287,3 +287,8 @@ figcaption b { color: var(--paper-text); }
 .skill-card h3 { font-size: 20px; margin: 0 0 6px; }
 .skill-card p { margin: 0; color: var(--muted); font-size: 15px; }
 .skill-card .soon { opacity: .6; }
+.prose-doc ol { padding-left: 20px; }
+.prose-doc li em { font-family: var(--serif); font-size: 1.05em; color: var(--text); }
+.prose-doc h2 code { font-size: .8em; }
+@media (prefers-color-scheme: dark) { .prose-doc pre { background: #141c33; border: 1px solid var(--line); } }
+@media (max-width: 600px) { .doc-table td code { white-space: normal; overflow-wrap: anywhere; } .doc-table th, .doc-table td { padding: 8px 10px; } }

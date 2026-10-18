@@ -6,7 +6,7 @@
   <title>Paper Figures · Aurora Lab</title>
   <meta name="description" content="Documentation for the Paper Figures agent skill: honest, publication-ready scientific figures with a colour-blind-safe journal style and a verification pass.">
   <meta property="og:title" content="Paper Figures · Aurora Lab">
-  <meta property="og:description" content="Honest, publication-ready scientific figures from your results. Skill documentation.">
+  <meta property="og:description" content="Documentation for the Paper Figures agent skill: honest, publication-ready scientific figures with a colour-blind-safe journal style and a verification pass.">
   <meta property="og:image" content="https://the-aurora-lab.github.io/assets/shots/paper-figures/01-figure.png">
   <meta name="theme-color" content="#0b1020">
   <link rel="icon" type="image/png" href="../../assets/img/avatar.png">
@@ -37,16 +37,11 @@
       <div class="wrap">
         <p class="crumbs"><a href="../../">Aurora Lab</a> / <a href="../../#skills">Skills</a> / Paper Figures</p>
         <h1>Paper Figures</h1>
-        <p class="lede">Honest, publication-ready scientific figures from your results. Your agent decides what to plot for the claim you're making, applies a colour-blind-safe journal style, checks the figure before calling it done, and writes a caption and spec file next to it.</p>
-        <ul class="meta" aria-label="Skill facts">
-          <li>v1.0.0</li>
-          <li>Python 3.10+ · matplotlib</li>
-          <li>No network access</li>
-          <li>Works with any SKILL.md agent</li>
-        </ul>
+        <p class="lede">Honest, publication-ready scientific figures from your results. Your agent decides what to plot for the claim you&#x27;re making, applies a colour-blind-safe journal style, checks the figure before calling it done, and writes a caption and spec file next to it.</p>
+        <ul class="meta" aria-label="Skill facts"><li>v1.0.0</li><li>Python 3.10+ · matplotlib</li><li>No network access</li><li>Works with any SKILL.md agent</li></ul>
         <div class="cta">
           <a class="btn" href="https://www.agensi.io/creators/aurora-lab">Get it on Agensi · $7</a>
-          <a class="btn btn-ghost" href="#quick-start">Quick start</a>
+          <a class="btn btn-ghost" href="#overview">Read the docs</a>
         </div>
       </div>
     </section>
@@ -54,190 +49,231 @@
     <div class="wrap docs">
       <nav class="toc" aria-label="On this page">
         <p>On this page</p>
-        <ol>
-          <li><a href="#overview">Overview</a></li>
-          <li><a href="#quick-start">Quick start</a></li>
-          <li><a href="#gallery">What you get</a></li>
-          <li><a href="#workflow">How it works</a></li>
-          <li><a href="#honesty">Honesty checks</a></li>
-          <li><a href="#outputs">Files it writes</a></li>
-          <li><a href="#helper">Style helper</a></li>
-          <li><a href="#widths">Journal widths</a></li>
-          <li><a href="#research-folder">research/ folder</a></li>
-          <li><a href="#faq">FAQ</a></li>
-          <li><a href="#limitations">Limitations</a></li>
-          <li><a href="#changelog">Changelog</a></li>
-        </ol>
+        <ol><li><a href="#overview">Overview</a></li><li><a href="#quick-start">Quick start</a></li><li><a href="#gallery">What you get</a></li><li><a href="#workflow">How it works</a></li><li><a href="#honesty">Honesty checks</a></li><li><a href="#outputs">Files it writes</a></li><li><a href="#helper">Style helper</a></li><li><a href="#widths">Journal widths</a></li><li><a href="#research-folder">The <code>research/</code> folder</a></li><li><a href="#faq">FAQ</a></li><li><a href="#limitations">Limitations</a></li><li><a href="#changelog">Changelog</a></li></ol>
       </nav>
-
       <article class="prose-doc">
-        <section id="overview">
-          <h2>Overview</h2>
-          <p>A figure is an argument: its shape makes a claim before anyone reads a label, and it can overstate a result as easily as a sentence can. Paper Figures turns your agent into a careful figure collaborator that:</p>
-          <ul>
-            <li><strong>Picks the plot that fits the claim.</strong> Dot plots instead of bar charts for small groups, every interval named, n on the figure, honest axis ranges.</li>
-            <li><strong>Keeps the figure honest.</strong> No cherry-picked examples, schematics marked as schematics, equations checked against the code, captions that claim no more than the evidence.</li>
-            <li><strong>Makes it journal-ready.</strong> Okabe–Ito colours, exact column widths, embedded TrueType fonts, PDF and PNG export from one helper.</li>
-            <li><strong>Verifies before it's done</strong>, including a font check that catches the Type 3 fonts many journals reject.</li>
-            <li><strong>Documents every figure</strong> with a caption and a spec file, so the next edit doesn't undo a deliberate choice.</li>
-          </ul>
-        </section>
-
-        <section id="quick-start">
-          <h2>Quick start</h2>
-          <ol class="steps-list">
-            <li><strong>Get the skill</strong> from <a href="https://www.agensi.io/creators/aurora-lab">Agensi</a> and add it to your agent (Claude Code, Codex CLI, Cursor, Gemini CLI or any agent that loads SKILL.md skills).</li>
-            <li><strong>Have Python 3.10+ with matplotlib</strong> in the project's environment (numpy for the bundled example).</li>
-            <li><strong>Ask in plain words.</strong> For example:</li>
-          </ol>
-          <ul>
-            <li class="prompt">"Make Figure 2 from research/results/dose_response.json for a Nature-family journal, single column."</li>
-            <li class="prompt">"We need a Figure 1 that explains the method. Propose a design before drawing anything."</li>
-            <li class="prompt">"Is this figure ready to submit?" (with the PDF attached or its path)</li>
-            <li class="prompt">"Panel c hides the replicates. Fix it and keep the colours."</li>
-          </ul>
-          <div class="callout"><p>No data at hand? The skill ships a complete worked example: <code>python paper-figures/examples/make_example_figure.py --out research/figures</code> builds a two-panel figure with its caption and spec.</p></div>
-        </section>
-
-        <section id="gallery">
-          <h2>What you get</h2>
-          <p>The figure, its spec file and the session excerpt come from a real run: a fresh agent session with only this skill installed, given two results files and the first prompt above. The "before" image is the same data plotted with matplotlib defaults.</p>
-          <div class="shots">
-            <figure><img src="../../assets/shots/paper-figures/01-figure.png" alt="Two-panel figure produced by the skill: a dose-response curve with replicates, means, intervals and fits, and a dot plot with n under each condition." loading="lazy"><figcaption>The figure, at Nature single-column width.</figcaption></figure>
-            <figure><img src="../../assets/shots/paper-figures/02-before-after.png" alt="Side-by-side comparison of a default matplotlib bar chart and the skill's figure for the same data." loading="lazy"><figcaption>Same data: matplotlib defaults against the skill's output.</figcaption></figure>
-            <figure><img src="../../assets/shots/paper-figures/03-spec.png" alt="The caption and spec file the skill writes next to the figure." loading="lazy"><figcaption>The caption and spec file written next to the figure.</figcaption></figure>
-            <figure><img src="../../assets/shots/paper-figures/04-session.png" alt="Excerpt of the agent session: the plan, the checks it ran and their results." loading="lazy"><figcaption>The agent's plan, checks and report.</figcaption></figure>
-          </div>
-        </section>
-
-        <section id="workflow">
-          <h2>How it works</h2>
-          <h3>Two modes</h3>
-          <ul>
-            <li><strong>Unguided</strong> ("we need a Figure 1", "plot these results"): the agent names the claim the figure must make, looks at how comparable papers draw it, and proposes colour, type size and layout at true column width before writing any plotting code.</li>
-            <li><strong>Guided</strong> ("make panel c shorter"): it does exactly what you ask, but checks the facts it is about to draw and tells you once if a request would make the figure say something false, offering the nearest honest alternative.</li>
-          </ul>
-          <h3>The steps</h3>
-          <ol class="steps-list">
-            <li><strong>Design</strong>: name the claim and the evidence file behind it; choose the plot type from the claim.</li>
-            <li><strong>Build</strong>: plotting code that calls the style helper first, so sizes and fonts are right from the start.</li>
-            <li><strong>Check honesty</strong>: the review in the next section.</li>
-            <li><strong>Verify</strong>: look at the rendered PNG and a crop of every panel, check fonts and page size, sweep the PDF text, confirm the caption matches what the code computed.</li>
-            <li><strong>Document</strong>: write the caption and spec file.</li>
-          </ol>
-        </section>
-
-        <section id="honesty">
-          <h2>Honesty checks</h2>
-          <p>These are a review your agent carries out and reports on, not an automated linter. The font and size checks are automated by the helper.</p>
-          <ul>
-            <li><strong>Selection.</strong> Examples are chosen by a stated rule (for instance, nearest the 25th, 50th and 75th percentile of fit error), not because they look best.</li>
-            <li><strong>Intervals.</strong> Every error bar is named (95% CI, SD or SEM) with how it was computed and n. A result without an interval is drawn as a point and the caption says so.</li>
-            <li><strong>Axes.</strong> Bars start at zero; a truncated axis that magnifies a small difference states the difference in numbers.</li>
-            <li><strong>Schematics.</strong> Hand-drawn elements are marked as schematic in the code, the caption and the spec.</li>
-            <li><strong>Equations.</strong> Every equation drawn in a figure is checked against the code, not memory.</li>
-            <li><strong>Invisible differences.</strong> When two curves overlap, the difference is plotted and labelled as one.</li>
-            <li><strong>Captions.</strong> No significance stars for tests that weren't run; "higher" without an interval means "higher mean in this sample".</li>
-          </ul>
-        </section>
-
-        <section id="outputs">
-          <h2>Files it writes</h2>
-          <div class="doc-table"><table>
-            <thead><tr><th scope="col">File</th><th scope="col">What it is</th></tr></thead>
-            <tbody>
-              <tr><td><code>&lt;name&gt;.pdf</code></td><td>Vector figure at the exact column width, fonts embedded.</td></tr>
-              <tr><td><code>&lt;name&gt;.png</code></td><td>600 dpi raster preview of the same figure.</td></tr>
-              <tr><td><code>&lt;name&gt;.md</code></td><td>Caption plus spec: generator script and seed, data files, size and type, colour encodings, interval and fit definitions, deliberate choices, schematic elements.</td></tr>
-            </tbody>
-          </table></div>
-          <p>By default these go to <code>research/figures/</code>. Without a <code>research/</code> folder the agent asks where figures belong. It writes nothing else.</p>
-        </section>
-
-        <section id="helper">
-          <h2>Style helper</h2>
-          <p><code>scripts/figure_style.py</code> is a single file with no dependencies beyond matplotlib. Your agent copies it next to the figure script.</p>
-<pre><code>import matplotlib.pyplot as plt
+<section id="overview"><h2>Overview</h2>
+<p>A figure is an argument: its shape makes a claim before anyone reads a label, and it can overstate a result as easily as a sentence can. Paper Figures turns your agent into a careful figure collaborator that:</p>
+<ul>
+<li><strong>Picks the plot that fits the claim.</strong> Dot plots instead of bar charts for small groups, every interval named, n on the figure, honest axis ranges.</li>
+<li><strong>Keeps the figure honest.</strong> No cherry-picked examples, schematics marked as schematics, equations checked against the code, captions that claim no more than the evidence.</li>
+<li><strong>Makes it journal-ready.</strong> Okabe–Ito colours, exact column widths, embedded TrueType fonts, PDF and PNG export from one helper.</li>
+<li><strong>Verifies before it's done</strong>, including a font check that catches the Type 3 fonts many journals reject.</li>
+<li><strong>Documents every figure</strong> with a caption and a spec file, so the next edit doesn't undo a deliberate choice.</li>
+</ul>
+</section>
+<section id="quick-start"><h2>Quick start</h2>
+<ol>
+<li><strong>Get the skill</strong> from <a href="https://www.agensi.io/creators/aurora-lab">Agensi</a> and add it to your agent (Claude Code, Codex CLI, Cursor, Gemini CLI or any agent that loads SKILL.md skills).</li>
+<li><strong>Have Python 3.10+ with matplotlib</strong> in the project's environment (numpy for the bundled example).</li>
+<li><strong>Ask in plain words.</strong></li>
+</ol>
+<p>Example requests:</p>
+<ul>
+<li><em>"Make Figure 2 from research/results/dose_response.json for a Nature-family journal, single column."</em></li>
+<li><em>"We need a Figure 1 that explains the method. Propose a design before drawing anything."</em></li>
+<li><em>"Is this figure ready to submit?"</em> (with the PDF attached or its path)</li>
+<li><em>"Panel c hides the replicates. Fix it and keep the colours."</em></li>
+</ul>
+<div class="callout">
+<p>No data at hand? The skill ships a complete worked example: <code>python paper-figures/examples/make_example_figure.py --out research/figures</code> builds a two-panel figure with its caption and spec.</p>
+</div>
+</section>
+<section id="gallery"><h2>What you get</h2>
+<p>The figure, its spec file and the session excerpt come from a real run: a fresh agent session with only this skill installed, given two results files and the first prompt above. The "before" image is the same data plotted with matplotlib defaults.</p>
+<div class="shots"><figure><img src="../../assets/shots/paper-figures/01-figure.png" alt="Two-panel figure produced by the skill: a dose-response curve with replicates, means, intervals and fits, and a dot plot with n under each condition." loading="lazy"><figcaption>The figure, at Nature single-column width.</figcaption></figure><figure><img src="../../assets/shots/paper-figures/02-before-after.png" alt="Side-by-side comparison of a default matplotlib bar chart and the skill&#x27;s figure for the same data." loading="lazy"><figcaption>Same data: matplotlib defaults against the skill&#x27;s output.</figcaption></figure><figure><img src="../../assets/shots/paper-figures/03-spec.png" alt="The caption and spec file the skill writes next to the figure." loading="lazy"><figcaption>The caption and spec file written next to the figure.</figcaption></figure><figure><img src="../../assets/shots/paper-figures/04-session.png" alt="Excerpt of the agent session: the steps, the checks it ran and their results." loading="lazy"><figcaption>The agent&#x27;s steps, checks and report.</figcaption></figure></div>
+</section>
+<section id="workflow"><h2>How it works</h2>
+<h3 id="two-modes">Two modes</h3>
+<ul>
+<li><strong>Unguided</strong> ("we need a Figure 1", "plot these results"): the agent names the claim the figure must make, looks at how comparable papers draw it, and proposes colour, type size and layout at true column width before writing any plotting code.</li>
+<li><strong>Guided</strong> ("make panel c shorter"): it does exactly what you ask, but checks the facts it is about to draw and tells you once if a request would make the figure say something false, offering the nearest honest alternative.</li>
+</ul>
+<h3 id="the-steps">The steps</h3>
+<ol>
+<li><strong>Design</strong>: name the claim and the evidence file behind it; choose the plot type from the claim.</li>
+<li><strong>Build</strong>: plotting code that calls the style helper first, so sizes and fonts are right from the start.</li>
+<li><strong>Check honesty</strong>: the review in the next section.</li>
+<li><strong>Verify</strong>: look at the rendered PNG and a crop of every panel, check fonts and page size, sweep the PDF text, confirm the caption matches what the code computed.</li>
+<li><strong>Document</strong>: write the caption and spec file.</li>
+</ol>
+</section>
+<section id="honesty"><h2>Honesty checks</h2>
+<p>These are a review your agent carries out and reports on, not an automated linter. The font and size checks are automated by the helper.</p>
+<ul>
+<li><strong>Selection.</strong> Examples are chosen by a stated rule (for instance, nearest the 25th, 50th and 75th percentile of fit error), not because they look best.</li>
+<li><strong>Intervals.</strong> Every error bar is named (95% CI, SD or SEM) with how it was computed and n. A result without an interval is drawn as a point and the caption says so.</li>
+<li><strong>Axes.</strong> Bars start at zero; a truncated axis that magnifies a small difference states the difference in numbers.</li>
+<li><strong>Schematics.</strong> Hand-drawn elements are marked as schematic in the code, the caption and the spec.</li>
+<li><strong>Equations.</strong> Every equation drawn in a figure is checked against the code, not memory.</li>
+<li><strong>Invisible differences.</strong> When two curves overlap, the difference is plotted and labelled as one.</li>
+<li><strong>Captions.</strong> No significance stars for tests that weren't run; "higher" without an interval means "higher mean in this sample".</li>
+</ul>
+</section>
+<section id="outputs"><h2>Files it writes</h2>
+<div class="doc-table"><table>
+<thead>
+<tr>
+<th>File</th>
+<th>What it is</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>&lt;name&gt;.pdf</code></td>
+<td>Vector figure at the exact column width, fonts embedded.</td>
+</tr>
+<tr>
+<td><code>&lt;name&gt;.png</code></td>
+<td>600 dpi raster preview of the same figure.</td>
+</tr>
+<tr>
+<td><code>&lt;name&gt;.md</code></td>
+<td>Caption plus spec: generator script and seed, data files, size and type, colour encodings, interval and fit definitions, deliberate choices, schematic elements.</td>
+</tr>
+</tbody>
+</table></div>
+<p>By default these go to <code>research/figures/</code>. Without a <code>research/</code> folder the agent asks where figures belong. It writes nothing else.</p>
+</section>
+<section id="helper"><h2>Style helper</h2>
+<p><code>scripts/figure_style.py</code> is a single file with no dependencies beyond matplotlib. Your agent copies it next to the figure script.</p>
+<pre><code class="language-python">import matplotlib.pyplot as plt
 import figure_style as fs
 
 fs.apply(font_size=7)                                     # Okabe-Ito, Type 42 fonts, print sizes
-fig, axs = plt.subplots(1, 2, figsize=fs.figsize("nature", "single", aspect=0.6))
-fs.panel_label(axs[0], "a")
-fs.save(fig, "research/figures/fig2")                     # fig2.pdf + fig2.png</code></pre>
-          <div class="doc-table"><table>
-            <thead><tr><th scope="col">Function or constant</th><th scope="col">Purpose</th></tr></thead>
-            <tbody>
-              <tr><td><code>apply(font_size=7, font=None)</code></td><td>Sets matplotlib for print: palette, font embedding, line widths and tick sizes. Call once before plotting.</td></tr>
-              <tr><td><code>figsize(journal, width, aspect=…, height_mm=…)</code></td><td>Figure size in inches for a journal column (<code>"single"</code>, <code>"double"</code>) or any width in mm.</td></tr>
-              <tr><td><code>panel_label(ax, "a")</code></td><td>Bold lowercase panel letter at the top-left corner.</td></tr>
-              <tr><td><code>save(fig, stem, png_dpi=600)</code></td><td>Writes the PDF and PNG at the figure's exact size.</td></tr>
-              <tr><td><code>pdf_font_types(path)</code></td><td>Font types declared in a PDF; used by the font check.</td></tr>
-              <tr><td><code>OKABE_ITO</code>, <code>CYCLE</code>, <code>MARKERS</code></td><td>Colour-blind-safe palette, its plotting order, and matching markers so identity never relies on colour alone.</td></tr>
-              <tr><td><code>SEQUENTIAL</code>, <code>DIVERGING</code></td><td>Colour maps for one magnitude and for signed quantities around zero.</td></tr>
-            </tbody>
-          </table></div>
-          <p>From the command line: <code>python figure_style.py fonts fig2.pdf</code> exits with an error if any Type 3 font is present, and <code>python figure_style.py widths</code> prints the width table.</p>
-        </section>
-
-        <section id="widths">
-          <h2>Journal widths</h2>
-          <div class="doc-table"><table>
-            <thead><tr><th scope="col">Key</th><th scope="col">Journals</th><th scope="col">Single column</th><th scope="col">Double column</th></tr></thead>
-            <tbody>
-              <tr><td><code>nature</code></td><td>Nature and Nature research journals</td><td>89 mm</td><td>183 mm</td></tr>
-              <tr><td><code>cell</code></td><td>Cell Press</td><td>85 mm</td><td>174 mm</td></tr>
-              <tr><td><code>pnas</code></td><td>PNAS</td><td>87 mm</td><td>178 mm</td></tr>
-              <tr><td><code>elsevier</code></td><td>Elsevier journals</td><td>90 mm</td><td>190 mm</td></tr>
-              <tr><td><code>ieee</code></td><td>IEEE</td><td>88.9 mm (3.5 in)</td><td>181.9 mm (7.16 in)</td></tr>
-              <tr><td><code>generic</code></td><td>Default</td><td>90 mm</td><td>180 mm</td></tr>
-            </tbody>
-          </table></div>
-          <p>Any other width works with <code>figsize(width=&lt;mm&gt;)</code>. Publishers update their guidelines, so check your journal's current author guide before final submission.</p>
-        </section>
-
-        <section id="research-folder">
-          <h2>The <code>research/</code> folder</h2>
-          <p>Paper Figures works on its own. If you keep your project in a <code>research/</code> folder, it uses the same plain-file convention as the other Aurora Lab research skills, so they cooperate without calling each other:</p>
+fig, axs = plt.subplots(1, 2, figsize=fs.figsize(&quot;nature&quot;, &quot;single&quot;, aspect=0.6))
+fs.panel_label(axs[0], &quot;a&quot;)
+fs.save(fig, &quot;research/figures/fig2&quot;)                     # fig2.pdf + fig2.png
+</code></pre>
+<div class="doc-table"><table>
+<thead>
+<tr>
+<th>Function or constant</th>
+<th>Purpose</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>apply(font_size=7, font=None)</code></td>
+<td>Sets matplotlib for print: palette, font embedding, line widths and tick sizes. Call once before plotting.</td>
+</tr>
+<tr>
+<td><code>figsize(journal, width, aspect=…, height_mm=…)</code></td>
+<td>Figure size in inches for a journal column (<code>"single"</code>, <code>"double"</code>) or any width in mm.</td>
+</tr>
+<tr>
+<td><code>panel_label(ax, "a")</code></td>
+<td>Bold lowercase panel letter at the top-left corner.</td>
+</tr>
+<tr>
+<td><code>save(fig, stem, png_dpi=600)</code></td>
+<td>Writes the PDF and PNG at the figure's exact size.</td>
+</tr>
+<tr>
+<td><code>pdf_font_types(path)</code></td>
+<td>Font types declared in a PDF; used by the font check.</td>
+</tr>
+<tr>
+<td><code>OKABE_ITO</code>, <code>CYCLE</code>, <code>MARKERS</code></td>
+<td>Colour-blind-safe palette, its plotting order, and matching markers so identity never relies on colour alone.</td>
+</tr>
+<tr>
+<td><code>SEQUENTIAL</code>, <code>DIVERGING</code></td>
+<td>Colour maps for one magnitude and for signed quantities around zero.</td>
+</tr>
+</tbody>
+</table></div>
+<p>From the command line: <code>python figure_style.py fonts fig2.pdf</code> exits with an error if any Type 3 font is present, and <code>python figure_style.py widths</code> prints the width table.</p>
+</section>
+<section id="widths"><h2>Journal widths</h2>
+<div class="doc-table"><table>
+<thead>
+<tr>
+<th>Key</th>
+<th>Journals</th>
+<th>Single column</th>
+<th>Double column</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>nature</code></td>
+<td>Nature and Nature research journals</td>
+<td>89 mm</td>
+<td>183 mm</td>
+</tr>
+<tr>
+<td><code>cell</code></td>
+<td>Cell Press</td>
+<td>85 mm</td>
+<td>174 mm</td>
+</tr>
+<tr>
+<td><code>pnas</code></td>
+<td>PNAS</td>
+<td>87 mm</td>
+<td>178 mm</td>
+</tr>
+<tr>
+<td><code>elsevier</code></td>
+<td>Elsevier journals</td>
+<td>90 mm</td>
+<td>190 mm</td>
+</tr>
+<tr>
+<td><code>ieee</code></td>
+<td>IEEE</td>
+<td>88.9 mm (3.5 in)</td>
+<td>181.9 mm (7.16 in)</td>
+</tr>
+<tr>
+<td><code>generic</code></td>
+<td>Default</td>
+<td>90 mm</td>
+<td>180 mm</td>
+</tr>
+</tbody>
+</table></div>
+<p>Any other width works with <code>figsize(width=&lt;mm&gt;)</code>. Publishers update their guidelines, so check your journal's current author guide before final submission.</p>
+</section>
+<section id="research-folder"><h2>The <code>research/</code> folder</h2>
+<p>Paper Figures works on its own. If you keep your project in a <code>research/</code> folder, it uses the same plain-file convention as the other Aurora Lab research skills, so they cooperate without calling each other:</p>
 <pre><code>research/
   results/    one JSON file per result     (read)
   figures/    figures + caption/spec files  (written)
   claims.md   the paper's claims and their evidence
   paper/      manuscript sections
-  refs.bib    bibliography</code></pre>
-          <p>A result file looks like this. <code>ci</code> and <code>n</code> are optional; a missing interval is reported as "no interval reported", never invented.</p>
-<pre><code>{ "metric": "EC50", "value": 0.82, "ci": [0.61, 1.10], "n": 3,
-  "unit": "µM", "source": "scripts/fit.py@a1b2c3d" }</code></pre>
-        </section>
+  refs.bib    bibliography
+</code></pre>
+<p>A result file looks like this. <code>ci</code> and <code>n</code> are optional; a missing interval is reported as "no interval reported", never invented.</p>
+<pre><code class="language-json">{ &quot;metric&quot;: &quot;EC50&quot;, &quot;value&quot;: 0.82, &quot;ci&quot;: [0.61, 1.10], &quot;n&quot;: 3,
+  &quot;unit&quot;: &quot;µM&quot;, &quot;source&quot;: &quot;scripts/fit.py@a1b2c3d&quot; }
+</code></pre>
+</section>
+<section id="faq"><h2>FAQ</h2>
+<h3 id="which-agents-does-it-work-with">Which agents does it work with?</h3>
+<p>Any agent that loads SKILL.md skills, including Claude Code, Codex CLI, Cursor and Gemini CLI. The agent needs to run Python locally for the rendering step.</p>
+<h3 id="what-do-i-need-installed">What do I need installed?</h3>
+<p>Python 3.10+ with matplotlib, plus numpy for the bundled example. Optionally <code>pdftotext</code> for the PDF text sweep. Nothing else, and no network access.</p>
+<h3 id="does-it-check-my-figures-automatically">Does it check my figures automatically?</h3>
+<p>Partly. Export size and the font check are automatic through the helper. The honesty checks are a review your agent follows and reports on.</p>
+<h3 id="does-it-run-statistics-on-my-raw-data">Does it run statistics on my raw data?</h3>
+<p>No. It plots what you give it and names every interval. If no interval is provided, the figure and caption say so instead of inventing one.</p>
+<h3 id="can-i-use-it-with-figures-i-already-made">Can I use it with figures I already made?</h3>
+<p>Yes. Ask "is this figure ready to submit?" and it runs the verification and honesty review on your existing PDF and plotting code, then proposes fixes.</p>
+<h3 id="do-i-need-the-other-aurora-lab-skills">Do I need the other Aurora Lab skills?</h3>
+<p>No. They share the <code>research/</code> folder convention if you want to use them together.</p>
+</section>
+<section id="limitations"><h2>Limitations</h2>
+<ul>
+<li>Rendering uses Python and matplotlib. With other plotting tools the design and honesty guidance still applies, but the style helper does not.</li>
+<li>It plots and documents the results you provide. It does not choose or run your statistical analysis.</li>
+<li>Built-in widths cover the journals listed above. Confirm against current author guidelines.</li>
+</ul>
+</section>
+<section id="changelog"><h2>Changelog</h2>
+<p><strong>1.0.0</strong> · October 2026 · First release.</p></section>
 
-        <section id="faq">
-          <h2>FAQ</h2>
-          <h3>Which agents does it work with?</h3>
-          <p>Any agent that loads SKILL.md skills, including Claude Code, Codex CLI, Cursor and Gemini CLI. The agent needs to run Python locally for the rendering step.</p>
-          <h3>What do I need installed?</h3>
-          <p>Python 3.10+ with matplotlib, plus numpy for the bundled example. Optionally <code>pdftotext</code> for the PDF text sweep. Nothing else, and no network access.</p>
-          <h3>Does it check my figures automatically?</h3>
-          <p>Partly. Export size and the font check are automatic through the helper. The honesty checks are a review your agent follows and reports on.</p>
-          <h3>Does it run statistics on my raw data?</h3>
-          <p>No. It plots what you give it and names every interval. If no interval is provided, the figure and caption say so instead of inventing one.</p>
-          <h3>Can I use it with figures I already made?</h3>
-          <p>Yes. Ask "is this figure ready to submit?" and it runs the verification and honesty review on your existing PDF and plotting code, then proposes fixes.</p>
-          <h3>Do I need the other Aurora Lab skills?</h3>
-          <p>No. They share the <code>research/</code> folder convention if you want to use them together.</p>
-        </section>
-
-        <section id="limitations">
-          <h2>Limitations</h2>
-          <ul>
-            <li>Rendering uses Python and matplotlib. With other plotting tools the design and honesty guidance still applies, but the style helper does not.</li>
-            <li>It plots and documents the results you provide. It does not choose or run your statistical analysis.</li>
-            <li>Built-in widths cover the journals listed above. Confirm against current author guidelines.</li>
-          </ul>
-        </section>
-
-        <section id="changelog">
-          <h2>Changelog</h2>
-          <p><strong>1.0.0</strong> · October 2026 · First release.</p>
-        </section>
       </article>
     </div>
   </main>
