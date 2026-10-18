@@ -1,0 +1,228 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Aurora Lab</title>
+  <meta name="description" content="Agent skills that automate the academic grind: literature, data analysis, scientific figures and paper polishing. Sample outputs on one toy topic.">
+  <meta property="og:title" content="Aurora Lab">
+  <meta property="og:description" content="Agent skills that automate the academic grind. See what they produce.">
+  <meta property="og:image" content="https://the-aurora-lab.github.io/assets/fig/bifurcation-after.png">
+  <meta property="og:type" content="website">
+  <meta name="theme-color" content="#0b1020">
+  <link rel="icon" type="image/png" href="assets/img/avatar.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/css/site.css">
+</head>
+<body>
+  <a class="skip" href="#main">Skip to content</a>
+
+  <header class="nav">
+    <div class="wrap nav-inner">
+      <a class="brand" href="#top" aria-label="Aurora Lab, back to top">
+        <img src="assets/img/avatar.png" alt="" width="32" height="32">
+        <span>Aurora Lab</span>
+      </a>
+      <nav aria-label="Primary">
+        <a href="#examples">Examples</a>
+        <a href="#how">How it works</a>
+        <a class="btn btn-small" href="https://www.agensi.io/creators/aurora-lab">Skills on Agensi</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main">
+    <section class="hero" id="top">
+      <div class="aurora" aria-hidden="true"></div>
+      <div class="wrap hero-inner">
+        <p class="eyebrow">Agent skills for researchers</p>
+        <h1>Skills that automate<br>the academic grind.</h1>
+        <p class="lede">I'm a PhD researcher. I build agent skills for the parts of research that eat the week: digging through literature, wrangling data, making figures, and getting drafts into shape. The skills live on Agensi. This page shows what they produce.</p>
+        <div class="cta">
+          <a class="btn" href="https://www.agensi.io/creators/aurora-lab">Browse the skills</a>
+          <a class="btn btn-ghost" href="#examples">See sample outputs</a>
+        </div>
+        <ul class="areas" aria-label="What the skills cover">
+          <li><span class="dot d1"></span>Literature</li>
+          <li><span class="dot d2"></span>Data analysis</li>
+          <li><span class="dot d3"></span>Scientific visualization</li>
+          <li><span class="dot d4"></span>Writing &amp; polishing</li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="section" id="examples">
+      <div class="wrap">
+        <p class="eyebrow">Sample outputs</p>
+        <h2>One toy topic, start to finish</h2>
+        <p class="section-lede">Every example below works on the same small problem, the logistic map <span class="eq"><i>x</i><sub><i>n</i>+1</sub> = <i>r</i>&thinsp;<i>x<sub>n</sub></i>(1 − <i>x<sub>n</sub></i>)</span>, so you can follow it from reading list to finished paragraph. Numbers are computed, citations are real, and every figure is reproducible from <a href="https://github.com/the-aurora-lab/the-aurora-lab.github.io/blob/main/src/figures.py"><code>src/figures.py</code></a>.</p>
+
+        <ol class="pipeline" aria-label="Example sections">
+          <li><a href="#ex-lit"><span>01</span>Literature brief</a></li>
+          <li><a href="#ex-data"><span>02</span>Analysis</a></li>
+          <li><a href="#ex-viz"><span>03</span>Figures</a></li>
+          <li><a href="#ex-write"><span>04</span>Polished prose</a></li>
+        </ol>
+
+        <!-- 01 Literature -->
+        <article class="example" id="ex-lit">
+          <div class="ex-copy">
+            <p class="ex-num">01 · Literature</p>
+            <h3>A reading brief, not a pile of PDFs</h3>
+            <p class="ask"><span>You ask</span>"Give me the essential papers on why the logistic map goes chaotic, and how they fit together."</p>
+            <p>You get a short brief: the question, the few papers that matter, one line on why each one matters, how they connect, and where to read next.</p>
+          </div>
+          <div class="paper doc">
+            <p class="doc-kicker">Reading brief</p>
+            <h4>Why does a one-line model go chaotic, and what is universal about it?</h4>
+            <ol class="refs">
+              <li><b>Sharkovskii (1964)</b>, <i>Coexistence of cycles of a continuous map of the line into itself</i>. Ukrainian Mathematical Journal 16, 61–71.
+                <span>Orders the integers so that a continuous interval map with a cycle of period <i>m</i> must have cycles of every period that comes after <i>m</i>. Period 3 sits at the top: it forces all the others.</span></li>
+              <li><b>Li &amp; Yorke (1975)</b>, <i>Period three implies chaos</i>. The American Mathematical Monthly 82(10), 985–992.
+                <span>Independently shows that period 3 forces every period, plus an uncountable set of non-periodic orbits. This is where "chaos" got its mathematical name.</span></li>
+              <li><b>May (1976)</b>, <i>Simple mathematical models with very complicated dynamics</i>. Nature 261, 459–467.
+                <span>Brings the logistic map to a wide audience, walks through the period-doubling route, and argues it should be taught early.</span></li>
+              <li><b>Feigenbaum (1978)</b>, <i>Quantitative universality for a class of nonlinear transformations</i>. Journal of Statistical Physics 19(1), 25–52.
+                <span>The gaps between successive period doublings shrink by a universal factor δ ≈ 4.6692, the same for any smooth map with a quadratic maximum.</span></li>
+            </ol>
+            <p class="doc-h">How they connect</p>
+            <p>Sharkovskii and Li–Yorke say <em>which</em> periods must coexist. May shows the route a real model takes. Feigenbaum explains why that route looks the same across models.</p>
+            <p class="doc-h">Read next</p>
+            <p>Lanford (1982), <i>A computer-assisted proof of the Feigenbaum conjectures</i>, Bulletin of the AMS 6(3), 427–434: the step from numerical observation to proof. Open thread: δ depends on the order of the map's maximum, so a non-quadratic peak lands in a different universality class.</p>
+          </div>
+        </article>
+
+        <!-- 02 Analysis -->
+        <article class="example" id="ex-data">
+          <div class="ex-copy">
+            <p class="ex-num">02 · Data analysis</p>
+            <h3>Numbers with the method and the caveats attached</h3>
+            <p class="ask"><span>You ask</span>"Estimate Feigenbaum's δ numerically and tell me how much to trust it."</p>
+            <p>You get the result, the table behind it, how it was computed, and what limits the precision, so it can go straight into a methods section.</p>
+          </div>
+          <div class="paper doc">
+            <p class="doc-kicker">Analysis note</p>
+            <h4>Estimating δ from superstable parameters</h4>
+            <p><b>Result.</b> δ ≈ 4.669202, agreeing with the reference value 4.669201609… to seven significant figures (error 7&thinsp;×&thinsp;10<sup>−8</sup> at <i>n</i>&nbsp;=&nbsp;11).</p>
+            <p><b>Method.</b> <i>R<sub>n</sub></i> is the parameter at which <i>x</i>&nbsp;=&nbsp;½ lies on a cycle of period 2<sup><i>n</i></sup>. Each one is found by Newton's method on <i>f<sub>r</sub></i><sup>2<sup><i>n</i></sup></sup>(½)&nbsp;−&nbsp;½, starting from the Feigenbaum-scaled guess. Then δ<sub><i>n</i></sub> = (<i>R</i><sub><i>n</i>−1</sub> − <i>R</i><sub><i>n</i>−2</sub>) / (<i>R<sub>n</sub></i> − <i>R</i><sub><i>n</i>−1</sub>).</p>
+            <div class="table-scroll">
+              <table>
+                <caption>Superstable parameters and successive ratios</caption>
+                <thead><tr><th scope="col"><i>n</i></th><th scope="col">period</th><th scope="col"><i>R<sub>n</sub></i></th><th scope="col">δ<sub><i>n</i></sub></th></tr></thead>
+                <tbody>
+              <tr><td>1</td><td class="num">2</td><td class="num">3.2360679775</td><td class="num muted">—</td></tr>
+              <tr><td>2</td><td class="num">4</td><td class="num">3.4985616993</td><td class="num">4.7089430</td></tr>
+              <tr><td>3</td><td class="num">8</td><td class="num">3.5546408628</td><td class="num">4.6807710</td></tr>
+              <tr><td>4</td><td class="num">16</td><td class="num">3.5666673799</td><td class="num">4.6629596</td></tr>
+              <tr><td>5</td><td class="num">32</td><td class="num">3.5692435316</td><td class="num">4.6684039</td></tr>
+              <tr><td>6</td><td class="num">64</td><td class="num">3.5697952937</td><td class="num">4.6689537</td></tr>
+              <tr><td>7</td><td class="num">128</td><td class="num">3.5699134654</td><td class="num">4.6691572</td></tr>
+              <tr><td>8</td><td class="num">256</td><td class="num">3.5699387742</td><td class="num">4.6691910</td></tr>
+              <tr><td>9</td><td class="num">512</td><td class="num">3.5699441946</td><td class="num">4.6691995</td></tr>
+              <tr><td>10</td><td class="num">1024</td><td class="num">3.5699453555</td><td class="num">4.6692011</td></tr>
+              <tr class="hl"><td>11</td><td class="num">2048</td><td class="num">3.5699456041</td><td class="num">4.6692017</td></tr>
+                </tbody>
+              </table>
+            </div>
+            <p><b>Caveats.</b> The table stops at <i>n</i>&nbsp;=&nbsp;11 on purpose. Beyond it the estimate gets <em>worse</em> in double precision: the error grows to 10<sup>−6</sup> at <i>n</i>&nbsp;=&nbsp;12, and by <i>n</i>&nbsp;=&nbsp;16 the third decimal is wrong. Each <i>R<sub>n</sub></i> carries round-off from 2<sup><i>n</i></sup> iterations, while the gaps it is divided by shrink like δ<sup>−<i>n</i></sup>. Going further needs extended precision. Superstable points and bifurcation points converge to the same δ. Superstable ones are used here because Newton converges on them cleanly.</p>
+<pre><code><span class="c"># Newton step for R_n, carrying d/dr along the orbit</span>
+x, dx = 0.5, 0.0
+for _ in range(2**n):
+    x, dx = r*x*(1 - x), x*(1 - x) + r*(1 - 2*x)*dx
+r -= (x - 0.5) / dx</code></pre>
+          </div>
+        </article>
+
+        <!-- 03 Visualization -->
+        <article class="example wide" id="ex-viz">
+          <div class="ex-copy">
+            <p class="ex-num">03 · Scientific visualization</p>
+            <h3>From default plot to figure you'd submit</h3>
+            <p class="ask"><span>You ask</span>"Make this bifurcation plot publication-ready and mark where the chaos starts."</p>
+            <p>Drag the slider. On the left is the matplotlib default. On the right is the cleaned-up figure: density shading instead of a blue wall, labelled bifurcation points, real axis labels, journal typography.</p>
+          </div>
+          <figure class="paper compare" style="--pos:50%">
+            <div class="compare-stage">
+              <img src="assets/fig/bifurcation-after.png" alt="Publication-ready bifurcation diagram of the logistic map with density shading and labelled bifurcation points." width="1600" height="1000">
+              <img class="compare-before" src="assets/fig/bifurcation-before.png" alt="The same diagram with matplotlib defaults: solid blue points, generic title and bare axis labels." width="1600" height="1000">
+              <span class="compare-line" aria-hidden="true"></span>
+              <span class="tag tag-left">Before · defaults</span>
+              <span class="tag tag-right">After</span>
+            </div>
+            <input class="compare-range" type="range" min="0" max="100" value="50" aria-label="Drag to compare the default plot with the publication-ready figure">
+          </figure>
+          <div class="fig-grid">
+            <figure class="paper">
+              <img src="assets/fig/panel.png" alt="Two-panel figure: bifurcation diagram above, Lyapunov exponent below, sharing the r axis." width="1455" height="1140" loading="lazy">
+              <figcaption><b>Figure 1.</b> (a) Long-run states of the logistic map against <i>r</i>. (b) Lyapunov exponent λ on the same axis. Shading marks λ&nbsp;&gt;&nbsp;0. Dashed lines: <i>r</i><sub>1</sub>&nbsp;=&nbsp;3, <i>r</i><sub>2</sub>&nbsp;=&nbsp;1&nbsp;+&nbsp;√6, the accumulation point <i>r</i><sub>∞</sub>&nbsp;≈&nbsp;3.5699, and the opening of the period-3 window at 1&nbsp;+&nbsp;√8. Periodic windows inside the chaotic band show up as dips below zero.</figcaption>
+            </figure>
+            <figure class="paper">
+              <img src="assets/fig/cobweb.svg" alt="Four cobweb diagrams at r equal to 2.8, 3.2, 3.5 and 3.9, showing a fixed point, period 2, period 4 and chaos." width="720" height="202" loading="lazy">
+              <figcaption><b>Figure 2.</b> Cobweb diagrams for four values of <i>r</i>. At 2.8 the orbit spirals into a fixed point; at 3.2 and 3.5 it settles on cycles of period 2 and 4; at 3.9 it never repeats.</figcaption>
+            </figure>
+          </div>
+        </article>
+
+        <!-- 04 Writing -->
+        <article class="example wide" id="ex-write">
+          <div class="ex-copy">
+            <p class="ex-num">04 · Writing &amp; polishing</p>
+            <h3>Same content, tighter claims</h3>
+            <p class="ask"><span>You ask</span>"Polish this paragraph for the introduction. Keep my meaning, make it precise."</p>
+            <p>You get the rewrite plus a short list of what changed and why, so you learn the pattern instead of just accepting edits.</p>
+          </div>
+          <div class="write-grid">
+            <div class="paper doc draft">
+              <p class="doc-kicker">Draft</p>
+              <p class="prose">In this work we study the logistic map which is a very famous and simple model that has very complicated dynamics. It is very well known that as the parameter r is increased the system goes through a series of period doublings and eventually becomes chaotic, this was shown by Feigenbaum. We compute the Feigenbaum constant numerically and we obtain a value which is very close to the known value of 4.669 which shows that our method works good.</p>
+            </div>
+            <div class="paper doc">
+              <p class="doc-kicker">Polished</p>
+              <p class="prose">We study the logistic map, <i>x</i><sub><i>n</i>+1</sub> = <i>r x<sub>n</sub></i>(1 − <i>x<sub>n</sub></i>), a one-parameter model whose simple form hides notoriously rich dynamics (May, 1976). As <i>r</i> increases, the map undergoes a cascade of period-doubling bifurcations that accumulates at <i>r</i><sub>∞</sub> ≈ 3.5699, beyond which chaotic orbits appear. Feigenbaum (1978) showed that successive bifurcations close in geometrically, at a universal rate δ ≈ 4.6692. Locating the superstable parameters by Newton's method, we recover δ to seven significant figures.</p>
+            </div>
+            <div class="changes">
+              <p class="doc-kicker">What changed</p>
+              <ol>
+                <li>The equation appears on first mention, so the reader knows exactly which map.</li>
+                <li>"Very famous … very complicated" becomes one precise claim with a citation.</li>
+                <li>The comma splice is split, and "this was shown by Feigenbaum" now says <em>what</em> he showed.</li>
+                <li>"Very close" becomes a number: seven significant figures.</li>
+                <li>"Shows that our method works good" is gone. The agreement makes that point on its own.</li>
+              </ol>
+            </div>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section class="section how" id="how">
+      <div class="wrap">
+        <p class="eyebrow">How it works</p>
+        <h2>Skills run inside the agent you already use</h2>
+        <ol class="steps">
+          <li><span>1</span><h3>Pick a skill</h3><p>Browse the skills on <a href="https://www.agensi.io/creators/aurora-lab">Agensi</a>. Each listing says what it does and which tools it needs.</p></li>
+          <li><span>2</span><h3>Install it</h3><p>It loads into Claude Code, Cursor, Codex CLI and most other agents that read <code>SKILL.md</code>.</p></li>
+          <li><span>3</span><h3>Ask in plain words</h3><p>"Make this figure publication-ready." "Summarize the key papers on X." The skill handles the rest.</p></li>
+        </ol>
+        <div class="cta center">
+          <a class="btn" href="https://www.agensi.io/creators/aurora-lab">Browse the skills on Agensi</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="wrap footer-inner">
+      <span class="brand"><img src="assets/img/avatar.png" alt="" width="24" height="24"> Aurora Lab</span>
+      <nav aria-label="Footer">
+        <a href="https://www.agensi.io/creators/aurora-lab">Agensi</a>
+        <a href="https://github.com/the-aurora-lab">GitHub</a>
+      </nav>
+    </div>
+  </footer>
+
+  <script src="assets/js/site.js"></script>
+</body>
+</html>
