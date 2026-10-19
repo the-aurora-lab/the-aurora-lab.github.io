@@ -1,0 +1,258 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Bifurcation Diagrams · Aurora Lab</title>
+  <meta name="description" content="Documentation for the Bifurcation Diagrams agent skill: publication-ready bifurcation diagrams computed from your ODE model, with pseudo-arclength continuation, Jacobian stability, located fold, branch and Hopf points, simulation checks and a results JSON.">
+  <meta property="og:title" content="Bifurcation Diagrams · Aurora Lab">
+  <meta property="og:description" content="Documentation for the Bifurcation Diagrams agent skill: publication-ready bifurcation diagrams computed from your ODE model, with pseudo-arclength continuation, Jacobian stability, located fold, branch and Hopf points, simulation checks and a results JSON.">
+  <meta property="og:image" content="https://the-aurora-lab.github.io/assets/shots/bifurcation-diagrams/01-diagram.png">
+  <meta name="theme-color" content="#0b1020">
+  <link rel="icon" type="image/png" href="../../assets/img/avatar.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../../assets/css/site.css">
+</head>
+<body>
+  <a class="skip" href="#main">Skip to content</a>
+  <header class="nav">
+    <div class="wrap nav-inner">
+      <a class="brand" href="../../" aria-label="Aurora Lab home">
+        <img src="../../assets/img/avatar.png" alt="" width="32" height="32">
+        <span>Aurora Lab</span>
+      </a>
+      <nav aria-label="Primary">
+        <a href="../../#skills">Skills</a>
+        <a href="../../#examples">Examples</a>
+        <a class="btn btn-small" href="https://www.agensi.io/creators/aurora-lab">Get it on Agensi</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main">
+    <section class="docs-hero">
+      <div class="aurora" aria-hidden="true"></div>
+      <div class="wrap">
+        <p class="crumbs"><a href="../../">Aurora Lab</a> / <a href="../../#skills">Skills</a> / Bifurcation Diagrams</p>
+        <h1>Bifurcation Diagrams</h1>
+        <p class="lede">Publication-ready bifurcation diagrams computed from your ODE model. Your agent traces every branch of equilibria through its folds, classifies stability from the Jacobian, locates fold, branch and Hopf points against their exact values, checks each branch by simulation, and draws it all at journal column width.</p>
+        <ul class="meta" aria-label="Skill facts"><li>v1.0.0</li><li>Python 3.10+ · numpy, matplotlib</li><li>No network access</li><li>Works with any SKILL.md agent</li></ul>
+        <div class="cta">
+          <a class="btn" href="https://www.agensi.io/creators/aurora-lab">Get it on Agensi · $9</a>
+          <a class="btn btn-ghost" href="#overview">Read the docs</a>
+        </div>
+      </div>
+    </section>
+
+    <div class="wrap docs">
+      <nav class="toc" aria-label="On this page">
+        <p>On this page</p>
+        <ol><li><a href="#overview">Overview</a></li><li><a href="#quick-start">Quick start</a></li><li><a href="#gallery">What you get</a></li><li><a href="#workflow">How it works</a></li><li><a href="#outputs">Files it reads and writes</a></li><li><a href="#helper">Helper API</a></li><li><a href="#faq">FAQ</a></li><li><a href="#limitations">Limitations</a></li><li><a href="#changelog">Changelog</a></li></ol>
+      </nav>
+      <article class="prose-doc">
+<section id="overview"><h2>Overview</h2>
+<p>A bifurcation diagram claims two things: the branches exist where they are drawn, and they have the stability shown. A brute-force parameter sweep misses the unstable branches and blurs the points where stability changes. Bifurcation Diagrams makes your agent compute the diagram from your model, check it, and draw it to publication standard:</p>
+<ul>
+<li><strong>Continuation through folds.</strong> Every branch of equilibria is traced by pseudo-arclength continuation, so an S-shaped curve comes out as one branch, unstable middle included.</li>
+<li><strong>Stability from the Jacobian</strong> at every point: analytic when the derivatives are easy to write, central differences otherwise.</li>
+<li><strong>Located points.</strong> Folds (SN), branch points (BP) and Hopf points (H) are found by bisection on a test function, and each is compared with its exact value when one is known.</li>
+<li><strong>Checked by simulation.</strong> On every stable or unstable segment, a perturbed point is integrated to confirm it returns or leaves as classified.</li>
+<li><strong>Limit cycles</strong> past a Hopf point, from simulation, and optional trajectories for slow passages or hysteresis sweeps.</li>
+<li><strong>One encoding, publication ready.</strong> Colour marks the branch family, solid means stable and dashed unstable, every stability switch sits on its marked point, and the figure is saved at an exact journal column width as vector PDF plus PNG.</li>
+<li><strong>Documented.</strong> A caption draft with the fixed parameters, the method and every located point, plus a results JSON with each point's value, state and error.</li>
+</ul>
+<p><strong>Other Aurora Lab skills for a paper's figures:</strong> <a href="../paper-figures/">Paper Figures</a> designs figures from data, and <a href="../figure-audit/">Figure Audit</a> reviews figures that already exist. Each works on its own; they pair well.</p>
+</section>
+<section id="quick-start"><h2>Quick start</h2>
+<ol>
+<li><strong>Get the skill</strong> from <a href="https://www.agensi.io/creators/aurora-lab">Agensi</a> and add it to your agent (Claude Code, Codex CLI, Cursor, Gemini CLI or any agent that loads SKILL.md skills).</li>
+<li><strong>Have Python 3.10+ with numpy and matplotlib.</strong> scipy is optional: when it is installed, simulations use <code>solve_ivp</code>; otherwise a fixed-step RK4 integrator.</li>
+<li><strong>Ask in plain words</strong>, with your model as equations in the message or as a file.</li>
+</ol>
+<p>Example requests:</p>
+<ul>
+<li><em>"Draw the bifurcation diagram of my model in parameter k from 0 to 5 and mark the folds."</em></li>
+<li><em>"Where does the Hopf bifurcation happen in this predator-prey model? Plot equilibria and limit-cycle amplitude."</em></li>
+<li><em>"Show the hysteresis loop: steady states against input, with a slow up-and-down sweep overlaid."</em></li>
+<li><em>"Check that the stability on my existing bifurcation figure is right."</em></li>
+</ul>
+</section>
+<section id="gallery"><h2>What you get</h2>
+<p>The first four images come from a real run: a fresh agent session with only this skill installed, given the request in the session card. The input was ours: a <code>model.py</code> with a textbook predator-prey model (logistic prey, Holling type II predation, the Rosenzweig–MacArthur model), chosen because its bifurcation points have closed forms, and different from the skill's bundled examples. The run wrote its own script, traced the prey-only and coexistence branches, located the transcritical point at K = 2/3 and the Hopf point at K = 7/3 (both within about 1e-12 of the exact values, which the agent derived), confirmed all five stability segments by simulation, checked that the Hopf is supercritical, and looked at the figure before reporting. We checked the located points and the cycle extent at K = 4 independently. The last image shows two of the bundled examples, rendered by their own scripts.</p>
+<div class="shots"><figure><img src="../../assets/shots/bifurcation-diagrams/01-diagram.png" alt="Bifurcation diagram of a predator-prey model in carrying capacity K: the prey-only branch along P = 0 (solid, then dashed after BP), the coexistence branch rising from BP (solid, then dashed after H), and the limit-cycle maximum and minimum opening from H." loading="lazy"><figcaption>rosenzweig_macarthur_K.png from the demo run: predator density against carrying capacity K, with the transcritical point (BP) and the Hopf point (H) located and the attracting limit cycle shown.</figcaption></figure><figure><img src="../../assets/shots/bifurcation-diagrams/02-points.png" alt="The agent&#x27;s report: a table of the two located points (BP at K = 2/3, H at K = 7/3) with numerical and exact values, then the checks it ran." loading="lazy"><figcaption>The top of the agent&#x27;s final report from the demo run, verbatim.</figcaption></figure><figure><img src="../../assets/shots/bifurcation-diagrams/03-caption.png" alt="The caption and spec file the skill wrote next to the figure." loading="lazy"><figcaption>rosenzweig_macarthur_K.md from the demo run, verbatim. The located points also went to results/rosenzweig_macarthur_K-bifurcations.json.</figcaption></figure><figure><img src="../../assets/shots/bifurcation-diagrams/04-session.png" alt="Excerpt of the agent session: reading the model, writing the script, the checks it printed and the report." loading="lazy"><figcaption>The agent&#x27;s steps, the checks its script printed and a line from its report (paraphrased from the demo transcript).</figcaption></figure><figure><img src="../../assets/shots/bifurcation-diagrams/05-examples.png" alt="Left: S-shaped curve of steady states with two saddle-node points. Right: a symmetric branch losing stability at a pitchfork where an asymmetric pair of branches appears." loading="lazy"><figcaption>Two of the three worked examples shipped with the skill, rendered by their own scripts (our command, not the demo run).</figcaption></figure></div>
+</section>
+<section id="workflow"><h2>How it works</h2>
+<ol>
+<li><strong>Model.</strong> Your equations become a Python function of the state and one parameter; all other parameters are fixed and stated. Where the derivatives are easy, the agent also writes the Jacobian.</li>
+<li><strong>Continuation.</strong> Each branch family is traced in both directions from a seed (an equilibrium found by Newton's method or by simulating to a steady state). Folds are passed without special handling.</li>
+<li><strong>Stability and events.</strong> The Jacobian's eigenvalues give stability at every point. Where the number of unstable eigenvalues changes, the point is located by bisection: det J for a real eigenvalue (a fold if the branch turns back, a branch point if it carries on), the bialternate product for a complex pair (a Hopf point, with its frequency).</li>
+<li><strong>Branch points.</strong> At a branch point another family crosses. The agent seeds that family and traces it separately; there is no automatic branch switching.</li>
+<li><strong>Simulation check.</strong> On every stability segment, the point farthest from marginal stability is perturbed and integrated. Every segment must agree with its classification; a disagreement means the model, the Jacobian or the seed is wrong, and the agent fixes it rather than restyling the line.</li>
+<li><strong>Limit cycles.</strong> Past a Hopf point, the cycle's maximum and minimum come from simulation, sampled more densely near the onset. For a supercritical Hopf the two curves are joined to the Hopf point, where the cycle is born with zero amplitude: this is the standard drawing, and the caption says so. Cycles found on the stable side of a Hopf point mean it is subcritical; the unstable cycle cannot be reached by simulation, and the caption says that too.</li>
+<li><strong>Draw.</strong> One line per stability run, each starting and ending exactly on its event; open circles labelled SN, BP or H; a two-part legend (colour for family, grey keys for stable and unstable); the component that carries the story named on the axis.</li>
+<li><strong>Save, document, look.</strong> Vector PDF and 600-dpi PNG at the chosen column width, the caption-and-spec file, the results JSON, and a final look at the rendered figure for collisions, branches meeting where they should and switches sitting on their circles.</li>
+</ol>
+<h3 id="encoding-rules-it-applies">Encoding rules it applies</h3>
+<div class="doc-table"><table>
+<thead>
+<tr>
+<th>Rule</th>
+<th>Why</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Colour marks the branch family, never stability</td>
+<td>Stability is already carried by line style; two codes for one thing confuse readers</td>
+</tr>
+<tr>
+<td>Solid for stable or attracting, dashed for unstable</td>
+<td>The convention readers expect in dynamical-systems papers</td>
+</tr>
+<tr>
+<td>Every solid-to-dashed switch sits on a marked point</td>
+<td>A switch between grid points would misplace the bifurcation</td>
+</tr>
+<tr>
+<td>Each stability run drawn as its own line</td>
+<td>Joining all stable points of a family would draw false straight segments</td>
+</tr>
+<tr>
+<td>Colour-blind-safe Okabe-Ito colours, one family keeps its colour across panels</td>
+<td>Readable in print and for every reader</td>
+</tr>
+<tr>
+<td>Fixed parameters, method and located points in the caption</td>
+<td>A reader can reproduce the diagram from the caption alone</td>
+</tr>
+</tbody>
+</table></div>
+</section>
+<section id="outputs"><h2>Files it reads and writes</h2>
+<div class="doc-table"><table>
+<thead>
+<tr>
+<th></th>
+<th>Path</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Reads</td>
+<td>your model (equations in the message or a file you name); optionally parameter values in <code>research/results/*.json</code> or <code>claims.md</code> to mark as operating points</td>
+</tr>
+<tr>
+<td>Writes</td>
+<td><code>research/figures/&lt;name&gt;.pdf</code> and <code>.png</code>, the diagram</td>
+</tr>
+<tr>
+<td></td>
+<td><code>research/figures/&lt;name&gt;.md</code>, the caption draft and spec</td>
+</tr>
+<tr>
+<td></td>
+<td><code>research/results/&lt;name&gt;-bifurcations.json</code>, one entry per located point: kind, parameter value, state, residual, frequency for Hopf points, and the exact value and error when known</td>
+</tr>
+<tr>
+<td></td>
+<td>the script that reproduces all of the above</td>
+</tr>
+</tbody>
+</table></div>
+<p>Without a <code>research/</code> folder it writes where you say. Your model file is never modified.</p>
+</section>
+<section id="helper"><h2>Helper API</h2>
+<p>The skill ships a small Python library the agent uses. You can call it yourself too.</p>
+<div class="doc-table"><table>
+<thead>
+<tr>
+<th>Function</th>
+<th>Purpose</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>continue_branch(F, x0, p0, p_range, jac=...)</code></td>
+<td>Pseudo-arclength continuation of equilibria; returns the branch with stability and located events</td>
+</tr>
+<tr>
+<td><code>branch_from_curve(F, X, P)</code></td>
+<td>Classify a curve you already have (for example p solved as a function of x)</td>
+</tr>
+<tr>
+<td><code>find_equilibrium</code>, <code>integrate</code></td>
+<td>Newton's method at fixed parameter; simulation (scipy if installed, RK4 otherwise)</td>
+</tr>
+<tr>
+<td><code>spot_check(F, branch)</code></td>
+<td>Simulation check of every stability segment</td>
+</tr>
+<tr>
+<td><code>cycle_amplitude(simulate, params)</code></td>
+<td>Limit-cycle maximum and minimum from simulation</td>
+</tr>
+<tr>
+<td><code>segments</code>, <code>draw_branch</code>, <code>mark_bifurcations</code>, <code>stability_legend</code></td>
+<td>Drawing with the encoding above</td>
+</tr>
+<tr>
+<td><code>operating_point</code>, <code>overlay_trajectory</code></td>
+<td>Mark the parameter value in use; overlay a slow-passage or sweep trajectory</td>
+</tr>
+<tr>
+<td><code>write_figure_md</code>, <code>write_bifurcations_json</code></td>
+<td>Caption-and-spec file; results JSON</td>
+</tr>
+<tr>
+<td><code>use_style</code>, <code>figure_for</code>, <code>save</code></td>
+<td>Publication style, journal column widths, PDF and PNG output</td>
+</tr>
+</tbody>
+</table></div>
+<pre><code class="language-bash">python bifurcation-diagrams/scripts/bifurcation_plot.py selftest
+python bifurcation-diagrams/examples/fold_cubic.py --out research
+</code></pre>
+</section>
+<section id="faq"><h2>FAQ</h2>
+<h3 id="what-does-my-model-need-to-look-like">What does my model need to look like?</h3>
+<p>A system of ODEs with one parameter to vary. Type the equations, point to a Python file, or paste code from another language; the agent writes it as a Python function and, where it can, an analytic Jacobian.</p>
+<h3 id="how-accurate-are-the-located-points">How accurate are the located points?</h3>
+<p>With an analytic Jacobian, typically 1e-10 or better: the bundled examples match their exact values to between 1e-17 and 2e-10, and the demo run to about 1e-12. With finite differences, about 1e-6. Known exact values and the errors go into the report and the results JSON.</p>
+<h3 id="why-are-the-cycle-curves-joined-to-the-hopf-point">Why are the cycle curves joined to the Hopf point?</h3>
+<p>At a supercritical Hopf the cycle is born with zero amplitude at the Hopf point, so joining its maximum and minimum curves there is the standard drawing. The simulations start just past the point, and the caption states that the curves are joined.</p>
+<h3 id="does-it-draw-unstable-limit-cycles">Does it draw unstable limit cycles?</h3>
+<p>No. Cycles come from forward simulation, which reaches only attracting ones. For a subcritical Hopf, period-doubling or two-parameter diagrams, the method notes point you to dedicated continuation packages (AUTO-07p, MatCont, PyDSTool, BifurcationKit.jl).</p>
+<h3 id="will-it-change-my-files">Will it change my files?</h3>
+<p>No. It writes new figure, caption, results and script files; your model file is never modified.</p>
+</section>
+<section id="limitations"><h2>Limitations</h2>
+<ul>
+<li>One-parameter continuation of equilibria only; no two-parameter curves of folds or Hopf points.</li>
+<li>Limit cycles come from simulation, so only attracting cycles are drawn; unstable cycles, period-doubling, torus and homoclinic bifurcations need a dedicated package.</li>
+<li>No automatic branch switching: the agent seeds each family at a branch point separately.</li>
+<li>ODEs only: delay equations, PDEs and discrete maps are not supported.</li>
+<li>With a finite-difference Jacobian, located points are accurate to about 1e-6.</li>
+<li>Branches of neutral (non-hyperbolic) equilibria, as in conservative models, need treatment by hand.</li>
+<li>Journal column widths are built in; check your venue's current figure guidelines.</li>
+</ul>
+</section>
+<section id="changelog"><h2>Changelog</h2>
+<p><strong>1.0.0</strong> · October 2026 · First release.</p></section>
+
+      </article>
+    </div>
+  </main>
+
+  <footer class="footer">
+    <div class="wrap footer-inner">
+      <span class="brand"><img src="../../assets/img/avatar.png" alt="" width="24" height="24"> Aurora Lab</span>
+      <nav aria-label="Footer">
+        <a href="https://www.agensi.io/creators/aurora-lab">Agensi</a>
+        <a href="https://github.com/the-aurora-lab">GitHub</a>
+      </nav>
+    </div>
+  </footer>
+</body>
+</html>
