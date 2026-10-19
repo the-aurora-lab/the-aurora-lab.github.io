@@ -1,0 +1,288 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Figure Audit · Aurora Lab</title>
+  <meta name="description" content="Documentation for the Figure Audit agent skill: review research figures and their matplotlib scripts before submission or as a referee, with colour-blind and greyscale checks, ranked findings and two redraws.">
+  <meta property="og:title" content="Figure Audit · Aurora Lab">
+  <meta property="og:description" content="Documentation for the Figure Audit agent skill: review research figures and their matplotlib scripts before submission or as a referee, with colour-blind and greyscale checks, ranked findings and two redraws.">
+  <meta property="og:image" content="https://the-aurora-lab.github.io/assets/shots/figure-audit/01-before-after.png">
+  <meta name="theme-color" content="#0b1020">
+  <link rel="icon" type="image/png" href="../../assets/img/avatar.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../../assets/css/site.css">
+</head>
+<body>
+  <a class="skip" href="#main">Skip to content</a>
+  <header class="nav">
+    <div class="wrap nav-inner">
+      <a class="brand" href="../../" aria-label="Aurora Lab home">
+        <img src="../../assets/img/avatar.png" alt="" width="32" height="32">
+        <span>Aurora Lab</span>
+      </a>
+      <nav aria-label="Primary">
+        <a href="../../#skills">Skills</a>
+        <a href="../../#examples">Examples</a>
+        <a class="btn btn-small" href="https://www.agensi.io/creators/aurora-lab">Get it on Agensi</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main">
+    <section class="docs-hero">
+      <div class="aurora" aria-hidden="true"></div>
+      <div class="wrap">
+        <p class="crumbs"><a href="../../">Aurora Lab</a> / <a href="../../#skills">Skills</a> / Figure Audit</p>
+        <h1>Figure Audit</h1>
+        <p class="lede">Catch figure problems before reviewers do. Your agent finds what would mislead a reader, what slows them down and what fails colour-blind or greyscale readers, ranks every finding with its evidence, and redraws the figure two ways: a minimal fix in your style and a message-first redesign.</p>
+        <ul class="meta" aria-label="Skill facts"><li>v1.0.0</li><li>Python 3.10+ · numpy, Pillow, matplotlib</li><li>No network access</li><li>Works with any SKILL.md agent</li></ul>
+        <div class="cta">
+          <a class="btn" href="https://www.agensi.io/creators/aurora-lab">Get it on Agensi · $9</a>
+          <a class="btn btn-ghost" href="#overview">Read the docs</a>
+        </div>
+      </div>
+    </section>
+
+    <div class="wrap docs">
+      <nav class="toc" aria-label="On this page">
+        <p>On this page</p>
+        <ol><li><a href="#overview">Overview</a></li><li><a href="#quick-start">Quick start</a></li><li><a href="#gallery">What you get</a></li><li><a href="#workflow">How it works</a></li><li><a href="#outputs">Files it reads and writes</a></li><li><a href="#helper">Command line and helper API</a></li><li><a href="#colour">Colour-blind simulation</a></li><li><a href="#faq">FAQ</a></li><li><a href="#limitations">Limitations</a></li><li><a href="#changelog">Changelog</a></li></ol>
+      </nav>
+      <article class="prose-doc">
+<section id="overview"><h2>Overview</h2>
+<p>A reader takes in a figure's shape before its caption. A bar axis that starts at 66 %, or a second y-axis scaled until two curves overlap, makes a claim the text then has to defend in front of reviewers. Figure Audit turns your agent into a careful figure reviewer that:</p>
+<ul>
+<li><strong>Pins down the claim</strong> each figure supports, from its caption and the sentence that cites it.</li>
+<li><strong>Audits the plotting script automatically</strong>, without overwriting your figure files: twin axes, bars not starting at zero, legends far from the data, crowded or rotated ticks, missing units and panel letters, error bars to define, and text size at the width the figure will print.</li>
+<li><strong>Checks colour-blind and greyscale readers</strong> with simulated views on one sheet and a pairwise check of the data colours.</li>
+<li><strong>Checks the numbers behind the claim</strong> when the data are there: replicates, intervals, how much an axis exaggerates a difference.</li>
+<li><strong>Ranks every finding by harm</strong> with its evidence and a fix, and says which came from the automatic audit and which are judgement.</li>
+<li><strong>Redraws the figure twice</strong>: <strong>Good</strong>, a minimal fix in your own style, and <strong>Better</strong>, a message-first redesign. Both are re-audited and inspected before you see them.</li>
+</ul>
+<p><strong>Which Aurora Lab figure skill?</strong> <a href="../paper-figures/">Paper Figures</a> designs and draws figures from your data. <a href="../figure-editor/">Figure Editor</a> assembles finished images into one multi-panel figure. Figure Audit reviews figures that already exist and the scripts behind them. Each works on its own; they pair well.</p>
+</section>
+<section id="quick-start"><h2>Quick start</h2>
+<ol>
+<li><strong>Get the skill</strong> from <a href="https://www.agensi.io/creators/aurora-lab">Agensi</a> and add it to your agent (Claude Code, Codex CLI, Cursor, Gemini CLI or any agent that loads SKILL.md skills).</li>
+<li><strong>Have Python 3.10+ with numpy, Pillow and matplotlib</strong> in the project's environment. For PDF input, also poppler's <code>pdftoppm</code> or the <code>pymupdf</code> package.</li>
+<li><strong>Ask in plain words.</strong></li>
+</ol>
+<p>Example requests:</p>
+<ul>
+<li><em>"Review Figure 3 before I submit; it's in research/paper/draft.pdf and the script is research/figures/fig3.py."</em></li>
+<li><em>"Is this plot misleading? figures/dose_response.png"</em></li>
+<li><em>"Check all the figures in manuscript.pdf for colour-blind safety and print legibility at 89 mm."</em></li>
+<li><em>"I'm refereeing this paper: draft comments on its figures for my report."</em></li>
+</ul>
+</section>
+<section id="gallery"><h2>What you get</h2>
+<p>Everything below comes from a real run: a fresh agent session with only this skill installed, given the request in the session card. The inputs were ours and deliberately flawed: a synthetic catalyst-screen figure with seeded data, the matplotlib script that drew it, and a two-page manuscript excerpt citing it. Planted problems included bars cut off at 66 %, red versus green as the only solvent cue, undefined error bars and twin y-axes. The run found all of them, plus two we had not planted: the figure was embedded in the PDF at only 100 ppi, and the temperature rise above the jacket set point could be the reaction heating the reactor, which undercuts the text's heat-transfer argument. Every number it quoted (bar-height ratio, Welch t, correlations) checks out against the data.</p>
+<div class="shots"><figure><img src="../../assets/shots/figure-audit/01-before-after.png" alt="Side by side: the original two-panel figure with truncated red and green bars and a twin-axis time course, and the redesigned figure with every replicate, intervals and stacked panels." loading="lazy"><figcaption>Left: the deliberately flawed synthetic figure we gave the skill. Right: the redesign it drew in the demo run.</figcaption></figure><figure><img src="../../assets/shots/figure-audit/02-colour-checks.png" alt="The original Figure 3 next to its simulated deuteranopia view: the red and green bars become near-identical olive tones." loading="lazy"><figcaption>The original figure and its simulated deuteranopia view, both written by the demo run (figtools.py checks).</figcaption></figure><figure><img src="../../assets/shots/figure-audit/03-report.png" alt="The report.md the skill wrote: claim, verdict and a severity-ranked table of findings with evidence and fixes." loading="lazy"><figcaption>The top of report.md from the demo run, verbatim: heading, verdict and the first six of its eleven findings.</figcaption></figure><figure><img src="../../assets/shots/figure-audit/04-good-better.png" alt="Side by side: the minimal-fix version of Figure 3 and the redesigned version." loading="lazy"><figcaption>good.png and better.png from the demo run, each drawn from a script it wrote next to the report.</figcaption></figure><figure><img src="../../assets/shots/figure-audit/05-session.png" alt="Excerpt of the agent session: page render, script audit, colour checks, calculations, redraws and the report." loading="lazy"><figcaption>The agent&#x27;s steps and report from the demo run (paraphrased from its transcript).</figcaption></figure></div>
+</section>
+<section id="workflow"><h2>How it works</h2>
+<ol>
+<li><strong>Collect.</strong> Images are used as they are; PDF pages are rendered (so vector figures are captured); small panels are cropped and enlarged; plotting scripts are run headless under the audit, with a PNG of each figure saved for viewing.</li>
+<li><strong>Claim.</strong> The agent writes down what each figure is meant to show, from the caption and the citing sentence, or marks it <em>(inferred)</em>.</li>
+<li><strong>Check.</strong> It works through a checklist in five groups (integrity, chart form, construction, colour, message) by looking at the image, then makes the greyscale and colour-blind check sheet and uses the script audit's numbers. Audit items are confirmed on the image, not passed on blindly.</li>
+<li><strong>Rank.</strong> Findings are sorted into four bands: <em>misleads</em>, <em>slows reading</em>, <em>clutter</em>, <em>polish</em>.</li>
+<li><strong>Redraw.</strong> With the script and data it writes <code>good.py</code> (minimal fix) and <code>better.py</code> (redesign, using the bundled <code>plotkit</code> helper), runs both, looks at them, fixes what looks wrong and re-audits. With only an image, it specifies the redesign and asks for the data.</li>
+<li><strong>Report.</strong> <code>report.md</code> holds the claim, verdict, the ranked table, what works, both versions, a caption suggestion and the checks run. The agent checks its verdict against the table before answering.</li>
+</ol>
+<h3 id="what-the-script-audit-flags">What the script audit flags</h3>
+<div class="doc-table"><table>
+<thead>
+<tr>
+<th>Check</th>
+<th>Why it matters</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Twin y-axes in one panel</td>
+<td>Where curves cross and how steep they look depend on two ranges the author chose</td>
+</tr>
+<tr>
+<td>Bars not starting at zero, bars on a log scale</td>
+<td>Bar length must be proportional to the value</td>
+</tr>
+<tr>
+<td>Bars with error bars; error bars present</td>
+<td>Small samples hide behind summaries; the caption must define the interval and n</td>
+</tr>
+<tr>
+<td>Legend (and legend outside the panel)</td>
+<td>Direct labels are read faster than a key</td>
+</tr>
+<tr>
+<td>Grid lines, closed frames, thin data lines</td>
+<td>Ink that competes with the data</td>
+</tr>
+<tr>
+<td>Rotated or crowded tick labels</td>
+<td>Sideways reading, needless precision</td>
+</tr>
+<tr>
+<td>Missing axis titles or units; no panel letters</td>
+<td>The caption and text cannot refer to what they need</td>
+</tr>
+<tr>
+<td>Colour pairs that merge under simulated protanopia, deuteranopia or tritanopia, or have similar lightness</td>
+<td>Colour-blind readers and greyscale prints lose the distinction</td>
+</tr>
+<tr>
+<td>More than five hues; 3D axes; pie charts</td>
+<td>Hard to decode, distorted magnitudes</td>
+</tr>
+<tr>
+<td>Text below the minimum at the printed width (<code>--print-width 89mm</code>)</td>
+<td>A figure drawn large and shrunk for print loses its labels</td>
+</tr>
+</tbody>
+</table></div>
+<p>The audit runs on matplotlib figures. Judging the claim, the axis range, the statistics, the caption and the redesign is the agent's work, and the report labels it as such.</p>
+</section>
+<section id="outputs"><h2>Files it reads and writes</h2>
+<div class="doc-table"><table>
+<thead>
+<tr>
+<th></th>
+<th>Path</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Reads</td>
+<td>the figures you name (PNG, JPEG, TIFF, PDF pages), e.g. in <code>research/figures/</code>; the manuscript, e.g. in <code>research/paper/</code>; the plotting script and the data it reads</td>
+</tr>
+<tr>
+<td>Writes</td>
+<td>one folder per figure: <code>research/reviews/figure-audit-&lt;figure&gt;/</code> with a <code>research/</code> folder, otherwise <code>figure-audit-&lt;figure&gt;/</code> next to the figure</td>
+</tr>
+<tr>
+<td>In that folder</td>
+<td><code>report.md</code>, <code>checks/</code> (page renders, crops, greyscale and colour-blind views, check sheets), <code>good.py</code> and <code>better.py</code> with their PNG/PDF output</td>
+</tr>
+</tbody>
+</table></div>
+<p>It never modifies, moves or overwrites your figure, script, data or manuscript. Auditing a script runs it; its <code>savefig</code> calls are intercepted, so its figure files are not rewritten.</p>
+</section>
+<section id="helper"><h2>Command line and helper API</h2>
+<pre><code class="language-bash">python figure-audit/scripts/figtools.py pages draft.pdf out/checks --first 7 --last 7
+python figure-audit/scripts/figtools.py checks fig3.png out/checks
+python figure-audit/scripts/figtools.py audit-script --print-width 89mm --render out/checks fig3.py
+python figure-audit/scripts/figtools.py crop page-7.png out/checks/panel_a.png 0.1 0.2 0.5 0.5
+</code></pre>
+<div class="doc-table"><table>
+<thead>
+<tr>
+<th>Command</th>
+<th>Purpose</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>pages</code></td>
+<td>Render PDF pages to PNG (needs <code>pdftoppm</code> or <code>pymupdf</code>)</td>
+</tr>
+<tr>
+<td><code>crop</code></td>
+<td>Crop by fractions of the image and enlarge, to inspect one panel</td>
+</tr>
+<tr>
+<td><code>grey</code>, <code>cvd</code></td>
+<td>Greyscale copy; simulated protanopia, deuteranopia and tritanopia</td>
+</tr>
+<tr>
+<td><code>checks</code></td>
+<td>All four views plus a single comparison sheet</td>
+</tr>
+<tr>
+<td><code>audit-script</code></td>
+<td>Run a matplotlib script headless and audit each figure (<code>--target paper/wide/slide/poster</code>, <code>--print-width</code>, <code>--render</code>)</td>
+</tr>
+</tbody>
+</table></div>
+<p>The bundled <code>plotkit</code> library draws the redesigns and carries the same audit:</p>
+<div class="doc-table"><table>
+<thead>
+<tr>
+<th>Function</th>
+<th>Purpose</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>use_style(target)</code>, <code>figure()</code></td>
+<td>Quiet axes, colour-blind-safe palette, sizes for paper, slide or poster</td>
+</tr>
+<tr>
+<td><code>strip(ax, groups, summary="mean_ci95")</code></td>
+<td>Every replicate with mean and 95 % CI, SD or SEM</td>
+</tr>
+<tr>
+<td><code>dots</code>, <code>bars</code>, <code>slope</code>, <code>hist</code>, <code>small_multiples</code></td>
+<td>Chart builders that keep encodings honest</td>
+</tr>
+<tr>
+<td><code>label_lines</code>, <code>emphasise</code>, <code>mark</code></td>
+<td>Direct labels and one accent colour</td>
+</tr>
+<tr>
+<td><code>audit(fig, print_width=)</code>, <code>report(issues)</code></td>
+<td>The automatic checks, for any matplotlib figure</td>
+</tr>
+<tr>
+<td><code>save(fig, path, also=("pdf",))</code></td>
+<td>Save with a greyscale copy alongside</td>
+</tr>
+</tbody>
+</table></div>
+</section>
+<section id="colour"><h2>Colour-blind simulation</h2>
+<p>The colour-blind views simulate full protanopia, deuteranopia and tritanopia with standard linear-RGB matrices. The audit compares every pair of data colours in a panel and flags pairs whose CIELAB difference collapses under a simulation, or whose lightness is so close that a greyscale print loses them. Milder colour-vision deficiencies are more common and less severe than the simulations, so a figure that passes all three is safe for most readers; a figure that fails one needs a second cue such as marker shape, line style or a direct label.</p>
+</section>
+<section id="faq"><h2>FAQ</h2>
+<h3 id="how-is-this-different-from-paper-figures-and-figure-editor">How is this different from Paper Figures and Figure Editor?</h3>
+<p>Paper Figures designs and draws figures from your data. Figure Editor assembles finished images into one multi-panel figure. Figure Audit reviews figures that already exist and the scripts behind them, ranks what is wrong and redraws them. Each works on its own.</p>
+<h3 id="what-do-i-need-installed">What do I need installed?</h3>
+<p>Python 3.10+ with numpy, Pillow and matplotlib. For PDF pages, poppler's <code>pdftoppm</code> (<code>brew install poppler</code>, <code>apt install poppler-utils</code>) or the <code>pymupdf</code> package. No network access.</p>
+<h3 id="which-checks-are-automatic">Which checks are automatic?</h3>
+<p>The script audit and the greyscale and colour-blind images. What the figure claims, whether the range or statistics support it, the caption and the redesign are the agent's judgement, and the report says which is which.</p>
+<h3 id="can-it-review-a-figure-from-r-excel-or-prism">Can it review a figure from R, Excel or Prism?</h3>
+<p>Yes, from the exported image or PDF: everything except the automatic script audit applies. Redraws are made in matplotlib from your data.</p>
+<h3 id="can-i-use-it-when-refereeing">Can I use it when refereeing?</h3>
+<p>Yes. Findings are phrased as observations with a suggested remedy. The skill makes no network calls, but your agent's model provider sees what the agent reads, as with any agent task, so follow your journal's confidentiality rules for manuscripts under review.</p>
+<h3 id="will-it-change-my-files">Will it change my files?</h3>
+<p>No. Everything it writes goes into a separate review folder.</p>
+</section>
+<section id="limitations"><h2>Limitations</h2>
+<ul>
+<li>It reviews existing figures; it does not design figures from scratch or assemble panels.</li>
+<li>The automatic audit covers matplotlib only. Figures from other tools are reviewed from their image or PDF.</li>
+<li>Auditing a script runs it: audit only scripts you trust. Files it writes other than figures are not intercepted.</li>
+<li>Colour-blind views simulate full dichromacy; they are a strong screen, not a test with real readers.</li>
+<li>With only an image, the redesign is specified rather than drawn, and values are never read off pixels.</li>
+<li>Minimum text sizes differ between venues; check your journal's current author guidelines.</li>
+</ul>
+</section>
+<section id="changelog"><h2>Changelog</h2>
+<p><strong>1.0.0</strong> · October 2026 · First release.</p></section>
+
+      </article>
+    </div>
+  </main>
+
+  <footer class="footer">
+    <div class="wrap footer-inner">
+      <span class="brand"><img src="../../assets/img/avatar.png" alt="" width="24" height="24"> Aurora Lab</span>
+      <nav aria-label="Footer">
+        <a href="https://www.agensi.io/creators/aurora-lab">Agensi</a>
+        <a href="https://github.com/the-aurora-lab">GitHub</a>
+      </nav>
+    </div>
+  </footer>
+</body>
+</html>
