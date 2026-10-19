@@ -1,0 +1,239 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Instructions Writer · Aurora Lab</title>
+  <meta name="description" content="Documentation for the Instructions Writer agent skill: READMEs, setup guides, reproduction steps and lab protocols written from the facts in your project, then tested by a fresh agent that follows them to the letter in a clean copy.">
+  <meta property="og:title" content="Instructions Writer · Aurora Lab">
+  <meta property="og:description" content="Documentation for the Instructions Writer agent skill: READMEs, setup guides, reproduction steps and lab protocols written from the facts in your project, then tested by a fresh agent that follows them to the letter in a clean copy.">
+  <meta property="og:image" content="https://the-aurora-lab.github.io/assets/shots/instructions-writer/01-before-after.png">
+  <meta name="theme-color" content="#0b1020">
+  <link rel="icon" type="image/png" href="../../assets/img/avatar.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../../assets/css/site.css">
+</head>
+<body>
+  <a class="skip" href="#main">Skip to content</a>
+  <header class="nav">
+    <div class="wrap nav-inner">
+      <a class="brand" href="../../" aria-label="Aurora Lab home">
+        <img src="../../assets/img/avatar.png" alt="" width="32" height="32">
+        <span>Aurora Lab</span>
+      </a>
+      <nav aria-label="Primary">
+        <a href="../../#skills">Skills</a>
+        <a href="../../#examples">Examples</a>
+        <a class="btn btn-small" href="https://www.agensi.io/creators/aurora-lab">Get it on Agensi</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main">
+    <section class="docs-hero">
+      <div class="aurora" aria-hidden="true"></div>
+      <div class="wrap">
+        <p class="crumbs"><a href="../../">Aurora Lab</a> / <a href="../../#skills">Skills</a> / Instructions Writer</p>
+        <h1>Instructions Writer</h1>
+        <p class="lede">READMEs that work on the first try. Your agent rewrites your README, setup guide, reproduction steps or lab protocol from the facts in the project, then has a fresh agent follow it to the letter in a clean copy, and fixes every step it had to guess.</p>
+        <ul class="meta" aria-label="Skill facts"><li>v1.0.0</li><li>No scripts or installs</li><li>Needs a terminal</li><li>Works with any SKILL.md agent</li></ul>
+        <div class="cta">
+          <a class="btn" href="https://www.agensi.io/creators/aurora-lab">Get it on Agensi · $5</a>
+          <a class="btn btn-ghost" href="#overview">Read the docs</a>
+        </div>
+      </div>
+    </section>
+
+    <div class="wrap docs">
+      <nav class="toc" aria-label="On this page">
+        <p>On this page</p>
+        <ol><li><a href="#overview">Overview</a></li><li><a href="#quick-start">Quick start</a></li><li><a href="#gallery">What you get</a></li><li><a href="#workflow">How it works</a></li><li><a href="#safety">What the follower may run</a></li><li><a href="#outputs">Files it reads and writes</a></li><li><a href="#report">The test report</a></li><li><a href="#faq">FAQ</a></li><li><a href="#limitations">Limitations</a></li><li><a href="#changelog">Changelog</a></li></ol>
+      </nav>
+      <article class="prose-doc">
+<section id="overview"><h2>Overview</h2>
+<p>The author of a README can't test it. They fill every gap from memory, and the file a missing step would create already exists on their machine. So the new student spends a day on <code>cd analysis</code>, a config file nobody mentioned and a figure script that has to run second. Instructions Writer makes your agent treat instructions like code: written from the real project, each step checkable, then tested.</p>
+<ul>
+<li><strong>Facts from the project, not from memory.</strong> Versions from <code>pyproject.toml</code> or <code>environment.yml</code>, dependencies from the imports actually used, options from the scripts' argument parsers, run order from which script writes which file, data location from the config. Contradictions with the old text are listed. Anything the project can't answer stays a visible <code>&lt;TODO&gt;</code>, never an invented value.</li>
+<li><strong>Steps you can check.</strong> Each task gives its time, the folder to run from and what you need, then numbered, copy-pastable commands (one per block), the output to expect after each, the likely error next to the step that causes it, and a final check such as a value with its tolerance.</li>
+<li><strong>A "Reproducing the results" table</strong> for research code: each figure, table or headline number with its command, output file, expected value and run time.</li>
+<li><strong>Tested by a fresh follower.</strong> A subagent that sees only the text and a clean copy of the project (no environment, no outputs, no filled-in config) runs every step it safely can and records each error and guess. The agent fixes the text and retests with a new follower, up to three rounds.</li>
+<li><strong>A test report:</strong> what the old text broke, the contradictions found, what was verified by running and what was judged for clarity only, open issues, and code changes it recommends but doesn't make.</li>
+</ul>
+<p><strong>Pairs well with:</strong> <a href="../research-software/">Research Software</a>, which makes the code itself correct and reproducible, and <a href="../py-lib/">Citable Python Packages</a> (free). Neither is needed.</p>
+</section>
+<section id="quick-start"><h2>Quick start</h2>
+<ol>
+<li><strong>Get the skill</strong> from <a href="https://www.agensi.io/creators/aurora-lab">Agensi</a> and add it to your agent (Claude Code, Codex CLI, Cursor, Gemini CLI or any agent that loads SKILL.md skills).</li>
+<li><strong>Nothing to install.</strong> There are no scripts. The agent needs a terminal to run the instructions it tests.</li>
+<li><strong>Ask in plain words</strong>, saying who will follow the instructions and what they should be able to do at the end.</li>
+</ol>
+<p>Example requests:</p>
+<ul>
+<li><em>"A new student couldn't get Figure 2 out of this repo. Rewrite README.md so a fresh clone gets there, and test it."</em></li>
+<li><em>"Write a 'Reproducing the results' section for this repository: every figure and table, the command, the expected value and the run time."</em></li>
+<li><em>"Review our staining protocol in protocols/staining.md. Could a new technician follow it alone?"</em></li>
+<li><em>"Test the install instructions in docs/install.md on a clean copy and fix whatever breaks."</em></li>
+</ul>
+<div class="callout">
+<p>Want to see a full run first? The skill ships the demo's before README, after README and test report in <code>examples/</code>.</p>
+</div>
+</section>
+<section id="gallery"><h2>What you get</h2>
+<p>Everything below comes from one real run: a fresh agent session with only this skill installed, given the request shown in the last image ($1.59, about five minutes). The repository was ours: <code>lake-trends</code>, a small synthetic analysis of six made-up lake temperature stations (a trend script, a figure script, a cleaning script and two tests), with a README written the way real ones are. We planted twelve problems: "python 3" where the code needs 3.10, a global <code>pip install</code> missing two packages, <code>cd analysis</code> when the scripts must run from the root, an unmentioned config file, data sent to a group share although it ships in the repo, the figure script before the script it depends on, a destructive cleaning step with its warning afterwards, no output folder or expected values, an option that doesn't exist, mixed names for the same thing, <code>pytest</code> never installed, and <code>$</code> prompts in copy-paste blocks.</p>
+<p>The new README fixed all twelve. Three fresh followers ran: one on the old README (it failed four times before producing any output), one on the new README (setup, Figure 2 and the tests on the first try, every promised value matched) and one on the revised README after small fixes. The agent also caught two things we hadn't planned: <code>pip install -e .</code> fails on this project, and the figure script hard-codes the last year. We checked every value it quotes (the trend, its interval, the row count, the checksum) against the data.</p>
+<div class="shots"><figure><img src="../../assets/shots/instructions-writer/01-before-after.png" alt="Left: the old README telling the reader to pip install numpy, cd into analysis, copy data from a group share, make the figures before the trends, and expect roughly the same slopes as the paper. Right: the rewritten Reproduce Figure 2 section with the time, the working folder, numbered commands, the expected output, the likely error and a check on the figure legend." loading="lazy"><figcaption>The old README (left, shortened by us) and the Reproduce Figure 2 section the agent wrote (right, lightly shortened). The repository and its README were ours: synthetic, written for the test.</figcaption></figure><figure><img src="../../assets/shots/instructions-writer/02-what-broke.png" alt="Table of nine problems a fresh follower hit with the old README: missing packages, the wrong working folder, data sent to a share nobody reads, an unmentioned config file, the wrong run order, a destructive cleaning step, a nonexistent option, no output folder or expected values, and pytest never installed." loading="lazy"><figcaption>The &#x27;Before&#x27; table of the test report saved by the demo run (wording shortened by us). Most rows come from the fresh follower; the agent confirmed the --site and pytest rows itself.</figcaption></figure><figure><img src="../../assets/shots/instructions-writer/03-after.png" alt="Final-round results: setup, Reproduce Figure 2 and the tests all completed by a new fresh follower; troubleshooting entries checked by triggering five errors; mean trend, legend, test count and data checksum all matched the text; two TODOs left for the author and two recommended code changes." loading="lazy"><figcaption>The &#x27;After&#x27; section and open issues of the test report from the demo run (shortened by us).</figcaption></figure><figure><img src="../../assets/shots/instructions-writer/04-session.png" alt="Excerpt of the agent session: reading the project, running the pipeline in a clean copy, rewriting the README, two fresh followers on the new and old text, a second round, and the saved test report." loading="lazy"><figcaption>The agent&#x27;s steps and messages from the demo run (paraphrased from its transcript; $1.59, 304 s).</figcaption></figure></div>
+</section>
+<section id="workflow"><h2>How it works</h2>
+<ol>
+<li><strong>Reader, start and finish lines.</strong> Who follows the text, on what platform, starting from what (usually a fresh clone), and the observable outcomes they come for ("Figure 2 is regenerated", "the tests pass"). Inferred and listed in the report when you don't say.</li>
+<li><strong>Facts from the project.</strong> Versions, dependencies, entry points and options, run order, data, configuration, outputs and expected values, each checked against its source file. Contradictions with the old text are kept for the report.</li>
+<li><strong>Layout.</strong> What it is, before you start, a quick start of five steps or fewer, one section per task, reference, troubleshooting, version. Research code gets a "Reproducing the results" table; protocols get purpose, safety, materials, preparation, procedure, expected results and troubleshooting.</li>
+<li><strong>Steps as checkpoints.</strong> Each task: an outcome heading, its time and working folder, what you need, numbered actions, the result to expect after each, the likely failure next to its step, and a final check.</li>
+<li><strong>Writing rules.</strong> Conditions and warnings before the action, one action per step, copy-pastable commands, marked placeholders, isolated environments, one name per thing, research rules for data, seeds, tolerances and run time.</li>
+<li><strong>Fresh follower.</strong> A clean copy of the project in the system temp directory; the follower gets only the text and that folder. The old text gets its own follower too, for the before/after.</li>
+<li><strong>Fix and retest.</strong> Every guess and blocker is fixed in the text; blockers outside its control move to "Before you start". A new follower retests, up to three rounds.</li>
+<li><strong>Deliver.</strong> The document (the old one kept as <code>&lt;name&gt;.orig.md</code> when there is no version control), the test report, and a summary in the chat.</li>
+</ol>
+<h3 id="run-throughs-and-walk-throughs">Run-throughs and walk-throughs</h3>
+<p>Instructions with commands get a <strong>run-through</strong>: the follower executes what is safe and compares each result with the text. Protocols and anything that can't be executed get a <strong>walk-through</strong>: the follower reads as a careful new lab member and flags missing quantities and units, unsettled choices, late warnings and safe pause points. Without subagents or a fresh session, the agent follows the text itself in a separate pass and says so in the report.</p>
+</section>
+<section id="safety"><h2>What the follower may run</h2>
+<div class="doc-table"><table>
+<thead>
+<tr>
+<th>Runs</th>
+<th>Doesn't run (judged for clarity only)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Creating environments and installing packages inside the clean copy</td>
+<td>Anything outside the clean copy</td>
+</tr>
+<tr>
+<td>Your scripts on the shipped or a small input</td>
+<td>Anything needing credentials or money</td>
+</tr>
+<tr>
+<td>Tests, checks, short pipelines</td>
+<td>Cluster jobs, downloads over about 1 GB, runs over about ten minutes</td>
+</tr>
+</tbody>
+</table></div>
+</section>
+<section id="outputs"><h2>Files it reads and writes</h2>
+<div class="doc-table"><table>
+<thead>
+<tr>
+<th>File</th>
+<th>Read or written</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>The instructions you point to</td>
+<td>Read, then rewritten where you say. Without version control the old one is kept as <code>&lt;name&gt;.orig.md</code>.</td>
+</tr>
+<tr>
+<td>Project files with the facts</td>
+<td>Read: dependency files, scripts and their options, configuration templates. Never credentials or <code>.env</code> files.</td>
+</tr>
+<tr>
+<td><code>research/reviews/instructions-test-&lt;doc&gt;-&lt;date&gt;.md</code></td>
+<td>Written: the test report. Without a <code>research/</code> folder it goes next to the document.</td>
+</tr>
+<tr>
+<td>A clean copy in the system temp directory</td>
+<td>Created for each follower and deleted at the end.</td>
+</tr>
+</tbody>
+</table></div>
+<p>It never changes your code or data unless you ask.</p>
+</section>
+<section id="report"><h2>The test report</h2>
+<div class="doc-table"><table>
+<thead>
+<tr>
+<th>Section</th>
+<th>What it holds</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Header</td>
+<td>Date, version, run-through or walk-through, follower mode, rounds, platform, assumptions.</td>
+</tr>
+<tr>
+<td>Verdict</td>
+<td>Could a newcomer reach each finish line with the old text, and can they now.</td>
+</tr>
+<tr>
+<td>Before</td>
+<td>Each step of the old text the follower hit: what happened, its kind (blocked, guessed, wrong, missing, order) and the fix.</td>
+</tr>
+<tr>
+<td>Contradictions</td>
+<td>Facts the old text stated that the project contradicts, with where they were checked.</td>
+</tr>
+<tr>
+<td>After</td>
+<td>Each task's result in the final round, what was verified by running and what only by reading; each promised result against what the follower got.</td>
+</tr>
+<tr>
+<td>Open issues</td>
+<td>TODOs for the author, untested steps and why.</td>
+</tr>
+<tr>
+<td>Recommended code changes</td>
+<td>Changes that would make the instructions shorter or safer, not made.</td>
+</tr>
+</tbody>
+</table></div>
+</section>
+<section id="faq"><h2>FAQ</h2>
+<h3 id="which-agents-does-it-work-with">Which agents does it work with?</h3>
+<p>Any agent that loads SKILL.md skills, including Claude Code, Codex CLI, Cursor and Gemini CLI. It needs a terminal, and works best where the agent can run subagents or start a fresh session.</p>
+<h3 id="does-it-run-my-code-is-that-safe">Does it run my code? Is that safe?</h3>
+<p>It runs your instructions, as written, in a temporary copy of the project and deletes the copy at the end. Packages go only into an environment inside that copy. Anything needing credentials, money, a cluster, a large download or more than about ten minutes is not run, and the report marks it.</p>
+<h3 id="will-it-change-my-code-or-data">Will it change my code or data?</h3>
+<p>No. When the code is the problem, it documents the workaround and lists the fix as a recommendation. It changes code only if you ask.</p>
+<h3 id="what-if-my-pipeline-takes-hours-or-needs-a-gpu">What if my pipeline takes hours or needs a GPU?</h3>
+<p>Long and GPU steps are not run. Their run time and hardware are written down, plus a quick variant when your project has one, and the follower runs that instead.</p>
+<h3 id="can-it-handle-lab-protocols">Can it handle lab protocols?</h3>
+<p>Yes, as a walk-through: nothing is executed. It finds gaps in the text, not errors in the science.</p>
+<h3 id="does-it-work-with-r-julia-or-other-languages">Does it work with R, Julia or other languages?</h3>
+<p>Yes. It takes versions and dependencies from whatever the project uses, and the follower runs whatever the instructions say. Our demo was a Python repository.</p>
+<h3 id="how-long-does-it-take">How long does it take?</h3>
+<p>In our demo, about five minutes for reading the project, the rewrite and three follower runs. Each follower is a separate agent run, so testing uses several times the tokens of a plain rewrite.</p>
+</section>
+<section id="limitations"><h2>Limitations</h2>
+<ul>
+<li>A follower is a simulated newcomer: it knows more and gives up later than a real one. For high-stakes instructions a real newcomer is still the final test.</li>
+<li>Tests run on the agent's own machine, so other operating systems and versions are untested; the report states the platform.</li>
+<li>Steps that need credentials, money, a cluster, large downloads or more than about ten minutes are judged for clarity only.</li>
+<li>Without subagents or a fresh session the test is less strict; the report says so.</li>
+<li>Facts the project can't answer (a repository URL, published values, a licence) stay as TODOs for you.</li>
+<li>Protocols are walked through, not performed.</li>
+<li>It recommends code fixes but doesn't make them unless you ask.</li>
+</ul>
+</section>
+<section id="changelog"><h2>Changelog</h2>
+<p><strong>1.0.0</strong> · October 2026 · First release.</p></section>
+
+      </article>
+    </div>
+  </main>
+
+  <footer class="footer">
+    <div class="wrap footer-inner">
+      <span class="brand"><img src="../../assets/img/avatar.png" alt="" width="24" height="24"> Aurora Lab</span>
+      <nav aria-label="Footer">
+        <a href="https://www.agensi.io/creators/aurora-lab">Agensi</a>
+        <a href="https://github.com/the-aurora-lab">GitHub</a>
+      </nav>
+    </div>
+  </footer>
+</body>
+</html>
