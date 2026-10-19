@@ -1,0 +1,253 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Table Design · Aurora Lab</title>
+  <meta name="description" content="Documentation for the Table Design agent skill: turn results in CSV or JSON into booktabs LaTeX, Markdown or HTML tables with mean ± SD rounding, best values in bold, explained missing cells and a rendered preview.">
+  <meta property="og:title" content="Table Design · Aurora Lab">
+  <meta property="og:description" content="Documentation for the Table Design agent skill: turn results in CSV or JSON into booktabs LaTeX, Markdown or HTML tables with mean ± SD rounding, best values in bold, explained missing cells and a rendered preview.">
+  <meta property="og:image" content="https://the-aurora-lab.github.io/assets/shots/table-design/01-table.png">
+  <meta name="theme-color" content="#0b1020">
+  <link rel="icon" type="image/png" href="../../assets/img/avatar.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../../assets/css/site.css">
+</head>
+<body>
+  <a class="skip" href="#main">Skip to content</a>
+  <header class="nav">
+    <div class="wrap nav-inner">
+      <a class="brand" href="../../" aria-label="Aurora Lab home">
+        <img src="../../assets/img/avatar.png" alt="" width="32" height="32">
+        <span>Aurora Lab</span>
+      </a>
+      <nav aria-label="Primary">
+        <a href="../../#skills">Skills</a>
+        <a href="../../#examples">Examples</a>
+        <a class="btn btn-small" href="https://www.agensi.io/creators/aurora-lab">Get it on Agensi</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main">
+    <section class="docs-hero">
+      <div class="aurora" aria-hidden="true"></div>
+      <div class="wrap">
+        <p class="crumbs"><a href="../../">Aurora Lab</a> / <a href="../../#skills">Skills</a> / Table Design</p>
+        <h1>Table Design</h1>
+        <p class="lede">Publication-ready results tables from your CSV. Your agent pivots methods × datasets, rounds mean ± SD to match, bolds the best value per column, marks and explains missing runs, writes a takeaway caption, and renders the table to check it before you paste it into the paper.</p>
+        <ul class="meta" aria-label="Skill facts"><li>v1.0.0</li><li>Python 3.10+ · standard library</li><li>No network access</li><li>Works with any SKILL.md agent</li></ul>
+        <div class="cta">
+          <a class="btn" href="https://www.agensi.io/creators/aurora-lab">Get it on Agensi · $5</a>
+          <a class="btn btn-ghost" href="#overview">Read the docs</a>
+        </div>
+      </div>
+    </section>
+
+    <div class="wrap docs">
+      <nav class="toc" aria-label="On this page">
+        <p>On this page</p>
+        <ol><li><a href="#overview">Overview</a></li><li><a href="#quick-start">Quick start</a></li><li><a href="#gallery">What you get</a></li><li><a href="#workflow">How it works</a></li><li><a href="#outputs">Files it reads and writes</a></li><li><a href="#helper">Command line and helper API</a></li><li><a href="#spanish">Spanish number formats</a></li><li><a href="#faq">FAQ</a></li><li><a href="#limitations">Limitations</a></li><li><a href="#changelog">Changelog</a></li></ol>
+      </nav>
+      <article class="prose-doc">
+<section id="overview"><h2>Overview</h2>
+<p>A results table is where reviewers check your claims, and six-decimal script output pasted into LaTeX makes them work for it. Table Design turns your agent into a careful table maker that:</p>
+<ul>
+<li><strong>Decides the form first</strong>: a sentence, a figure or a table, and whether the table is for looking values up (supplementary) or for showing one comparison (main text).</li>
+<li><strong>Pivots long results</strong> (one row per method × dataset) into methods as rows and datasets as columns, and orders the rows by a rule it states.</li>
+<li><strong>Rounds for the reader</strong>: two to three significant digits by default; for mean ± SD, the SD keeps one significant digit (two when it starts with 1) and the mean is rounded to match. Large and tiny values are scaled, with the factor in the header.</li>
+<li><strong>Marks what matters, and only that</strong>: the best value per column in bold, or one highlighted row; units in headers; digits aligned; booktabs rules and no vertical lines.</li>
+<li><strong>Never hides a gap</strong>: missing runs print as an en dash with a note that says what the data say; cells with a different n are flagged; when the best value is within one SD of the runner-up, it says so.</li>
+<li><strong>Renders the table and looks at it</strong> before handing it over.</li>
+</ul>
+<p>It writes booktabs LaTeX for the paper, Markdown for a README and HTML for reports, and formats numbers for Spanish-language documents (decimal comma).</p>
+<p><strong>Other Aurora Lab skills for a paper's results:</strong> <a href="../paper-figures/">Paper Figures</a> designs figures from data, and <a href="../figure-audit/">Figure Audit</a> reviews figures that already exist. Each works on its own; they pair well.</p>
+</section>
+<section id="quick-start"><h2>Quick start</h2>
+<ol>
+<li><strong>Get the skill</strong> from <a href="https://www.agensi.io/creators/aurora-lab">Agensi</a> and add it to your agent (Claude Code, Codex CLI, Cursor, Gemini CLI or any agent that loads SKILL.md skills).</li>
+<li><strong>Have Python 3.10+.</strong> Nothing else is needed to make tables. For rendered previews: a LaTeX engine plus poppler's <code>pdftoppm</code> (or <code>pymupdf</code>) for LaTeX tables, or Chrome, Chromium, Edge or Brave for HTML tables.</li>
+<li><strong>Ask in plain words.</strong></li>
+</ol>
+<p>Example requests:</p>
+<ul>
+<li><em>"Make Table 2 from results.csv for the paper (LaTeX booktabs) and a Markdown version for the README."</em></li>
+<li><em>"Clean up this table before I submit: tables/ablation.tex."</em></li>
+<li><em>"Turn the JSON results in research/results/ into a supplementary table, one row per experiment."</em></li>
+<li><em>"Format these numbers for a Spanish-language report, decimal comma."</em></li>
+</ul>
+</section>
+<section id="gallery"><h2>What you get</h2>
+<p>Everything below, except the last image, comes from a real run: a fresh agent session with only this skill installed, given the request in the session card. The input was ours: a synthetic, seeded <code>results.csv</code> with six classifiers on four image datasets (mean and SD of accuracy over seeds, seeds per cell, training time, run status), including one run that ran out of memory, one cell with 3 seeds instead of 5, and a dataset where a baseline edges out the proposed method within noise. The run produced the LaTeX and Markdown tables and a rendered preview; it noted the missing run and the 3-seed cell under the table, and its caption does not claim a win on the dataset where the gap is within one SD. Every number in the table matches the CSV.</p>
+<div class="shots"><figure><img src="../../assets/shots/table-design/01-table.png" alt="A booktabs LaTeX table: six methods by four datasets, test accuracy mean ± SD, best mean per column in bold, one cell shown as an en dash, three notes under the table." loading="lazy"><figcaption>previews/table2.png from the demo run: the LaTeX table the skill wrote, compiled and rendered by its preview script.</figcaption></figure><figure><img src="../../assets/shots/table-design/02-before-after.png" alt="Left: the raw results CSV with 24 rows of method, dataset, mean, SD, seeds, minutes and status. Right: the rendered table." loading="lazy"><figcaption>Left: the synthetic input CSV we gave the skill (shown as text by us). Right: the table it produced in the demo run.</figcaption></figure><figure><img src="../../assets/shots/table-design/03-markdown.png" alt="The Markdown table the skill wrote: caption, six rows by four datasets, three notes." loading="lazy"><figcaption>table2.md from the demo run, verbatim.</figcaption></figure><figure><img src="../../assets/shots/table-design/04-session.png" alt="Excerpt of the agent session: reading the CSV, running the table script, rendering the preview, and the final report." loading="lazy"><figcaption>The agent&#x27;s steps and report from the demo run (paraphrased from its transcript).</figcaption></figure><figure><img src="../../assets/shots/table-design/05-spanish.png" alt="A Markdown table in Spanish: soil-moisture RMSE of five models at four sites, with decimal commas." loading="lazy"><figcaption>examples/tabla1_es.md, shipped with the skill: the script&#x27;s output for its bundled synthetic example (our command, not the demo run).</figcaption></figure></div>
+</section>
+<section id="workflow"><h2>How it works</h2>
+<ol>
+<li><strong>Form.</strong> Sentence, figure or table? A table is for exact values or many attributes in different units.</li>
+<li><strong>Purpose.</strong> A lookup table (supplementary) favours completeness and findability; a comparison table (main text) keeps only the columns its sentence needs, about seven at most.</li>
+<li><strong>Shape and order.</strong> Items compared are rows, measures are columns. Long results are pivoted. Rows are ordered by the column the message is about, or by a natural order, and the rule is reported.</li>
+<li><strong>Rounding.</strong> Significant-digit defaults, mean ± SD matched to the SD, scaling with the factor in the header, scientific notation for tiny values, labels such as years and IDs kept as text.</li>
+<li><strong>Format.</strong> The bundled script writes the table with the caption, notes, bold and highlight.</li>
+<li><strong>Caption and notes.</strong> Takeaway first, then quantity, unit, n and what ± means; notes for the missing mark, abbreviations, what bold means and any cell with a different n. Notes state only what the data say.</li>
+<li><strong>Look.</strong> LaTeX is compiled and rendered to PNG, HTML is screenshotted, Markdown is read; the agent checks alignment, decimals, units, missing marks, emphasis and the caption, and re-renders after any change.</li>
+<li><strong>Report.</strong> Files written, the row-order rule, the rounding, what is missing and why, what is bold and why, and any number worth a second look.</li>
+</ol>
+<h3 id="formatting-rules-it-applies">Formatting rules it applies</h3>
+<div class="doc-table"><table>
+<thead>
+<tr>
+<th>Rule</th>
+<th>Why</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Three horizontal rules (booktabs), no vertical lines or boxes</td>
+<td>Lines between cells compete with the numbers</td>
+</tr>
+<tr>
+<td>Numbers right-aligned, one number of decimals per column</td>
+<td>Digits line up, so magnitudes compare at a glance</td>
+</tr>
+<tr>
+<td>Units once, in the header</td>
+<td>Cells hold only numbers</td>
+</tr>
+<tr>
+<td>Thousands separators only from five digits</td>
+<td>1250 stays compact; 12,500 is easier to read grouped</td>
+</tr>
+<tr>
+<td>Missing cells as an en dash, explained in a note</td>
+<td>A blank looks like an error; a zero is a different claim</td>
+</tr>
+<tr>
+<td>One emphasis: best value per column or one row</td>
+<td>When everything is bold, nothing stands out</td>
+</tr>
+<tr>
+<td>Totals only for additive columns</td>
+<td>Summed rates, means or percentages are meaningless</td>
+</tr>
+</tbody>
+</table></div>
+</section>
+<section id="outputs"><h2>Files it reads and writes</h2>
+<div class="doc-table"><table>
+<thead>
+<tr>
+<th></th>
+<th>Path</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Reads</td>
+<td>the CSV or JSON results you name, e.g. in <code>research/results/</code>, or a table you want cleaned up</td>
+</tr>
+<tr>
+<td>Writes</td>
+<td><code>research/tables/&lt;name&gt;.tex</code>, <code>.md</code> or <code>.html</code> when a <code>research/</code> folder exists, otherwise next to the data or where you say</td>
+</tr>
+<tr>
+<td>Previews</td>
+<td>PNG (and PDF for LaTeX) in a <code>previews/</code> folder next to the tables</td>
+</tr>
+</tbody>
+</table></div>
+<p>Your data files are never modified.</p>
+</section>
+<section id="helper"><h2>Command line and helper API</h2>
+<pre><code class="language-bash">python table-design/scripts/table_fmt.py results.csv --pivot method,dataset,acc_mean,acc_sd \
+    --scale '*=1e-2' --units '*=%' --best max --rename method=Method \
+    --caption &quot;Takeaway. What is shown, n, what ± means.&quot; --note &quot;–: not run.&quot; --out table2.tex
+python table-design/scripts/preview.py table2.tex previews/table2.png --number 2
+</code></pre>
+<div class="doc-table"><table>
+<thead>
+<tr>
+<th>Option</th>
+<th>Purpose</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>--pivot ROW,COL,VALUE[,SD]</code></td>
+<td>Long to wide (methods × datasets), with mean ± SD cells</td>
+</tr>
+<tr>
+<td><code>--pm MEAN=SD</code></td>
+<td>Mean ± SD for data that are already wide</td>
+</tr>
+<tr>
+<td><code>--sig</code>, <code>--decimals</code>, <code>--scale</code>, <code>--sci</code>, <code>--raw</code></td>
+<td>Rounding, fixed decimals, scaling, scientific notation, text columns</td>
+</tr>
+<tr>
+<td><code>--best max</code> (or <code>min</code>), <code>--highlight VALUE</code></td>
+<td>Bold the best value per column; emphasise one row</td>
+</tr>
+<tr>
+<td><code>--sort</code>, <code>--group 5</code>, <code>--cols</code>, <code>--rename</code>, <code>--units</code></td>
+<td>Order, grouping, column choice, labels, units</td>
+</tr>
+<tr>
+<td><code>--caption</code>, <code>--note</code>, <code>--name</code>, <code>--label</code>, <code>--missing</code></td>
+<td>Caption, notes, Markdown/HTML caption prefix, LaTeX label, missing mark</td>
+</tr>
+<tr>
+<td><code>--pct</code>, <code>--total</code>, <code>--bar</code></td>
+<td>Share of total, total row, inline bars</td>
+</tr>
+<tr>
+<td><code>--decimal ,</code>, <code>--thousands</code>, <code>--in-decimal ,</code></td>
+<td>Decimal comma and thousands separator, for output and input</td>
+</tr>
+</tbody>
+</table></div>
+<p><code>preview.py</code> renders a <code>.tex</code> table (pdflatex, xelatex, lualatex or tectonic, then pdftoppm or pymupdf; <code>--textwidth</code>, <code>--number</code>) or an <code>.html</code> table (Chrome, Chromium, Edge or Brave, found on macOS, Linux and Windows; <code>--chrome PATH</code>).</p>
+</section>
+<section id="spanish"><h2>Spanish number formats</h2>
+<p>With <code>--decimal ,</code> the table uses the decimal comma, with a narrow no-break space between thousands by default (<code>--thousands .</code> for a point). Input files written that way are read with <code>--in-decimal ,</code>, and semicolon-separated CSVs are detected automatically. The last image in the gallery is the skill's bundled example (<code>examples/tabla1_es.md</code>), produced by our command rather than the demo run.</p>
+</section>
+<section id="faq"><h2>FAQ</h2>
+<h3 id="what-does-my-data-need-to-look-like">What does my data need to look like?</h3>
+<p>A CSV (comma, semicolon, tab or pipe separated) or a JSON list of records, either wide or long (one row per method × dataset, which it pivots). Empty, NA or n/a cells are treated as missing.</p>
+<h3 id="what-do-i-need-installed">What do I need installed?</h3>
+<p>Python 3.10+ to make tables. For previews, a LaTeX engine plus <code>pdftoppm</code> or <code>pymupdf</code>, or a Chrome-family browser. Your paper needs <code>\usepackage{booktabs}</code>.</p>
+<h3 id="does-bold-mean-statistically-better">Does bold mean statistically better?</h3>
+<p>No. Bold marks the highest (or lowest) mean per column; a note says so, and the agent flags when the best value is within one SD of the next.</p>
+<h3 id="can-it-start-from-raw-per-seed-results">Can it start from raw per-seed results?</h3>
+<p>The pivot expects one row per method × dataset. The agent can average per-seed rows with a short script first, but the bundled tool does not aggregate.</p>
+<h3 id="will-it-change-my-files">Will it change my files?</h3>
+<p>No. It writes new table files and previews; your data are never modified.</p>
+</section>
+<section id="limitations"><h2>Limitations</h2>
+<ul>
+<li>It formats and reviews tables; it does not run experiments or test significance.</li>
+<li>Results must already be aggregated to one row per method × dataset for the pivot.</li>
+<li>LaTeX columns are plain right-aligned booktabs columns, not siunitx decimal alignment; very wide or multi-page tables need manual layout (longtable, landscape).</li>
+<li>Previews need a local LaTeX engine or a Chrome-family browser; without them the agent reads the table source as text.</li>
+<li>Caption style and table formats differ between journals; check your venue's current author guidelines.</li>
+</ul>
+</section>
+<section id="changelog"><h2>Changelog</h2>
+<p><strong>1.0.0</strong> · October 2026 · First release.</p></section>
+
+      </article>
+    </div>
+  </main>
+
+  <footer class="footer">
+    <div class="wrap footer-inner">
+      <span class="brand"><img src="../../assets/img/avatar.png" alt="" width="24" height="24"> Aurora Lab</span>
+      <nav aria-label="Footer">
+        <a href="https://www.agensi.io/creators/aurora-lab">Agensi</a>
+        <a href="https://github.com/the-aurora-lab">GitHub</a>
+      </nav>
+    </div>
+  </footer>
+</body>
+</html>
