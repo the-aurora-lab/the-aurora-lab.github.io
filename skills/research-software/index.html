@@ -1,0 +1,227 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Research Software · Aurora Lab</title>
+  <meta name="description" content="Documentation for the Research Software agent skill: your agent reviews research code for leakage, unseeded randomness, floats compared without a tolerance and swallowed errors, fixes it, pins the results with tolerance-based tests, and runs it end to end. Includes a stdlib-only smell checker for CI.">
+  <meta property="og:title" content="Research Software · Aurora Lab">
+  <meta property="og:description" content="Documentation for the Research Software agent skill: your agent reviews research code for leakage, unseeded randomness, floats compared without a tolerance and swallowed errors, fixes it, pins the results with tolerance-based tests, and runs it end to end. Includes a stdlib-only smell checker for CI.">
+  <meta property="og:image" content="https://the-aurora-lab.github.io/assets/shots/research-software/01-headline.png">
+  <meta name="theme-color" content="#0b1020">
+  <link rel="icon" type="image/png" href="../../assets/img/avatar.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../../assets/css/site.css">
+</head>
+<body>
+  <a class="skip" href="#main">Skip to content</a>
+  <header class="nav">
+    <div class="wrap nav-inner">
+      <a class="brand" href="../../" aria-label="Aurora Lab home">
+        <img src="../../assets/img/avatar.png" alt="" width="32" height="32">
+        <span>Aurora Lab</span>
+      </a>
+      <nav aria-label="Primary">
+        <a href="../../#skills">Skills</a>
+        <a href="../../#examples">Examples</a>
+        <a class="btn btn-small" href="https://www.agensi.io/creators/aurora-lab">Get it on Agensi</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main">
+    <section class="docs-hero">
+      <div class="aurora" aria-hidden="true"></div>
+      <div class="wrap">
+        <p class="crumbs"><a href="../../">Aurora Lab</a> / <a href="../../#skills">Skills</a> / Research Software</p>
+        <h1>Research Software</h1>
+        <p class="lede">Make the code behind your paper correct, tested and reproducible. Your agent runs a deterministic smell check, reviews the code against a scientific-programming checklist (leakage, seeds, tolerances, swallowed errors, numerical stability), fixes what it finds, pins your results with tests that use a justified tolerance, and runs everything end to end.</p>
+        <ul class="meta" aria-label="Skill facts"><li>v1.0.0</li><li>Python research code</li><li>Python 3.10+ · standard library (smell checker)</li><li>No network</li><li>Works with any SKILL.md agent</li></ul>
+        <div class="cta">
+          <a class="btn" href="https://www.agensi.io/creators/aurora-lab">Get it on Agensi · $12</a>
+          <a class="btn btn-ghost" href="#overview">Read the docs</a>
+        </div>
+      </div>
+    </section>
+
+    <div class="wrap docs">
+      <nav class="toc" aria-label="On this page">
+        <p>On this page</p>
+        <ol><li><a href="#overview">Overview</a></li><li><a href="#quick-start">Quick start</a></li><li><a href="#gallery">What you get</a></li><li><a href="#workflow">How it works</a></li><li><a href="#outputs">Files it reads and writes</a></li><li><a href="#helper">The smell checker</a></li><li><a href="#faq">FAQ</a></li><li><a href="#limitations">Limitations</a></li><li><a href="#changelog">Changelog</a></li></ol>
+      </nav>
+      <article class="prose-doc">
+<section id="overview"><h2>Overview</h2>
+<p>Research code is a deliverable, and it fails in ways a generic code review does not look for: preprocessing fitted before the train/test split, random draws nobody seeded, tests that compare floats with <code>==</code>, an <code>except:</code> that turns a failure into a silent NaN, a number in the paper that no script can regenerate. Research Software makes your agent review and fix the code behind your results, then prove the fixes:</p>
+<ul>
+<li><strong>A deterministic smell check first.</strong> The bundled <code>sci_check.py</code> parses your Python, never runs it, and reports <code>file:line</code> findings. Each one is a lead the agent verifies by reading the code.</li>
+<li><strong>A review that goes past the script.</strong> A checklist that puts science-specific failures first: group, temporal and target leakage, broadcasting, dtype and units, non-determinism, silent fallbacks, numerical stability. Then a general engineering pass.</li>
+<li><strong>Fixes, then tests that pin the result.</strong> Seeds threaded through every random step, preprocessing moved inside the training fold, tolerances chosen from the metric's scale with the reason written next to them, regression tests on the headline number and seed-stability tests.</li>
+<li><strong>Run it, don't trust it.</strong> Tests and the main script run end to end; two runs with the same seed must agree, and the spread across seeds is reported.</li>
+<li><strong>A review you can act on.</strong> On request, <code>research/code-review.md</code>: must-fix and should-fix items with <code>file:line</code>, the fix and its status, what was verified with which command, and what was not checked.</li>
+</ul>
+<p><strong>Pairs well with:</strong> <a href="../py-lib/">Citable Python Packages</a> (free), which turns the corrected code into an installable, citable package, and Instructions Writer, for a README and setup guide a newcomer can follow. Neither is needed.</p>
+</section>
+<section id="quick-start"><h2>Quick start</h2>
+<ol>
+<li><strong>Get the skill</strong> from <a href="https://www.agensi.io/creators/aurora-lab">Agensi</a> and add it to your agent (Claude Code, Codex CLI, Cursor, Gemini CLI or any agent that loads SKILL.md skills).</li>
+<li><strong>Open your agent in the project</strong>, with the project's own environment available so the agent can run your tests and scripts.</li>
+<li><strong>Python 3.10+</strong> for the smell checker (standard library only, nothing to install).</li>
+<li><strong>Ask in plain words.</strong></li>
+</ol>
+<p>Example requests:</p>
+<ul>
+<li><em>"Review my research code and make it reproducible."</em></li>
+<li><em>"My accuracy changes every run. Make it reproducible."</em></li>
+<li><em>"Check this training script for data leakage."</em></li>
+<li><em>"Write regression tests that pin the results in Table 2."</em></li>
+<li><em>"Is this repository ready to release with the paper?"</em></li>
+</ul>
+</section>
+<section id="gallery"><h2>What you get</h2>
+<p>Everything below comes from one real run: a fresh agent session with only this skill installed, given the request shown ($0.91, 286 s). The project was ours: a synthetic, seeded seed-germination study (<code>germ</code>, 288 seeds in 24 trays, a random forest predicting germination), written the way thesis code often is. We planted a scaler fitted before the split, an unseeded split, forest and bootstrap, a hard-coded home-folder path, a bare <code>except</code> returning NaN, missing values filled with one global mean, an exact float test that fails, two exact comparisons that are correct by design, and a tray-level feature with a random row split (group leakage, which no static check can see).</p>
+<p>The agent found every planted problem, and three we had not planned: the bootstrap interval resampled clustered seeds, the README's command failed because the package could not be imported from a script, and in our synthetic data dry mass exceeds fresh mass in 105 of 283 rows (a mistake in our generator, which it flagged without editing the data). It fixed the code, kept the two exact-by-design comparisons and marked them with a reason, wrote tests (17 pass), confirmed that putting the old split back makes 8 of them fail, and reported the corrected number at the top: the old script's 0.66 accuracy was tray leakage, and with whole trays held out the model scores 0.48 ± 0.08, the same as the majority-class baseline.</p>
+<div class="shots"><figure><img src="../../assets/shots/research-software/01-headline.png" alt="Headline of the code review: the old script&#x27;s accuracy of 0.661 plus or minus 0.071 came from seeds of the same tray in train and test; with whole trays held out the accuracy is 0.481 plus or minus 0.075, the same as the 0.475 majority-class baseline. Seed-0 accuracy 0.444 with a tray-bootstrap 95% CI of 0.264 to 0.653." loading="lazy"><figcaption>Headline section of research/code-review.md written by the agent in the demo run (lightly shortened by us). The project, data and planted bugs were ours: synthetic and seeded.</figcaption></figure><figure><img src="../../assets/shots/research-software/02-findings.png" alt="Must-fix list from the code review: group leakage in the random row split, a bootstrap that resampled clustered seeds, missing values filled with the whole-matrix mean, a scaler fitted before the split, unseeded split, forest and bootstrap, an exact float test, and a bare except that turned typos into NaN. Should-fix: dry mass above fresh mass in 105 of 283 rows, and pH effects resting on 24 trays." loading="lazy"><figcaption>Must-fix and should-fix items from research/code-review.md in the demo run (wording shortened by us).</figcaption></figure><figure><img src="../../assets/shots/research-software/03-sci-check.png" alt="Output of sci_check.py on the demo project before the fixes: a bare except that swallows the error, a mutable default, print in package code, a hard-coded path, a scaler fitted before the split, three unseeded random calls and four exact float comparisons in tests; 10 HIGH and 2 WARN. After the fixes: 0 HIGH, 0 WARN, exit 0." loading="lazy"><figcaption>sci_check.py run by us on the demo project before and after the agent&#x27;s changes (messages shortened by us; the agent ran the same checks during the run).</figcaption></figure><figure><img src="../../assets/shots/research-software/04-tests.png" alt="Test excerpts written by the agent: assert_allclose with rtol 1e-12 and a comment explaining the choice, an exact comparison of a stored setting suppressed with a reason, and a regression test pinning the headline accuracy and CI with a stated tolerance. Verified: 17 tests pass; restoring the row-level split makes 8 fail." loading="lazy"><figcaption>Excerpts of tests/test_features.py and tests/test_train.py written by the agent in the demo run, and its verification notes.</figcaption></figure><figure><img src="../../assets/shots/research-software/05-session.png" alt="Excerpt of the agent session: running the smell checker, the tests and the script three times, comparing split protocols, rewriting the code, writing tests, a mutation check, and the final report." loading="lazy"><figcaption>The agent&#x27;s steps and report from the demo run (paraphrased from its transcript; $0.91, 286 s).</figcaption></figure></div>
+</section>
+<section id="workflow"><h2>How it works</h2>
+<ol>
+<li><strong>Scope it.</strong> Library code or experiment scripts, and what you want: a review, tests, reproducibility, a leakage check, release readiness. The agent reads the code and README before changing anything.</li>
+<li><strong>Pre-check.</strong> <code>sci_check.py</code> on the project. Findings are leads, not verdicts; a clean run proves nothing about logic.</li>
+<li><strong>Review against the checklist.</strong> Science-specific failures first, then the general pass. A leakage taxonomy covers preprocessing, resampling, duplicates, groups, time, target leakage, tuning on the test set and selective reporting. Where your environment can run a separate reviewer, the checklist and diff can go to it as a second opinion.</li>
+<li><strong>Fix and add tests.</strong> Regression pins with justified tolerances, property tests for invariants, seed-stability tests; numerical stability and performance fixes backed by a measurement.</li>
+<li><strong>Run it end to end.</strong> The test suite and the main script on a small input. For code that will be released or cited, the release gates: fresh-environment install, CI, pinned environment, archived version.</li>
+<li><strong>Report.</strong> Findings by severity with <code>file:line</code>, what was fixed, what is still open and what was not checked.</li>
+</ol>
+</section>
+<section id="outputs"><h2>Files it reads and writes</h2>
+<div class="doc-table"><table>
+<thead>
+<tr>
+<th></th>
+<th>Path</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Reads</td>
+<td>your code, tests, packaging files and README; <code>research/results/*.json</code> only when asked, to check that each result names a source script that exists</td>
+</tr>
+<tr>
+<td>Writes</td>
+<td>code and tests only when you ask for fixes; <code>research/code-review.md</code> only when you ask for a written review</td>
+</tr>
+<tr>
+<td>Runs</td>
+<td>the smell checker (static), your test suite and your scripts, inside your project's environment</td>
+</tr>
+<tr>
+<td>Never</td>
+<td>rewrites results, figures, manuscript files or data; installs anything globally; uses the network; writes outside the project (except throwaway scratch files in the system temp directory)</td>
+</tr>
+</tbody>
+</table></div>
+</section>
+<section id="helper"><h2>The smell checker</h2>
+<pre><code class="language-bash">python sci_check.py .                  # report
+python sci_check.py . --fail-on high   # exit 1 on any HIGH (CI)
+python sci_check.py . --results        # check result provenance
+python sci_check.py . --ignore TODO,PRINT
+</code></pre>
+<p>The script ships in the skill's <code>scripts/</code> folder. Python 3.10+, standard library only. Static: every <code>.py</code> file is parsed, never imported or run. No network, no writes. Output is one line per finding, <code>path:line: SEVERITY CODE: message</code>.</p>
+<div class="doc-table"><table>
+<thead>
+<tr>
+<th>Code</th>
+<th>Severity</th>
+<th>Flags</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>SEED</td>
+<td>HIGH</td>
+<td>random draws in a file that never seeds that generator; RNGs created without a seed; randomised scikit-learn estimators and splitters without <code>random_state</code></td>
+</tr>
+<tr>
+<td>FLOAT-EQ</td>
+<td>HIGH</td>
+<td>in tests: <code>==</code> or <code>!=</code> on float-valued expressions, <code>assertEqual</code> or <code>assert_array_equal</code> on floats</td>
+</tr>
+<tr>
+<td>LEAKAGE</td>
+<td>HIGH</td>
+<td>a scaler, imputer, selector, PCA or resampler fitted before the split in the same function; data normalised with its own statistics before the split; anything fitted on test data</td>
+</tr>
+<tr>
+<td>HARDPATH</td>
+<td>HIGH</td>
+<td>machine-specific absolute paths in string literals</td>
+</tr>
+<tr>
+<td>EXCEPT</td>
+<td>HIGH or WARN</td>
+<td>HIGH: a bare <code>except:</code> or <code>except Exception:</code> that swallows the error (only <code>pass</code>, <code>continue</code>, a bare <code>return</code>, or returning or assigning a default such as <code>None</code> or NaN). WARN: a bare <code>except:</code> that still logs, re-raises or handles the error</td>
+</tr>
+<tr>
+<td>NO-TESTS</td>
+<td>HIGH</td>
+<td>a package with no test files</td>
+</tr>
+<tr>
+<td>PROVENANCE</td>
+<td>HIGH</td>
+<td>with <code>--results</code>: a result with no source script, or one that does not exist</td>
+</tr>
+<tr>
+<td>Hygiene</td>
+<td>WARN</td>
+<td>mutable default arguments, <code>print</code> in library code, TODO comments, no packaging metadata, unparsable files</td>
+</tr>
+</tbody>
+</table></div>
+<p><strong>Silencing a reviewed finding.</strong> End the line with <code># sci-check: ignore[CODE]</code> (or <code># sci-check: ignore</code> for all codes), ideally with a short reason. The usual case is FLOAT-EQ on a value that is exact by design, such as a stored setting read back: <code>assert t.value == 0.25  # sci-check: ignore[FLOAT-EQ] stored setting read back, never computed</code>.</p>
+</section>
+<section id="faq"><h2>FAQ</h2>
+<h3 id="what-does-it-check-automatically">What does it check automatically?</h3>
+<p>The smell checker flags the codes in the table above, with file and line. Everything else, including group and temporal leakage, units, broadcasting and numerical stability, is a review the agent performs by reading the code against the bundled checklist.</p>
+<h3 id="will-it-change-my-results">Will it change my results?</h3>
+<p>It changes code, not result files, and only when you ask for fixes. If a fix moves a number, it tells you the old and new values and why. In the demo the reported accuracy fell from about 0.66 to 0.48, the majority-class baseline, and the agent put that at the top of its report.</p>
+<h3 id="how-strict-is-it-about-bare-except">How strict is it about bare except?</h3>
+<p>An <code>except</code> block that swallows the error (its body only passes, continues, breaks, returns nothing, or returns or assigns a default such as <code>None</code> or NaN) is HIGH, because failures, and Ctrl-C, silently disappear. A bare <code>except:</code> that still logs, re-raises or computes a real fallback is a WARN: it should name the exception, but it does not hide the failure. <code>except Exception:</code> is flagged only when it swallows.</p>
+<h3 id="what-about-float-comparisons-that-are-exact-on-purpose">What about float comparisons that are exact on purpose?</h3>
+<p>The checker sees the shape of a comparison, not where the value came from, so a stored setting read back is flagged too. Check that nothing on either side is computed, then add <code># sci-check: ignore[FLOAT-EQ]</code> with a short reason. In the demo the agent did this for two such lines and fixed the one comparison that needed a tolerance.</p>
+<h3 id="does-it-work-with-notebooks-r-or-julia">Does it work with notebooks, R or Julia?</h3>
+<p>The doctrine and checklist apply to any language, and the agent reviews whatever code you give it. The smell checker reads Python <code>.py</code> files only; export notebooks first (for example with <code>jupyter nbconvert --to script</code>).</p>
+<h3 id="can-i-use-the-checker-in-ci">Can I use the checker in CI?</h3>
+<p>Yes: <code>--fail-on high</code> exits 1 on any HIGH finding, <code>--fail-on warn</code> on any finding. The bundled reference includes a pre-commit hook snippet.</p>
+<h3 id="does-it-need-my-data">Does it need my data?</h3>
+<p>It runs your scripts inside your project, so it reads what they read. Nothing is uploaded: the skill uses no network. The workflow runs your main script on a small input.</p>
+</section>
+<section id="limitations"><h2>Limitations</h2>
+<ul>
+<li>The smell checker is a static heuristic for Python. It cannot see a seed set in another module, semantic leakage (duplicates across splits, group or temporal leakage, target leakage, tuning on the test set), wrong units, broadcasting or dtype errors or wrong maths, and it does not read notebooks.</li>
+<li>It flags float comparisons that are exact by design; check each one and silence it inline.</li>
+<li>A clean run proves nothing about logic. The agent's review covers what the script cannot, but it is a careful reading, not a proof of correctness.</li>
+<li>Regression pins hold for the library versions they were recorded with. A fresh-environment install is a separate step the agent recommends.</li>
+<li>It does not scaffold packages, write up results, edit your manuscript or change your data.</li>
+</ul>
+</section>
+<section id="changelog"><h2>Changelog</h2>
+<p><strong>1.0.0</strong> · October 2026 · First release: scientific-programming review doctrine and checklists, and the <code>sci_check.py</code> smell checker (swallowed errors HIGH, a handled bare <code>except</code> WARN, inline suppression).</p></section>
+
+      </article>
+    </div>
+  </main>
+
+  <footer class="footer">
+    <div class="wrap footer-inner">
+      <span class="brand"><img src="../../assets/img/avatar.png" alt="" width="24" height="24"> Aurora Lab</span>
+      <nav aria-label="Footer">
+        <a href="https://www.agensi.io/creators/aurora-lab">Agensi</a>
+        <a href="https://github.com/the-aurora-lab">GitHub</a>
+      </nav>
+    </div>
+  </footer>
+</body>
+</html>
