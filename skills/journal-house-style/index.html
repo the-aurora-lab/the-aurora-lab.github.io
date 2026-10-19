@@ -1,0 +1,235 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Journal House Style · Aurora Lab</title>
+  <meta name="description" content="Documentation for the Journal House Style agent skill: a venue profile built from any journal&#x27;s, conference&#x27;s or thesis office&#x27;s current author guidelines, or from your own requirements, with a source for every rule; then an audit of your draft against it, restructuring and cuts, with a bundled audit script.">
+  <meta property="og:title" content="Journal House Style · Aurora Lab">
+  <meta property="og:description" content="Documentation for the Journal House Style agent skill: a venue profile built from any journal&#x27;s, conference&#x27;s or thesis office&#x27;s current author guidelines, or from your own requirements, with a source for every rule; then an audit of your draft against it, restructuring and cuts, with a bundled audit script.">
+  <meta property="og:image" content="https://the-aurora-lab.github.io/assets/shots/journal-house-style/01-profile.png">
+  <meta name="theme-color" content="#0b1020">
+  <link rel="icon" type="image/png" href="../../assets/img/avatar.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../../assets/css/site.css">
+</head>
+<body>
+  <a class="skip" href="#main">Skip to content</a>
+  <header class="nav">
+    <div class="wrap nav-inner">
+      <a class="brand" href="../../" aria-label="Aurora Lab home">
+        <img src="../../assets/img/avatar.png" alt="" width="32" height="32">
+        <span>Aurora Lab</span>
+      </a>
+      <nav aria-label="Primary">
+        <a href="../../#skills">Skills</a>
+        <a href="../../#examples">Examples</a>
+        <a class="btn btn-small" href="https://www.agensi.io/creators/aurora-lab">Get it on Agensi</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main">
+    <section class="docs-hero">
+      <div class="aurora" aria-hidden="true"></div>
+      <div class="wrap">
+        <p class="crumbs"><a href="../../">Aurora Lab</a> / <a href="../../#skills">Skills</a> / Journal House Style</p>
+        <h1>Journal House Style</h1>
+        <p class="lede">Fit your manuscript to any venue&#x27;s author guidelines. Name the journal, conference or thesis office, or hand over your own style sheet: your agent builds a venue profile from the current guidelines, with a source on every rule, then audits your draft against it, restructures it and cuts it to fit. What the guidelines don&#x27;t state is marked as not stated, never guessed.</p>
+        <ul class="meta" aria-label="Skill facts"><li>v1.0.0</li><li>Any journal, conference or thesis office</li><li>Python 3.10+ · standard library (audit script only)</li><li>Network access to read guideline pages (optional)</li><li>Works with any SKILL.md agent</li></ul>
+        <div class="cta">
+          <a class="btn" href="https://www.agensi.io/creators/aurora-lab">Get it on Agensi · $12</a>
+          <a class="btn btn-ghost" href="#overview">Read the docs</a>
+        </div>
+      </div>
+    </section>
+
+    <div class="wrap docs">
+      <nav class="toc" aria-label="On this page">
+        <p>On this page</p>
+        <ol><li><a href="#overview">Overview</a></li><li><a href="#quick-start">Quick start</a></li><li><a href="#gallery">What you get</a></li><li><a href="#workflow">How it works</a></li><li><a href="#profile">The venue profile</a></li><li><a href="#outputs">Files it reads and writes</a></li><li><a href="#helper">The audit script</a></li><li><a href="#faq">FAQ</a></li><li><a href="#limitations">Limitations</a></li><li><a href="#changelog">Changelog</a></li></ol>
+      </nav>
+      <article class="prose-doc">
+<section id="overview"><h2>Overview</h2>
+<p>Editors and thesis offices check the shape of a manuscript before anyone reads it: the word limits, the sections they require, the statements they demand, how figures are labelled and where captions go. Every venue sets these differently, and the rules live on pages that change. Journal House Style makes your agent fit the manuscript to the venue you name, from that venue's own current pages, or to the requirements you give it:</p>
+<ul>
+<li><strong>A venue profile from the venue's own pages.</strong> The agent finds the current author guidelines for your journal, conference, publisher series or thesis office, using a bundled guide to where about twenty publishers, the major ML, vision and language conferences, LaTeX template galleries and university thesis offices keep them. It reads them and writes a profile for your article type: limits and what the main-text count excludes, display items and references, section order, required sections and statements, heading depth, caption rules, reference style and template.</li>
+<li><strong>Or your own requirements.</strong> A lab style sheet, a department thesis guide, a template or an editor's email becomes the same profile, offline.</li>
+<li><strong>A source on every rule.</strong> Each rule records the page it came from and the date it was read, or "user-supplied". What the sources do not say is recorded as <em>not stated</em>. When two pages disagree, both are kept and you are told.</li>
+<li><strong>An audit you can act on.</strong> One table of what is over a limit, missing, forbidden or out of order, each finding citing the rule it breaks, then a prioritised list of actions.</li>
+<li><strong>Restructure, cut, recheck.</strong> Sections reordered, required statements added, captions relabelled and moved, material moved rather than deleted, then cut to budget and audited again. Anything only you can supply, such as a code DOI or an ethics approval, becomes a visible placeholder.</li>
+</ul>
+<p><strong>Other Aurora Lab skills for the same draft:</strong> <a href="../scientific-voice/">Scientific Voice</a> (how the sentences read), <a href="../claim-check/">Claim Check</a> (does each sentence stay inside its evidence?) and <a href="../test-readers/">Test Readers</a> (how a cold reader takes it) pair well with it. Each works on its own.</p>
+</section>
+<section id="quick-start"><h2>Quick start</h2>
+<ol>
+<li><strong>Get the skill</strong> from <a href="https://www.agensi.io/creators/aurora-lab">Agensi</a> and add it to your agent (Claude Code, Codex CLI, Cursor, Gemini CLI or any agent that loads SKILL.md skills).</li>
+<li><strong>For a named venue, allow web access</strong> (the agent's web-fetch tool, or a shell with <code>curl</code>). With your own requirements nothing is fetched.</li>
+<li><strong>Optional: Python 3.10+</strong> for the audit script (standard library only).</li>
+<li><strong>Name the venue and the article type</strong>, or point to your requirements.</li>
+</ol>
+<p>Example requests:</p>
+<ul>
+<li><em>"I'm submitting draft.md to PLOS Computational Biology as a Research Article. Fit it to their guidelines."</em></li>
+<li><em>"Build a venue profile from the NeurIPS call for papers and check my paper against it."</em></li>
+<li><em>"Here is my department's thesis chapter style sheet: make chapter 3 comply."</em></li>
+<li><em>"The editor's email says 4,000 words and 5 figures. Cut the draft to that."</em></li>
+<li><em>"Is this ready to submit to the journal? Check it against their author guidelines."</em></li>
+</ul>
+</section>
+<section id="gallery"><h2>What you get</h2>
+<p>Everything below comes from two real runs: fresh agent sessions with only this skill installed, given the requests shown. The inputs were ours: a synthetic, seeded <code>draft.md</code> of about 1,500 words describing a made-up lake-monitoring method, "BloomCast", written the way a first draft aimed at another journal often is. Against PLOS Computational Biology's guidelines we planted a 323-word abstract with labelled parts and a citation, no Author Summary, "data not shown" in the Results, captions collected at the end and labelled "Figure 1", a funding sentence in the Acknowledgments and code "available from the corresponding author on request".</p>
+<p><strong>Run 1, a named venue</strong> ($1.55, 253 s, web access allowed): the agent fetched seven PLOS Computational Biology pages and wrote a profile with 7 sources and a recorded conflict between two of them. We checked every value it extracted against the fetched pages. It found all six planted problems plus a missing ethics statement for field work, references out of order and an undefined abbreviation; wrote a 179-word Author Summary from the draft's own findings for the author to review; cut the abstract to 294 words without removing a number; moved and relabelled every caption; and left 12 placeholders for what only the author can supply. The revised draft passes the audit with nothing over a limit and nothing missing.</p>
+<p><strong>Run 2, your own requirements</strong> ($0.66, 127 s, no web access): given an editor's email (ours) inviting a Short Report, it built the profile from the email alone, marked what the email does not state, and cut the draft to fit: abstract 323 to 145 words, main text 695 to 554 words against a 600-word limit, four figures to three.</p>
+<div class="shots"><figure><img src="../../assets/shots/journal-house-style/01-profile.png" alt="The venue profile for PLOS Computational Biology, Research Article: seven source pages with access dates, a table of rules (any length, abstract at most 300 words, a required 150-200 word Author Summary, &#x27;Fig 1&#x27; labels with captions after the first-citing paragraph, data and code statement, funding only in the submission system), the items not stated, and a conflict between two pages." loading="lazy"><figcaption>Excerpt of venue-profile.md written by the agent in the demo run (URLs shortened and rows selected by us). Every value was checked by us against the fetched PLOS pages.</figcaption></figure><figure><img src="../../assets/shots/journal-house-style/02-audit.png" alt="Audit table: Author Summary missing, Data Availability Statement missing, code &#x27;available on request&#x27; non-compliant, &#x27;data not shown&#x27; forbidden, funding in the Acknowledgments, ethics statement missing, abstract 323 words over 300 with a citation and headings, &#x27;Figure 1&#x27; instead of &#x27;Fig 1&#x27;, captions at the end instead of in the text, references out of order." loading="lazy"><figcaption>Ten rows of the audit table in venue-audit.md from the demo run (the action column shortened by us).</figcaption></figure><figure><img src="../../assets/shots/journal-house-style/03-script.png" alt="Output of venue_audit.py: abstract 323 words OVER max 300, Author Summary MISSING, figures NO LIMIT, references NOT STATED; structure findings for the missing Author Summary and Data Availability Statement, &#x27;data not shown&#x27;, a citation and labelled parts in the abstract, &#x27;Figure 1a&#x27; callouts and captions in an end section." loading="lazy"><figcaption>venue_audit.py run by us on the demo&#x27;s original draft with the profile from the run (the agent ran the same command during the run); rows selected by us.</figcaption></figure><figure><img src="../../assets/shots/journal-house-style/04-own-requirements.png" alt="A profile built from an editor&#x27;s email (abstract at most 150 words, main text at most 600, at most 3 display items, data and code statements required, a list of items the email does not state) and a table of the revision: abstract 323 to 145 words, main text 695 to 554 words, figures 4 to 3, availability statements added." loading="lazy"><figcaption>From the second demo run (route b, no network tools): the profile&#x27;s summary table and the agent&#x27;s before/after table, both from that run&#x27;s outputs and report. The editor&#x27;s email was written by us.</figcaption></figure><figure><img src="../../assets/shots/journal-house-style/05-session.png" alt="Excerpt of the agent session: reading the skill&#x27;s references and the draft, fetching seven PLOS pages, writing and validating the profile, auditing, writing the revised draft and re-auditing it." loading="lazy"><figcaption>The agent&#x27;s steps and report from the demo run (paraphrased from its transcript; $1.55, 253 s).</figcaption></figure></div>
+</section>
+<section id="workflow"><h2>How it works</h2>
+<ol>
+<li><strong>Build the venue profile.</strong> The agent reuses a matching profile if one exists. Otherwise it chooses the article type explicitly, then either fetches the venue's current pages (main guidelines, article types, figure and policy pages; for a conference, the call for papers and style kit) or reads the requirements you give it. Each rule goes into the profile with its source; anything unstated is written <em>not stated</em>. The profile is validated by the script before use, and you are told the main limits, what was not stated and any conflict between sources.</li>
+<li><strong>Audit.</strong> The script checks every rule it can count; the agent reads the draft for the rest (reference style, tense, statement content, template) and writes one table plus a prioritised action list. Venue findings cite the profile; generic research-article advice is labelled generic.</li>
+<li><strong>Restructure.</strong> Section order, required sections and statements, heading depth, captions (label, title length, placement), display items within the limit; material moved to Methods or supplementary material rather than deleted.</li>
+<li><strong>Cut to budget.</strong> Repetition first, then framing sentences, catalogues of parameters, secondary results and caption detail; sentence compression last. A claim's evidence, its comparator, a limitation the scope depends on and required content are never cut.</li>
+<li><strong>Check.</strong> Re-run the audit, list the placeholders, the <em>not stated</em> items worth confirming and the items that belong in the submission system rather than the manuscript.</li>
+</ol>
+<p><strong>Fetching.</strong> The agent reads pages with its web-fetch tool or with <code>curl</code> and a normal browser identity (the bundled guide says which sites need which), confirms each page is the real guideline page and not a cookie wall or bot check, and otherwise asks you to paste the text or save the page as PDF. On the day we checked, PLOS, Nature Portfolio (with <code>curl</code>), eLife, IEEE, APS, Cambridge, Frontiers and the conference sites were readable; Elsevier, Wiley, Cell Press, Springer, Science, PNAS, ACM, ACS and MDPI showed bot checks to automated fetches.</p>
+</section>
+<section id="profile"><h2>The venue profile</h2>
+<p>A Markdown file (<code>research/venue-profile.md</code>, or next to your draft) with a readable summary and one block the script parses. Every line carries its source:</p>
+<pre><code>venue: PLOS Computational Biology
+article_type: Research Article
+built: 2026-10-19
+
+[S1] https://journals.plos.org/ploscompbiol/s/submission-guidelines (accessed 2026-10-19)
+[S2] https://journals.plos.org/ploscompbiol/s/figures (accessed 2026-10-19)
+
+abstract_words: max 300 [S1]
+author_summary_words: 150-200 [S1]
+references: not stated [S1]
+caption_label: Fig [S1, S2]
+caption_placement: inline [S1, S2]
+forbidden_phrases: data not shown; unpublished work; personal communication [S1]
+reference_style: Vancouver (ICMJE), numbered in order of appearance [S1]
+</code></pre>
+<p>Limits are written as <code>max N</code>, <code>min N</code>, <code>N-M</code>, <code>about N</code> (a recommendation), <code>not stated</code> or <code>no limit</code>; a bare number is rejected, so the profile always says what kind of limit it is. Rules the script cannot count, such as reference style, are kept as reading rules for the agent and listed in every audit with their source.</p>
+</section>
+<section id="outputs"><h2>Files it reads and writes</h2>
+<div class="doc-table"><table>
+<thead>
+<tr>
+<th></th>
+<th>Path</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Reads</td>
+<td>the manuscript you name (Markdown or LaTeX, one file or a folder of section files), your requirements files if you give them; with a <code>research/</code> folder also <code>research/paper/*</code>, <code>research/figures/*.md</code> (caption drafts), <code>research/refs.bib</code> (reference count) and <code>research/claims.md</code> (so cuts never drop a claim's evidence)</td>
+</tr>
+<tr>
+<td>Writes</td>
+<td>the venue profile (<code>research/venue-profile.md</code>, or next to the draft), the audit (<code>research/paper/venue-audit.md</code>, or next to the draft) and a revised draft where you ask for one</td>
+</tr>
+<tr>
+<td>Network</td>
+<td>reads the venue's public guideline pages only; nothing is uploaded and no login is used</td>
+</tr>
+<tr>
+<td>Never</td>
+<td>adds results or numbers, changes findings, or edits files in place unless you ask</td>
+</tr>
+</tbody>
+</table></div>
+</section>
+<section id="helper"><h2>The audit script</h2>
+<pre><code class="language-bash">python journal-house-style/scripts/venue_audit.py --profile venue-profile.md --check-profile
+python journal-house-style/scripts/venue_audit.py draft.md --profile venue-profile.md --out venue-audit.md
+python journal-house-style/scripts/venue_audit.py research/paper/ --profile research/venue-profile.md \
+    --bib research/refs.bib --target-words 4000 --json
+</code></pre>
+<p>Standard library only, no network; it writes only the report you name with <code>--out</code>. <code>--check-profile</code> prints every rule as parsed and exits with an error for a rule without a source, an undefined source, an unreadable limit or a missing article type. <code>--strict</code> exits 1 when anything is over or under a limit or missing.</p>
+<div class="doc-table"><table>
+<thead>
+<tr>
+<th>Checks (each only when the profile states it)</th>
+<th>Detail</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Limits</td>
+<td>title words or characters, abstract, any named section (lay summary, author summary, Methods), main text with the components the venue counts: OVER, UNDER, CHECK (above a recommendation), NOT STATED or NO LIMIT</td>
+</tr>
+<tr>
+<td>Counts</td>
+<td>figures, tables, display items, supplementary figures, references (from the list or a <code>.bib</code>), keywords, heading depth</td>
+</tr>
+<tr>
+<td>Structure</td>
+<td>missing sections and required statements (as a heading or a bold run-in), section order, forbidden phrases, citations or labelled parts in the abstract, Results and Discussion subheading rules</td>
+</tr>
+<tr>
+<td>Captions</td>
+<td>caption and caption-title length, label form ("Fig 1" vs "Figure 1") in captions and callouts, placement in the text or at the end</td>
+</tr>
+<tr>
+<td>Reading rules</td>
+<td>every other profile rule, listed with its source for the agent to check</td>
+</tr>
+<tr>
+<td>Generic checks</td>
+<td>keyword heuristics about research articles in general (abstract and introduction moves, inline statistics, limitations, persistent identifiers, caption hygiene), labelled as not venue rules</td>
+</tr>
+<tr>
+<td>Budget</td>
+<td><code>--target-words N</code> scales your current section proportions to a target</td>
+</tr>
+</tbody>
+</table></div>
+</section>
+<section id="faq"><h2>FAQ</h2>
+<h3 id="which-venues-does-it-work-with">Which venues does it work with?</h3>
+<p>Any venue that writes down its requirements: journals, conferences, publisher series, thesis and graduate offices, and your own lab or department. The bundled guide covers where about twenty publishers, the major ML, vision and language conferences, LaTeX template galleries and thesis offices keep their rules; for anything else the agent searches for the venue's own guidelines page. The skill ships no venue's rules: it reads the current ones each time.</p>
+<h3 id="are-the-limits-up-to-date">Are the limits up to date?</h3>
+<p>They are read from the venue's pages when you run it, and each rule records the URL and the date it was read. A saved profile is reused with its build date shown, and the agent offers to refresh an old one.</p>
+<h3 id="what-happens-when-a-publishers-site-blocks-the-agent">What happens when a publisher's site blocks the agent?</h3>
+<p>It uses its web-fetch tool or <code>curl</code> with a normal browser identity. If the site still serves a bot check or consent page, it tells you which URL it tried and asks you to paste the page text or save it as PDF. It never fills a value from memory or from another journal of the same publisher.</p>
+<h3 id="can-i-use-my-own-style-sheet-or-an-editors-email">Can I use my own style sheet or an editor's email?</h3>
+<p>Yes, and offline: the profile is built from what you give it, with "user-supplied" as the source. The second demo run did exactly this with an editor's email, and the skill ships a worked example built from fictional thesis-chapter requirements.</p>
+<h3 id="will-it-invent-numbers-or-change-my-findings">Will it invent numbers or change my findings?</h3>
+<p>No. Missing content becomes a visible placeholder listed for you, and wording that would change a claim is flagged rather than rewritten: in the demo it flagged "transfers across lakes without retraining" for a model fitted to each lake. Text it writes from your own draft, such as a required author summary, is marked for your review.</p>
+<h3 id="does-it-work-with-latex">Does it work with LaTeX?</h3>
+<p>Yes. The script reads LaTeX source as well as Markdown, and the agent edits in the format you wrote in. Page limits cannot be measured from source, so they are listed for you to check on the compiled PDF. A Word file needs converting to Markdown first (for example with pandoc), or paste its text.</p>
+<h3 id="how-is-it-different-from-scientific-voice">How is it different from Scientific Voice?</h3>
+<p><a href="../scientific-voice/">Scientific Voice</a> edits sentences. Journal House Style works at the level of the venue: limits, section order, required statements, headings, captions and end matter. They pair well, and neither needs the other.</p>
+</section>
+<section id="limitations"><h2>Limitations</h2>
+<ul>
+<li>The profile is only as complete as the pages read: a rule buried in a page the agent did not open can be missed. Every rule is sourced so you can check it; read the profile before you submit.</li>
+<li>Some publisher sites block automated fetches; you then paste the page or save it as PDF.</li>
+<li>Guidelines change. Each rule records the date its page was read.</li>
+<li>The script checks only what can be counted from source text. Page limits, fonts, figure resolution and reference formatting are checked by reading or on your compiled PDF; the generic checks are keyword heuristics.</li>
+<li>Markdown and LaTeX only; convert Word files first.</li>
+<li>It works at the venue level. Sentence-level style, checking claims against data, submission-system forms and figure files are outside its scope; it lists the submission-system items for you.</li>
+<li>It never adds results or numbers; missing content becomes placeholders for you to fill.</li>
+</ul>
+</section>
+<section id="changelog"><h2>Changelog</h2>
+<p><strong>1.0.0</strong> · October 2026 · First release: venue profiles built from any venue's current guidelines or your own requirements, with a source on every rule; profile-driven audit script.</p></section>
+
+      </article>
+    </div>
+  </main>
+
+  <footer class="footer">
+    <div class="wrap footer-inner">
+      <span class="brand"><img src="../../assets/img/avatar.png" alt="" width="24" height="24"> Aurora Lab</span>
+      <nav aria-label="Footer">
+        <a href="https://www.agensi.io/creators/aurora-lab">Agensi</a>
+        <a href="https://github.com/the-aurora-lab">GitHub</a>
+      </nav>
+    </div>
+  </footer>
+</body>
+</html>
