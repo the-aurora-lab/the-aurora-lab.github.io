@@ -1,0 +1,202 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Citable Python Packages · Aurora Lab</title>
+  <meta name="description" content="Documentation for the py-lib agent skill: turn research scripts into an installable, citable Python package with uv, ruff, pytest, CITATION.cff and a lock file.">
+  <meta property="og:title" content="Citable Python Packages · Aurora Lab">
+  <meta property="og:description" content="Documentation for the py-lib agent skill: turn research scripts into an installable, citable Python package with uv, ruff, pytest, CITATION.cff and a lock file.">
+  <meta property="og:image" content="https://the-aurora-lab.github.io/assets/shots/py-lib/01-package.png">
+  <meta name="theme-color" content="#0b1020">
+  <link rel="icon" type="image/png" href="../../assets/img/avatar.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../../assets/css/site.css">
+</head>
+<body>
+  <a class="skip" href="#main">Skip to content</a>
+  <header class="nav">
+    <div class="wrap nav-inner">
+      <a class="brand" href="../../" aria-label="Aurora Lab home">
+        <img src="../../assets/img/avatar.png" alt="" width="32" height="32">
+        <span>Aurora Lab</span>
+      </a>
+      <nav aria-label="Primary">
+        <a href="../../#skills">Skills</a>
+        <a href="../../#examples">Examples</a>
+        <a class="btn btn-small" href="https://www.agensi.io/creators/aurora-lab">Get it on Agensi</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main">
+    <section class="docs-hero">
+      <div class="aurora" aria-hidden="true"></div>
+      <div class="wrap">
+        <p class="crumbs"><a href="../../">Aurora Lab</a> / <a href="../../#skills">Skills</a> / Citable Python Packages</p>
+        <h1>Citable Python Packages</h1>
+        <p class="lede">Installable, citable Python packages from your research code. Your agent lays out a clean package with uv, ruff and pytest, adds a CITATION.cff and a How to cite section, records the exact versions your results ran on, and moves your scripts in without rewriting them.</p>
+        <ul class="meta" aria-label="Skill facts"><li>v1.0.0</li><li>Python 3.10+ · uv</li><li>Network only for uv sync</li><li>Works with any SKILL.md agent</li></ul>
+        <div class="cta">
+          <a class="btn" href="https://www.agensi.io/creators/aurora-lab">Get it on Agensi · Free</a>
+          <a class="btn btn-ghost" href="#overview">Read the docs</a>
+        </div>
+      </div>
+    </section>
+
+    <div class="wrap docs">
+      <nav class="toc" aria-label="On this page">
+        <p>On this page</p>
+        <ol><li><a href="#overview">Overview</a></li><li><a href="#quick-start">Quick start</a></li><li><a href="#gallery">What you get</a></li><li><a href="#workflow">How it works</a></li><li><a href="#outputs">Files it writes</a></li><li><a href="#doi">Citation and DOI</a></li><li><a href="#reproducibility">Reproducibility</a></li><li><a href="#research-folder">The <code>research/</code> folder</a></li><li><a href="#faq">FAQ</a></li><li><a href="#limitations">Limitations</a></li><li><a href="#changelog">Changelog</a></li></ol>
+      </nav>
+      <article class="prose-doc">
+<section id="overview"><h2>Overview</h2>
+<p>Research code tends to live as a few scripts that produced a paper's numbers and that nobody else can install. py-lib turns your agent into a careful packaging collaborator that:</p>
+<ul>
+<li><strong>Builds a clean package</strong> with one fixed, modern toolchain: <code>uv</code> for the environment and lock file, <code>hatchling</code> to build, <code>ruff</code> to lint, <code>pytest</code> to test, and a <code>src/</code> layout so tests run against the installed package, not the loose files.</li>
+<li><strong>Makes it citable.</strong> A <code>CITATION.cff</code> with authors, ORCID iDs, licence and version; a README with a "How to cite" section and BibTeX; and a test that fails if the citation is invalid, still holds placeholders, or no longer matches the package version.</li>
+<li><strong>Records what your results ran on.</strong> Lower bounds in <code>pyproject.toml</code> for people installing the package, exact versions in a committed <code>uv.lock</code> for people reproducing your results, and the Python version in <code>.python-version</code>.</li>
+<li><strong>Keeps your code yours.</strong> Existing scripts are copied in verbatim. The only edit is turning imports between your own scripts into package imports. Anything else it would change is flagged for you to decide.</li>
+<li><strong>Runs the checks</strong> (<code>uv sync</code>, <code>ruff</code>, <code>pytest</code>) and hands over the commands and a list of what is still a placeholder.</li>
+</ul>
+</section>
+<section id="quick-start"><h2>Quick start</h2>
+<ol>
+<li><strong>Get the skill</strong> from <a href="https://www.agensi.io/creators/aurora-lab">Agensi</a> (free) and add it to your agent (Claude Code, Codex CLI, Cursor, Gemini CLI or any agent that loads SKILL.md skills).</li>
+<li><strong>Have Python 3.10+ and <a href="https://docs.astral.sh/uv/">uv</a></strong> on the machine. Without uv the agent still writes every file and gives you the commands to run later.</li>
+<li><strong>Ask in plain words.</strong></li>
+</ol>
+<p>Example requests:</p>
+<ul>
+<li><em>"Turn fit.py and io_utils.py into a package I can cite in my paper. Authors: … MIT licence."</em></li>
+<li><em>"New Python project for a spike-sorting method: scaffold it with CI and an examples folder."</em></li>
+<li><em>"Add a CITATION.cff and a How to cite section to this repo."</em></li>
+<li><em>"How do I get a DOI for this code? Prepare the release."</em></li>
+<li><em>"Pin the dependencies so reviewers can reproduce Figure 3."</em></li>
+</ul>
+</section>
+<section id="gallery"><h2>What you get</h2>
+<p>Everything below comes from a real run: a fresh agent session with only this skill installed, given two synthetic analysis scripts (an Arrhenius fit and a CSV loader), a small dataset and the request shown in the session card. The file cards show excerpts of the files it wrote.</p>
+<div class="shots"><figure><img src="../../assets/shots/py-lib/01-package.png" alt="The project layout the skill wrote and an excerpt of its pyproject.toml." loading="lazy"><figcaption>Layout and pyproject.toml from the demo run (excerpts of the files it wrote).</figcaption></figure><figure><img src="../../assets/shots/py-lib/02-cite.png" alt="The CITATION.cff and the README&#x27;s How to cite section written by the skill." loading="lazy"><figcaption>CITATION.cff and the README&#x27;s How to cite section from the demo run (excerpts).</figcaption></figure><figure><img src="../../assets/shots/py-lib/03-flags.png" alt="The agent&#x27;s list of issues it found in the user&#x27;s code and left unchanged." loading="lazy"><figcaption>From the agent&#x27;s final report in the demo run.</figcaption></figure><figure><img src="../../assets/shots/py-lib/04-session.png" alt="Excerpt of the agent session: the steps, the test run and the report." loading="lazy"><figcaption>The agent&#x27;s steps, checks and report (prompt shortened).</figcaption></figure></div>
+</section>
+<section id="workflow"><h2>How it works</h2>
+<h3 id="two-starting-points">Two starting points</h3>
+<ul>
+<li><strong>From existing scripts</strong>: the agent reads every file, proposes how they map into the package (which module goes where, what gets re-exported), and names the one edit it will make: imports between your own scripts become package imports. It copies the files in and leaves your originals where they are.</li>
+<li><strong>From an idea</strong>: it asks at most three questions (what the package does, what a first call looks like, what it is called) and scaffolds the same structure with stub functions, so the project installs and its tests run before any real logic exists.</li>
+</ul>
+<p>Before writing files it asks once for authors (with ORCID iDs and affiliations if you have them), the licence (MIT by default), whether there is a paper to cite, and which extras you want. Anything you skip becomes a placeholder that the handoff lists.</p>
+<h3 id="flagged-not-fixed">Flagged, not fixed</h3>
+<p>Moving code that produced someone's results is the riskiest step, so the agent reports these and lets you choose:</p>
+<ul>
+<li>code that runs on import (loading data, fitting, plotting, <code>plt.show()</code>);</li>
+<li>absolute or machine-specific paths;</li>
+<li><code>sys.path</code> tricks, <code>import *</code>, or modules that shadow a third-party name;</li>
+<li>imports whose package name differs from the import name (<code>sklearn</code> is <code>scikit-learn</code>, <code>cv2</code> is <code>opencv-python</code>);</li>
+<li>ruff findings in your moved code. It runs <code>ruff check --fix</code> or <code>ruff format</code> on your code only if you agree.</li>
+</ul>
+<h3 id="the-checks">The checks</h3>
+<p>When uv is available and you agree to the first download, the agent runs <code>uv sync</code> (creating <code>.venv</code> and <code>uv.lock</code>), <code>uv run ruff check .</code>, <code>uv run ruff format --check .</code> and <code>uv run pytest</code>, and reports what passed. The tests it writes are smoke tests: each public function on a small input with a known answer, plus the citation test. They show the package works after the move; they do not validate your method.</p>
+</section>
+<section id="outputs"><h2>Files it writes</h2>
+<div class="doc-table"><table>
+<thead>
+<tr>
+<th>File</th>
+<th>What it is</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>pyproject.toml</code></td>
+<td>Metadata, run-time dependencies with lower bounds, a <code>dev</code> dependency group, hatchling and ruff settings.</td>
+</tr>
+<tr>
+<td><code>uv.lock</code></td>
+<td>Exact versions of every dependency, generated by uv. Commit it.</td>
+</tr>
+<tr>
+<td><code>.python-version</code></td>
+<td>The Python version you develop and run your results on.</td>
+</tr>
+<tr>
+<td><code>src/&lt;name&gt;/</code></td>
+<td>Your code (or stubs), with the version read from the installed metadata.</td>
+</tr>
+<tr>
+<td><code>tests/</code></td>
+<td>Smoke tests per public function, and <code>test_citation.py</code>.</td>
+</tr>
+<tr>
+<td><code>CITATION.cff</code></td>
+<td>Citation metadata (CFF 1.2.0); GitHub shows it as "Cite this repository".</td>
+</tr>
+<tr>
+<td><code>README.md</code></td>
+<td>Description, installation, quick start, How to cite, development commands.</td>
+</tr>
+<tr>
+<td><code>LICENSE</code>, <code>.gitignore</code></td>
+<td>Full licence text; ignores for the environment, caches and build output.</td>
+</tr>
+</tbody>
+</table></div>
+<p>On request it adds <code>examples/</code> (scripts that import the installed package, with a test that runs every one), <code>notebooks/</code> (committed without outputs), <code>.github/workflows/ci.yml</code>, a <code>Dockerfile</code> with <code>.dockerignore</code>, and <code>requirements-lock.txt</code> for people who do not use uv. It deletes nothing.</p>
+</section>
+<section id="doi"><h2>Citation and DOI</h2>
+<p>The citation test keeps <code>CITATION.cff</code> correct from the first commit: valid YAML, the required fields, a quoted version equal to the package version, and no leftover placeholders.</p>
+<p>For a DOI, the agent prepares the release: version bump in <code>pyproject.toml</code> and <code>CITATION.cff</code>, refreshed lock file, release notes. It then gives you a checklist for Zenodo's GitHub integration: the repository must be public, you switch it on in Zenodo, and publishing a GitHub release triggers the archive. It explains which DOI goes where (the version DOI in your paper's Code availability statement, the concept DOI in <code>CITATION.cff</code> and the README badge) and drafts that statement. You perform the GitHub and Zenodo steps yourself; the agent never contacts GitHub, Zenodo or PyPI. Zenodo's screens change from time to time, so check its current help pages when you release.</p>
+</section>
+<section id="reproducibility"><h2>Reproducibility</h2>
+<pre><code class="language-bash">uv sync --locked          # recreate the exact environment from uv.lock
+uv export --no-dev --no-emit-project --format requirements-txt -o requirements-lock.txt
+</code></pre>
+<p><code>pyproject.toml</code> says what the package needs; <code>uv.lock</code> records what your results ran on. Tag the release that produced a paper's numbers and cite that version. The optional CI workflow tests the oldest and newest supported Python from the lock file, and the optional Dockerfile installs exactly the locked versions.</p>
+</section>
+<section id="research-folder"><h2>The <code>research/</code> folder</h2>
+<p>py-lib works on its own. If you keep your project in a <code>research/</code> folder, the plain-file convention the Aurora Lab research skills share, it reads <code>research/refs.bib</code> and <code>research/paper/</code> to fill in the paper citation, and appends a software entry to <code>research/refs.bib</code> only if you ask. It writes nothing else there.</p>
+</section>
+<section id="faq"><h2>FAQ</h2>
+<h3 id="will-it-change-my-code">Will it change my code?</h3>
+<p>No. Existing scripts are copied into the package verbatim and the originals stay where they are. The one edit is turning imports between your own scripts into package imports, and it tells you about it. Everything else it would change is listed for you to decide.</p>
+<h3 id="what-do-i-need-installed">What do I need installed?</h3>
+<p>Python 3.10+ and uv. The package's dev tools (pytest, pytest-cov, ruff, pyyaml) are installed by uv into the project's <code>.venv</code>.</p>
+<h3 id="does-it-need-internet-access">Does it need internet access?</h3>
+<p>Only for uv. The first <code>uv sync</code> downloads your package's dependencies from PyPI, and a Python interpreter if the requested one is missing. The agent asks before that first sync. The skill itself contacts nothing.</p>
+<h3 id="can-it-get-me-a-doi">Can it get me a DOI?</h3>
+<p>It prepares everything and gives you the checklist for Zenodo's GitHub integration, plus a Code availability statement. You publish the release and switch the repository on in Zenodo; the repository must be public.</p>
+<h3 id="does-it-publish-to-pypi">Does it publish to PyPI?</h3>
+<p>No. Once the repository is on GitHub, people can install a tagged release straight from git. PyPI publishing is an optional later step.</p>
+<h3 id="does-it-test-my-science">Does it test my science?</h3>
+<p>No. It writes smoke tests that show the package works after the move. Whether your method is correct is outside its scope.</p>
+<h3 id="do-i-need-the-other-aurora-lab-skills">Do I need the other Aurora Lab skills?</h3>
+<p>No. They share the <code>research/</code> folder convention if you want to use them together.</p>
+</section>
+<section id="limitations"><h2>Limitations</h2>
+<ul>
+<li>Python only, with a fixed toolchain (uv, hatchling, ruff, pytest). It does not set up Poetry, conda or setuptools projects.</li>
+<li>It packages your code but does not judge whether the science is right; its tests are smoke tests on small known inputs.</li>
+<li>It does not create the GitHub repository, publish releases, mint a DOI or upload to PyPI. It prepares the files and gives you the steps.</li>
+<li>Zenodo and GitHub Actions details reflect their documentation as of October 2026. Check the current guides when you release.</li>
+</ul>
+</section>
+<section id="changelog"><h2>Changelog</h2>
+<p><strong>1.0.0</strong> · October 2026 · First release.</p></section>
+
+      </article>
+    </div>
+  </main>
+
+  <footer class="footer">
+    <div class="wrap footer-inner">
+      <span class="brand"><img src="../../assets/img/avatar.png" alt="" width="24" height="24"> Aurora Lab</span>
+      <nav aria-label="Footer">
+        <a href="https://www.agensi.io/creators/aurora-lab">Agensi</a>
+        <a href="https://github.com/the-aurora-lab">GitHub</a>
+      </nav>
+    </div>
+  </footer>
+</body>
+</html>

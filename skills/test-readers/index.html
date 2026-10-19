@@ -1,0 +1,253 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Test Readers · Aurora Lab</title>
+  <meta name="description" content="Documentation for the Test Readers agent skill: blind, fresh-context reader personas, a check on whether your message landed, and a severity-ranked report with a fix for every issue.">
+  <meta property="og:title" content="Test Readers · Aurora Lab">
+  <meta property="og:description" content="Documentation for the Test Readers agent skill: blind, fresh-context reader personas, a check on whether your message landed, and a severity-ranked report with a fix for every issue.">
+  <meta property="og:image" content="https://the-aurora-lab.github.io/assets/shots/test-readers/01-annotated-draft.png">
+  <meta name="theme-color" content="#0b1020">
+  <link rel="icon" type="image/png" href="../../assets/img/avatar.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../../assets/css/site.css">
+</head>
+<body>
+  <a class="skip" href="#main">Skip to content</a>
+  <header class="nav">
+    <div class="wrap nav-inner">
+      <a class="brand" href="../../" aria-label="Aurora Lab home">
+        <img src="../../assets/img/avatar.png" alt="" width="32" height="32">
+        <span>Aurora Lab</span>
+      </a>
+      <nav aria-label="Primary">
+        <a href="../../#skills">Skills</a>
+        <a href="../../#examples">Examples</a>
+        <a class="btn btn-small" href="https://www.agensi.io/creators/aurora-lab">Get it on Agensi</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main">
+    <section class="docs-hero">
+      <div class="aurora" aria-hidden="true"></div>
+      <div class="wrap">
+        <p class="crumbs"><a href="../../">Aurora Lab</a> / <a href="../../#skills">Skills</a> / Test Readers</p>
+        <h1>Test Readers</h1>
+        <p class="lede">Fresh-eyes feedback before you send. Your agent gives the draft, and nothing else, to blind reader personas, checks what each one took away against what you meant, and returns a severity-ranked report with a concrete fix or question for every issue.</p>
+        <ul class="meta" aria-label="Skill facts"><li>v1.0.0</li><li>No scripts or installs</li><li>No network access</li><li>Works with any SKILL.md agent</li></ul>
+        <div class="cta">
+          <a class="btn" href="https://www.agensi.io/creators/aurora-lab">Get it on Agensi · Free</a>
+          <a class="btn btn-ghost" href="#overview">Read the docs</a>
+        </div>
+      </div>
+    </section>
+
+    <div class="wrap docs">
+      <nav class="toc" aria-label="On this page">
+        <p>On this page</p>
+        <ol><li><a href="#overview">Overview</a></li><li><a href="#quick-start">Quick start</a></li><li><a href="#gallery">What you get</a></li><li><a href="#workflow">How it works</a></li><li><a href="#personas">The personas</a></li><li><a href="#report">The report</a></li><li><a href="#outputs">Files it reads and writes</a></li><li><a href="#research-folder">The <code>research/</code> folder</a></li><li><a href="#faq">FAQ</a></li><li><a href="#limitations">Limitations</a></li><li><a href="#changelog">Changelog</a></li></ol>
+      </nav>
+      <article class="prose-doc">
+<section id="overview"><h2>Overview</h2>
+<p>You can't test-read your own draft: you know what each sentence was meant to say, so that is what you read. A reader who starts with a fresh context has none of that knowledge. Test Readers turns your agent into a panel of such readers:</p>
+<ul>
+<li><strong>Blind readers.</strong> Five personas (Newcomer, Expert, Editor, Decision-maker, Skimmer), adapted to your real audience. Each gets only the draft: no outline, no intent, no "section 3 is meant to...".</li>
+<li><strong>Fresh contexts.</strong> When your agent can run subagents or start a fresh session, every reader runs in its own, in parallel, so each reading is a genuine first reading.</li>
+<li><strong>A comprehension probe.</strong> Each reader states the main message and what they think they are asked to do. Set against what you intended, drift becomes a finding even when nobody complains.</li>
+<li><strong>A severity-ranked report.</strong> Every issue is ranked (blocks understanding, misleads, slows the reader, polish), located, described from the reader's side, and paired with a fix or question. Totals and counts the readers question are checked against the draft before they are reported.</li>
+<li><strong>Useful tone.</strong> Observations and questions, strengths named as concretely as problems, and your draft left untouched unless you ask.</li>
+</ul>
+</section>
+<section id="quick-start"><h2>Quick start</h2>
+<ol>
+<li><strong>Get the skill</strong> from <a href="https://www.agensi.io/creators/aurora-lab">Agensi</a> (free) and add it to your agent (Claude Code, Codex CLI, Cursor, Gemini CLI or any agent that loads SKILL.md skills).</li>
+<li><strong>Nothing to install.</strong> There are no scripts.</li>
+<li><strong>Ask in plain words</strong>, saying who will read the draft and what you want them to take away.</li>
+</ol>
+<p>Example requests:</p>
+<ul>
+<li><em>"Get fresh-reader feedback on proposal.md before I send it to the panel."</em></li>
+<li><em>"Test-read research/paper/introduction.md. Will a non-specialist reviewer get the point?"</em></li>
+<li><em>"Will this email to the department head land? The ask is a second server by March."</em></li>
+<li><em>"Run the test readers again on the revised draft."</em></li>
+</ul>
+<div class="callout">
+<p>Want to see a full report first? The skill ships a synthetic draft and the report a real run produced on it: <code>examples/sample-draft.md</code> and <code>examples/sample-report.md</code>.</p>
+</div>
+</section>
+<section id="gallery"><h2>What you get</h2>
+<p>These come from a real run: a fresh agent session with only this skill installed, given a synthetic one-page grant summary with realistic problems and the request shown in the last image. The highlights and margin notes on the first image were drawn by us from the skill's report; the report excerpts are from the file the run saved.</p>
+<div class="shots"><figure><img src="../../assets/shots/test-readers/01-annotated-draft.png" alt="The demo grant summary with eleven passages highlighted by severity and numbered margin notes summarising what the readers said." loading="lazy"><figcaption>The demo draft with the run&#x27;s findings. Highlights and margin notes drawn by us from the skill&#x27;s report; numbers in brackets are the report&#x27;s issue numbers.</figcaption></figure><figure><img src="../../assets/shots/test-readers/02-issues.png" alt="Excerpt of the issues table from the report: severity, location, what the reader experienced, and a fix or question." loading="lazy"><figcaption>Seven of the seventeen issues in the saved report (some cells shortened).</figcaption></figure><figure><img src="../../assets/shots/test-readers/03-message.png" alt="The report&#x27;s message table: the intended message and what each of the five readers understood, with two drifts noted." loading="lazy"><figcaption>The comprehension probe from the saved report, condensed to the main-message row.</figcaption></figure><figure><img src="../../assets/shots/test-readers/04-session.png" alt="Excerpt of the agent session: the request, five parallel readers, the sum check and the saved report." loading="lazy"><figcaption>The agent&#x27;s steps and its reply, from the run.</figcaption></figure></div>
+</section>
+<section id="workflow"><h2>How it works</h2>
+<ol>
+<li><strong>Scope.</strong> Who the real readers are, which kinds of feedback you want (clarity, accuracy, language), how deep (structure or line by line), and the message and action you intend. If you don't say, the agent asks, or infers and lists its assumptions in the report.</li>
+<li><strong>Pick personas.</strong> The Newcomer whenever anyone outside your circle will read it; the Expert for technical or factual claims; the Editor for language; the Decision-maker when the draft asks for money, approval or action; the Skimmer for long documents. Three to five is typical.</li>
+<li><strong>Blind packet.</strong> Each reader gets the path to the draft and its persona prompt, nothing else. Only the Expert may get background on the field (never on what the draft is trying to say).</li>
+<li><strong>Read.</strong> In parallel, one fresh reader per persona. Each reports the main message, what it thinks it is expected to do, every place it got lost or stopped trusting the text (quoted), its persona-specific checks, and what worked.</li>
+<li><strong>Probe.</strong> The readers' main message and expected action, side by side with yours.</li>
+<li><strong>Rank.</strong> Findings are merged and deduplicated, then sorted strictly by severity; passages several readers tripped on move up. Numbers the readers question are checked against the draft.</li>
+<li><strong>Report.</strong> Saved as a Markdown file, with the verdict and the top three issues in the chat. The agent offers to apply the fixes; after major changes, a second round with new readers.</li>
+</ol>
+<h3 id="fresh-readers-or-a-careful-fallback">Fresh readers or a careful fallback</h3>
+<p>Fresh readers are the intended mode. In an agent that cannot run subagents or a fresh session, the agent reads as each persona in separate passes, quoting the draft before reacting, and says at the top of the report that the readings were simulated in one context.</p>
+</section>
+<section id="personas"><h2>The personas</h2>
+<div class="doc-table"><table>
+<thead>
+<tr>
+<th>Persona</th>
+<th>Stands for</th>
+<th>Reads by</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Newcomer</td>
+<td>The least specialised intended reader, months from now, with no context</td>
+<td>Everything once, in order</td>
+</tr>
+<tr>
+<td>Expert</td>
+<td>The most specialised reader</td>
+<td>Everything, critically</td>
+</tr>
+<tr>
+<td>Editor</td>
+<td>A careful, fluent reader of the draft's language</td>
+<td>Line by line</td>
+</tr>
+<tr>
+<td>Decision-maker</td>
+<td>The person who has to act</td>
+<td>The first page, then decides</td>
+</tr>
+<tr>
+<td>Skimmer</td>
+<td>Most real readers of long documents</td>
+<td>Headings, first sentences, figures and captions</td>
+</tr>
+</tbody>
+</table></div>
+</section>
+<section id="report"><h2>The report</h2>
+<div class="doc-table"><table>
+<thead>
+<tr>
+<th>Section</th>
+<th>What it holds</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Header</td>
+<td>Personas used, reading mode, date, and any assumptions about scope.</td>
+</tr>
+<tr>
+<td>Overall</td>
+<td>Two or three sentences on whether the draft reaches its purpose, biggest issue first.</td>
+</tr>
+<tr>
+<td>Keep</td>
+<td>What works and why, with specific passages.</td>
+</tr>
+<tr>
+<td>Did the message land?</td>
+<td>Your intended message and action next to each reader's.</td>
+</tr>
+<tr>
+<td>Issues</td>
+<td>One row per issue: severity, where, object (content, structure or language), must fix or suggestion, what the reader experienced, fix or question.</td>
+</tr>
+<tr>
+<td>Line notes</td>
+<td>Optional, grouped by section.</td>
+</tr>
+</tbody>
+</table></div>
+</section>
+<section id="outputs"><h2>Files it reads and writes</h2>
+<div class="doc-table"><table>
+<thead>
+<tr>
+<th>File</th>
+<th>Read or written</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>The draft you point to</td>
+<td>Read. Markdown, plain text, LaTeX, or anything your agent can open (PDFs, rendered slides).</td>
+</tr>
+<tr>
+<td><code>research/paper/</code></td>
+<td>Read, when you give no path and the project has a <code>research/</code> folder.</td>
+</tr>
+<tr>
+<td><code>research/claims.md</code></td>
+<td>Read, optionally, for your intended message. Never given to the readers.</td>
+</tr>
+<tr>
+<td><code>research/reviews/test-readers-&lt;draft&gt;-&lt;date&gt;.md</code></td>
+<td>Written: the report. Without a <code>research/</code> folder it goes next to the draft.</td>
+</tr>
+</tbody>
+</table></div>
+<p>It writes nothing else and never edits the draft unless you ask.</p>
+</section>
+<section id="research-folder"><h2>The <code>research/</code> folder</h2>
+<p>Test Readers works on its own. If you keep your project in a <code>research/</code> folder, it uses the same plain-file convention as the other Aurora Lab research skills, so they cooperate without calling each other:</p>
+<pre><code>research/
+  paper/      manuscript sections            (read)
+  claims.md   the paper's claims             (read, optional)
+  reviews/    test-read reports              (written)
+  results/    one JSON file per result
+  figures/    figures + caption/spec files
+  refs.bib    bibliography
+</code></pre>
+</section>
+<section id="faq"><h2>FAQ</h2>
+<h3 id="which-agents-does-it-work-with">Which agents does it work with?</h3>
+<p>Any agent that loads SKILL.md skills, including Claude Code, Codex CLI, Cursor and Gemini CLI. It works best where the agent can run subagents or start a fresh session. Where it can't, the agent reads as each persona in separate passes and says so in the report.</p>
+<h3 id="what-kinds-of-drafts-can-it-test">What kinds of drafts can it test?</h3>
+<p>Anything your agent can read: papers and paper sections, grant proposals, reports, cover letters, emails, and slides or PDFs if your agent can open them.</p>
+<h3 id="will-it-rewrite-my-draft">Will it rewrite my draft?</h3>
+<p>No. It writes one report and leaves the draft alone. It offers to apply the fixes and only does so if you say yes.</p>
+<h3 id="how-long-does-a-test-read-take-and-what-does-it-cost">How long does a test read take, and what does it cost?</h3>
+<p>Each persona is a separate read, so usage grows with the number of readers and the length of the draft. In our demo, five readers on a one-page grant summary finished in about two minutes.</p>
+<h3 id="can-simulated-readers-replace-real-ones">Can simulated readers replace real ones?</h3>
+<p>No. They are a fast first test. Real readers know less and are less patient, so for high-stakes pieces the report recommends one real reader from the audience as well.</p>
+<h3 id="do-i-need-the-other-aurora-lab-skills">Do I need the other Aurora Lab skills?</h3>
+<p>No. They share the <code>research/</code> folder convention if you want to use them together.</p>
+</section>
+<section id="limitations"><h2>Limitations</h2>
+<ul>
+<li>Simulated readers know more and are kinder than real ones. The persona prompt pushes against this, but it is a first test, not a substitute for a real reader.</li>
+<li>Without subagents or a fresh session, the readings share a context that knows your intent, so they are less blind. The report says when this was the case.</li>
+<li>The Expert persona can be wrong about facts. Treat a factual objection as something to check, not a verdict.</li>
+<li>Each persona is a separate read, so a test read uses several times the tokens of a single review.</li>
+<li>It reviews; it does not check references or rewrite the draft unless you ask. Tested on English drafts.</li>
+</ul>
+</section>
+<section id="changelog"><h2>Changelog</h2>
+<p><strong>1.0.0</strong> · October 2026 · First release.</p></section>
+
+      </article>
+    </div>
+  </main>
+
+  <footer class="footer">
+    <div class="wrap footer-inner">
+      <span class="brand"><img src="../../assets/img/avatar.png" alt="" width="24" height="24"> Aurora Lab</span>
+      <nav aria-label="Footer">
+        <a href="https://www.agensi.io/creators/aurora-lab">Agensi</a>
+        <a href="https://github.com/the-aurora-lab">GitHub</a>
+      </nav>
+    </div>
+  </footer>
+</body>
+</html>
