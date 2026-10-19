@@ -1,0 +1,304 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Slide Architect · Aurora Lab</title>
+  <meta name="description" content="Documentation for the Slide Architect agent skill: turn your paper, figures and data into a research talk with the finding stated early, a claim in every headline, figures redrawn for the screen, every number traced to your work, and an editable .pptx with speaker notes.">
+  <meta property="og:title" content="Slide Architect · Aurora Lab">
+  <meta property="og:description" content="Documentation for the Slide Architect agent skill: turn your paper, figures and data into a research talk with the finding stated early, a claim in every headline, figures redrawn for the screen, every number traced to your work, and an editable .pptx with speaker notes.">
+  <meta property="og:image" content="https://the-aurora-lab.github.io/assets/shots/slide-architect/01-deck.png">
+  <meta name="theme-color" content="#0b1020">
+  <link rel="icon" type="image/png" href="../../assets/img/avatar.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../../assets/css/site.css">
+</head>
+<body>
+  <a class="skip" href="#main">Skip to content</a>
+  <header class="nav">
+    <div class="wrap nav-inner">
+      <a class="brand" href="../../" aria-label="Aurora Lab home">
+        <img src="../../assets/img/avatar.png" alt="" width="32" height="32">
+        <span>Aurora Lab</span>
+      </a>
+      <nav aria-label="Primary">
+        <a href="../../#skills">Skills</a>
+        <a href="../../#examples">Examples</a>
+        <a class="btn btn-small" href="https://www.agensi.io/creators/aurora-lab">Get it on Agensi</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main">
+    <section class="docs-hero">
+      <div class="aurora" aria-hidden="true"></div>
+      <div class="wrap">
+        <p class="crumbs"><a href="../../">Aurora Lab</a> / <a href="../../#skills">Skills</a> / Slide Architect</p>
+        <h1>Slide Architect</h1>
+        <p class="lede">Presentation-ready research talks from your own paper, figures and results. Your agent states the finding by slide 3, writes every headline as a claim backed by one piece of evidence, redraws your figures at slide size, traces every number to your material, and builds an editable .pptx with speaker notes, then measures and looks at every slide before you rehearse.</p>
+        <ul class="meta" aria-label="Skill facts"><li>v1.0.0</li><li>Python 3.10+ · python-pptx · Pillow · matplotlib</li><li>Chrome, Chromium, Edge or Brave</li><li>No network access</li><li>Works with any SKILL.md agent</li></ul>
+        <div class="cta">
+          <a class="btn" href="https://www.agensi.io/creators/aurora-lab">Get it on Agensi · $12</a>
+          <a class="btn btn-ghost" href="#overview">Read the docs</a>
+        </div>
+      </div>
+    </section>
+
+    <div class="wrap docs">
+      <nav class="toc" aria-label="On this page">
+        <p>On this page</p>
+        <ol><li><a href="#overview">Overview</a></li><li><a href="#quick-start">Quick start</a></li><li><a href="#gallery">What you get</a></li><li><a href="#workflow">How it works</a></li><li><a href="#browser">Browser requirement</a></li><li><a href="#outputs">Files it reads and writes</a></li><li><a href="#helper">Command line and helper API</a></li><li><a href="#faq">FAQ</a></li><li><a href="#limitations">Limitations</a></li><li><a href="#changelog">Changelog</a></li></ol>
+      </nav>
+      <article class="prose-doc">
+<section id="overview"><h2>Overview</h2>
+<p>A research talk is an argument made out loud, to people who cannot turn back a page. Journal figures shrunk onto slides, headlines such as "Results", and a Methods section before any result lose them. Slide Architect turns your agent into a careful talk designer that:</p>
+<ul>
+<li><strong>Builds the talk around your finding</strong>: the problem in the audience's terms, the answer stated by slide 3 or 4 with its number, evidence blocks that earn it, a limits slide, and a take-home that stays up during questions. Sized for the setting and the slot, with a time plan per part.</li>
+<li><strong>Writes every headline as a claim</strong>: a sentence stating what the slide shows, backed by one figure, one number or a short list.</li>
+<li><strong>Keeps every number traceable</strong>: an inventory of your results with their locations, and a check of every number on the slides and in the notes against your paper and data. Nothing is invented; inconsistencies in your material are reported to you.</li>
+<li><strong>Redraws your figures for the screen</strong> from a copy of your plotting script and your data, at the exact size each figure takes on the slide, with 20 pt text and direct labels. Your originals are never touched.</li>
+<li><strong>Builds an editable .pptx</strong> with speaker notes, plus an HTML preview, a PDF and an image of every slide.</li>
+<li><strong>Measures the layout</strong> in a real browser engine, <strong>looks at every slide</strong>, and runs a <strong>fresh-reader test</strong>: a subagent sees only the slide images and says what the talk claims.</li>
+</ul>
+<p><strong>Pairs well with</strong> <a href="../talk-coach/">Talk Coach</a> for rehearsal feedback, <a href="../qa-prep/">Q&amp;A Prep</a> for the questions, <a href="../poster-layout/">Poster Layout</a> and <a href="../paper-figures/">Paper Figures</a>. Each works on its own.</p>
+</section>
+<section id="quick-start"><h2>Quick start</h2>
+<ol>
+<li><strong>Get the skill</strong> from <a href="https://www.agensi.io/creators/aurora-lab">Agensi</a> and add it to your agent (Claude Code, Codex CLI, Cursor, Gemini CLI or any agent that loads SKILL.md skills).</li>
+<li><strong>Have Python 3.10+ with python-pptx and Pillow</strong> (plus matplotlib and numpy to redraw figures) and a Chrome-family browser: see <a href="#browser">Browser requirement</a>.</li>
+<li><strong>Ask in plain words</strong>, pointing at your material and saying how long the talk is.</li>
+</ol>
+<p>Example requests:</p>
+<ul>
+<li><em>"Make a 12-minute conference talk from my paper (paper/main.md) and the figures in figures/. The data and plotting script are in data/ and scripts/."</em></li>
+<li><em>"Turn my thesis chapters into a 40-minute defence presentation."</em></li>
+<li><em>"I have a 5-minute lightning talk at the department research day: build it from this abstract and fig2.png."</em></li>
+<li><em>"Review talk.pptx before Friday's lab meeting: what would the audience miss?"</em></li>
+</ul>
+</section>
+<section id="gallery"><h2>What you get</h2>
+<p>Everything below comes from a real run: a fresh agent session with only this skill installed, given the request in the session card. The input was ours: a synthetic, seeded study of humidity and low-cost air-quality sensors (a short paper, three journal-size figures with legends and a red/green cue, the CSV data and the plotting script). We planted one inconsistency: the abstract says the correction cuts the error "by three-quarters" while the results give 69%. The run recomputed the paper's numbers from the data, found the inconsistency, redrew all three figures at slide size, built a 12-minute deck (12 main slides, 2 backups, 10.3 minutes planned), traced all 86 numbers, looked at every slide and ran the fresh-reader test.</p>
+<div class="shots"><figure><img src="../../assets/shots/slide-architect/01-deck.png" alt="Six slides from the demo deck: title, the problem, a big 69% finding slide, the study set-up, a section divider and a redrawn bias-versus-humidity figure." loading="lazy"><figcaption>render/grid-1.png from the demo run: the first six slides the skill built from a synthetic paper, its three journal figures and the data.</figcaption></figure><figure><img src="../../assets/shots/slide-architect/02-figure.png" alt="Left: a small journal bar chart with red and green bars and a legend. Right: the slide with the headline &#x27;Correction cuts error most on the most humid days: 29.5 → 7.0 µg/m³&#x27; and grey and blue labelled bars." loading="lazy"><figcaption>Left: the synthetic paper figure we gave the skill. Right: the slide it built in the demo run.</figcaption></figure><figure><img src="../../assets/shots/slide-architect/03-sources.png" alt="The sources file: a table of results with their values and locations in the paper, a &#x27;Discrepancy in the paper&#x27; section about &#x27;three-quarters&#x27; versus 69%, and a list of what the material does not contain." loading="lazy"><figcaption>sources.md from the demo run, verbatim. The &#x27;three-quarters&#x27; in the abstract was planted by us; the slides use the 69% the results and data give.</figcaption></figure><figure><img src="../../assets/shots/slide-architect/04-finding.png" alt="Left: slide 3 with a large blue 69% and &#x27;less error on held-out days, RMSE 16.8 → 5.2 µg/m³&#x27;. Right: slide 11 headed &#x27;One site, one season, one sensor model: whether κ transfers is untested&#x27; with three short limits." loading="lazy"><figcaption>Two slides from the demo run, as rendered by the build (1920 × 1080).</figcaption></figure><figure><img src="../../assets/shots/slide-architect/05-session.png" alt="Excerpt of the agent session: reading the material, writing sources and storyboard, redrawing figures, building and checking the deck, the fresh-reader test and the final report." loading="lazy"><figcaption>The agent&#x27;s steps and report from the demo run (paraphrased from its transcript).</figcaption></figure></div>
+</section>
+<section id="workflow"><h2>How it works</h2>
+<ol>
+<li><strong>Facts.</strong> Setting, slot, audience and your material. If nobody knows the aspect ratio, it uses 16:9 and says so.</li>
+<li><strong>Evidence inventory.</strong> Every result the talk may use, with its value and where it comes from, plus what the material lacks.</li>
+<li><strong>Finding and arc.</strong> The finding as one sentence with its number; evidence blocks chosen by what a sceptical expert needs to see; sizes and time shares for the setting.</li>
+<li><strong>Storyboard.</strong> Headlines first: read alone, in order, they must tell the argument. Each names its evidence and source, and gets its seconds.</li>
+<li><strong>Figures for the screen.</strong> Redrawn from your data at the size the slot needs, one panel per claim, the data the headline is about in the accent colour.</li>
+<li><strong>Build and check.</strong> A short JSON spec becomes the deck; the build measures the layout, the lint checks the content rules, and the number trace checks every number.</li>
+<li><strong>Look.</strong> Every slide image at full size, then six-per-page sheets that show what is hard to read from the back row.</li>
+<li><strong>Fresh reader.</strong> A subagent sees only the slides: what does each slide claim, what is the finding, what would you ask?</li>
+<li><strong>Hand-over.</strong> Files, the finding, the time plan, each number with its source, assumptions, and what to prepare for questions.</li>
+</ol>
+<h3 id="the-talk-structure">The talk structure</h3>
+<div class="doc-table"><table>
+<thead>
+<tr>
+<th>Part</th>
+<th>What it does</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Problem</td>
+<td>What is unknown or broken, in this audience's terms, and why it matters to them</td>
+</tr>
+<tr>
+<td>Finding</td>
+<td>The answer as one sentence with its number, by slide 3 or 4</td>
+</tr>
+<tr>
+<td>Evidence</td>
+<td>One block per supporting result; method only where a result needs it</td>
+</tr>
+<tr>
+<td>Limits</td>
+<td>Scope, assumptions, the strongest alternative explanation</td>
+</tr>
+<tr>
+<td>Take-home</td>
+<td>The finding again and what it changes for the audience; stays up during questions</td>
+</tr>
+<tr>
+<td>Backup</td>
+<td>Slides for the questions you expect, after the end</td>
+</tr>
+</tbody>
+</table></div>
+<p>Lightning talks, conference talks, seminars, job talks, defences, lab meetings and online talks each get their own sizes and time shares.</p>
+<h3 id="what-the-build-measures">What the build measures</h3>
+<div class="doc-table"><table>
+<thead>
+<tr>
+<th>Problem</th>
+<th>Flagged when</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Overflowing text</td>
+<td>a headline, list, label or caption runs past its box (it would be cut off or overlap in the .pptx)</td>
+</tr>
+<tr>
+<td>Long headline</td>
+<td>a headline wraps to three or more lines</td>
+</tr>
+<tr>
+<td>Soft figure</td>
+<td>a figure has fewer pixels than it needs on a 1920-pixel projector</td>
+</tr>
+<tr>
+<td>Small figure text</td>
+<td>a figure's text shows under 18 pt at its size on the slide, or a page-sized figure is stretched</td>
+</tr>
+<tr>
+<td>Empty space</td>
+<td>a figure fills less than 70 % of its space on the slide</td>
+</tr>
+</tbody>
+</table></div>
+<p>The content lint adds claim-or-topic headlines (a tested heuristic), the finding stated early and restated at the end, a limits slide, the time plan against the slot, list length, words per slide and full references on slides. What a script cannot see (whether a figure shows its headline's claim, whether a number is used with the right meaning) is the agent's job, from the slide images.</p>
+</section>
+<section id="browser"><h2>Browser requirement</h2>
+<p>The PDF, slide images and text measurements come from a Chrome-family browser run headless on your machine, with a temporary profile and no network access. Any of these works:</p>
+<div class="doc-table"><table>
+<thead>
+<tr>
+<th>System</th>
+<th>Found automatically</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>macOS</td>
+<td>Google Chrome, Chromium, Microsoft Edge or Brave Browser in <code>/Applications</code> or <code>~/Applications</code></td>
+</tr>
+<tr>
+<td>Windows</td>
+<td><code>chrome.exe</code>, <code>msedge.exe</code> or <code>brave.exe</code> under Program Files, Program Files (x86) or Local AppData</td>
+</tr>
+<tr>
+<td>Linux</td>
+<td><code>google-chrome</code>, <code>google-chrome-stable</code>, <code>chromium</code>, <code>chromium-browser</code>, <code>microsoft-edge</code> or <code>brave-browser</code> on <code>PATH</code></td>
+</tr>
+<tr>
+<td>Anywhere else</td>
+<td><code>--chrome PATH</code> or the <code>CHROME_PATH</code> environment variable</td>
+</tr>
+</tbody>
+</table></div>
+<p>Firefox and Safari cannot be driven this way. <strong>Without a Chrome-family browser</strong> the skill still writes the .pptx, the HTML preview, the speaker notes and the figure checks; the PDF, slide images and text-overflow checks are skipped, and the agent tells you it could not look at the slides.</p>
+</section>
+<section id="outputs"><h2>Files it reads and writes</h2>
+<div class="doc-table"><table>
+<thead>
+<tr>
+<th></th>
+<th>Path</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Reads</td>
+<td>the paper, figures, data and plotting scripts you point to; with a <code>research/</code> folder, <code>research/paper/</code>, <code>research/figures/</code>, <code>research/results/</code>, <code>research/claims.md</code></td>
+</tr>
+<tr>
+<td>Writes</td>
+<td><code>talk/</code> (or <code>research/talk/</code>): <code>sources.md</code>, <code>storyboard.md</code>, <code>deck.json</code>, redrawn figures and a copy of your plotting script, <code>deck.pptx</code>, <code>deck.html</code>, <code>deck_notes.md</code>, <code>render/deck.pdf</code>, <code>render/slide-NN.png</code>, <code>render/grid-N.png</code></td>
+</tr>
+</tbody>
+</table></div>
+<p>Your paper, figures, data and scripts are never modified.</p>
+</section>
+<section id="helper"><h2>Command line and helper API</h2>
+<pre><code class="language-bash">python slide-architect/scripts/build_deck.py talk/deck.json                 # .pptx, HTML, notes, PDF, slide images, report
+python slide-architect/scripts/build_deck.py talk/deck.json --no-render     # no browser needed
+python slide-architect/scripts/deck_lint.py talk/deck.json                  # content rules (or an existing .pptx)
+python slide-architect/scripts/trace_numbers.py talk/deck.json paper.md data/
+python slide-architect/scripts/headline_check.py &quot;Shade cools bus stops by 4 °C&quot; &quot;Results&quot;
+</code></pre>
+<div class="doc-table"><table>
+<thead>
+<tr>
+<th>Helper</th>
+<th>Purpose</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>build_deck.py</code></td>
+<td>Spec to editable .pptx with notes, HTML preview, notes file, PDF and slide images, with each figure's slot size, the time plan and every measured layout problem</td>
+</tr>
+<tr>
+<td><code>trace_numbers.py</code></td>
+<td>Every number on the slides and in the notes: found in your material, rounded from it, a declared calculation, or unsourced</td>
+</tr>
+<tr>
+<td><code>deck_lint.py</code></td>
+<td>Content rules for a spec, or a review of an existing .pptx</td>
+</tr>
+<tr>
+<td><code>headline_check.py</code></td>
+<td>Is a headline a claim, a topic label or a question?</td>
+</tr>
+<tr>
+<td><code>slide_style.use()</code> / <code>figure(w, h)</code></td>
+<td>matplotlib settings and a figure at its size on the slide</td>
+</tr>
+<tr>
+<td><code>slide_style.label_end(...)</code>, <code>check(fig)</code>, <code>save(fig, path)</code></td>
+<td>Direct labels, a check for text under 18 pt, saving at the planned size</td>
+</tr>
+<tr>
+<td><code>slide_style.equation(tex, path)</code></td>
+<td>One equation rendered to an image, no LaTeX installation needed</td>
+</tr>
+</tbody>
+</table></div>
+<p>The spec is plain JSON: title, finding, slot length, evidence blocks, accent colour, and per slide a type (title, claim, section, outline, end), a headline, one piece of evidence, a caption, notes and seconds. The skill ships a complete synthetic example.</p>
+</section>
+<section id="faq"><h2>FAQ</h2>
+<h3 id="what-do-i-need-to-give-it">What do I need to give it?</h3>
+<p>Your paper or abstract, your figures, and ideally the data and plotting script behind them, plus the setting and slot length. It asks for what it cannot infer.</p>
+<h3 id="will-it-change-my-numbers-or-figures">Will it change my numbers or figures?</h3>
+<p>No. Every number on the slides and in the notes is checked against your paper and data, and figures are redrawn from a copy of your script with the same data and analysis. Your originals are never modified.</p>
+<h3 id="can-i-edit-the-slides-afterwards">Can I edit the slides afterwards?</h3>
+<p>Yes. The .pptx opens in PowerPoint, Keynote, LibreOffice and Google Slides with speaker notes. For larger changes, edit the JSON spec and rebuild so the checks run again.</p>
+<h3 id="does-it-use-my-institutions-template">Does it use my institution's template?</h3>
+<p>No. It uses one clean built-in style with your choice of accent colour, font, aspect ratio and logo. You can paste the slides into a template afterwards.</p>
+<h3 id="can-it-review-a-deck-i-already-have">Can it review a deck I already have?</h3>
+<p>Yes: it lints the .pptx (topic titles, wordy slides, small text, legends, pies, 3D charts, big tables), maps it onto the talk structure and proposes a restructure, then rebuilds it if you want.</p>
+</section>
+<section id="limitations"><h2>Limitations</h2>
+<ul>
+<li>It builds talks from material you already have; it does not run new analyses, and it cannot redraw a figure without its data.</li>
+<li>One built-in style; no institutional templates, no Beamer/LaTeX output, no generated animations.</li>
+<li>The .pptx is laid out to match the measured preview; PowerPoint, Keynote or LibreOffice may wrap lines slightly differently.</li>
+<li>Rendering needs Chrome, Chromium, Edge or Brave; without one there are no slide images or text checks.</li>
+<li>The number check confirms where a number comes from, not that it is used with the right meaning; numbers inside images or written as words are checked by the agent.</li>
+<li>The headline check is a heuristic for English (with basic Spanish) and only warns.</li>
+<li>Talk formats differ between venues and institutions: check your event's current instructions.</li>
+</ul>
+</section>
+<section id="changelog"><h2>Changelog</h2>
+<p><strong>1.0.0</strong> · October 2026 · First release.</p></section>
+
+      </article>
+    </div>
+  </main>
+
+  <footer class="footer">
+    <div class="wrap footer-inner">
+      <span class="brand"><img src="../../assets/img/avatar.png" alt="" width="24" height="24"> Aurora Lab</span>
+      <nav aria-label="Footer">
+        <a href="https://www.agensi.io/creators/aurora-lab">Agensi</a>
+        <a href="https://github.com/the-aurora-lab">GitHub</a>
+      </nav>
+    </div>
+  </footer>
+</body>
+</html>
