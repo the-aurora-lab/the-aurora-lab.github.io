@@ -1,0 +1,239 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Scientific Voice · Aurora Lab</title>
+  <meta name="description" content="Documentation for the Scientific Voice agent skill: scientific prose in English or Spanish edited into a clear, evidence-first voice, with a bundled linter for hedge stacks, meta-commentary, buried verbs, wordy phrases, false friends, mixed spelling and decimal formats.">
+  <meta property="og:title" content="Scientific Voice · Aurora Lab">
+  <meta property="og:description" content="Documentation for the Scientific Voice agent skill: scientific prose in English or Spanish edited into a clear, evidence-first voice, with a bundled linter for hedge stacks, meta-commentary, buried verbs, wordy phrases, false friends, mixed spelling and decimal formats.">
+  <meta property="og:image" content="https://the-aurora-lab.github.io/assets/shots/scientific-voice/01-before-after-en.png">
+  <meta name="theme-color" content="#0b1020">
+  <link rel="icon" type="image/png" href="../../assets/img/avatar.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../../assets/css/site.css">
+</head>
+<body>
+  <a class="skip" href="#main">Skip to content</a>
+  <header class="nav">
+    <div class="wrap nav-inner">
+      <a class="brand" href="../../" aria-label="Aurora Lab home">
+        <img src="../../assets/img/avatar.png" alt="" width="32" height="32">
+        <span>Aurora Lab</span>
+      </a>
+      <nav aria-label="Primary">
+        <a href="../../#skills">Skills</a>
+        <a href="../../#examples">Examples</a>
+        <a class="btn btn-small" href="https://www.agensi.io/creators/aurora-lab">Get it on Agensi</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main">
+    <section class="docs-hero">
+      <div class="aurora" aria-hidden="true"></div>
+      <div class="wrap">
+        <p class="crumbs"><a href="../../">Aurora Lab</a> / <a href="../../#skills">Skills</a> / Scientific Voice</p>
+        <h1>Scientific Voice</h1>
+        <p class="lede">Submission-ready prose in English and Spanish. Your agent puts the finding before the caveat, keeps one hedge sized to the evidence, cuts sentences about the text, turns buried nouns back into verbs and gives every vague word its number. Your numbers and your terms stay exactly as they are, and anything it cannot fix without guessing is marked for you.</p>
+        <ul class="meta" aria-label="Skill facts"><li>v1.0.0</li><li>Python 3.10+ · standard library (linter only)</li><li>No network access</li><li>Works with any SKILL.md agent</li></ul>
+        <div class="cta">
+          <a class="btn" href="https://www.agensi.io/creators/aurora-lab">Get it on Agensi · $12</a>
+          <a class="btn btn-ghost" href="#overview">Read the docs</a>
+        </div>
+      </div>
+    </section>
+
+    <div class="wrap docs">
+      <nav class="toc" aria-label="On this page">
+        <p>On this page</p>
+        <ol><li><a href="#overview">Overview</a></li><li><a href="#quick-start">Quick start</a></li><li><a href="#gallery">What you get</a></li><li><a href="#workflow">How it works</a></li><li><a href="#outputs">Files it reads and writes</a></li><li><a href="#helper">The linter</a></li><li><a href="#faq">FAQ</a></li><li><a href="#limitations">Limitations</a></li><li><a href="#changelog">Changelog</a></li></ol>
+      </nav>
+      <article class="prose-doc">
+<section id="overview"><h2>Overview</h2>
+<p>Reviewers read your draft once. Most of what slows them down is small and mechanical: a caveat before the result, "may potentially suggest", "It is worth noting that", "very small effect" where a number would do, "performed an analysis of", an 80-word sentence, colour and color in the same paper. In Spanish the list is longer: "se realizó un análisis de", "cabe destacar que", "eventualmente" used for "in the end", a stray decimal point among decimal commas. Scientific Voice makes your agent find and fix all of it:</p>
+<ul>
+<li><strong>Finding first.</strong> Each paragraph opens with its result; the limitation follows, attached to its consequence.</li>
+<li><strong>One hedge, sized to the evidence.</strong> Stacks collapse to a single hedge. A hedge that carries real uncertainty is never removed, and a claim is never strengthened.</li>
+<li><strong>Precise beats grand.</strong> "Dramatically", "novel" and "very" give way to the number or mechanism they stand for; "significant" is kept for statistics.</li>
+<li><strong>Verbs, not buried nouns; no sentences about the text.</strong> "Performed an analysis of" becomes "analysed"; "As mentioned above" and "In this section we describe" go.</li>
+<li><strong>Spanish done in Spanish.</strong> Spanish hedges, including the softening conditional, first-person-plural verbs instead of "fue realizado", false friends, and one decimal separator throughout.</li>
+<li><strong>Nothing invented.</strong> Numbers, units, citations, math and your technical terms are fixed. A missing test or comparator becomes a visible marker such as <code>[test?]</code>, with a question for you.</li>
+</ul>
+<p><strong>Other Aurora Lab skills for the same draft:</strong> <a href="../claim-check/">Claim Check</a> (does each sentence stay inside its evidence?), Journal House Style (does the paper fit the venue?) and <a href="../test-readers/">Test Readers</a> (how a cold reader takes it) pair well with it. Each works on its own.</p>
+</section>
+<section id="quick-start"><h2>Quick start</h2>
+<ol>
+<li><strong>Get the skill</strong> from <a href="https://www.agensi.io/creators/aurora-lab">Agensi</a> and add it to your agent (Claude Code, Codex CLI, Cursor, Gemini CLI or any agent that loads SKILL.md skills).</li>
+<li><strong>Optional: Python 3.10+</strong> for the linter. It uses the standard library only; the editing itself needs nothing installed.</li>
+<li><strong>Ask in plain words.</strong> "Tighten" or "light edit" gives minimal changes; "rewrite" or "polish" gives a full rewrite with a change log; "review" or "lint" gives findings only.</li>
+</ol>
+<p>Example requests:</p>
+<ul>
+<li><em>"Tighten the English results paragraph and the Spanish abstract in draft.md; keep my terms."</em></li>
+<li><em>"Polish the Results section in paper/results.md; we use US spelling and no em dashes."</em></li>
+<li><em>"Light edit on this abstract, show me each change."</em></li>
+<li><em>"This paragraph hedges everything. Make it direct without overclaiming."</em></li>
+<li><em>"Revisa el resumen: usamos coma decimal."</em></li>
+</ul>
+</section>
+<section id="gallery"><h2>What you get</h2>
+<p>Everything below comes from a real run: a fresh agent session with only this skill installed, given the request in the session card. The input was ours: a synthetic, seeded <code>draft.md</code> with one English Results-and-discussion paragraph and one Spanish abstract from a made-up irrigation trial on processing tomato. We planted the same tics in both (a meta-commentary frame, a four-hedge stack, vague intensifiers, a promotional word, buried verbs, wordy phrases, "significantly" with no test, a sentence over 70 words), plus mixed British and US spelling in the English, and false friends and one stray decimal point in the Spanish. The linter reported 31 findings. The rewrite fixed every planted tic, kept every number and term, cut the two paragraphs from 375 to 318 words, and left three markers for missing tests plus a list of questions, including a mismatch between the English and the Spanish that we had not planted. After the rewrite the linter reports only one long sentence, which the agent kept on purpose and said why, and the three markers. The run took 59 s and cost $0.21.</p>
+<div class="shots"><figure><img src="../../assets/shots/scientific-voice/01-before-after-en.png" alt="Two versions of a Results paragraph about deficit irrigation. The draft opens with &#x27;It is worth noting that&#x27;, says &#x27;very small effect&#x27; and &#x27;rose dramatically&#x27;, and ends &#x27;may potentially suggest that this novel RDI schedule could be adopted&#x27;. The tightened version starts with the yield and water-productivity numbers, splits an 82-word sentence into three, and ends &#x27;These results suggest that this RDI schedule can be adopted&#x27;." loading="lazy"><figcaption>Top: the synthetic English paragraph we planted the tics in. Bottom: draft-tightened.md, written by the skill in the demo run.</figcaption></figure><figure><img src="../../assets/shots/scientific-voice/02-before-after-es.png" alt="Two versions of a Spanish abstract. The draft has &#x27;se realizó un análisis de&#x27;, &#x27;Cabe destacar que&#x27;, &#x27;consistentes con&#x27;, &#x27;eventualmente&#x27; and a stray &#x27;24.7&#x27; among decimal commas. The tightened version uses &#x27;Presentamos&#x27;, &#x27;realizamos&#x27;, &#x27;analizamos&#x27;, &#x27;coherentes con&#x27;, &#x27;24,7&#x27; and ends with one hedge." loading="lazy"><figcaption>Top: the synthetic Spanish abstract we planted the tics in. Bottom: the same section of draft-tightened.md from the demo run.</figcaption></figure><figure><img src="../../assets/shots/scientific-voice/03-linter.png" alt="Terminal output of prose_lint.py on draft.md: hedge-stack, meta-commentary, nominalisation, wordy-phrase, spelling-variant and long-sentence findings in the English paragraph; hedge-stack, meta-commentary, nominalisation, two false-friend, number-format and long-sentence findings in the Spanish abstract; 31 findings in total, 2 English and 2 Spanish paragraphs." loading="lazy"><figcaption>13 of the 31 findings the linter reported on the draft in the demo run, verbatim; the summary line is shortened by us.</figcaption></figure><figure><img src="../../assets/shots/scientific-voice/04-changes.png" alt="The agent&#x27;s change list. Results and discussion: filler phrases cut, vague words replaced by numbers, an 82-word sentence split into three, wordy verbs simplified, four hedges reduced to one, spelling made consistently British. Resumen: active first person, wordy phrases cut, promotional words removed, false friends fixed, one hedge, decimal comma throughout." loading="lazy"><figcaption>The &#x27;Main changes&#x27; part of the agent&#x27;s final report in the demo run, verbatim (bold labels turned into headings by us).</figcaption></figure><figure><img src="../../assets/shots/scientific-voice/05-left-for-you.png" alt="The agent&#x27;s list of things to check: three gap markers for missing tests, two unclear phrases, a possible mismatch between &#x27;rendimiento comercial&#x27; and &#x27;fruit yield&#x27;, the 31% figure that appears only in the Resumen, and a suggestion to move fruit-counting detail to Methods." loading="lazy"><figcaption>The end of the agent&#x27;s final report in the demo run, verbatim.</figcaption></figure><figure><img src="../../assets/shots/scientific-voice/06-session.png" alt="Excerpt of the agent session: lint the draft, read the Spanish reference, write the tightened file, re-lint, fix a hedge stack the re-lint found in the Spanish closing sentence, and report." loading="lazy"><figcaption>The agent&#x27;s steps from the demo run (paraphrased from its transcript; $0.21, 59 s).</figcaption></figure></div>
+</section>
+<section id="workflow"><h2>How it works</h2>
+<ol>
+<li><strong>Pick the mode.</strong> Rewrite, edit (before → after per sentence) or review, from the words of the request; edit when unclear.</li>
+<li><strong>Settle house preferences once per project.</strong> Spelling variant (US, British, British with -ize), em dashes allowed or banned, the decimal separator for Spanish text, any banned words. They are saved to <code>.prose-lint.json</code> so later sessions apply the same rules.</li>
+<li><strong>Lint first.</strong> The linter's findings become a checklist of places to look; each one is a prompt, not an order.</li>
+<li><strong>Rewrite in passes</strong>, structural fixes first and word-level fixes last: claim first, meta-commentary, one point per paragraph, numbers, negative results, hedges, precise words, verbs, sentence length, openers and flow, tense and terms, house conventions.</li>
+<li><strong>Hold the hard constraints.</strong> Meaning fixed, nothing strengthened, terms never renamed, format preserved (Markdown stays Markdown, LaTeX stays LaTeX), gaps marked rather than filled.</li>
+<li><strong>Verify and report.</strong> Lint again; every remaining finding is fixed or listed with a reason. The report gives the revised text, the changes (most important first) and what is left for you, and offers to add any correction you accepted twice to your personal patterns.</li>
+</ol>
+<p>For Spanish text the agent first reads a reference on Spanish scientific style: hedges, impersonal and passive forms, wordy phrases, false friends and calques, numbers and units, the gerund after a comma, and bilingual abstracts.</p>
+</section>
+<section id="outputs"><h2>Files it reads and writes</h2>
+<div class="doc-table"><table>
+<thead>
+<tr>
+<th></th>
+<th>Path</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Reads</td>
+<td>the text you name, any format; with a <code>research/</code> folder, <code>research/paper/*</code>, plus <code>research/claims.md</code> read-only so wording stays no stronger than each claim's recorded status</td>
+</tr>
+<tr>
+<td>Writes</td>
+<td>the revised text where you say; files edited in place only when you ask</td>
+</tr>
+<tr>
+<td>May write</td>
+<td><code>.prose-lint.json</code> (house preferences you state), <code>.prose-lint-personal.txt</code> (recurring errors you agree to add)</td>
+</tr>
+<tr>
+<td>Never</td>
+<td>changes numbers, citations, math or your results files</td>
+</tr>
+</tbody>
+</table></div>
+</section>
+<section id="helper"><h2>The linter</h2>
+<pre><code class="language-bash">python scientific-voice/scripts/prose_lint.py draft.md
+python scientific-voice/scripts/prose_lint.py paper/ --spelling us --ban-em-dash
+python scientific-voice/scripts/prose_lint.py tesis/ --lang es --spanish-decimal comma
+python scientific-voice/scripts/prose_lint.py --list-rules
+</code></pre>
+<p>Reads Markdown, LaTeX, reStructuredText and plain text, skipping code, math, tables, comments, citations and LaTeX commands. Each paragraph is checked in its own language (English or Spanish, detected from its function words; <code>--lang</code> forces one). Output is one line per finding, <code>path:line: rule-id: message "excerpt"</code>, or JSON. Exit status 0 means clean, 1 findings, 2 a usage problem. It writes nothing and needs no network.</p>
+<div class="doc-table"><table>
+<thead>
+<tr>
+<th>Rule</th>
+<th>Catches</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>hedge-stack</code></td>
+<td>two or more hedges in one sentence: may, could, suggest / puede, podría, sugiere, ...</td>
+</tr>
+<tr>
+<td><code>meta-commentary</code></td>
+<td>in this section we, it is worth noting that / cabe destacar que, como se mencionó anteriormente, ...</td>
+</tr>
+<tr>
+<td><code>vague-intensifier</code>, <code>hype-word</code></td>
+<td>very, dramatically, novel / muy, notablemente, novedoso, ...</td>
+</tr>
+<tr>
+<td><code>ambiguous-significant</code></td>
+<td>"significant" or "significativo" with no test or P value in the sentence</td>
+</tr>
+<tr>
+<td><code>nominalisation</code></td>
+<td>performed an analysis of / se realizó un análisis de</td>
+</tr>
+<tr>
+<td><code>wordy-phrase</code></td>
+<td>in order to, due to the fact that / con el fin de, a nivel de, llevar a cabo</td>
+</tr>
+<tr>
+<td><code>false-friend</code></td>
+<td>Spanish: eventualmente, asumir que, consistente con, billón, la data, librería, ...</td>
+</tr>
+<tr>
+<td><code>spelling-variant</code></td>
+<td>mixed US/UK spelling in English, or the variant your house rejects</td>
+</tr>
+<tr>
+<td><code>number-format</code></td>
+<td>a decimal comma in English; mixed or off-house decimal separators in Spanish</td>
+</tr>
+<tr>
+<td><code>long-sentence</code>, <code>long-paragraph</code></td>
+<td>over 45 words / 200 words (configurable)</td>
+</tr>
+<tr>
+<td><code>doubled-word</code>, <code>leftover-marker</code></td>
+<td>"the the"; TODO, [ref], and gap markers such as [test?] left behind</td>
+</tr>
+<tr>
+<td><code>em-dash</code>, <code>banned-word</code></td>
+<td>off by default: your house rules</td>
+</tr>
+<tr>
+<td><code>personal-pattern</code></td>
+<td>your own recurring errors, from a plain-text list</td>
+</tr>
+</tbody>
+</table></div>
+<p><strong>Personal patterns.</strong> One line per error, <code>regex :: message :: suggestion</code>, in <code>.prose-lint-personal.txt</code> (one project) or a file you name (all projects). The shipped list holds only commented examples, typical of a writer working between Spanish and English, so nothing fires until you add a rule.</p>
+<p><strong>Deliberately not flagged:</strong> "In this study, we show that ..." and "En este trabajo mostramos que ...". They state the paper's contribution, a standard abstract opener, and are content rather than commentary.</p>
+</section>
+<section id="faq"><h2>FAQ</h2>
+<h3 id="does-it-work-on-spanish-text">Does it work on Spanish text?</h3>
+<p>Yes. Each paragraph is checked in its own language, so one file can hold an English Results section and a Spanish "Resumen". Other languages are not supported.</p>
+<h3 id="will-it-change-my-numbers-or-my-terms">Will it change my numbers or my terms?</h3>
+<p>No. Numbers, units, citations, cross-references, math and your technical terms are fixed, and a claim is never strengthened. What a sentence lacks, such as the test behind "significantly", is marked with <code>[test?]</code> and asked about.</p>
+<h3 id="how-is-it-different-from-a-grammar-checker">How is it different from a grammar checker?</h3>
+<p>A grammar checker fixes words. This edits the shape of scientific sentences: finding before caveat, one hedge sized to the evidence, no sentences about the text, a number instead of "dramatically", the verb hidden in "performed an analysis of". Every change comes with its reason.</p>
+<h3 id="do-i-need-to-run-the-linter">Do I need to run the linter?</h3>
+<p>No. Without Python the agent applies the same checks by reading. With Python 3.10+ it lints before and after editing, so every remaining finding is fixed or explained.</p>
+<h3 id="can-it-learn-the-mistakes-i-keep-making">Can it learn the mistakes I keep making?</h3>
+<p>Yes, through the personal patterns file. When you accept the same correction twice, the agent offers to add a line for it.</p>
+<h3 id="can-it-enforce-my-journals-or-labs-house-style">Can it enforce my journal's or lab's house style?</h3>
+<p>For the mechanical parts: spelling variant, Spanish decimal separator, an em-dash ban, banned words, sentence and paragraph limits, all in a small <code>.prose-lint.json</code>. Venue structure and word limits are outside its scope.</p>
+<h3 id="does-it-work-with-latex">Does it work with LaTeX?</h3>
+<p>Yes. The linter reads LaTeX source and skips the preamble, math, citations, references, tables and code; the agent edits the prose and leaves commands and math untouched.</p>
+</section>
+<section id="limitations"><h2>Limitations</h2>
+<ul>
+<li>It edits voice: sentences and paragraphs. Whether a claim is supported by its numbers, and whether the paper fits a venue's structure and word limits, are outside its scope.</li>
+<li>It never adds results, tests or citations; a missing one is marked for you to fill.</li>
+<li>The linter matches patterns from fixed word lists. It cannot tell whether a paragraph leads with its claim, whether a hedge matches the evidence or whether a term was renamed; the agent's read-through covers those, and each finding is a prompt to look, not an order.</li>
+<li>English and Spanish only. The language of very short paragraphs is taken from the paragraph that follows; <code>--lang es</code> forces Spanish.</li>
+<li>In Spanish the linter does not check the gerund after a comma or quotation-mark style, and does not judge numbers such as 1,250 that could be thousands. Usage varies by country, so some false-friend flags are style advice rather than errors.</li>
+</ul>
+</section>
+<section id="changelog"><h2>Changelog</h2>
+<p><strong>1.0.0</strong> · October 2026 · First release: English and Spanish, personal patterns.</p></section>
+
+      </article>
+    </div>
+  </main>
+
+  <footer class="footer">
+    <div class="wrap footer-inner">
+      <span class="brand"><img src="../../assets/img/avatar.png" alt="" width="24" height="24"> Aurora Lab</span>
+      <nav aria-label="Footer">
+        <a href="https://www.agensi.io/creators/aurora-lab">Agensi</a>
+        <a href="https://github.com/the-aurora-lab">GitHub</a>
+      </nav>
+    </div>
+  </footer>
+</body>
+</html>
