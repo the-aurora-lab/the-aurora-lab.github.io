@@ -1,0 +1,222 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Claim Check · Aurora Lab</title>
+  <meta name="description" content="Documentation for the Claim Check agent skill: every sentence about a result checked against the results file it cites, with numbers matched within rounding, no verdict words over intervals that include zero, one fact per citation, an 8-step reread and a bundled checker.">
+  <meta property="og:title" content="Claim Check · Aurora Lab">
+  <meta property="og:description" content="Documentation for the Claim Check agent skill: every sentence about a result checked against the results file it cites, with numbers matched within rounding, no verdict words over intervals that include zero, one fact per citation, an 8-step reread and a bundled checker.">
+  <meta property="og:image" content="https://the-aurora-lab.github.io/assets/shots/claim-check/01-before-after.png">
+  <meta name="theme-color" content="#0b1020">
+  <link rel="icon" type="image/png" href="../../assets/img/avatar.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../../assets/css/site.css">
+</head>
+<body>
+  <a class="skip" href="#main">Skip to content</a>
+  <header class="nav">
+    <div class="wrap nav-inner">
+      <a class="brand" href="../../" aria-label="Aurora Lab home">
+        <img src="../../assets/img/avatar.png" alt="" width="32" height="32">
+        <span>Aurora Lab</span>
+      </a>
+      <nav aria-label="Primary">
+        <a href="../../#skills">Skills</a>
+        <a href="../../#examples">Examples</a>
+        <a class="btn btn-small" href="https://www.agensi.io/creators/aurora-lab">Get it on Agensi</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main">
+    <section class="docs-hero">
+      <div class="aurora" aria-hidden="true"></div>
+      <div class="wrap">
+        <p class="crumbs"><a href="../../">Aurora Lab</a> / <a href="../../#skills">Skills</a> / Claim Check</p>
+        <h1>Claim Check</h1>
+        <p class="lede">Every result in your draft, backed by its data. Your agent checks each sentence about a result against the results file it cites: numbers within rounding, no verdict word over an interval that includes zero, no hand-made conversions, one fact per citation, and an untested mechanism labelled as one. Then it rereads, runs the checker, and hands you a draft your co-authors can trust.</p>
+        <ul class="meta" aria-label="Skill facts"><li>v1.0.0</li><li>Python 3.10+ · standard library (checker only)</li><li>No network access</li><li>Works with any SKILL.md agent</li></ul>
+        <div class="cta">
+          <a class="btn" href="https://www.agensi.io/creators/aurora-lab">Get it on Agensi · $12</a>
+          <a class="btn btn-ghost" href="#overview">Read the docs</a>
+        </div>
+      </div>
+    </section>
+
+    <div class="wrap docs">
+      <nav class="toc" aria-label="On this page">
+        <p>On this page</p>
+        <ol><li><a href="#overview">Overview</a></li><li><a href="#quick-start">Quick start</a></li><li><a href="#gallery">What you get</a></li><li><a href="#workflow">How it works</a></li><li><a href="#outputs">Files it reads and writes</a></li><li><a href="#helper">The checker</a></li><li><a href="#faq">FAQ</a></li><li><a href="#limitations">Limitations</a></li><li><a href="#changelog">Changelog</a></li></ol>
+      </nav>
+      <article class="prose-doc">
+<section id="overview"><h2>Overview</h2>
+<p>A results section is where reviewers hold your sentences against your numbers. Most overclaims are small: "significantly better" over an interval that crosses zero, an accuracy rounded the wrong way, a fraction turned into a percent by hand, "no extra cost" from a wide interval, one seed written up as a general finding. Claim Check makes your agent find and fix them before anyone else does:</p>
+<ul>
+<li><strong>Numbers match the data.</strong> Every number in a cited sentence must sit in the cited result within rounding. A mis-rounded estimate, a value copied from the wrong entry, a dropped minus sign or a hand unit conversion is caught.</li>
+<li><strong>No verdict without the evidence for it.</strong> "Improves" and "outperforms" need a stored difference whose interval excludes zero; "no effect", "matches" and "no extra cost" need an equivalence test, not a wide interval. Otherwise the sentence gives the estimate and interval, or "not distinguishable from zero at this sample size".</li>
+<li><strong>One fact per citation.</strong> Two arms, two conditions, or a value and the difference derived from it each get their own sentence and citation.</li>
+<li><strong>Scope stays where it was measured.</strong> A single run is reported as one run; "generalises" needs evidence at every setting; a mechanism no experiment isolated becomes "one explanation, not tested here".</li>
+<li><strong>A reread before returning.</strong> Each claim sentence is checked fact by fact against its entry, then the bundled checker runs and every error it reports is resolved. Sentences that already pass are left alone.</li>
+</ul>
+<p>It checks your own results, not the literature: citation auditors check that a paper you cite supports a sentence; Claim Check opens the JSON your sentence cites and checks the numbers and verdict words against the stored value, interval and n.</p>
+<p><strong>Other Aurora Lab skills for the same draft:</strong> Scientific Voice (how the sentences read) and <a href="../test-readers/">Test Readers</a> (how a cold reader takes the paper) pair well with it. Each works on its own.</p>
+</section>
+<section id="quick-start"><h2>Quick start</h2>
+<ol>
+<li><strong>Get the skill</strong> from <a href="https://www.agensi.io/creators/aurora-lab">Agensi</a> and add it to your agent (Claude Code, Codex CLI, Cursor, Gemini CLI or any agent that loads SKILL.md skills).</li>
+<li><strong>Optional: Python 3.10+</strong> for the checker. It uses the standard library only; the procedure itself needs nothing installed.</li>
+<li><strong>Ask in plain words.</strong></li>
+</ol>
+<p>Example requests:</p>
+<ul>
+<li><em>"Check my results section and claims list against the results files before I send them to my co-authors."</em></li>
+<li><em>"Is this sentence overclaiming? 'Our method significantly outperforms the baseline (0.91 vs 0.89).'"</em></li>
+<li><em>"Write the results paragraph for the ablation in results/ablation.json without overclaiming."</em></li>
+<li><em>"Our new loss gives 0.003 [-0.008, 0.014]. How do I write that up as a negative result?"</em></li>
+</ul>
+</section>
+<section id="gallery"><h2>What you get</h2>
+<p>Everything below comes from a real run: a fresh agent session with only this skill installed, given the request in the session card. The input was ours: a synthetic, seeded <code>research/</code> folder for a made-up augmentation method on a made-up land-cover dataset (five results files with value, 95% interval and n), a draft Results section and a five-row claims list. We planted six problems in the draft: a calibration "significantly better" over an interval that includes zero, an accuracy rounded twice (0.87346 to 0.8735 to 0.874), a percentage-point gain written as "2.8%", "no extra training cost" over an interval that includes zero, a single-seed result on a second dataset written up as general, and an untested mechanism stated as fact. The run found all six (the last by its own reread, since no keyword checker can see it), wrote a corrected copy that passes the checker with no errors or warnings, left the one correct sentence unchanged, and proposed a status for each claim. We checked every number in the corrected copy against the results files.</p>
+<div class="shots"><figure><img src="../../assets/shots/claim-check/01-before-after.png" alt="Two versions of a results paragraph. The draft says &#x27;significantly better calibrated&#x27;, &#x27;improves accuracy by 2.8%&#x27;, &#x27;no extra training cost&#x27; and &#x27;generalises&#x27;. The checked copy gives each estimate with its interval and seed count, says which differences are not distinguishable from zero, and labels the mechanism as untested." loading="lazy"><figcaption>Top: the synthetic draft Results section we planted the errors in. Bottom: research/paper/results-checked.md, written by the skill in the demo run (paragraph line breaks joined by us).</figcaption></figure><figure><img src="../../assets/shots/claim-check/02-checker.png" alt="Terminal output of check_claims.py: verdict-over-zero, equivalence-claim, number-mismatch, percent-conversion, sign-dropped, broad-citation, several-facts, single-run and comparison-no-diff findings, ending &#x27;6 error(s), 9 warning(s) in 11 cited sentence(s)&#x27;." loading="lazy"><figcaption>The checker&#x27;s output on the draft and claims list, verbatim from the demo run&#x27;s transcript.</figcaption></figure><figure><img src="../../assets/shots/claim-check/03-changes.png" alt="Six numbered fixes from the agent&#x27;s report: a mis-rounded accuracy, a calibration verdict over an interval including zero, a hand conversion to percent, a no-cost claim, a single-seed generalisation, and an untested mechanism." loading="lazy"><figcaption>The first part of the agent&#x27;s final report in the demo run, verbatim (list layout flattened by us).</figcaption></figure><figure><img src="../../assets/shots/claim-check/04-claims.png" alt="A table of five claims: C1 checked, C2 to C4 revised with replacement sentences, C5 open because it needs multi-seed runs on the second dataset." loading="lazy"><figcaption>The end of the agent&#x27;s final report in the demo run, verbatim.</figcaption></figure><figure><img src="../../assets/shots/claim-check/05-session.png" alt="Excerpt of the agent session: reading the research folder, running the checker, writing the corrected copy, re-running the checker, and the final report." loading="lazy"><figcaption>The agent&#x27;s steps and report from the demo run (paraphrased from its transcript; $0.27, 43 s).</figcaption></figure></div>
+</section>
+<section id="workflow"><h2>How it works</h2>
+<p>Claim sentences cite their evidence in square brackets, relative to the <code>research/</code> folder:</p>
+<pre><code>The paired difference was 0.013 (95% CI 0.010 to 0.016, 5 seeds) [results/main.json: acc_diff].
+</code></pre>
+<p>For every claim sentence the agent follows eight steps:</p>
+<ol>
+<li><strong>Open the cited evidence</strong> and list what it holds: estimate, interval (level and kind), n and what n counts, unit, any test. A citation to a whole file of results is narrowed to the one entry the sentence is about.</li>
+<li><strong>An interval that includes zero gives no verdict</strong>: neither "improves" nor "no effect".</li>
+<li><strong>A verdict word appears only when the evidence carries what the word needs</strong>: a stored difference for a comparison, a stated test for "significant", a criterion fixed in advance for "confirms".</li>
+<li><strong>One fact per cited sentence.</strong></li>
+<li><strong>No number computed by hand.</strong> If a number is not stored, it is computed with code and stored with its interval and n, or the claim is marked open.</li>
+<li><strong>A value that varies by condition is one fact per condition</strong>, each cited to its own entry.</li>
+<li><strong>Scope and interpretation stay labelled</strong>: tested settings only; mechanisms as "consistent with" unless isolated.</li>
+<li><strong>Reread before returning</strong>, then run the checker and resolve every error.</li>
+</ol>
+<p>Two reference files back the steps: nine families of verdict words with what each needs, and phrasing for hard cases (null results, overlapping intervals, single runs, n = 1, missing intervals, many comparisons, percent versus percentage points).</p>
+</section>
+<section id="outputs"><h2>Files it reads and writes</h2>
+<div class="doc-table"><table>
+<thead>
+<tr>
+<th></th>
+<th>Path</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Reads</td>
+<td><code>research/results/*.json</code> (the evidence), <code>research/claims.md</code>, and the prose you name: <code>research/paper/*</code>, captions in <code>research/figures/&lt;figure&gt;.md</code></td>
+</tr>
+<tr>
+<td>Writes</td>
+<td><code>research/claims.md</code> (sentences and status: checked, revised, dropped, open); paper text or captions only when you ask for edits, or a corrected copy where you say</td>
+</tr>
+<tr>
+<td>Never</td>
+<td>modifies your results files</td>
+</tr>
+</tbody>
+</table></div>
+<p>Without a <code>research/</code> folder it works from the numbers you paste. A results file holds one result or a list:</p>
+<pre><code class="language-json">{&quot;metric&quot;: &quot;acc_diff&quot;, &quot;value&quot;: 0.013, &quot;ci&quot;: [0.010, 0.016], &quot;n&quot;: 5, &quot;note&quot;: &quot;paired, 5 seeds&quot;}
+</code></pre>
+</section>
+<section id="helper"><h2>The checker</h2>
+<pre><code class="language-bash">python claim-check/scripts/check_claims.py                       # research/claims.md
+python claim-check/scripts/check_claims.py research/claims.md research/paper/results.md
+python claim-check/scripts/check_claims.py --root path/to/research --json
+</code></pre>
+<p>Exit status 0 means no errors, 1 errors found, 2 a usage problem. Warnings never fail it.</p>
+<div class="doc-table"><table>
+<thead>
+<tr>
+<th>Finding</th>
+<th>Level</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Number not in the cited entry within rounding (with a hint when it lives elsewhere)</td>
+<td>error</td>
+</tr>
+<tr>
+<td>Number equal to 100 times a stored value, without a % sign</td>
+<td>error</td>
+</tr>
+<tr>
+<td>Comparison, significance or confirmation word over an interval that includes zero</td>
+<td>error</td>
+</tr>
+<tr>
+<td>Equivalence word ("no effect", "matches", "no extra cost") with no equivalence test stored</td>
+<td>error</td>
+</tr>
+<tr>
+<td>Broken citation, or a claims row with numbers and no evidence</td>
+<td>error</td>
+</tr>
+<tr>
+<td>"91%" for a stored 0.91, dropped minus sign, rounding below two significant figures</td>
+<td>warning</td>
+</tr>
+<tr>
+<td>Verdict with no interval, verdict on n = 1, comparison with no stored difference</td>
+<td>warning</td>
+</tr>
+<tr>
+<td>Citation covering several results, or one citation for numbers from several results</td>
+<td>warning</td>
+</tr>
+<tr>
+<td>"Proves", "always", "never" and similar; "p &lt; 0.05" with no stored p-value</td>
+<td>warning</td>
+</tr>
+</tbody>
+</table></div>
+</section>
+<section id="faq"><h2>FAQ</h2>
+<h3 id="how-is-this-different-from-a-citation-or-evidence-auditor">How is this different from a citation or evidence auditor?</h3>
+<p>Citation auditors check that a paper you cite supports your sentence. Claim Check checks your own results: every number within rounding, every verdict word against the stored interval, one result per citation. It does not check literature references.</p>
+<h3 id="what-do-my-results-files-need-to-look-like">What do my results files need to look like?</h3>
+<p>One JSON object per result, or a list, with <code>value</code> (or <code>mean</code>, <code>estimate</code>) and ideally <code>ci</code>, <code>n</code>, <code>unit</code> and a <code>note</code> on what n counts. A sentence cites one entry by its <code>metric</code>, <code>name</code> or <code>id</code>, or by a dotted path. Without files, paste the numbers.</p>
+<h3 id="does-the-checker-understand-my-sentences">Does the checker understand my sentences?</h3>
+<p>No. It matches verdict words from a fixed list and numbers within rounding; see the limitations below. The agent's fact-by-fact reread covers what it cannot see, such as the untested mechanism in the demo.</p>
+<h3 id="will-it-rewrite-my-paper">Will it rewrite my paper?</h3>
+<p>For a review it reports each failing sentence with the fix and the reason and lists what passed. It edits your text only when you ask for edits or a corrected copy. Sentences that already pass are never rewritten.</p>
+<h3 id="does-it-compute-statistics">Does it compute statistics?</h3>
+<p>No number is computed by hand. A missing number (such as a paired difference) is computed with code and stored with its interval and n, or the claim is marked open with exactly what is needed.</p>
+<h3 id="does-it-work-with-latex">Does it work with LaTeX?</h3>
+<p>Yes. The checker reads LaTeX source as well as Markdown, escaped percent signs included, as long as citations use the <code>[results/...]</code> form (for example in a <code>%</code> comment). Strip citations from the submitted text and keep them in <code>claims.md</code>.</p>
+</section>
+<section id="limitations"><h2>Limitations</h2>
+<ul>
+<li>It checks claims against the results they cite. It does not run experiments, compute statistics on its own, or check literature references.</li>
+<li>The checker matches verdict words from a fixed list: a paraphrase ("edges out", "a clear gain") passes it, and an innocent use ("we increased the batch size") draws a warning.</li>
+<li>A number passes the checker when it equals any value in the cited entry, interval bounds included, within the rounding it is written at. A mis-rounded estimate that equals a bound, or a small whole number that equals an unrelated count, slips through; numbers written as words are not checked.</li>
+<li>Scope, mechanism and whether the right entry was cited are left to the agent's reread: a careful review, not a guarantee.</li>
+<li>The checker reads citations only in the <code>[results/&lt;file&gt;.json: &lt;entry&gt;]</code> form; other ways of pointing at evidence are checked by the agent alone.</li>
+</ul>
+</section>
+<section id="changelog"><h2>Changelog</h2>
+<p><strong>1.0.0</strong> · October 2026 · First release.</p></section>
+
+      </article>
+    </div>
+  </main>
+
+  <footer class="footer">
+    <div class="wrap footer-inner">
+      <span class="brand"><img src="../../assets/img/avatar.png" alt="" width="24" height="24"> Aurora Lab</span>
+      <nav aria-label="Footer">
+        <a href="https://www.agensi.io/creators/aurora-lab">Agensi</a>
+        <a href="https://github.com/the-aurora-lab">GitHub</a>
+      </nav>
+    </div>
+  </footer>
+</body>
+</html>
