@@ -1,0 +1,272 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Poster Layout · Aurora Lab</title>
+  <meta name="description" content="Documentation for the Poster Layout agent skill: turn your abstract, figures and data into a print-ready conference poster at A0 or any size, with figures redrawn at printed size, a measured layout, distance previews and walkthrough notes.">
+  <meta property="og:title" content="Poster Layout · Aurora Lab">
+  <meta property="og:description" content="Documentation for the Poster Layout agent skill: turn your abstract, figures and data into a print-ready conference poster at A0 or any size, with figures redrawn at printed size, a measured layout, distance previews and walkthrough notes.">
+  <meta property="og:image" content="https://the-aurora-lab.github.io/assets/shots/poster-layout/01-poster.png">
+  <meta name="theme-color" content="#0b1020">
+  <link rel="icon" type="image/png" href="../../assets/img/avatar.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../../assets/css/site.css">
+</head>
+<body>
+  <a class="skip" href="#main">Skip to content</a>
+  <header class="nav">
+    <div class="wrap nav-inner">
+      <a class="brand" href="../../" aria-label="Aurora Lab home">
+        <img src="../../assets/img/avatar.png" alt="" width="32" height="32">
+        <span>Aurora Lab</span>
+      </a>
+      <nav aria-label="Primary">
+        <a href="../../#skills">Skills</a>
+        <a href="../../#examples">Examples</a>
+        <a class="btn btn-small" href="https://www.agensi.io/creators/aurora-lab">Get it on Agensi</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main">
+    <section class="docs-hero">
+      <div class="aurora" aria-hidden="true"></div>
+      <div class="wrap">
+        <p class="crumbs"><a href="../../">Aurora Lab</a> / <a href="../../#skills">Skills</a> / Poster Layout</p>
+        <h1>Poster Layout</h1>
+        <p class="lede">Print-ready conference posters from your own figures and results. Your agent writes a title that states the result, gives each zone one claim and one piece of evidence, redraws your figures at the size they print, builds a one-page PDF at physical size, and checks it from 4 m and up close before you send it to the printer.</p>
+        <ul class="meta" aria-label="Skill facts"><li>v1.0.0</li><li>Python 3.10+ · Pillow · matplotlib</li><li>Chrome, Chromium, Edge or Brave</li><li>No network access</li><li>Works with any SKILL.md agent</li></ul>
+        <div class="cta">
+          <a class="btn" href="https://www.agensi.io/creators/aurora-lab">Get it on Agensi · $9</a>
+          <a class="btn btn-ghost" href="#overview">Read the docs</a>
+        </div>
+      </div>
+    </section>
+
+    <div class="wrap docs">
+      <nav class="toc" aria-label="On this page">
+        <p>On this page</p>
+        <ol><li><a href="#overview">Overview</a></li><li><a href="#quick-start">Quick start</a></li><li><a href="#gallery">What you get</a></li><li><a href="#workflow">How it works</a></li><li><a href="#browser">Browser requirement</a></li><li><a href="#outputs">Files it reads and writes</a></li><li><a href="#helper">Command line and helper API</a></li><li><a href="#faq">FAQ</a></li><li><a href="#limitations">Limitations</a></li><li><a href="#changelog">Changelog</a></li></ol>
+      </nav>
+      <article class="prose-doc">
+<section id="overview"><h2>Overview</h2>
+<p>A poster session is a crowd walking past at one to three metres, deciding in seconds whether to stop. Paper figures shrunk next to paragraphs of text lose them. Poster Layout turns your agent into a careful poster designer that:</p>
+<ul>
+<li><strong>Writes the story before the layout</strong>: a title that states the main result with its number, and three to six zones whose headlines each make one claim and, read in order, summarise the study.</li>
+<li><strong>Keeps every number traceable</strong>: each value on the poster comes from your figures, results or text, with the same rounding, n and interval. Nothing is invented.</li>
+<li><strong>Redraws your figures at printed size</strong> from a copy of your plotting script and your data, at the exact space the build reports for each zone, with poster type sizes and the data each headline is about in one accent colour. Your originals are never touched.</li>
+<li><strong>Builds a one-page PDF at physical size</strong>: A0, A1, 36×48 in, 42×56 in or any custom size.</li>
+<li><strong>Measures the layout</strong> in a real browser engine and <strong>looks at it like a visitor</strong>: from about 4 m, from about 1 m, and zone by zone up close. A fresh subagent then sees only the poster image and has to find the main result.</li>
+<li><strong>Prepares the conversation</strong>: one-minute and three-minute walkthroughs, likely questions with answers from your material, and the handout link.</li>
+</ul>
+<p><strong>Pairs well with</strong> <a href="../paper-figures/">Paper Figures</a>, which designs figures from data. Each works on its own.</p>
+</section>
+<section id="quick-start"><h2>Quick start</h2>
+<ol>
+<li><strong>Get the skill</strong> from <a href="https://www.agensi.io/creators/aurora-lab">Agensi</a> and add it to your agent (Claude Code, Codex CLI, Cursor, Gemini CLI or any agent that loads SKILL.md skills).</li>
+<li><strong>Have Python 3.10+ with Pillow</strong> (plus matplotlib and numpy to redraw figures) and a Chrome-family browser: see <a href="#browser">Browser requirement</a>.</li>
+<li><strong>Ask in plain words</strong>, pointing at your material.</li>
+</ol>
+<p>Example requests:</p>
+<ul>
+<li><em>"Make an A0 portrait poster for the conference from my figures in figures/ and the abstract in abstract.md."</em></li>
+<li><em>"Here is my paper (paper/main.tex) and its figures: turn it into a 36×48 in landscape poster."</em></li>
+<li><em>"Review poster/poster.pdf before I send it to print: what would a visitor miss?"</em></li>
+<li><em>"My poster's text is cut off and the figures look blurry: fix the layout."</em></li>
+</ul>
+</section>
+<section id="gallery"><h2>What you get</h2>
+<p>Everything below comes from a real run: a fresh agent session with only this skill installed, given the request in the session card. The input was ours: a synthetic, seeded study of street-tree shade at 40 bus stops (an abstract, two paper figures at journal size, one of them saved at only 150 dpi, the CSV data and the plotting script). The run recomputed every number from the data, redrew both figures from a copy of the script at the size the build reported, built the A0 poster, checked the previews and zone close-ups, ran the fresh-eyes test and fixed four things it flagged, and wrote the walkthrough. Every number on the poster matches the data.</p>
+<div class="shots"><figure><img src="../../assets/shots/poster-layout/01-poster.png" alt="An A0 portrait poster: a title stating that bus stops under street trees have surfaces 4.1 °C cooler, five numbered zones with two redrawn figures, a big number and a closing statement, and a footer." loading="lazy"><figcaption>poster_view.png from the demo run: the whole A0 poster the skill built from a synthetic abstract, two paper figures and their data.</figcaption></figure><figure><img src="../../assets/shots/poster-layout/02-before-after.png" alt="Left: the author&#x27;s two-panel paper figure with red and green lines and grey bars. Right: the poster zone with a claim headline, the two panels stacked in grey and orange, and a caption." loading="lazy"><figcaption>Left: the synthetic paper figure we gave the skill. Right: the zone it built in the demo run (close-up from poster_zones/).</figcaption></figure><figure><img src="../../assets/shots/poster-layout/03-zone.png" alt="Left: the whole poster at thumbnail size, as seen from about 4 m. Right: the close-up of zone 2 with its headline, scatter plot and caption." loading="lazy"><figcaption>Both images from the demo run: the 4 m preview and one of the per-zone close-ups the build writes.</figcaption></figure><figure><img src="../../assets/shots/poster-layout/04-walkthrough.png" alt="The walkthrough file: a one-minute talk in five steps, a three-minute talk, and four likely questions with answers." loading="lazy"><figcaption>walkthrough.md from the demo run, verbatim.</figcaption></figure><figure><img src="../../assets/shots/poster-layout/05-session.png" alt="Excerpt of the agent session: reading the inputs, redrawing figures, building and checking the poster, the fresh-eyes test and the final report." loading="lazy"><figcaption>The agent&#x27;s steps and report from the demo run (paraphrased from its transcript).</figcaption></figure></div>
+</section>
+<section id="workflow"><h2>How it works</h2>
+<ol>
+<li><strong>Facts.</strong> Venue size and orientation, audience, and your material. If nobody knows the size, it uses A0 portrait and says so.</li>
+<li><strong>Story.</strong> The title states the main result; three to six zone headlines each make one claim. Read alone, in order, title and headlines must summarise the study.</li>
+<li><strong>Evidence.</strong> One figure, big number, diagram or photo per zone; one panel of a multi-panel paper figure rather than all of them.</li>
+<li><strong>First build.</strong> A short JSON spec becomes an HTML poster at physical size; the report gives each zone's printed size and the free space for its figure.</li>
+<li><strong>Figures at size.</strong> Redrawn from your data at exactly that space with poster type sizes, or, for image-only figures, used as is when they reach 150 dpi and stay legible.</li>
+<li><strong>Measure and look.</strong> Every layout problem the build reports is fixed (cut words first, then resize zones, then redraw; type is never shrunk below the minimum). Then the agent looks at the 4 m preview, the 1 m preview and each zone close-up.</li>
+<li><strong>Fresh eyes.</strong> A subagent sees only the poster image: what is the main result, which part shows it, would you stop, what would you ask?</li>
+<li><strong>Conversation.</strong> One- and three-minute walkthroughs, likely questions, the handout link or QR code.</li>
+<li><strong>Delivery.</strong> The files, how to print (100 %, no "fit to page"), assumptions, and each number with its source.</li>
+</ol>
+<h3 id="what-the-build-measures">What the build measures</h3>
+<div class="doc-table"><table>
+<thead>
+<tr>
+<th>Problem</th>
+<th>Flagged when</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Clipped text</td>
+<td>a zone's content runs past its edge</td>
+</tr>
+<tr>
+<td>Page overflow</td>
+<td>content runs past the page; the PDF is not one page</td>
+</tr>
+<tr>
+<td>Wrong page size</td>
+<td>the PDF page differs from the spec's size</td>
+</tr>
+<tr>
+<td>Long title</td>
+<td>the title wraps to three or more lines</td>
+</tr>
+<tr>
+<td>Low resolution</td>
+<td>a raster figure prints under 150 dpi</td>
+</tr>
+<tr>
+<td>Squeezed figure</td>
+<td>text leaves the figure less than 35 % of the zone's height</td>
+</tr>
+<tr>
+<td>Empty space</td>
+<td>a figure fills less than 75 % of its space, or a text zone uses less than half its height</td>
+</tr>
+<tr>
+<td>Page-sized text</td>
+<td>a figure saved for a page will print its text under 24 pt</td>
+</tr>
+</tbody>
+</table></div>
+<p>The content lint adds zone count, headline length, words per zone and in total, and missing images. What a script cannot see (legibility inside figures, whether a figure shows its headline's claim, whether the numbers agree) is the agent's job, from the previews and close-ups.</p>
+</section>
+<section id="browser"><h2>Browser requirement</h2>
+<p>The PDF, previews and layout measurements come from a Chrome-family browser run headless on your machine, with a temporary profile and no network access. Any of these works:</p>
+<div class="doc-table"><table>
+<thead>
+<tr>
+<th>System</th>
+<th>Found automatically</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>macOS</td>
+<td>Google Chrome, Chromium, Microsoft Edge or Brave Browser in <code>/Applications</code> or <code>~/Applications</code></td>
+</tr>
+<tr>
+<td>Windows</td>
+<td><code>chrome.exe</code>, <code>msedge.exe</code> or <code>brave.exe</code> under Program Files, Program Files (x86) or Local AppData</td>
+</tr>
+<tr>
+<td>Linux</td>
+<td><code>google-chrome</code>, <code>google-chrome-stable</code>, <code>chromium</code>, <code>chromium-browser</code>, <code>microsoft-edge</code> or <code>brave-browser</code> on <code>PATH</code></td>
+</tr>
+<tr>
+<td>Anywhere else</td>
+<td><code>--chrome PATH</code> or the <code>CHROME_PATH</code> environment variable</td>
+</tr>
+</tbody>
+</table></div>
+<p>Firefox and Safari cannot be driven this way. <strong>Without a Chrome-family browser</strong> the skill writes the HTML poster and runs the content lint only: open the HTML in any browser and print it to PDF at 100 % (margins none, background graphics on). The previews, close-ups and layout checks need the browser, and the agent tells you it could not check the layout.</p>
+</section>
+<section id="outputs"><h2>Files it reads and writes</h2>
+<div class="doc-table"><table>
+<thead>
+<tr>
+<th></th>
+<th>Path</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Reads</td>
+<td>the abstract, paper, figures, data and plotting scripts you point to; with a <code>research/</code> folder, <code>research/figures/</code>, <code>research/results/</code>, <code>research/claims.md</code>, <code>research/paper/</code></td>
+</tr>
+<tr>
+<td>Writes</td>
+<td><code>poster/</code> (or <code>research/poster/</code>): <code>poster.json</code>, redrawn figures and a copy of your plotting script, <code>poster.html</code>, <code>poster.pdf</code>, <code>poster_view.png</code>, <code>poster_far.png</code>, <code>poster_zones/</code>, <code>walkthrough.md</code></td>
+</tr>
+</tbody>
+</table></div>
+<p>Your figures, data and scripts are never modified.</p>
+</section>
+<section id="helper"><h2>Command line and helper API</h2>
+<pre><code class="language-bash">python poster-layout/scripts/build_poster.py poster/poster.json              # HTML, PDF, previews, close-ups, report
+python poster-layout/scripts/build_poster.py poster/poster.json --chrome PATH
+python poster-layout/scripts/build_poster.py poster/poster.json --no-render  # HTML and content lint only
+</code></pre>
+<div class="doc-table"><table>
+<thead>
+<tr>
+<th>Helper</th>
+<th>Purpose</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>build_poster.py</code></td>
+<td>Spec to HTML, one-page PDF at physical size, 4 m and 1 m previews, per-zone close-ups, and a report of each zone's size, the free space for its figure, effective dpi and layout problems</td>
+</tr>
+<tr>
+<td><code>poster_style.use()</code></td>
+<td>matplotlib settings for print: 28 pt text, thick lines, quiet axes, colour-blind-safe series colours</td>
+</tr>
+<tr>
+<td><code>poster_style.figure(w, h)</code></td>
+<td>A figure at its printed size in inches (the space the build reports)</td>
+</tr>
+<tr>
+<td><code>poster_style.label_end(...)</code></td>
+<td>Name a series at its last point instead of a legend</td>
+</tr>
+<tr>
+<td><code>poster_style.check(fig)</code></td>
+<td>List any text that will print under 24 pt</td>
+</tr>
+<tr>
+<td><code>poster_style.save(fig, path)</code></td>
+<td>Save at that exact size, 200 dpi (optionally SVG too)</td>
+</tr>
+</tbody>
+</table></div>
+<p>The spec is plain JSON: size, columns, accent colour, title, authors, logos, row heights, and per zone a headline with text, bullets, a big number, an image and a caption. Zones fill the grid in reading order; <code>colspan</code>, <code>rowspan</code> and <code>row_heights</code> size them. The skill ships a complete synthetic example.</p>
+</section>
+<section id="faq"><h2>FAQ</h2>
+<h3 id="what-do-i-need-to-give-it">What do I need to give it?</h3>
+<p>Your abstract or paper, your figures, and ideally the data and plotting script behind them so it can redraw the figures at poster size. Tell it the size if you know it.</p>
+<h3 id="will-it-change-my-figures-or-numbers">Will it change my figures or numbers?</h3>
+<p>No. It redraws from a copy of your script with the same data, fit and intervals, changing only size, type, line weight, colour emphasis and labels. Every number on the poster is traced to your material.</p>
+<h3 id="which-sizes-does-it-support">Which sizes does it support?</h3>
+<p>A0 and A1 in portrait or landscape, 36×48 in, 48×36 in, 42×56 in, or any custom size in mm or inches. The PDF is one page at physical size: print it at 100 %.</p>
+<h3 id="can-i-edit-the-poster-afterwards">Can I edit the poster afterwards?</h3>
+<p>Yes, through the JSON spec, then rebuild in seconds. It does not produce PowerPoint or LaTeX files.</p>
+<h3 id="what-if-a-figure-exists-only-as-an-image">What if a figure exists only as an image?</h3>
+<p>It is used as is when it prints at 150 dpi or more and its text is legible in the close-up; otherwise the agent asks you for a vector (SVG) or larger export, or the data. It never redraws a figure from numbers read off an image.</p>
+</section>
+<section id="limitations"><h2>Limitations</h2>
+<ul>
+<li>It lays out and checks posters from material you already have; it does not analyse your data beyond recomputing the numbers it puts on the poster.</li>
+<li>One fixed style: a title band, white zones on a light background on a strict grid, one sans-serif font and one accent colour. No institutional PowerPoint or LaTeX templates, and the output is PDF and HTML, not .pptx.</li>
+<li>Rendering needs Chrome, Chromium, Edge or Brave; without one you get the HTML only, with no layout checks.</li>
+<li>PDF figures must be converted to SVG or PNG first.</li>
+<li>Venues differ in size and template rules; check your conference's current poster instructions.</li>
+</ul>
+</section>
+<section id="changelog"><h2>Changelog</h2>
+<p><strong>1.0.0</strong> · October 2026 · First release.</p></section>
+
+      </article>
+    </div>
+  </main>
+
+  <footer class="footer">
+    <div class="wrap footer-inner">
+      <span class="brand"><img src="../../assets/img/avatar.png" alt="" width="24" height="24"> Aurora Lab</span>
+      <nav aria-label="Footer">
+        <a href="https://www.agensi.io/creators/aurora-lab">Agensi</a>
+        <a href="https://github.com/the-aurora-lab">GitHub</a>
+      </nav>
+    </div>
+  </footer>
+</body>
+</html>
