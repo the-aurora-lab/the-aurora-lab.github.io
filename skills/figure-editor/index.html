@@ -1,0 +1,340 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Figure Editor · Aurora Lab</title>
+  <meta name="description" content="Documentation for the Figure Editor agent skill: assemble existing images into one labelled multi-panel journal figure with placeholders, print-resolution checks and a caption draft.">
+  <meta property="og:title" content="Figure Editor · Aurora Lab">
+  <meta property="og:description" content="Documentation for the Figure Editor agent skill: assemble existing images into one labelled multi-panel journal figure with placeholders, print-resolution checks and a caption draft.">
+  <meta property="og:image" content="https://the-aurora-lab.github.io/assets/shots/figure-editor/01-figure.png">
+  <meta name="theme-color" content="#0b1020">
+  <link rel="icon" type="image/png" href="../../assets/img/avatar.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../../assets/css/site.css">
+</head>
+<body>
+  <a class="skip" href="#main">Skip to content</a>
+  <header class="nav">
+    <div class="wrap nav-inner">
+      <a class="brand" href="../../" aria-label="Aurora Lab home">
+        <img src="../../assets/img/avatar.png" alt="" width="32" height="32">
+        <span>Aurora Lab</span>
+      </a>
+      <nav aria-label="Primary">
+        <a href="../../#skills">Skills</a>
+        <a href="../../#examples">Examples</a>
+        <a class="btn btn-small" href="https://www.agensi.io/creators/aurora-lab">Get it on Agensi</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main">
+    <section class="docs-hero">
+      <div class="aurora" aria-hidden="true"></div>
+      <div class="wrap">
+        <p class="crumbs"><a href="../../">Aurora Lab</a> / <a href="../../#skills">Skills</a> / Figure Editor</p>
+        <h1>Figure Editor</h1>
+        <p class="lede">Multi-panel journal figures from the images you already have. Your agent inspects every panel, lays them out at an exact column width with a, b, c labels, keeps a slot for panels you haven&#x27;t made yet, tells you which ones won&#x27;t print sharply, and drafts the caption.</p>
+        <ul class="meta" aria-label="Skill facts"><li>v1.0.0</li><li>Python 3.10+ · matplotlib, Pillow, numpy</li><li>No network access</li><li>Works with any SKILL.md agent</li></ul>
+        <div class="cta">
+          <a class="btn" href="https://www.agensi.io/creators/aurora-lab">Get it on Agensi · $9</a>
+          <a class="btn btn-ghost" href="#overview">Read the docs</a>
+        </div>
+      </div>
+    </section>
+
+    <div class="wrap docs">
+      <nav class="toc" aria-label="On this page">
+        <p>On this page</p>
+        <ol><li><a href="#overview">Overview</a></li><li><a href="#quick-start">Quick start</a></li><li><a href="#gallery">What you get</a></li><li><a href="#workflow">How it works</a></li><li><a href="#outputs">Files it reads and writes</a></li><li><a href="#helper">Command line and Python API</a></li><li><a href="#vector">Optional: PDF and SVG panels</a></li><li><a href="#widths">Journal sizes</a></li><li><a href="#research-folder">The <code>research/</code> folder</a></li><li><a href="#faq">FAQ</a></li><li><a href="#limitations">Limitations</a></li><li><a href="#changelog">Changelog</a></li></ol>
+      </nav>
+      <article class="prose-doc">
+<section id="overview"><h2>Overview</h2>
+<p>The last step before submission is often the fiddliest: five panels exported from three scripts and a microscope, all at different sizes, that have to become one figure at exactly 183 mm wide with matching labels. Figure Editor turns your agent into a careful figure assembler that:</p>
+<ul>
+<li><strong>Inspects before it proposes.</strong> Pixel size, aspect ratio and DPI tag of every panel, then a layout suggestion with its reason.</li>
+<li><strong>Lays panels out for the page.</strong> Grids, rows, spanning panels, and justified rows that give mixed portrait and landscape panels one height per row with no gaps.</li>
+<li><strong>Prints at an exact width</strong>, so the label size you ask for is the size that gets printed.</li>
+<li><strong>Keeps a slot for missing panels</strong>: a grey "Data not available" box in the right place.</li>
+<li><strong>Checks print resolution</strong> and shrinking text, and says exactly how many pixels each weak panel needs. It never upscales.</li>
+<li><strong>Drafts the caption</strong> after looking at every panel, leaving what it can't see in [brackets].</li>
+</ul>
+<p><strong>Figure Editor or Paper Figures?</strong> <a href="../paper-figures/">Paper Figures</a> designs and draws figures from your data. Figure Editor assembles images that already exist (plots, micrographs, gels, diagrams, panels made by Paper Figures or anything else) into one labelled multi-panel figure. Each works on its own; they pair well.</p>
+</section>
+<section id="quick-start"><h2>Quick start</h2>
+<ol>
+<li><strong>Get the skill</strong> from <a href="https://www.agensi.io/creators/aurora-lab">Agensi</a> and add it to your agent (Claude Code, Codex CLI, Cursor, Gemini CLI or any agent that loads SKILL.md skills).</li>
+<li><strong>Have Python 3.10+ with matplotlib, Pillow and numpy</strong> in the project's environment. The <code>panelkit</code> library ships inside the skill.</li>
+<li><strong>Ask in plain words.</strong></li>
+</ol>
+<p>Example requests:</p>
+<ul>
+<li><em>"Put research/figures/a.png, b.png and c.png into one figure. No layout preference."</em></li>
+<li><em>"Make a 2x2 figure from these four images for a single-column slot, lowercase labels."</em></li>
+<li><em>"Assemble Figure 3; panel B isn't ready yet, leave a placeholder."</em></li>
+<li><em>"Why does panel C look blurry in my assembled figure?"</em></li>
+</ul>
+<div class="callout">
+<p><strong>Reading layout names.</strong> Grids are <strong>columns x rows</strong>: <code>2x1 grid</code> puts two panels side by side, <code>1x2 grid</code> stacks them vertically, <code>3x2 grid</code> is three across and two down. <code>N+M</code> strings give the number of panels in each row: <code>1+2</code> is one full-width panel on top and two below.</p>
+</div>
+</section>
+<section id="gallery"><h2>What you get</h2>
+<p>The figure, the caption and spec file and the session excerpt come from a real run: a fresh agent session with only this skill installed. It was given four synthetic panel images of different sizes (one deliberately low resolution, one panel missing) and the request shown in the session card. The figure is a PNG render of the PDF it wrote. The "before" image is our own illustration of the input files at their relative pixel sizes.</p>
+<div class="shots"><figure><img src="../../assets/shots/figure-editor/01-figure.png" alt="Multi-panel figure assembled by the skill: growth curves and a scatter plot on top; a micrograph, a grey placeholder for panel d and a heatmap below, labelled a to e." loading="lazy"><figcaption>The assembled Figure 3 from the demo run (a PNG render of the PDF it wrote).</figcaption></figure><figure><img src="../../assets/shots/figure-editor/02-before-after.png" alt="Side-by-side: the five input slots at their relative pixel sizes (one missing), and the assembled figure." loading="lazy"><figcaption>Left: the demo&#x27;s input files at their relative pixel sizes (our illustration). Right: the skill&#x27;s output.</figcaption></figure><figure><img src="../../assets/shots/figure-editor/03-spec.png" alt="The caption draft and spec file the skill wrote next to the figure, including the low-resolution warning for panel c." loading="lazy"><figcaption>figure3.md as written by the demo run: caption draft, sizes, effective dpi, warnings and the rebuild command.</figcaption></figure><figure><img src="../../assets/shots/figure-editor/04-session.png" alt="Excerpt of the agent session: inspection, assembly, the preview check and the report." loading="lazy"><figcaption>The agent&#x27;s steps, checks and report (prompt shortened).</figcaption></figure></div>
+</section>
+<section id="workflow"><h2>How it works</h2>
+<ol>
+<li><strong>Intake.</strong> One message with two questions: which images, in which order, and whether you have a layout, width and label style in mind. If you describe a panel instead of giving a path, the agent asks which file it is; it never guesses a path.</li>
+<li><strong>Inspect.</strong> <code>assemble_figure.py --inspect</code> prints each panel's size, aspect ratio and DPI tag and a suggested layout. The agent explains its proposal, and if one would make the figure too tall for a page it says so and proposes another (in the demo: 117 mm instead of 253 mm).</li>
+<li><strong>Placeholders.</strong> A missing panel becomes a grey box labelled with its letter, in its slot. The agent says so, and reminds you to replace it.</li>
+<li><strong>Assemble.</strong> One command writes the figure at the exact width, with labels at true print size. PDF output embeds each raster panel without resampling.</li>
+<li><strong>Look, then report.</strong> The agent opens a freshly rendered preview to check order, labels, clipping and stretching, then explains every warning in plain language with the fix.</li>
+<li><strong>Caption.</strong> It opens every panel image, fills the caption draft with complete sentences about what is visible, and reuses any <code>&lt;panel&gt;.md</code> caption notes found next to an image.</li>
+</ol>
+<h3 id="layouts">Layouts</h3>
+<div class="doc-table"><table>
+<thead>
+<tr>
+<th>Layout string</th>
+<th>Result</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>2x2 grid</code></td>
+<td>2 columns x 2 rows, filled left to right, top to bottom</td>
+</tr>
+<tr>
+<td><code>2x1 grid</code> / <code>1x2 grid</code></td>
+<td>two side by side / two stacked</td>
+</tr>
+<tr>
+<td><code>1+2</code>, <code>2+3</code>, <code>1+2+3</code></td>
+<td>panels per row; widths divide evenly</td>
+</tr>
+<tr>
+<td><code>3x2 grid Panel A full width</code></td>
+<td>panel A spans the top row; the rest flow around it</td>
+</tr>
+<tr>
+<td><code>--fit rows</code></td>
+<td>justified rows: one height per row, widths follow each panel's shape</td>
+</tr>
+</tbody>
+</table></div>
+<h3 id="checks-it-runs">Checks it runs</h3>
+<div class="doc-table"><table>
+<thead>
+<tr>
+<th>Warning</th>
+<th>What it means</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Low resolution</td>
+<td>The panel's effective dpi at its printed size is below the threshold (300 by default, <code>--min-dpi</code> to change). The warning gives the pixel width needed.</td>
+</tr>
+<tr>
+<td>Printed at N% of native size</td>
+<td>The panel was shrunk to fit, so its own text and lines shrink too (8 pt at 66% is about 5.3 pt).</td>
+</tr>
+<tr>
+<td>DPI metadata differs</td>
+<td>Panels were exported with inconsistent settings. Usually harmless on its own.</td>
+</tr>
+<tr>
+<td>16-bit image scaled to 8-bit</td>
+<td>Display contrast was set from the data's range.</td>
+</tr>
+<tr>
+<td>Vector panel rasterised</td>
+<td>PDF/SVG panels become pixels (600 dpi) in the assembly.</td>
+</tr>
+<tr>
+<td>Figure is N mm tall</td>
+<td>Taller than most journal pages allow (about 240 mm).</td>
+</tr>
+</tbody>
+</table></div>
+<p>The resolution, text-size and height checks are automatic. Choosing the layout, checking the preview and writing the caption are steps the agent carries out and reports.</p>
+</section>
+<section id="outputs"><h2>Files it reads and writes</h2>
+<div class="doc-table"><table>
+<thead>
+<tr>
+<th></th>
+<th>Path</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Reads</td>
+<td>the image files you name (PNG, TIFF, JPEG, PDF, SVG), e.g. in <code>research/figures/</code>, and any <code>&lt;panel&gt;.md</code> caption note next to them</td>
+</tr>
+<tr>
+<td>Writes</td>
+<td>the figure you name (<code>.pdf</code> recommended; <code>.png</code>, <code>.tif</code>, <code>.svg</code>, <code>.eps</code>, <code>.jpg</code> also work) and its caption draft <code>&lt;name&gt;.md</code> in <code>research/figures/</code></td>
+</tr>
+<tr>
+<td>Elsewhere</td>
+<td>outside <code>research/figures/</code> the draft is <code>&lt;name&gt;_captions.md</code> next to the figure</td>
+</tr>
+</tbody>
+</table></div>
+<p>It never modifies, moves or overwrites an input image (it refuses to write over one), and never overwrites an existing caption draft unless asked, so your edits survive a rebuild. The caption draft also records each panel's printed size and effective dpi, every warning, and the exact command to rebuild the figure.</p>
+</section>
+<section id="helper"><h2>Command line and Python API</h2>
+<pre><code class="language-bash">python figure-editor/scripts/assemble_figure.py --inspect a.png b.tif c.png
+python figure-editor/scripts/assemble_figure.py a.png b.tif none d.png \
+    --layout &quot;2x2 grid&quot; --width double --labels lower -o research/figures/fig1.pdf
+</code></pre>
+<div class="doc-table"><table>
+<thead>
+<tr>
+<th>Option</th>
+<th>Purpose</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>--layout</code></td>
+<td>grid, rows or spanning layout (see above); omitted = automatic</td>
+</tr>
+<tr>
+<td><code>--fit</code></td>
+<td><code>grid</code> (aligned columns) or <code>rows</code> (justified rows for mixed shapes)</td>
+</tr>
+<tr>
+<td><code>--width</code></td>
+<td><code>single</code> (89 mm), <code>onehalf</code> (120 mm), <code>double</code> (183 mm, default), or e.g. <code>180mm</code>, <code>7in</code></td>
+</tr>
+<tr>
+<td><code>--labels</code></td>
+<td><code>upper</code> (A, B), <code>lower</code> (a, b), <code>plain</code> or <code>none</code></td>
+</tr>
+<tr>
+<td><code>--font-size</code></td>
+<td>label size in pt at printed size (default 10)</td>
+</tr>
+<tr>
+<td><code>--dpi</code>, <code>--min-dpi</code></td>
+<td>raster output resolution; resolution warning threshold (both default 300)</td>
+</tr>
+<tr>
+<td><code>none</code></td>
+<td>in place of a path: a placeholder panel</td>
+</tr>
+</tbody>
+</table></div>
+<p>For a re-runnable script, the bundled <code>panelkit</code> library exposes the same steps:</p>
+<div class="doc-table"><table>
+<thead>
+<tr>
+<th>Function or class</th>
+<th>Purpose</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>get_image_dims(paths)</code></td>
+<td>pixel size of each panel</td>
+</tr>
+<tr>
+<td><code>suggest_layout(dims)</code></td>
+<td>a layout, fit mode and the reason, to discuss with you</td>
+</tr>
+<tr>
+<td><code>assemble(images=…, layout=…, output=…, width=…)</code></td>
+<td>builds the figure and returns sizes, effective dpi and warnings per panel</td>
+</tr>
+<tr>
+<td><code>Panel(image, label, colspan, rowspan, caption)</code></td>
+<td>per-panel spans, custom labels and draft captions</td>
+</tr>
+<tr>
+<td><code>write_caption_draft(result)</code></td>
+<td>writes the caption draft and spec; never overwrites unless asked</td>
+</tr>
+</tbody>
+</table></div>
+</section>
+<section id="vector"><h2>Optional: PDF and SVG panels</h2>
+<p>PNG, TIFF (including 16-bit and multi-page) and JPEG panels work out of the box. PDF and SVG panels are rasterised at 600 dpi, which needs one optional tool: the <code>pymupdf</code> package (PDF and SVG), or poppler's <code>pdftoppm</code> command (PDF only). Without either, the panel becomes a placeholder with a warning and the agent asks you to export it as PNG or TIFF. Because these panels become pixels, an assembled figure is not fully vector; if your venue wants vector line art, assemble the original vector panels in a vector editor or LaTeX.</p>
+</section>
+<section id="widths"><h2>Journal sizes</h2>
+<p>The skill carries a reference table it reads when you name a venue. These values were checked against the publishers' own artwork pages in October 2026:</p>
+<div class="doc-table"><table>
+<thead>
+<tr>
+<th>Publisher</th>
+<th>Widths (single · 1.5 · double)</th>
+<th>Resolution at final size</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Nature</td>
+<td>89 · 120–136 · 183 mm</td>
+<td>photos ≥ 300 dpi; line art as vector</td>
+</tr>
+<tr>
+<td>Elsevier</td>
+<td>90 · 140 · 190 mm</td>
+<td>300 / 500 / 1000 dpi (halftone / combination / line art)</td>
+</tr>
+<tr>
+<td>IEEE</td>
+<td>88.9 · – · 182 mm</td>
+<td>&gt; 300 dpi colour/greyscale, &gt; 600 dpi line art</td>
+</tr>
+</tbody>
+</table></div>
+<p>Cell Press and PNAS are listed with commonly quoted values (about 85 mm single and 174–178 mm double column). Journals within a publisher can differ and guides change, so confirm against your venue's current author guidelines before submission.</p>
+</section>
+<section id="research-folder"><h2>The <code>research/</code> folder</h2>
+<p>Figure Editor works on its own. If you keep your project in a <code>research/</code> folder, it uses the same plain-file convention as the other Aurora Lab research skills, so they cooperate without calling each other. Panels in <code>research/figures/</code> (with an optional <code>&lt;panel&gt;.md</code> caption note from whatever made the panel) go in, and the assembled figure and its caption draft come out in the same folder.</p>
+</section>
+<section id="faq"><h2>FAQ</h2>
+<h3 id="how-is-this-different-from-paper-figures">How is this different from Paper Figures?</h3>
+<p>Paper Figures designs and draws figures from your data. Figure Editor assembles finished images into one multi-panel figure with layout, labels, placeholders, resolution checks and a caption draft. They work well together, but neither needs the other.</p>
+<h3 id="what-do-i-need-installed">What do I need installed?</h3>
+<p>Python 3.10+ with matplotlib, Pillow and numpy. Optionally <code>pymupdf</code> or poppler's <code>pdftoppm</code> for PDF/SVG panels. No network access.</p>
+<h3 id="will-it-fix-a-blurry-panel">Will it fix a blurry panel?</h3>
+<p>No. It reports the panel's effective dpi and the pixel width it needs, and suggests re-exporting from the source. Upscaling adds no detail, so it never does it.</p>
+<h3 id="does-it-check-against-my-journals-rules">Does it check against my journal's rules?</h3>
+<p>It checks resolution, shrinking text and figure height automatically, with an adjustable threshold. The reference table covers Nature, Elsevier and IEEE plus typical values for others. Confirm with your journal's current guidelines.</p>
+<h3 id="can-i-change-the-figure-later">Can I change the figure later?</h3>
+<p>Yes. The caption draft records the rebuild command. Replace a file, or swap <code>none</code> for the finished panel, and run it again; your caption edits are kept.</p>
+<h3 id="do-i-need-the-other-aurora-lab-skills">Do I need the other Aurora Lab skills?</h3>
+<p>No. They share the <code>research/</code> folder convention if you want to use them together.</p>
+</section>
+<section id="limitations"><h2>Limitations</h2>
+<ul>
+<li>It assembles existing images. It does not make plots from data, edit pixels inside a panel, or invent content for a missing panel.</li>
+<li>PDF and SVG panels are rasterised at 600 dpi, so the result is not fully vector. They also need PyMuPDF or poppler's <code>pdftoppm</code>.</li>
+<li>Journal values are a starting point; confirm against your venue's current author guidelines.</li>
+<li>The caption is a draft for you to complete: details that are not visible in the images stay in [brackets].</li>
+</ul>
+</section>
+<section id="changelog"><h2>Changelog</h2>
+<p><strong>1.0.0</strong> · October 2026 · First release.</p></section>
+
+      </article>
+    </div>
+  </main>
+
+  <footer class="footer">
+    <div class="wrap footer-inner">
+      <span class="brand"><img src="../../assets/img/avatar.png" alt="" width="24" height="24"> Aurora Lab</span>
+      <nav aria-label="Footer">
+        <a href="https://www.agensi.io/creators/aurora-lab">Agensi</a>
+        <a href="https://github.com/the-aurora-lab">GitHub</a>
+      </nav>
+    </div>
+  </footer>
+</body>
+</html>
