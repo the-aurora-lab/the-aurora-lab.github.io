@@ -4,9 +4,9 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Paper Figures · Aurora Lab</title>
-  <meta name="description" content="Documentation for the Paper Figures agent skill: honest, publication-ready scientific figures with a colour-blind-safe journal style and a verification pass.">
+  <meta name="description" content="Documentation for the Paper Figures agent skill: publication-ready scientific figures with a colour-blind-safe journal style and a verification pass.">
   <meta property="og:title" content="Paper Figures · Aurora Lab">
-  <meta property="og:description" content="Documentation for the Paper Figures agent skill: honest, publication-ready scientific figures with a colour-blind-safe journal style and a verification pass.">
+  <meta property="og:description" content="Documentation for the Paper Figures agent skill: publication-ready scientific figures with a colour-blind-safe journal style and a verification pass.">
   <meta property="og:image" content="https://the-aurora-lab.github.io/assets/shots/paper-figures/01-figure.png">
   <meta name="theme-color" content="#0b1020">
   <link rel="icon" type="image/png" href="../../assets/img/avatar.png">
@@ -37,8 +37,8 @@
       <div class="wrap">
         <p class="crumbs"><a href="../../">Aurora Lab</a> / <a href="../../#skills">Skills</a> / Paper Figures</p>
         <h1>Paper Figures</h1>
-        <p class="lede">Honest, publication-ready scientific figures from your results. Your agent decides what to plot for the claim you&#x27;re making, applies a colour-blind-safe journal style, checks the figure before calling it done, and writes a caption and spec file next to it.</p>
-        <ul class="meta" aria-label="Skill facts"><li>v1.0.0</li><li>Python 3.10+ · matplotlib</li><li>No network access</li><li>Works with any SKILL.md agent</li></ul>
+        <p class="lede">Publication-ready scientific figures from your results. Your agent decides what to plot for the claim you&#x27;re making, applies a colour-blind-safe journal style, checks the figure before calling it done, and writes a caption and spec file next to it.</p>
+        <ul class="meta" aria-label="Skill facts"><li>v1.1.0</li><li>Python 3.10+ · matplotlib</li><li>No network access</li><li>Works with any SKILL.md agent</li></ul>
         <div class="cta">
           <a class="btn" href="https://www.agensi.io/skills/paper-figures-honest-publication-ready-figures">Get it on Agensi · $7</a>
           <a class="btn btn-ghost" href="#overview">Read the docs</a>
@@ -49,14 +49,14 @@
     <div class="wrap docs">
       <nav class="toc" aria-label="On this page">
         <p>On this page</p>
-        <ol><li><a href="#overview">Overview</a></li><li><a href="#quick-start">Quick start</a></li><li><a href="#gallery">What you get</a></li><li><a href="#workflow">How it works</a></li><li><a href="#honesty">Honesty checks</a></li><li><a href="#outputs">Files it writes</a></li><li><a href="#helper">Style helper</a></li><li><a href="#widths">Journal widths</a></li><li><a href="#research-folder">The <code>research/</code> folder</a></li><li><a href="#faq">FAQ</a></li><li><a href="#limitations">Limitations</a></li><li><a href="#changelog">Changelog</a></li></ol>
+        <ol><li><a href="#overview">Overview</a></li><li><a href="#quick-start">Quick start</a></li><li><a href="#gallery">What you get</a></li><li><a href="#workflow">How it works</a></li><li><a href="#integrity">Integrity checks</a></li><li><a href="#outputs">Files it writes</a></li><li><a href="#helper">Style helper</a></li><li><a href="#widths">Journal widths</a></li><li><a href="#research-folder">The <code>research/</code> folder</a></li><li><a href="#faq">FAQ</a></li><li><a href="#limitations">Limitations</a></li><li><a href="#changelog">Changelog</a></li></ol>
       </nav>
       <article class="prose-doc">
 <section id="overview"><h2>Overview</h2>
 <p>A figure is an argument: its shape makes a claim before anyone reads a label, and it can overstate a result as easily as a sentence can. Paper Figures turns your agent into a careful figure collaborator that:</p>
 <ul>
-<li><strong>Picks the plot that fits the claim.</strong> Dot plots instead of bar charts for small groups, every interval named, n on the figure, honest axis ranges.</li>
-<li><strong>Keeps the figure honest.</strong> No cherry-picked examples, schematics marked as schematics, equations checked against the code, captions that claim no more than the evidence.</li>
+<li><strong>Picks the plot that fits the claim.</strong> Dot plots instead of bar charts for small groups, every interval named, n on the figure, accurate axis ranges.</li>
+<li><strong>Backs every claim with the data.</strong> No cherry-picked examples, schematics marked as schematics, equations checked against the code, captions that match the evidence.</li>
 <li><strong>Makes it journal-ready.</strong> Okabe–Ito colours, exact column widths, embedded TrueType fonts, PDF and PNG export from one helper.</li>
 <li><strong>Verifies before it's done</strong>, including a font check that catches the Type 3 fonts many journals reject.</li>
 <li><strong>Documents every figure</strong> with a caption and a spec file, so the next edit doesn't undo a deliberate choice.</li>
@@ -87,18 +87,18 @@
 <h3 id="two-modes">Two modes</h3>
 <ul>
 <li><strong>Unguided</strong> ("we need a Figure 1", "plot these results"): the agent names the claim the figure must make, looks at how comparable papers draw it, and proposes colour, type size and layout at true column width before writing any plotting code.</li>
-<li><strong>Guided</strong> ("make panel c shorter"): it does exactly what you ask, but checks the facts it is about to draw and tells you once if a request would make the figure say something false, offering the nearest honest alternative.</li>
+<li><strong>Guided</strong> ("make panel c shorter"): it does exactly what you ask, but checks the facts it is about to draw and tells you once if a request would make the figure say something false, offering the nearest accurate alternative.</li>
 </ul>
 <h3 id="the-steps">The steps</h3>
 <ol>
 <li><strong>Design</strong>: name the claim and the evidence file behind it; choose the plot type from the claim.</li>
 <li><strong>Build</strong>: plotting code that calls the style helper first, so sizes and fonts are right from the start.</li>
-<li><strong>Check honesty</strong>: the review in the next section.</li>
+<li><strong>Check integrity</strong>: the review in the next section.</li>
 <li><strong>Verify</strong>: look at the rendered PNG and a crop of every panel, check fonts and page size, sweep the PDF text, confirm the caption matches what the code computed.</li>
 <li><strong>Document</strong>: write the caption and spec file.</li>
 </ol>
 </section>
-<section id="honesty"><h2>Honesty checks</h2>
+<section id="integrity"><h2>Integrity checks</h2>
 <p>These are a review your agent carries out and reports on, not an automated linter. The font and size checks are automated by the helper.</p>
 <ul>
 <li><strong>Selection.</strong> Examples are chosen by a stated rule (for instance, nearest the 25th, 50th and 75th percentile of fit error), not because they look best.</li>
@@ -256,22 +256,23 @@ fs.save(fig, &quot;research/figures/fig2&quot;)                     # fig2.pdf +
 <h3 id="what-do-i-need-installed">What do I need installed?</h3>
 <p>Python 3.10+ with matplotlib, plus numpy for the bundled example. Optionally <code>pdftotext</code> for the PDF text sweep. Nothing else, and no network access.</p>
 <h3 id="does-it-check-my-figures-automatically">Does it check my figures automatically?</h3>
-<p>Partly. Export size and the font check are automatic through the helper. The honesty checks are a review your agent follows and reports on.</p>
+<p>Partly. Export size and the font check are automatic through the helper. The integrity checks are a review your agent follows and reports on.</p>
 <h3 id="does-it-run-statistics-on-my-raw-data">Does it run statistics on my raw data?</h3>
 <p>No. It plots what you give it and names every interval. If no interval is provided, the figure and caption say so instead of inventing one.</p>
 <h3 id="can-i-use-it-with-figures-i-already-made">Can I use it with figures I already made?</h3>
-<p>Yes. Ask "is this figure ready to submit?" and it runs the verification and honesty review on your existing PDF and plotting code, then proposes fixes.</p>
+<p>Yes. Ask "is this figure ready to submit?" and it runs the verification and integrity review on your existing PDF and plotting code, then proposes fixes.</p>
 <h3 id="do-i-need-the-other-aurora-lab-skills">Do I need the other Aurora Lab skills?</h3>
 <p>No. They share the <code>research/</code> folder convention if you want to use them together.</p>
 </section>
 <section id="limitations"><h2>Limitations</h2>
 <ul>
-<li>Rendering uses Python and matplotlib. With other plotting tools the design and honesty guidance still applies, but the style helper does not.</li>
+<li>Rendering uses Python and matplotlib. With other plotting tools the design and integrity guidance still applies, but the style helper does not.</li>
 <li>It plots and documents the results you provide. It does not choose or run your statistical analysis.</li>
 <li>Built-in widths cover the journals listed above. Confirm against current author guidelines.</li>
 </ul>
 </section>
 <section id="changelog"><h2>Changelog</h2>
+<p><strong>1.1.0</strong> · October 2026 · Clearer description; no change to how the skill works.</p>
 <p><strong>1.0.0</strong> · October 2026 · First release.</p></section>
 
       </article>
