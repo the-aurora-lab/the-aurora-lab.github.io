@@ -1,0 +1,244 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Q&amp;A Prep · Aurora Lab</title>
+  <meta name="description" content="Documentation for the Q&amp;A Prep agent skill: the hard questions after a talk, poster, thesis defence or job talk predicted from your own paper, slides and results, with answers that stay inside what your material supports.">
+  <meta property="og:title" content="Q&amp;A Prep · Aurora Lab">
+  <meta property="og:description" content="Documentation for the Q&amp;A Prep agent skill: the hard questions after a talk, poster, thesis defence or job talk predicted from your own paper, slides and results, with answers that stay inside what your material supports.">
+  <meta property="og:image" content="https://the-aurora-lab.github.io/assets/shots/qa-prep/01-dangerous.png">
+  <meta name="theme-color" content="#0b1020">
+  <link rel="icon" type="image/png" href="../../assets/img/avatar.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../../assets/css/site.css">
+</head>
+<body>
+  <a class="skip" href="#main">Skip to content</a>
+  <header class="nav">
+    <div class="wrap nav-inner">
+      <a class="brand" href="../../" aria-label="Aurora Lab home">
+        <img src="../../assets/img/avatar.png" alt="" width="32" height="32">
+        <span>Aurora Lab</span>
+      </a>
+      <nav aria-label="Primary">
+        <a href="../../#skills">Skills</a>
+        <a href="../../#examples">Examples</a>
+        <a class="btn btn-small" href="https://www.agensi.io/creators/aurora-lab">Get it on Agensi</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main">
+    <section class="docs-hero">
+      <div class="aurora" aria-hidden="true"></div>
+      <div class="wrap">
+        <p class="crumbs"><a href="../../">Aurora Lab</a> / <a href="../../#skills">Skills</a> / Q&amp;A Prep</p>
+        <h1>Q&amp;A Prep</h1>
+        <p class="lede">Hard questions answered before they&#x27;re asked. Your agent reads your paper, slides or results, finds the weak spots a sharp questioner will hit, ranks the questions you&#x27;ll get, and drafts short answers that stay inside what your material supports, with every number checked.</p>
+        <ul class="meta" aria-label="Skill facts"><li>v1.0.0</li><li>Talks, posters, defences</li><li>Python 3.10+ (number check)</li><li>Works with any SKILL.md agent</li></ul>
+        <div class="cta">
+          <a class="btn" href="https://www.agensi.io/creators/aurora-lab">Get it on Agensi · $5</a>
+          <a class="btn btn-ghost" href="#overview">Read the docs</a>
+        </div>
+      </div>
+    </section>
+
+    <div class="wrap docs">
+      <nav class="toc" aria-label="On this page">
+        <p>On this page</p>
+        <ol><li><a href="#overview">Overview</a></li><li><a href="#quick-start">Quick start</a></li><li><a href="#gallery">What you get</a></li><li><a href="#workflow">How it works</a></li><li><a href="#number-check">The number check</a></li><li><a href="#outputs">Files it reads and writes</a></li><li><a href="#faq">FAQ</a></li><li><a href="#limitations">Limitations</a></li><li><a href="#changelog">Changelog</a></li></ol>
+      </nav>
+      <article class="prose-doc">
+<section id="overview"><h2>Overview</h2>
+<p>The questions after a research talk aren't random. They go where the material is exposed: a headline stronger than its estimate, a test on the wrong unit, a sample nobody explained, a choice that invites an alternative explanation. You can't see those spots in your own work, because you know what you meant. Q&amp;A Prep makes your agent find them first and prepare answers you can defend in the room.</p>
+<ul>
+<li><strong>Every claim against its evidence.</strong> Each claim a listener could challenge is listed with its number, n, uncertainty and location, and marked supported, stretched or unsupported. Numbers that differ between abstract, slides and paper are caught.</li>
+<li><strong>Questions predicted, then ranked.</strong> From the exposed points, a list of research question angles and the questions your setting brings, plus fresh questioner subagents that see only your material. Fifteen or more questions (ten for a poster session), ranked by how likely and how damaging they are.</li>
+<li><strong>Answers that stay inside your material.</strong> Each leads with the direct answer, then the evidence, then the limit you concede before the questioner does, with a Sources line for every fact. Anything your material doesn't contain becomes a <code>[GAP]</code> note for you, never an invented number or citation.</li>
+<li><strong>A number check that runs.</strong> A bundled script finds every number in the answers in your material, flags any it can't, and verifies declared derivations.</li>
+<li><strong>What to fix before you walk on:</strong> gaps to close, backup slides built only from what you have, scripts for the hard moments, a one-page lectern card, and a mock Q&amp;A if you want one.</li>
+</ul>
+<p><strong>Pairs well with:</strong> <a href="../poster-layout/">Poster Layout</a> and other talk skills. Neither is needed.</p>
+</section>
+<section id="quick-start"><h2>Quick start</h2>
+<ol>
+<li><strong>Get the skill</strong> from <a href="https://www.agensi.io/creators/aurora-lab">Agensi</a> and add it to your agent (Claude Code, Codex CLI, Cursor, Gemini CLI or any agent that loads SKILL.md skills).</li>
+<li><strong>Have Python 3.10+</strong> for the number check (standard library only, nothing to install).</li>
+<li><strong>Point it at your material</strong> and say who will be in the room and how long the Q&amp;A is.</li>
+</ol>
+<p>Example requests:</p>
+<ul>
+<li><em>"I'm presenting this paper at a conference next week, 12 minutes plus 5 for questions. Prepare me for the Q&amp;A."</em></li>
+<li><em>"My thesis defence is in three weeks. Here are my chapters and my committee's fields: what will they ask, and how do I answer without overselling?"</em></li>
+<li><em>"Poster session tomorrow. Give me the 30-second version and the five questions visitors will ask."</em></li>
+<li><em>"Run a mock Q&amp;A on my job talk slides: one question at a time, and tell me where I overclaim."</em></li>
+</ul>
+<div class="callout">
+<p>Want to see a full run first? The skill ships the demo's material and the prep sheet it produced in <code>examples/</code>.</p>
+</div>
+</section>
+<section id="gallery"><h2>What you get</h2>
+<p>Everything below comes from one real run: a fresh agent session with only this skill installed, given the request shown in the last image ($1.61, about four minutes). The material was ours: a made-up draft paper, a 12-minute slide outline and the count data for a field study of sown wildflower strips and pollinator visits on eight farms. We planted six weak spots: "doubled" in the title against an estimate of 1.6 (95% CI 1.2 to 2.1), a test on 160 counts when the farm is the unit, nine farms in the abstract but eight in the results, a yield claim from three self-selected farms, strip margins chosen by the farmers, and one season of dry mornings.</p>
+<p>The run found all six, and one we hadn't planned: strip and control counts logged with identical start times, so nobody knows who walked which margin first. It recomputed the headline numbers from the raw data (they matched the paper), ran four questioner subagents (the chair, a field statistician, an agronomist, a farm adviser), ranked 18 questions and drafted 11 answers. Farm-level statistics the paper doesn't report went into <code>[GAP]</code> notes for the speaker to confirm, not into the answers. The number check passed on 39 numbers. We checked the farm-level values it computed against the data ourselves.</p>
+<div class="shots"><figure><img src="../../assets/shots/qa-prep/01-dangerous.png" alt="Table of the five top-ranked questions for a talk on wildflower strips: doubled versus 1.6 times, the test treating 160 counts as independent, the yield claim from three farms, farmer-chosen strip placement, and the missing ninth farm, each with a defensible answer and which questioners raised it." loading="lazy"><figcaption>The top five of 18 ranked questions from the demo&#x27;s prep sheet, with their answers (shortened by us). The paper, talk and data were ours: made up for the test, with six weak spots planted.</figcaption></figure><figure><img src="../../assets/shots/qa-prep/02-answer.png" alt="Two drafted answers. Q4, on farmer-chosen strip placement: a direct answer conceding it cannot be ruled out, what the design controls, the limit, what would settle it, a gap note and the sources. Q2, on pseudoreplication: agreement that the farm is the replicate, the farm-level effect size, a gap note to rerun the test, and the number check passing." loading="lazy"><figcaption>Two answers from the demo&#x27;s prep sheet (lightly shortened by us), and the last line of its number check.</figcaption></figure><figure><img src="../../assets/shots/qa-prep/03-evidence.png" alt="Evidence map with eight claims: doubled visits (stretched), 8.2 versus 5.1 visits (supported), significance on 160 counts (stretched), 6 percent yield (stretched), visits translate into yields (unsupported), low cost (unsupported), nine farms (inconsistent), and same-morning counts (supported, order unknown)." loading="lazy"><figcaption>Eight of the twelve rows of the evidence map in the demo&#x27;s prep sheet (wording shortened by us).</figcaption></figure><figure><img src="../../assets/shots/qa-prep/04-gaps.png" alt="Table of gaps to close: replace doubled with 1.6 times, rerun the test with farm as the unit, explain the ninth farm, soften the yield slide, check the walk order in field notes, soften the take-home slide, and acknowledge placement, baseline, floral density and one season." loading="lazy"><figcaption>The &#x27;Gaps to close&#x27; table of the demo&#x27;s prep sheet (shortened by us).</figcaption></figure><figure><img src="../../assets/shots/qa-prep/05-session.png" alt="Excerpt of the agent session: reading the material, recomputing the numbers, four fresh questioner subagents reporting, the number check passing, and the final message." loading="lazy"><figcaption>The agent&#x27;s steps and messages from the demo run (paraphrased from its transcript; $1.61, about four minutes).</figcaption></figure></div>
+</section>
+<section id="workflow"><h2>How it works</h2>
+<ol>
+<li><strong>Material and setting.</strong> Everything you give it is read. The setting (format, Q&amp;A length, chair, what's at stake) and the groups in the room are written down, or inferred and listed as assumptions.</li>
+<li><strong>Claims mapped to evidence.</strong> Each challengeable claim with its number, n, uncertainty and location, marked supported, stretched or unsupported; then the exposures, the places a sharp questioner will go.</li>
+<li><strong>Questions predicted.</strong> At least one per exposure, a sweep of research question angles and setting-specific questions, and fresh questioners who see only your material. Ranked by likelihood × damage.</li>
+<li><strong>Answers drafted.</strong> Direct answer, evidence, limit, and optionally what would settle it; 20 to 45 seconds spoken (up to 90 for a defence); a Sources line and <code>[GAP]</code> notes.</li>
+<li><strong>Backup slides and gaps.</strong> Three to five backup slides from existing figures and tables; gaps sorted into fix-before-the-talk and acknowledge-in-the-answer, with softer wording for slides that overclaim.</li>
+<li><strong>Hard moments.</strong> Scripts tied to this talk for a question that hits a real flaw, one you can't answer, a comment instead of a question, a multi-part or hostile question, and the setting's own cases.</li>
+<li><strong>Number check.</strong> The bundled script, then a re-read of every answer for wording stronger than the evidence.</li>
+<li><strong>Rehearsal (optional).</strong> A mock Q&amp;A, one question at a time, with short feedback after each answer.</li>
+<li><strong>Delivery.</strong> The prep sheet, and in the chat the three most dangerous questions, their one-line answers and the gaps to close.</li>
+</ol>
+<h3 id="the-integrity-rules">The integrity rules</h3>
+<p>Answers use only what your material contains. Gaps are flagged, never filled. An answer keeps the material's own hedges, intervals and scope, and when the material itself overclaims, that becomes the first question to prepare for. Derived numbers show their working. Every fact is located.</p>
+<h3 id="settings-it-knows">Settings it knows</h3>
+<div class="doc-table"><table>
+<thead>
+<tr>
+<th>Setting</th>
+<th>What it adds</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Conference talk</td>
+<td>Short Q&amp;A, a 15-second version of each top answer</td>
+</tr>
+<tr>
+<td>Poster session</td>
+<td>A 30-second and a 2-minute walk-through, the questions every visitor asks</td>
+</tr>
+<tr>
+<td>Thesis defence or viva</td>
+<td>Contribution in one sentence, limitations first, what you'd do differently, your role, each examiner's field (never guessed)</td>
+</tr>
+<tr>
+<td>Job talk</td>
+<td>Research programme, independence, funding, teaching, collaborations</td>
+</tr>
+<tr>
+<td>Grant panel</td>
+<td>Feasibility, main risk and fallback, budget lines</td>
+</tr>
+<tr>
+<td>Written reviewer or committee Q&amp;A</td>
+<td>Each comment answered point first, with the change made and where, or the reason for not changing</td>
+</tr>
+</tbody>
+</table></div>
+</section>
+<section id="number-check"><h2>The number check</h2>
+<p><code>scripts/check_numbers.py</code> (Python 3.10+, standard library only) reads the prep sheet and your material (text files or folders; PDFs need a text extraction first) and reports every number in the Answers, Backup slides and Lectern card sections:</p>
+<div class="doc-table"><table>
+<thead>
+<tr>
+<th>Status</th>
+<th>Meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>FOUND</td>
+<td>The value appears in your material.</td>
+</tr>
+<tr>
+<td>ROUNDED</td>
+<td>A material value rounds to it, or it is a material fraction written as a percentage: confirm it.</td>
+</tr>
+<tr>
+<td>DERIVED</td>
+<td>Declared as <code>derived: 3.1 = 8.2 - 5.1</code>, with the operands in your material and the arithmetic right.</td>
+</tr>
+<tr>
+<td>UNSOURCED</td>
+<td>Not in your material: source it, derive it, or remove it.</td>
+</tr>
+<tr>
+<td>BAD-DERIVE</td>
+<td>A derivation whose operands aren't in the material or whose arithmetic is wrong.</td>
+</tr>
+</tbody>
+</table></div>
+<p>Headings, <code>[GAP]</code> notes, locators such as "Table 2" or "slide 7" and list numbers are skipped. It exits with an error when anything is UNSOURCED or BAD-DERIVE.</p>
+</section>
+<section id="outputs"><h2>Files it reads and writes</h2>
+<div class="doc-table"><table>
+<thead>
+<tr>
+<th>File</th>
+<th>Read or written</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Your material</td>
+<td>Read: paper, slides, poster, abstract, results files, reviewer comments. Never edited.</td>
+</tr>
+<tr>
+<td><code>research/claims.md</code>, <code>research/results/*.json</code>, <code>research/paper/</code>, <code>research/figures/&lt;figure&gt;.md</code></td>
+<td>Read when a <code>research/</code> folder exists.</td>
+</tr>
+<tr>
+<td><code>research/talks/qa-prep-&lt;talk&gt;-&lt;date&gt;.md</code></td>
+<td>Written: the prep sheet. Without a <code>research/</code> folder it goes next to the material.</td>
+</tr>
+<tr>
+<td>A text extraction of a PDF or slide file</td>
+<td>Written to a temporary file for the number check and deleted at the end.</td>
+</tr>
+</tbody>
+</table></div>
+<p>The prep sheet holds: a summary, the evidence map, the exposures, the ranked question bank, the answers with sources, backup slides, gaps to close, hard-moment scripts, the lectern card, rehearsal notes and the number check result.</p>
+</section>
+<section id="faq"><h2>FAQ</h2>
+<h3 id="which-agents-does-it-work-with">Which agents does it work with?</h3>
+<p>Any agent that loads SKILL.md skills, including Claude Code, Codex CLI, Cursor and Gemini CLI. It works best where the agent can run subagents or start a fresh session; elsewhere it plays each questioner in a separate pass and says so.</p>
+<h3 id="will-it-make-up-answers-to-sound-convincing">Will it make up answers to sound convincing?</h3>
+<p>No. Every number, result and citation in an answer must come from your material, with its location. Where a good answer needs something you haven't given it, a <code>[GAP]</code> note tells you what to supply, and the number check flags any number it can't find in your material.</p>
+<h3 id="what-does-the-number-check-actually-check">What does the number check actually check?</h3>
+<p>Provenance, not meaning: that each number appears in your material (allowing rounding and percentages) and that declared derivations are right. Wording that claims too much is caught by the agent's re-read against the evidence map.</p>
+<h3 id="does-it-work-for-a-thesis-defence-or-a-job-talk">Does it work for a thesis defence or a job talk?</h3>
+<p>Yes. Tell it your examiners' fields and anything you know about their work; it never guesses an examiner's views.</p>
+<h3 id="can-i-rehearse-with-it">Can I rehearse with it?</h3>
+<p>Yes. Ask for a mock Q&amp;A. It is text-based unless your agent can take voice.</p>
+<h3 id="will-it-change-my-slides-or-paper">Will it change my slides or paper?</h3>
+<p>No. It suggests wording for the lines that will draw hard questions and leaves the edits to you.</p>
+<h3 id="how-long-does-it-take">How long does it take?</h3>
+<p>Our demo, with four questioner subagents, took about four minutes. Each questioner is a separate agent run, so it uses several times the tokens of a single pass.</p>
+</section>
+<section id="limitations"><h2>Limitations</h2>
+<ul>
+<li>It can't know facts that aren't in your material (why a sample was dropped, an examiner's views, literature you haven't cited); those become <code>[GAP]</code> notes for you.</li>
+<li>Questioners are simulated. A real room will still surprise you; a run-through with a colleague remains worth doing.</li>
+<li>The number check verifies provenance, not meaning: a small integer that appears anywhere in your material passes.</li>
+<li>PDFs and slide files need a text extraction (done by the agent when a tool such as <code>pdftotext</code> is available).</li>
+<li>The mock Q&amp;A is text-based unless your agent can take voice.</li>
+<li>Without subagents the questioners are played in one context, which is less independent; the prep sheet says so.</li>
+</ul>
+</section>
+<section id="changelog"><h2>Changelog</h2>
+<p><strong>1.0.0</strong> · October 2026 · First release.</p></section>
+
+      </article>
+    </div>
+  </main>
+
+  <footer class="footer">
+    <div class="wrap footer-inner">
+      <span class="brand"><img src="../../assets/img/avatar.png" alt="" width="24" height="24"> Aurora Lab</span>
+      <nav aria-label="Footer">
+        <a href="https://www.agensi.io/creators/aurora-lab">Agensi</a>
+        <a href="https://github.com/the-aurora-lab">GitHub</a>
+      </nav>
+    </div>
+  </footer>
+</body>
+</html>
