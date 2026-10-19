@@ -1,0 +1,278 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Talk Coach · Aurora Lab</title>
+  <meta name="description" content="Documentation for the Talk Coach agent skill: rehearsal feedback for research talks from your own recording or transcript, with a cut list that fits your slot and three priorities tied to timestamps.">
+  <meta property="og:title" content="Talk Coach · Aurora Lab">
+  <meta property="og:description" content="Documentation for the Talk Coach agent skill: rehearsal feedback for research talks from your own recording or transcript, with a cut list that fits your slot and three priorities tied to timestamps.">
+  <meta property="og:image" content="https://the-aurora-lab.github.io/assets/shots/talk-coach/01-priorities.png">
+  <meta name="theme-color" content="#0b1020">
+  <link rel="icon" type="image/png" href="../../assets/img/avatar.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../../assets/css/site.css">
+</head>
+<body>
+  <a class="skip" href="#main">Skip to content</a>
+  <header class="nav">
+    <div class="wrap nav-inner">
+      <a class="brand" href="../../" aria-label="Aurora Lab home">
+        <img src="../../assets/img/avatar.png" alt="" width="32" height="32">
+        <span>Aurora Lab</span>
+      </a>
+      <nav aria-label="Primary">
+        <a href="../../#skills">Skills</a>
+        <a href="../../#examples">Examples</a>
+        <a class="btn btn-small" href="https://www.agensi.io/creators/aurora-lab">Get it on Agensi</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main">
+    <section class="docs-hero">
+      <div class="aurora" aria-hidden="true"></div>
+      <div class="wrap">
+        <p class="crumbs"><a href="../../">Aurora Lab</a> / <a href="../../#skills">Skills</a> / Talk Coach</p>
+        <h1>Talk Coach</h1>
+        <p class="lede">A sharper talk after every rehearsal. Your agent transcribes your rehearsal on your machine, measures where the minutes went, reads the talk as your audience will hear it, and gives you a cut list that fits the slot and three priorities with drills, every point tied to a timestamp and a quote.</p>
+        <ul class="meta" aria-label="Skill facts"><li>v1.0.0</li><li>Conference, job talk, defence, lab meeting</li><li>Python 3.10+ (+ a local Whisper)</li><li>Works with any SKILL.md agent</li></ul>
+        <div class="cta">
+          <a class="btn" href="https://www.agensi.io/creators/aurora-lab">Get it on Agensi · $9</a>
+          <a class="btn btn-ghost" href="#overview">Read the docs</a>
+        </div>
+      </div>
+    </section>
+
+    <div class="wrap docs">
+      <nav class="toc" aria-label="On this page">
+        <p>On this page</p>
+        <ol><li><a href="#overview">Overview</a></li><li><a href="#quick-start">Quick start</a></li><li><a href="#gallery">What you get</a></li><li><a href="#workflow">How it works</a></li><li><a href="#scripts">Helper scripts</a></li><li><a href="#outputs">Files it reads and writes</a></li><li><a href="#faq">FAQ</a></li><li><a href="#limitations">Limitations</a></li><li><a href="#changelog">Changelog</a></li></ol>
+      </nav>
+      <article class="prose-doc">
+<section id="overview"><h2>Overview</h2>
+<p>You can't hear your own rehearsal the way the room will. You know the results too well to notice they went past at twice the speed of the rest, you know what SOH means, and the minute you ran over felt like twenty seconds. Talk Coach turns a rehearsal recording into feedback you can act on before the next run-through.</p>
+<ul>
+<li><strong>Where the minutes went.</strong> Time against your slot, and each section's length, share and pace, so a rushed results section or a methods section that ate the talk shows up as numbers with timestamps.</li>
+<li><strong>A cut list that adds up.</strong> When you're over, concrete passages to cut, each with its timestamp and the seconds it saves, totalling the overrun plus a margin. Never "speak faster".</li>
+<li><strong>The talk as your audience hears it.</strong> When the main message is first said, which terms and acronyms are never explained for this audience, how many numbers come in one breath, whether the last sentence before the thanks is your take-home.</li>
+<li><strong>The verbal habits, counted.</strong> Hesitation sounds, filler phrases in context, sentences about the talk ("now I'll show you the results"), hedges on the main result, each with its timestamp.</li>
+<li><strong>Three priorities, not thirty remarks.</strong> Each with the evidence, the change, a drill and a target the next rehearsal can be measured against. Rerun on the next recording and compare.</li>
+<li><strong>Feedback grounded in what was recorded.</strong> Every point quotes the transcript with a timestamp. Recogniser errors are separated from your errors, and nothing is said about your voice or confidence that a transcript can't show.</li>
+</ul>
+<p><strong>Pairs well with:</strong> <a href="../qa-prep/">Q&amp;A Prep</a>, <a href="../poster-layout/">Poster Layout</a> and other talk skills. None is needed.</p>
+</section>
+<section id="quick-start"><h2>Quick start</h2>
+<ol>
+<li><strong>Get the skill</strong> from <a href="https://www.agensi.io/creators/aurora-lab">Agensi</a> and add it to your agent (Claude Code, Codex CLI, Cursor, Gemini CLI or any agent that loads SKILL.md skills).</li>
+<li><strong>Have Python 3.10+.</strong> To transcribe recordings, install a local Whisper into your project's environment, for example <code>python -m pip install faster-whisper "av&lt;19"</code> (macOS, Linux, Windows), plus ffmpeg. No recogniser? Captions from Zoom, Teams, Meet or YouTube work instead.</li>
+<li><strong>Record a rehearsal</strong> (phone, laptop, a one-person video call) and tell your agent the time limit and who will be in the room.</li>
+</ol>
+<p>Example requests:</p>
+<ul>
+<li><em>"Here's my rehearsal recording (rehearsal.m4a). I have a 12-minute slot at a conference next week. Coach me."</em></li>
+<li><em>"My job talk is 45 minutes plus questions; here's the Zoom recording of my practice run. Where do I lose time, and what should I fix first?"</em></li>
+<li><em>"I only have the transcript from Teams (practice.vtt), and my defence presentation must be 20 minutes. What's over, and what should I cut?"</em></li>
+<li><em>"Second run-through attached. Compare it with last week's metrics."</em></li>
+</ul>
+<div class="callout">
+<p>Want to try it without recording anything? The skill ships a made-up rehearsal as captions, its outline, and the feedback a real run produced, in <code>examples/</code>.</p>
+</div>
+</section>
+<section id="gallery"><h2>What you get</h2>
+<p>Everything below comes from one real run: a fresh agent session with only this skill installed, given the request shown in the last image ($0.59, about three minutes including transcription). The rehearsal was ours: a made-up five-minute research-day talk on predicting e-bike battery health from one overnight charge, spoken by a computer voice from a script we wrote, plus the speaker's slide outline. We planted the usual rehearsal problems: a talk 30% over its slot, a results section spoken at about twice the pace of the rest, SOH, ICA and DCIR never explained to a mixed department audience, about three hesitations a minute, and an opening and close spent on housekeeping.</p>
+<p>The run transcribed the recording locally (faster-whisper, <code>small</code>) and found all of them. It mapped the outline's sections onto the recording, measured them, read the talk for terms, numbers and the close, and wrote twelve timed cuts adding up to 135 seconds, three priorities with drills and targets, and the command to compare the next rehearsal. It listed ten recogniser errors, such as "AS" for EIS and "U square" for R squared, as corrections rather than speaker mistakes, and said plainly that voice, body language and slides were not assessed.</p>
+<div class="shots"><figure><img src="../../assets/shots/talk-coach/01-priorities.png" alt="The three priorities from the demo feedback: fit the 5-minute slot (6:29, setup takes 78% of the time), slow the results down (214 wpm against 126, ten numbers in 47 seconds, a hedge at 05:46), and explain SOH, ICA and DCIR, each with evidence and a target for the next rehearsal." loading="lazy"><figcaption>The three priorities from the demo&#x27;s feedback file (shortened by us; the full version also has a change and a drill for each). The talk was ours: made up, spoken by a computer voice, with rehearsal problems planted.</figcaption></figure><figure><img src="../../assets/shots/talk-coach/02-sections.png" alt="Section table for the demo rehearsal: opening, why it matters, background, data and features plus model all at 112 to 120 words per minute; results start at 05:03, last 49 seconds, 13% of the talk, at 214 words per minute; close at 109. Below, measures: 6:29 against a 5-minute limit, 20 hesitation sounds, 6 sentences about the talk, three unexplained acronyms." loading="lazy"><figcaption>The section table and headline measures from the demo&#x27;s feedback file.</figcaption></figure><figure><img src="../../assets/shots/talk-coach/03-cuts.png" alt="Cut list with twelve rows, each with its timestamp and seconds saved, from the greeting at 00:00 to the closing &#x27;that&#x27;s it&#x27; at 06:21, totalling about 135 seconds against an 89-second overrun plus margin." loading="lazy"><figcaption>The cut list from the demo&#x27;s feedback file (the &#x27;Carries&#x27; column left out by us).</figcaption></figure><figure><img src="../../assets/shots/talk-coach/04-grounded.png" alt="Transcript corrections from the demo, such as AS heard for EIS, ICAPs for ICA peaks, DCI are for DCIR and U square for R squared, followed by the Not checked section: intonation, volume, emphasis and nerves unmeasured, no video, slides not provided." loading="lazy"><figcaption>The &#x27;Transcript corrections&#x27; (shortened by us) and &#x27;Not checked&#x27; sections of the demo&#x27;s feedback file.</figcaption></figure><figure><img src="../../assets/shots/talk-coach/05-session.png" alt="Excerpt of the agent session: local transcription of the rehearsal, the measuring script with sections, the results section flagged at 214 words per minute, and the agent&#x27;s headline message." loading="lazy"><figcaption>The agent&#x27;s steps and messages from the demo run (paraphrased from its transcript; $0.59, about three minutes).</figcaption></figure></div>
+</section>
+<section id="workflow"><h2>How it works</h2>
+<ol>
+<li><strong>Collect.</strong> The recording or transcript, the time limit, the setting and audience, the outline or slides if any, and earlier rehearsal metrics.</li>
+<li><strong>Timed transcript.</strong> Transcribed locally with word timestamps, keeping the fillers recognisers usually drop. Or imported from captions or text.</li>
+<li><strong>Proof.</strong> The transcript is read against your outline; misheard terms are listed and corrected for, never counted as your mistakes.</li>
+<li><strong>Sections.</strong> Each section of the outline gets its start time in the recording.</li>
+<li><strong>Measure.</strong> The bundled script: time against the slot, pace overall, over time and per section, pauses, hesitations, filler phrases in context, sentences about the talk, hedges, acronyms and whether they were expanded, opening and closing words.</li>
+<li><strong>Listen as the audience.</strong> One read for the point, the terms, the results, the signposting and the close, each finding with a timestamp and a quote.</li>
+<li><strong>Video stills</strong> (video only). Stance, position, facing the audience: only what stills can show.</li>
+<li><strong>Time plan.</strong> A cut list that adds up, or what to do with spare time; section balance against what the talk is for.</li>
+<li><strong>Three priorities.</strong> Evidence, change, drill, and a target the script can check next time.</li>
+<li><strong>Feedback file.</strong> What already works, the measures, the priorities, the cut list, transcript corrections, and what wasn't checked.</li>
+</ol>
+<h3 id="what-each-input-can-show">What each input can show</h3>
+<div class="doc-table"><table>
+<thead>
+<tr>
+<th>Input</th>
+<th>Measured</th>
+<th>Not measured</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Recording, transcribed locally</td>
+<td>words, timing per section, pace over time, pauses, fillers, structure, terms</td>
+<td>voice, intonation, volume, emphasis</td>
+</tr>
+<tr>
+<td>Captions (.vtt, .srt)</td>
+<td>the same, with pace to within a caption</td>
+<td>pauses inside a caption</td>
+</tr>
+<tr>
+<td>Plain text</td>
+<td>fillers, terms, structure; pace if you give the length</td>
+<td>timing per section, pauses</td>
+</tr>
+<tr>
+<td>Video stills</td>
+<td>stance, position, facing the audience, framing online</td>
+<td>gestures in motion</td>
+</tr>
+</tbody>
+</table></div>
+<h3 id="transcription">Transcription</h3>
+<div class="doc-table"><table>
+<thead>
+<tr>
+<th>Recogniser</th>
+<th>Install</th>
+<th>Runs on</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>faster-whisper (recommended)</td>
+<td><code>pip install faster-whisper "av&lt;19"</code></td>
+<td>macOS, Linux, Windows; CPU or NVIDIA GPU</td>
+</tr>
+<tr>
+<td>mlx-whisper</td>
+<td><code>pip install mlx-whisper</code></td>
+<td>Apple Silicon Macs (fastest there)</td>
+</tr>
+<tr>
+<td>openai-whisper</td>
+<td><code>pip install openai-whisper</code></td>
+<td>any OS, needs PyTorch</td>
+</tr>
+<tr>
+<td>whisper.cpp</td>
+<td>a <code>whisper-cli</code> build plus a model file</td>
+<td>any OS, no Python packages</td>
+</tr>
+</tbody>
+</table></div>
+<p>The default model, <code>small</code>, is a 0.5 GB download on first use; on our Apple Silicon laptop it transcribed a 6.5-minute rehearsal in 46 seconds (<code>base</code>: 145 MB, 17 seconds). Larger models make fewer errors on field terms. Cloud transcription (Groq, OpenAI) is available but only when you ask for it, since it uploads the recording.</p>
+</section>
+<section id="scripts"><h2>Helper scripts</h2>
+<p>All need Python 3.10+; only transcription needs extra packages.</p>
+<div class="doc-table"><table>
+<thead>
+<tr>
+<th>Script</th>
+<th>What it does</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>transcribe.py</code></td>
+<td>Recording (audio or video) to a word-timestamped transcript (<code>.json</code> and a readable <code>.txt</code>), locally; <code>--verbatim</code> keeps fillers.</td>
+</tr>
+<tr>
+<td><code>import_transcript.py</code></td>
+<td>Captions (.vtt, .srt), timestamped text or plain text to the same format; <code>--speaker</code> keeps one speaker.</td>
+</tr>
+<tr>
+<td><code>delivery_metrics.py</code></td>
+<td>The measures, with timestamps; <code>--sections</code> for per-section timing, <code>--target-min</code> for the slot, <code>--json</code>/<code>--compare</code> for reruns. Standard library only.</td>
+</tr>
+</tbody>
+</table></div>
+</section>
+<section id="outputs"><h2>Files it reads and writes</h2>
+<div class="doc-table"><table>
+<thead>
+<tr>
+<th>File</th>
+<th>Read or written</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Your recording or transcript, outline or slides</td>
+<td>Read. Never edited.</td>
+</tr>
+<tr>
+<td><code>&lt;name&gt;.transcript.json</code>, <code>&lt;name&gt;.transcript.txt</code></td>
+<td>Written: the timed transcript.</td>
+</tr>
+<tr>
+<td><code>&lt;name&gt;.metrics.md</code>, <code>&lt;name&gt;.metrics.json</code></td>
+<td>Written: the measures, and the numbers for the next comparison.</td>
+</tr>
+<tr>
+<td><code>talk-coach-&lt;talk&gt;-&lt;date&gt;.md</code></td>
+<td>Written: the feedback.</td>
+</tr>
+<tr>
+<td><code>research/talks/</code>, <code>research/claims.md</code></td>
+<td>Read when a <code>research/</code> folder exists; outputs then go to <code>research/talks/</code>.</td>
+</tr>
+<tr>
+<td>Video stills</td>
+<td>Written to a temporary folder in the project and deleted at the end.</td>
+</tr>
+</tbody>
+</table></div>
+</section>
+<section id="faq"><h2>FAQ</h2>
+<h3 id="which-agents-does-it-work-with">Which agents does it work with?</h3>
+<p>Any agent that loads SKILL.md skills and can run Python locally, including Claude Code, Codex CLI, Cursor and Gemini CLI.</p>
+<h3 id="does-my-recording-leave-my-computer">Does my recording leave my computer?</h3>
+<p>Not by default. Transcription runs locally with a Whisper model on your machine; only the model itself is downloaded once. Cloud transcription (Groq or OpenAI) is available, but the agent uses it only if you ask, since it uploads the recording.</p>
+<h3 id="what-do-i-need-to-install">What do I need to install?</h3>
+<p>Python 3.10+, and for recordings one local speech recogniser, for example <code>pip install faster-whisper "av&lt;19"</code> in your project's environment (macOS, Linux and Windows), plus ffmpeg. The skill's transcription guide gives the commands per system, the model sizes and what they cost in time. The measuring scripts themselves use only the standard library.</p>
+<h3 id="i-cant-install-whisper-can-i-still-use-it">I can't install Whisper. Can I still use it?</h3>
+<p>Yes. Rehearse in a one-person Zoom, Teams or Meet call with transcription on, or upload to YouTube unlisted, and give the agent the captions (.vtt or .srt). Timing is then per caption, so section timing and pace still work; pauses inside a caption aren't measured. A plain-text transcript works too, for fillers, terms and structure.</p>
+<h3 id="will-it-comment-on-my-voice-or-body-language">Will it comment on my voice or body language?</h3>
+<p>Only on what the input shows. From a transcript it reports words and timing, and says plainly that intonation, volume and nerves weren't assessed. From a video it looks at stills for stance and facing the audience. It never guesses the rest.</p>
+<h3 id="what-if-the-transcript-gets-my-terms-wrong">What if the transcript gets my terms wrong?</h3>
+<p>The agent proofs the transcript against your outline, lists each misheard term with its timestamp, and doesn't count it against you. In our demo it set aside ten, from "so" for SOH to "U square" for R squared.</p>
+<h3 id="does-it-work-for-a-job-talk-a-defence-or-a-lab-meeting">Does it work for a job talk, a defence or a lab meeting?</h3>
+<p>Yes. Tell it the time limit and who will be in the room. Its delivery guide covers the section balance and what each setting needs, and terms are judged for the audience you name.</p>
+<h3 id="can-it-track-my-progress">Can it track my progress?</h3>
+<p>Yes. Each run saves its measures; give it the next recording and it compares the two runs measure by measure against the targets it set.</p>
+<h3 id="how-long-does-it-take">How long does it take?</h3>
+<p>Our demo, a 6.5-minute rehearsal, took about three minutes end to end, including local transcription with the default model.</p>
+</section>
+<section id="limitations"><h2>Limitations</h2>
+<ul>
+<li>It works from words and timing. A transcript can't show intonation, volume, emphasis, accent or nerves; those are left to your own listening (it offers a short self-rating) and never guessed.</li>
+<li>Video is judged from stills: stance, position and facing the audience, not gestures in motion.</li>
+<li>Filler counts are a lower bound: recognisers drop some even when asked to keep them.</li>
+<li>Recognisers mishear field terms; the agent corrects for them against your outline, but a term missing from the outline may be misread.</li>
+<li>Captions give timing per caption, so pauses inside a caption aren't measured; plain text gives no section timing.</li>
+<li>Pace, section shares and fillers per minute are coaching rules of thumb, not norms.</li>
+<li>Transcription runs on your machine: on an older CPU, expect a few times the 46 seconds our demo took for a 6.5-minute rehearsal.</li>
+<li>It coaches the delivery, not the science, and doesn't see your slides unless you share them as text.</li>
+</ul>
+</section>
+<section id="changelog"><h2>Changelog</h2>
+<p><strong>1.0.0</strong> · October 2026 · First release.</p></section>
+
+      </article>
+    </div>
+  </main>
+
+  <footer class="footer">
+    <div class="wrap footer-inner">
+      <span class="brand"><img src="../../assets/img/avatar.png" alt="" width="24" height="24"> Aurora Lab</span>
+      <nav aria-label="Footer">
+        <a href="https://www.agensi.io/creators/aurora-lab">Agensi</a>
+        <a href="https://github.com/the-aurora-lab">GitHub</a>
+      </nav>
+    </div>
+  </footer>
+</body>
+</html>
