@@ -1,0 +1,199 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Modelling Paper · Aurora Lab</title>
+  <meta name="description" content="Documentation for the Modelling Paper agent skill: your agent co-writes a mathematical or computational modelling paper in any field, as PI and postdoc. It pins the one-sentence claim, writes the full Methods mathematics with a sourced notation table, checks the derivations against your code, never invents references, and keeps a rated list of reviewer objections.">
+  <meta property="og:title" content="Modelling Paper · Aurora Lab">
+  <meta property="og:description" content="Documentation for the Modelling Paper agent skill: your agent co-writes a mathematical or computational modelling paper in any field, as PI and postdoc. It pins the one-sentence claim, writes the full Methods mathematics with a sourced notation table, checks the derivations against your code, never invents references, and keeps a rated list of reviewer objections.">
+  <meta property="og:image" content="https://the-aurora-lab.github.io/assets/shots/modelling-paper/01-methods.png">
+  <meta name="theme-color" content="#0b1020">
+  <link rel="icon" type="image/png" href="../../assets/img/avatar.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../../assets/css/site.css">
+</head>
+<body>
+  <a class="skip" href="#main">Skip to content</a>
+  <header class="nav">
+    <div class="wrap nav-inner">
+      <a class="brand" href="../../" aria-label="Aurora Lab home">
+        <img src="../../assets/img/avatar.png" alt="" width="32" height="32">
+        <span>Aurora Lab</span>
+      </a>
+      <nav aria-label="Primary">
+        <a href="../../#skills">Skills</a>
+        <a href="../../#examples">Examples</a>
+        <a class="btn btn-small" href="https://www.agensi.io/creators/aurora-lab">Get it on Agensi</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main">
+    <section class="docs-hero">
+      <div class="aurora" aria-hidden="true"></div>
+      <div class="wrap">
+        <p class="crumbs"><a href="../../">Aurora Lab</a> / <a href="../../#skills">Skills</a> / Modelling Paper</p>
+        <h1>Modelling Paper</h1>
+        <p class="lede">Turn model results into a paper whose mathematics survives review. Your agent works as PI and postdoc: it pins the one-sentence claim, writes the full Methods mathematics with a notation table that sources every value, checks each derived result against your code, cites only references it has verified, and keeps a rated list of what Reviewer 2 will say.</p>
+        <ul class="meta" aria-label="Skill facts"><li>v1.0.0</li><li>Any modelling paper: ODE, PDE, stochastic, agent-based, statistical, network, optimisation</li><li>Domain packs: biology, epidemiology, ecology, physics &amp; engineering</li><li>Python 3.10+ · standard library (scripts)</li><li>Works with any SKILL.md agent</li></ul>
+        <div class="cta">
+          <a class="btn" href="https://www.agensi.io/creators/aurora-lab">Get it on Agensi · $12</a>
+          <a class="btn btn-ghost" href="#overview">Read the docs</a>
+        </div>
+      </div>
+    </section>
+
+    <div class="wrap docs">
+      <nav class="toc" aria-label="On this page">
+        <p>On this page</p>
+        <ol><li><a href="#overview">Overview</a></li><li><a href="#quick-start">Quick start</a></li><li><a href="#gallery">What you get</a></li><li><a href="#workflow">How it works</a></li><li><a href="#outputs">Files it reads and writes</a></li><li><a href="#helper">Helper scripts</a></li><li><a href="#faq">FAQ</a></li><li><a href="#limitations">Limitations</a></li><li><a href="#changelog">Changelog</a></li></ol>
+      </nav>
+      <article class="prose-doc">
+<section id="overview"><h2>Overview</h2>
+<p>A modelling paper is judged on its mathematics. Is the model written out in full? Does every parameter have a source? Do the steady states, thresholds and distributions in the text actually hold? Does the paper claim more than the model shows? Modelling Paper makes your agent a co-author who handles all of that, in two roles:</p>
+<ul>
+<li><strong>PI.</strong> Owns the story. Pins the one-sentence claim before anything is drafted, challenges weak framing, decides what goes where, and asks "what will Reviewer 2 say?" before anyone else does.</li>
+<li><strong>Postdoc.</strong> Drafts full prose, writes the complete Methods mathematics, and checks it.</li>
+</ul>
+<p>What you get:</p>
+<ul>
+<li><strong>It starts from what you have.</strong> It reads your model code, results, outline and any partial draft before asking anything. The Methods describe what your code actually solves, and any difference between the code and your notes is reported to you.</li>
+<li><strong>The full Methods mathematics.</strong> The complete model with every symbol defined, initial and boundary conditions, scaling, derived results with enough derivation to check, numerical settings, and a notation table: symbol, meaning, units, value or range, source.</li>
+<li><strong>Checked, not asserted.</strong> Dimensions, limiting cases, your code against the equations, and a numerical check of every analytic result when a Python environment is available. Every number in the prose comes from a computation. A claim in your notes that the model cannot support is flagged before it is written up.</li>
+<li><strong>Any model class, any field.</strong> A checklist per model class (deterministic ODEs, DDEs and PDEs; master equations and SDEs; agent-based models; statistical and inference models; networks; optimisation and control; numerical methods; surrogates). Domain packs add vocabulary, conventions and field-specific reviewer objections for biology, epidemiology, ecology, and physics and engineering.</li>
+<li><strong>Reviewer objections, rated and planned.</strong> Each objection specific to your paper, rated fatal, major or minor, with the planned answer.</li>
+<li><strong>No invented references.</strong> A citation is verified (seen in a search result, supplied by you, or read) or it is marked. A parameter without a known source gets a <code>[CITE]</code> marker, never a plausible-looking citation.</li>
+</ul>
+<p><strong>Other Aurora Lab skills for the same paper:</strong> <a href="../claim-check/">Claim Check</a> (does each sentence stay inside its evidence?), <a href="../scientific-voice/">Scientific Voice</a> (how the sentences read) and <a href="../journal-house-style/">Journal House Style</a> (fit the venue's guidelines) pair well with it. Each works on its own.</p>
+</section>
+<section id="quick-start"><h2>Quick start</h2>
+<ol>
+<li><strong>Get the skill</strong> from <a href="https://www.agensi.io/creators/aurora-lab">Agensi</a> and add it to your agent (Claude Code, Codex CLI, Cursor, Gemini CLI or any agent that loads SKILL.md skills).</li>
+<li><strong>Open your agent in the project</strong>, ideally with your model's own environment available (for example Python with numpy and scipy) so the agent can check the maths numerically.</li>
+<li><strong>Optional: Python 3.10+</strong> for the two helper scripts (standard library only).</li>
+<li><strong>Ask in plain words.</strong></li>
+</ol>
+<p>Example requests:</p>
+<ul>
+<li><em>"Help me turn these model results into a paper. Start with the Methods."</em></li>
+<li><em>"I have an SEIR model fitted to case data with a school-closure scenario. Is this a paper? Where do I start?"</em></li>
+<li><em>"Write the Methods for my reaction-diffusion model, including the dispersion relation and the mesh study."</em></li>
+<li><em>"Here are my agent-based simulation results. Draft Results and list what reviewers will attack."</em></li>
+<li><em>"Methods paper or application paper? Our new solver is five times faster on these benchmarks."</em></li>
+</ul>
+</section>
+<section id="gallery"><h2>What you get</h2>
+<p>Everything below comes from a real run: a fresh agent session with only this skill installed, given the request shown ($1.07, 281 s). The project was ours and deliberately outside biology: a synthetic two-node thermal model of a cylindrical battery cell (core and can, Joule heating, Arrhenius self-heating, convective cooling), its Python code, four result files and a rough outline. We planted three problems in the outline: a hoped-for Hopf bifurcation, "below the threshold the cell is safe", and a current of 2.5 A where the code uses 3.0 A.</p>
+<p>The agent caught all three. It proved that the system is cooperative, so its eigenvalues are always real and a Hopf bifurcation cannot occur, and offered critical slowing down as the early-warning signal the model does support. It showed that the safe state is only locally stable (a core started 10 K hot runs away 1 K below the threshold). It derived the threshold in closed form, matched the code's bisection to 3e-6 K, and reported the threshold at both currents. It also raised points we had not planned: a 2.5 Ah cell at 3 A is empty in 50 minutes, yet the runaway times are hours, and the self-heating rate drives most of the uncertainty. It invented no references: the user's notes named no sources, so the bibliography stayed empty and every literature value carries a <code>[CITE]</code> marker. We re-derived the Methods and recomputed every number on these cards ourselves. One earlier run (not shown) stated a hand-computed temperature 0.4 K off; the skill now requires every number in the prose to come from a computation, and the run shown here did so.</p>
+<div class="shots"><figure><img src="../../assets/shots/modelling-paper/01-methods.png" alt="Excerpt of the Methods section written in the demo: the Jacobian of the two-node thermal model, its determinant and trace, the argument that the system is cooperative so its eigenvalues are real and no Hopf bifurcation can occur, and the closed-form critical ambient temperature at the saddle-node fold, Eqs. 8 and 9." loading="lazy"><figcaption>Part of research/paper/methods.md written by the agent in the demo run (lightly shortened by us; equations rendered by us with KaTeX). The model, code and results were ours: a synthetic two-node thermal model of a battery cell.</figcaption></figure><figure><img src="../../assets/shots/modelling-paper/02-notation.png" alt="Notation table from the Methods: symbol, meaning, units, value or range, and source for each parameter. Parameters without a known source carry CITE or CHECK markers, including a mismatch between the current in the outline (2.5 A) and in the code (3.0 A)." loading="lazy"><figcaption>The notation table from research/paper/methods.md in the demo run (five rows omitted by us for space). The bibliography stayed empty: the user&#x27;s notes named no sources, so every literature value is marked.</figcaption></figure><figure><img src="../../assets/shots/modelling-paper/03-reviewers.png" alt="Reviewer objections from the PI notes: R1 fatal, the claimed Hopf early warning is impossible; R2 major, &#x27;safe below the threshold&#x27; is only local; R3 major, the headline rests on an unsourced self-heating rate sampled independently of the activation energy; R4 two-node lumping not justified; R6 constant current for hours; R8 novelty against classical Semenov theory." loading="lazy"><figcaption>Six of the eleven reviewer objections in research/paper-notes.md from the demo run (shortened by us).</figcaption></figure><figure><img src="../../assets/shots/modelling-paper/04-checks.png" alt="The maths-checks log: units, the analytic Jacobian against a finite-difference one, a scan showing no complex eigenvalues, the closed-form threshold against the code&#x27;s bisection to 3e-6 K, a limiting case, solver agreement, the Monte Carlo reproduced but not exactly, what was not checked, and the open question about the current." loading="lazy"><figcaption>The Maths checks section and the first open question from research/paper-notes.md in the demo run (lightly shortened by us). We re-checked every number on this card ourselves.</figcaption></figure><figure><img src="../../assets/shots/modelling-paper/05-session.png" alt="Excerpt of the agent session: reading the code, outline and results, numerical checks, writing the Methods and notes, and the final report that drops the Hopf claim, narrows the safety claim and flags the current mismatch." loading="lazy"><figcaption>The agent&#x27;s steps and report from the demo run (paraphrased from its transcript; $1.07, 281 s).</figcaption></figure></div>
+</section>
+<section id="workflow"><h2>How it works</h2>
+<ol>
+<li><strong>Find out where the paper stands.</strong> Read the existing files (outline, notes, sections, claims, bibliography, results, figure plans and the model code), then route: a raw idea goes to the PI first, results get framed into a story, a partial draft gets its narrative arc assessed, a single section gets written with a skeleton around it.</li>
+<li><strong>Pin the claim.</strong> One sentence at the top of the outline before the first paragraph is drafted.</li>
+<li><strong>Identify the model class and the field.</strong> Load the class checklist and, if one fits, the domain pack.</li>
+<li><strong>Write the Methods mathematics.</strong> The model, notation table, scaling, derived results, numerics and any inference, using the per-class checklist.</li>
+<li><strong>Verify.</strong> Dimensions, signs, limiting cases, code against equations, analytic results against numerical ones, the user's claims against the maths, and every number in the prose recomputed. What was checked, how, and what was not checked goes into the notes.</li>
+<li><strong>Draft the other sections</strong> around the planned figures, keeping the wording no stronger than the claims list.</li>
+<li><strong>Anticipate reviewers.</strong> A running, rated objection list with a planned answer for each.</li>
+<li><strong>Cite carefully, then export.</strong> Verified references only; the citation audit runs before any LaTeX export.</li>
+</ol>
+</section>
+<section id="outputs"><h2>Files it reads and writes</h2>
+<div class="doc-table"><table>
+<thead>
+<tr>
+<th></th>
+<th>Path</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Reads</td>
+<td>your model code, <code>research/results/*.json</code>, and any existing <code>research/outline.md</code>, <code>paper-notes.md</code>, <code>paper/*</code>, <code>claims.md</code>, <code>refs.bib</code>, <code>figures/*.md</code></td>
+</tr>
+<tr>
+<td>Writes</td>
+<td>manuscript sections in <code>research/paper/</code> (nothing else goes there), the working files <code>research/outline.md</code> and <code>research/paper-notes.md</code>, new figure plans <code>research/figures/figN.md</code>, its own lines in <code>research/claims.md</code>, entries in <code>research/refs.bib</code></td>
+</tr>
+<tr>
+<td>Runs</td>
+<td>the two helper scripts, and throwaway scripts that check the maths in your environment (kept in the system temp directory unless you ask)</td>
+</tr>
+<tr>
+<td>Never</td>
+<td>edits your code, data or result files; invents a reference or a parameter source; uses the network from its scripts</td>
+</tr>
+</tbody>
+</table></div>
+<p>Without a <code>research/</code> folder it works where you point it: the sections go in your paper folder and the two working files beside it. Projects from the older layout, with <code>outline.md</code> and <code>notes.md</code> inside <code>paper/</code>, keep working.</p>
+</section>
+<section id="helper"><h2>Helper scripts</h2>
+<pre><code class="language-bash">python scaffold_paper.py research --title &quot;Working title&quot;   # paper skeleton, never overwrites
+python check_refs.py research                                # citation audit
+python check_refs.py research --strict                       # before submission
+</code></pre>
+<p>Both ship in the skill's <code>scripts/</code> folder. Python 3.10+, standard library only, no network.</p>
+<div class="doc-table"><table>
+<thead>
+<tr>
+<th>Script</th>
+<th>What it does</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>scaffold_paper.py</code></td>
+<td>Creates the section files, the outline and notes files, the figures folder, <code>claims.md</code> and <code>refs.bib</code> with starter templates. Skips every file that already exists.</td>
+</tr>
+<tr>
+<td><code>check_refs.py</code></td>
+<td>Lists cited keys missing from <code>refs.bib</code> (error), cited keys marked UNVERIFIED, <code>[CITE: ...]</code> and <code>[CHECK: ...]</code> placeholders, and entries never cited. Reads Pandoc and LaTeX citation syntax. Exit code 1 on errors, or on any warning with <code>--strict</code>.</td>
+</tr>
+</tbody>
+</table></div>
+</section>
+<section id="faq"><h2>FAQ</h2>
+<h3 id="which-kinds-of-models-does-it-handle">Which kinds of models does it handle?</h3>
+<p>Any paper whose contribution rests on a mathematical or computational model: deterministic ODEs, DDEs and PDEs, master equations and SDEs, agent-based models, statistical and inference models, network models, optimisation and control, numerical-methods papers and surrogate models. Each class has a checklist of what its Methods must contain.</p>
+<h3 id="my-field-isnt-biology-will-it-work">My field isn't biology. Will it work?</h3>
+<p>Yes. The core is field-neutral, and the demo above is an engineering model. Domain packs add vocabulary and field-specific reviewer objections for biology, epidemiology, ecology, and physics and engineering. For other fields, such as economics, climate or neuroscience, it works from the core and asks you which conventions and reporting standards your community expects.</p>
+<h3 id="does-it-actually-check-the-maths">Does it actually check the maths?</h3>
+<p>Checking is part of the workflow, not an afterthought: units, limiting cases, your code against the written equations, and a numerical check of every analytic steady state, threshold or distribution when a Python environment is available. The notes record what was checked, how, and what could not be checked. It is a careful review, not a formal proof.</p>
+<h3 id="will-it-make-up-references">Will it make up references?</h3>
+<p>No. A reference is cited only if the agent saw it in a search result with a DOI or stable identifier, you supplied it, or it read the paper. Anything else is marked UNVERIFIED or left as a <code>[CITE: what is needed]</code> placeholder, and <code>check_refs.py</code> lists them all before export.</p>
+<h3 id="does-it-write-the-whole-paper-or-just-the-methods">Does it write the whole paper or just the Methods?</h3>
+<p>Both. It drafts every section, the abstract last, and starts wherever you ask. The demo asked for the Methods and the reviewer objections first.</p>
+<h3 id="how-is-it-different-from-claim-check">How is it different from Claim Check?</h3>
+<p>Modelling Paper co-writes the paper and its mathematics. Claim Check audits finished prose sentence by sentence against the evidence. They pair well, and neither needs the other.</p>
+</section>
+<section id="limitations"><h2>Limitations</h2>
+<ul>
+<li>It writes and checks the paper; it does not run your study. Numerical checks need a working environment for your model; without one the agent checks by hand and lists what it could not verify.</li>
+<li>Its checks are a careful review, not a formal proof of correctness.</li>
+<li>Without a literature-search tool or your own PDFs and BibTeX, references stay as <code>[CITE]</code> placeholders for you to fill.</li>
+<li>Domain packs cover biology, epidemiology, ecology, and physics and engineering. Other fields get the general core.</li>
+<li>It plans figures and writes captions but does not produce figures, format for a specific journal or edit sentence-level style. Markdown is the working format; LaTeX export is a separate step on request.</li>
+</ul>
+</section>
+<section id="changelog"><h2>Changelog</h2>
+<p><strong>1.0.0</strong> · October 2026 · First release: PI and postdoc roles, Methods mathematics by model class with a verification pass, domain packs for biology, epidemiology, ecology, and physics and engineering, a general reviewer-objection catalogue, verified-only citations, and the scaffold and citation-audit scripts.</p></section>
+
+      </article>
+    </div>
+  </main>
+
+  <footer class="footer">
+    <div class="wrap footer-inner">
+      <span class="brand"><img src="../../assets/img/avatar.png" alt="" width="24" height="24"> Aurora Lab</span>
+      <nav aria-label="Footer">
+        <a href="https://www.agensi.io/creators/aurora-lab">Agensi</a>
+        <a href="https://github.com/the-aurora-lab">GitHub</a>
+      </nav>
+    </div>
+  </footer>
+</body>
+</html>
