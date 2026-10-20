@@ -38,7 +38,7 @@
         <p class="crumbs"><a href="../../">Aurora Lab</a> / <a href="../../#skills">Skills</a> / Slide Architect</p>
         <h1>Slide Architect</h1>
         <p class="lede">Presentation-ready research talks from your own paper, figures and results. Your agent states the finding by slide 3, writes every headline as a claim backed by one piece of evidence, redraws your figures at slide size, traces every number to your material, and builds an editable .pptx with speaker notes, then measures and looks at every slide before you rehearse.</p>
-        <ul class="meta" aria-label="Skill facts"><li>v1.0.0</li><li>Python 3.10+ · python-pptx · Pillow · matplotlib</li><li>Chrome, Chromium, Edge or Brave</li><li>No network access</li><li>Works with any SKILL.md agent</li></ul>
+        <ul class="meta" aria-label="Skill facts"><li>v1.1.0</li><li>Python 3.10+ · python-pptx · Pillow · matplotlib</li><li>Chrome, Chromium, Edge or Brave</li><li>No network access</li><li>Works with any SKILL.md agent</li></ul>
         <div class="cta">
           <a class="btn" href="https://www.agensi.io/skills/slide-architect-presentation-ready-research-talks">Get it on Agensi · $12</a>
           <a class="btn btn-ghost" href="#overview">Read the docs</a>
@@ -49,7 +49,7 @@
     <div class="wrap docs">
       <nav class="toc" aria-label="On this page">
         <p>On this page</p>
-        <ol><li><a href="#overview">Overview</a></li><li><a href="#quick-start">Quick start</a></li><li><a href="#gallery">What you get</a></li><li><a href="#workflow">How it works</a></li><li><a href="#browser">Browser requirement</a></li><li><a href="#outputs">Files it reads and writes</a></li><li><a href="#helper">Command line and helper API</a></li><li><a href="#faq">FAQ</a></li><li><a href="#limitations">Limitations</a></li><li><a href="#changelog">Changelog</a></li></ol>
+        <ol><li><a href="#overview">Overview</a></li><li><a href="#quick-start">Quick start</a></li><li><a href="#gallery">What you get</a></li><li><a href="#workflow">How it works</a></li><li><a href="#browser">Browser requirement</a></li><li><a href="#outputs">Files it reads and writes</a></li><li><a href="#helper">Command line and figure style</a></li><li><a href="#faq">FAQ</a></li><li><a href="#limitations">Limitations</a></li><li><a href="#changelog">Changelog</a></li></ol>
       </nav>
       <article class="prose-doc">
 <section id="overview"><h2>Overview</h2>
@@ -208,23 +208,24 @@
 </tr>
 <tr>
 <td>Writes</td>
-<td><code>talk/</code> (or <code>research/talk/</code>): <code>sources.md</code>, <code>storyboard.md</code>, <code>deck.json</code>, redrawn figures and a copy of your plotting script, <code>deck.pptx</code>, <code>deck.html</code>, <code>deck_notes.md</code>, <code>render/deck.pdf</code>, <code>render/slide-NN.png</code>, <code>render/grid-N.png</code></td>
+<td><code>talk/</code> (or <code>research/talk/</code>): <code>sources.md</code>, <code>storyboard.md</code>, <code>deck.json</code>, redrawn figures and the figure script that redraws them (a copy of your plotting script), <code>deck.pptx</code>, <code>deck.html</code>, <code>deck_notes.md</code>, <code>render/deck.pdf</code>, <code>render/slide-NN.png</code>, <code>render/grid-N.png</code></td>
 </tr>
 </tbody>
 </table></div>
-<p>Your paper, figures, data and scripts are never modified.</p>
+<p>Your paper, figures, data and scripts are never modified, and no skill file is copied into your project.</p>
 </section>
-<section id="helper"><h2>Command line and helper API</h2>
+<section id="helper"><h2>Command line and figure style</h2>
+<p>Your agent runs these for you. Each script is a single self-contained file: it runs from the skill's <code>scripts/</code> folder, with the file on standard input (<code>python - talk/deck.json &lt; build_deck.py</code>) or from a temporary copy, and writes only its outputs into your project.</p>
 <pre><code class="language-bash">python slide-architect/scripts/build_deck.py talk/deck.json                 # .pptx, HTML, notes, PDF, slide images, report
 python slide-architect/scripts/build_deck.py talk/deck.json --no-render     # no browser needed
 python slide-architect/scripts/deck_lint.py talk/deck.json                  # content rules (or an existing .pptx)
+python slide-architect/scripts/deck_lint.py --headline &quot;Shade cools bus stops by 4 °C&quot; &quot;Results&quot;
 python slide-architect/scripts/trace_numbers.py talk/deck.json paper.md data/
-python slide-architect/scripts/headline_check.py &quot;Shade cools bus stops by 4 °C&quot; &quot;Results&quot;
 </code></pre>
 <div class="doc-table"><table>
 <thead>
 <tr>
-<th>Helper</th>
+<th>Script</th>
 <th>Purpose</th>
 </tr>
 </thead>
@@ -239,26 +240,11 @@ python slide-architect/scripts/headline_check.py &quot;Shade cools bus stops by 
 </tr>
 <tr>
 <td><code>deck_lint.py</code></td>
-<td>Content rules for a spec, or a review of an existing .pptx</td>
-</tr>
-<tr>
-<td><code>headline_check.py</code></td>
-<td>Is a headline a claim, a topic label or a question?</td>
-</tr>
-<tr>
-<td><code>slide_style.use()</code> / <code>figure(w, h)</code></td>
-<td>matplotlib settings and a figure at its size on the slide</td>
-</tr>
-<tr>
-<td><code>slide_style.label_end(...)</code>, <code>check(fig)</code>, <code>save(fig, path)</code></td>
-<td>Direct labels, a check for text under 18 pt, saving at the planned size</td>
-</tr>
-<tr>
-<td><code>slide_style.equation(tex, path)</code></td>
-<td>One equation rendered to an image, no LaTeX installation needed</td>
+<td>Content rules for a spec, or a review of an existing .pptx; <code>--headline</code> says whether a headline is a claim, a topic label or a question</td>
 </tr>
 </tbody>
 </table></div>
+<p>The figure script you keep (for example <code>talk/make_slide_figures.py</code>) carries a short slide style block, with no import of the skill, so it redraws your figures anywhere with matplotlib and numpy alone: slide-sized type and lines, <code>figure(w, h)</code> at the size the figure takes on the slide, <code>label_end</code> for direct labels, <code>check_text</code> for text under 18 pt, <code>save</code> at the planned size, and <code>equation(tex, path)</code> to render one equation to an image without a LaTeX installation.</p>
 <p>The spec is plain JSON: title, finding, slot length, evidence blocks, accent colour, and per slide a type (title, claim, section, outline, end), a headline, one piece of evidence, a caption, notes and seconds. The skill ships a complete synthetic example.</p>
 </section>
 <section id="faq"><h2>FAQ</h2>
@@ -267,9 +253,11 @@ python slide-architect/scripts/headline_check.py &quot;Shade cools bus stops by 
 <h3 id="will-it-change-my-numbers-or-figures">Will it change my numbers or figures?</h3>
 <p>No. Every number on the slides and in the notes is checked against your paper and data, and figures are redrawn from a copy of your script with the same data and analysis. Your originals are never modified.</p>
 <h3 id="can-i-edit-the-slides-afterwards">Can I edit the slides afterwards?</h3>
-<p>Yes. The .pptx opens in PowerPoint, Keynote, LibreOffice and Google Slides with speaker notes. For larger changes, edit the JSON spec and rebuild so the checks run again.</p>
+<p>Yes. The .pptx opens in PowerPoint, Keynote, LibreOffice and Google Slides with speaker notes. For larger changes, ask your agent to edit the JSON spec and rebuild, so the checks run again.</p>
 <h3 id="does-it-use-my-institutions-template">Does it use my institution's template?</h3>
 <p>No. It uses one clean built-in style with your choice of accent colour, font, aspect ratio and logo. You can paste the slides into a template afterwards.</p>
+<h3 id="does-it-work-through-agensis-mcp-connection-without-a-skill-folder">Does it work through Agensi's MCP connection, without a skill folder?</h3>
+<p>Yes. Your agent loads the instructions and each script on request, runs the scripts in-session and writes only the talk files into your project. The figure script it leaves you is self-contained, so you can redraw the figures without the skill. No skill file is copied into your project. Version 1.1 was tested this way.</p>
 <h3 id="can-it-review-a-deck-i-already-have">Can it review a deck I already have?</h3>
 <p>Yes: it lints the .pptx (topic titles, wordy slides, small text, legends, pies, 3D charts, big tables), maps it onto the talk structure and proposes a restructure, then rebuilds it if you want.</p>
 </section>
@@ -285,6 +273,7 @@ python slide-architect/scripts/headline_check.py &quot;Shade cools bus stops by 
 </ul>
 </section>
 <section id="changelog"><h2>Changelog</h2>
+<p><strong>1.1.0</strong> · October 2026 · Works when the skill is delivered without a local folder (Agensi's MCP connection): the headline check is merged into <code>deck_lint.py</code> (<code>--headline</code>, same results), so every script is one self-contained file that runs in-session and writes only its outputs. <code>slide_style.py</code> is replaced by a slide style block that the figure script you keep carries, so it redraws your figures with matplotlib and numpy alone (same figures, byte for byte) and no skill file is copied into or imported by your project. Decks build exactly as in 1.0.</p>
 <p><strong>1.0.0</strong> · October 2026 · First release.</p></section>
 
       </article>
