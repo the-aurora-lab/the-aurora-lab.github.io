@@ -38,7 +38,7 @@
         <p class="crumbs"><a href="../../">Aurora Lab</a> / <a href="../../#skills">Skills</a> / Table Design</p>
         <h1>Table Design</h1>
         <p class="lede">Publication-ready results tables from your CSV. Your agent pivots methods × datasets, rounds mean ± SD to match, bolds the best value per column, marks and explains missing runs, writes a takeaway caption, and renders the table to check it before you paste it into the paper.</p>
-        <ul class="meta" aria-label="Skill facts"><li>v1.0.0</li><li>Python 3.10+ · standard library</li><li>No network access</li><li>Works with any SKILL.md agent</li></ul>
+        <ul class="meta" aria-label="Skill facts"><li>v1.1.0</li><li>Python 3.10+ · standard library</li><li>No network access</li><li>Works with any SKILL.md agent</li></ul>
         <div class="cta">
           <a class="btn" href="https://www.agensi.io/skills/table-design-publication-ready-results-tables">Get it on Agensi · $5</a>
           <a class="btn btn-ghost" href="#overview">Read the docs</a>
@@ -80,7 +80,7 @@
 </ul>
 </section>
 <section id="gallery"><h2>What you get</h2>
-<p>Everything below, except the last image, comes from a real run: a fresh agent session with only this skill installed, given the request in the session card. The input was ours: a synthetic, seeded <code>results.csv</code> with six classifiers on four image datasets (mean and SD of accuracy over seeds, seeds per cell, training time, run status), including one run that ran out of memory, one cell with 3 seeds instead of 5, and a dataset where a baseline edges out the proposed method within noise. The run produced the LaTeX and Markdown tables and a rendered preview; it noted the missing run and the 3-seed cell under the table, and its caption does not claim a win on the dataset where the gap is within one SD. Every number in the table matches the CSV.</p>
+<p>Everything below, except the last image, comes from a real run: a fresh agent session with only this skill installed, given the request in the session card. The input was ours: a synthetic, seeded <code>results.csv</code> with six classifiers on four image datasets (mean and SD of accuracy over seeds, seeds per cell, training time, run status), including one run that ran out of memory, one cell with 3 seeds instead of 5, and a dataset where a baseline edges out the proposed method within noise. The run produced the LaTeX and Markdown tables and a rendered preview; it noted the missing run and the 3-seed cell under the table, and its caption does not claim a win on the dataset where the gap is within one SD. Every number in the table matches the CSV. Version 1.1 was rerun on the same request, installed and through Agensi's MCP connection without a skill folder: both runs produced the same table cells, bolded ViT-S on Seeds with a note that the gap is within one SD, and noted the missing run and the 3-seed cell.</p>
 <div class="shots"><figure><img src="../../assets/shots/table-design/01-table.png" alt="A booktabs LaTeX table: six methods by four datasets, test accuracy mean ± SD, best mean per column in bold, one cell shown as an en dash, three notes under the table." loading="lazy"><figcaption>previews/table2.png from the demo run: the LaTeX table the skill wrote, compiled and rendered by its preview script.</figcaption></figure><figure><img src="../../assets/shots/table-design/02-before-after.png" alt="Left: the raw results CSV with 24 rows of method, dataset, mean, SD, seeds, minutes and status. Right: the rendered table." loading="lazy"><figcaption>Left: the synthetic input CSV we gave the skill (shown as text by us). Right: the table it produced in the demo run.</figcaption></figure><figure><img src="../../assets/shots/table-design/03-markdown.png" alt="The Markdown table the skill wrote: caption, six rows by four datasets, three notes." loading="lazy"><figcaption>table2.md from the demo run, verbatim.</figcaption></figure><figure><img src="../../assets/shots/table-design/04-session.png" alt="Excerpt of the agent session: reading the CSV, running the table script, rendering the preview, and the final report." loading="lazy"><figcaption>The agent&#x27;s steps and report from the demo run (paraphrased from its transcript).</figcaption></figure><figure><img src="../../assets/shots/table-design/05-spanish.png" alt="A Markdown table in Spanish: soil-moisture RMSE of five models at four sites, with decimal commas." loading="lazy"><figcaption>examples/tabla1_es.md, shipped with the skill: the script&#x27;s output for its bundled synthetic example (our command, not the demo run).</figcaption></figure></div>
 </section>
 <section id="workflow"><h2>How it works</h2>
@@ -160,10 +160,11 @@
 <p>Your data files are never modified.</p>
 </section>
 <section id="helper"><h2>Command line and helper API</h2>
-<pre><code class="language-bash">python table-design/scripts/table_fmt.py results.csv --pivot method,dataset,acc_mean,acc_sd \
+<p>Your agent runs these for you. Each script is a single self-contained file: it runs from the skill's <code>scripts/</code> folder or with the file on standard input (<code>python - results.csv --out table2.md &lt; table_fmt.py</code>), and writes only the table or the preview.</p>
+<pre><code class="language-bash">python table_fmt.py results.csv --pivot method,dataset,acc_mean,acc_sd \
     --scale '*=1e-2' --units '*=%' --best max --rename method=Method \
     --caption &quot;Takeaway. What is shown, n, what ± means.&quot; --note &quot;–: not run.&quot; --out table2.tex
-python table-design/scripts/preview.py table2.tex previews/table2.png --number 2
+python preview.py table2.tex previews/table2.png --number 2
 </code></pre>
 <div class="doc-table"><table>
 <thead>
@@ -221,6 +222,8 @@ python table-design/scripts/preview.py table2.tex previews/table2.png --number 2
 <p>No. Bold marks the highest (or lowest) mean per column; a note says so, and the agent flags when the best value is within one SD of the next.</p>
 <h3 id="can-it-start-from-raw-per-seed-results">Can it start from raw per-seed results?</h3>
 <p>The pivot expects one row per method × dataset. The agent can average per-seed rows with a short script first, but the bundled tool does not aggregate.</p>
+<h3 id="does-it-work-through-agensis-mcp-connection-without-a-skill-folder">Does it work through Agensi's MCP connection, without a skill folder?</h3>
+<p>Yes. Your agent loads the instructions and each script on request and runs the scripts in-session. The only files it writes into your project are the tables and their previews; nothing from the skill is copied there. Version 1.1 was tested this way.</p>
 <h3 id="will-it-change-my-files">Will it change my files?</h3>
 <p>No. It writes new table files and previews; your data are never modified.</p>
 </section>
@@ -234,6 +237,7 @@ python table-design/scripts/preview.py table2.tex previews/table2.png --number 2
 </ul>
 </section>
 <section id="changelog"><h2>Changelog</h2>
+<p><strong>1.1.0</strong> · October 2026 · Works when the skill is delivered without a local folder (Agensi's MCP connection): the instructions say how to run the two scripts from the skill folder, standard input or a temporary copy, and never to copy a skill file into your project. <code>table_fmt.py</code> writes its one invisible character (the narrow no-break space) as an escape, so a copy your agent writes out keeps it. Tables and previews come out exactly as in 1.0.</p>
 <p><strong>1.0.0</strong> · October 2026 · First release.</p></section>
 
       </article>
