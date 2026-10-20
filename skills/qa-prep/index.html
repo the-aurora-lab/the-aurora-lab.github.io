@@ -38,7 +38,7 @@
         <p class="crumbs"><a href="../../">Aurora Lab</a> / <a href="../../#skills">Skills</a> / Q&amp;A Prep</p>
         <h1>Q&amp;A Prep</h1>
         <p class="lede">Hard questions answered before they&#x27;re asked. Your agent reads your paper, slides or results, finds the weak spots a sharp questioner will hit, ranks the questions you&#x27;ll get, and drafts short answers that stay inside what your material supports, with every number checked.</p>
-        <ul class="meta" aria-label="Skill facts"><li>v1.0.0</li><li>Talks, posters, defences</li><li>Python 3.10+ (number check)</li><li>Works with any SKILL.md agent</li></ul>
+        <ul class="meta" aria-label="Skill facts"><li>v1.1.0</li><li>Talks, posters, defences</li><li>Python 3.10+ (number check)</li><li>Works with any SKILL.md agent</li></ul>
         <div class="cta">
           <a class="btn" href="https://www.agensi.io/skills/q-a-prep-hard-questions-answered-before-they-re-asked">Get it on Agensi · $5</a>
           <a class="btn btn-ghost" href="#overview">Read the docs</a>
@@ -82,7 +82,7 @@
 </section>
 <section id="gallery"><h2>What you get</h2>
 <p>Everything below comes from one real run: a fresh agent session with only this skill installed, given the request shown in the last image ($1.61, about four minutes). The material was ours: a made-up draft paper, a 12-minute slide outline and the count data for a field study of sown wildflower strips and pollinator visits on eight farms. We planted six weak spots: "doubled" in the title against an estimate of 1.6 (95% CI 1.2 to 2.1), a test on 160 counts when the farm is the unit, nine farms in the abstract but eight in the results, a yield claim from three self-selected farms, strip margins chosen by the farmers, and one season of dry mornings.</p>
-<p>The run found all six, and one we hadn't planned: strip and control counts logged with identical start times, so nobody knows who walked which margin first. It recomputed the headline numbers from the raw data (they matched the paper), ran four questioner subagents (the chair, a field statistician, an agronomist, a farm adviser), ranked 18 questions and drafted 11 answers. Farm-level statistics the paper doesn't report went into <code>[GAP]</code> notes for the speaker to confirm, not into the answers. The number check passed on 39 numbers. We checked the farm-level values it computed against the data ourselves.</p>
+<p>The run found all six, and one we hadn't planned: strip and control counts logged with identical start times, so nobody knows who walked which margin first. It recomputed the headline numbers from the raw data (they matched the paper), ran four questioner subagents (the chair, a field statistician, an agronomist, a farm adviser), ranked 18 questions and drafted 11 answers. Farm-level statistics the paper doesn't report went into <code>[GAP]</code> notes for the speaker to confirm, not into the answers. The number check passed on 39 numbers. We checked the farm-level values it computed against the data ourselves. Version 1.1 was rerun on the same request through Agensi's MCP connection, without a skill folder: four fresh questioners again, all six weak spots and the shared start times found, 17 questions ranked, and the number check passed on 68 numbers.</p>
 <div class="shots"><figure><img src="../../assets/shots/qa-prep/01-dangerous.png" alt="Table of the five top-ranked questions for a talk on wildflower strips: doubled versus 1.6 times, the test treating 160 counts as independent, the yield claim from three farms, farmer-chosen strip placement, and the missing ninth farm, each with a defensible answer and which questioners raised it." loading="lazy"><figcaption>The top five of 18 ranked questions from the demo&#x27;s prep sheet, with their answers (shortened by us). The paper, talk and data were ours: made up for the test, with six weak spots planted.</figcaption></figure><figure><img src="../../assets/shots/qa-prep/02-answer.png" alt="Two drafted answers. Q4, on farmer-chosen strip placement: a direct answer conceding it cannot be ruled out, what the design controls, the limit, what would settle it, a gap note and the sources. Q2, on pseudoreplication: agreement that the farm is the replicate, the farm-level effect size, a gap note to rerun the test, and the number check passing." loading="lazy"><figcaption>Two answers from the demo&#x27;s prep sheet (lightly shortened by us), and the last line of its number check.</figcaption></figure><figure><img src="../../assets/shots/qa-prep/03-evidence.png" alt="Evidence map with eight claims: doubled visits (stretched), 8.2 versus 5.1 visits (supported), significance on 160 counts (stretched), 6 percent yield (stretched), visits translate into yields (unsupported), low cost (unsupported), nine farms (inconsistent), and same-morning counts (supported, order unknown)." loading="lazy"><figcaption>Eight of the twelve rows of the evidence map in the demo&#x27;s prep sheet (wording shortened by us).</figcaption></figure><figure><img src="../../assets/shots/qa-prep/04-gaps.png" alt="Table of gaps to close: replace doubled with 1.6 times, rerun the test with farm as the unit, explain the ninth farm, soften the yield slide, check the walk order in field notes, soften the take-home slide, and acknowledge placement, baseline, floral density and one season." loading="lazy"><figcaption>The &#x27;Gaps to close&#x27; table of the demo&#x27;s prep sheet (shortened by us).</figcaption></figure><figure><img src="../../assets/shots/qa-prep/05-session.png" alt="Excerpt of the agent session: reading the material, recomputing the numbers, four fresh questioner subagents reporting, the number check passing, and the final message." loading="lazy"><figcaption>The agent&#x27;s steps and messages from the demo run (paraphrased from its transcript; $1.61, about four minutes).</figcaption></figure></div>
 </section>
 <section id="workflow"><h2>How it works</h2>
@@ -136,7 +136,7 @@
 </table></div>
 </section>
 <section id="number-check"><h2>The number check</h2>
-<p><code>scripts/check_numbers.py</code> (Python 3.10+, standard library only) reads the prep sheet and your material (text files or folders; PDFs need a text extraction first) and reports every number in the Answers, Backup slides and Lectern card sections:</p>
+<p><code>check_numbers.py</code> (Python 3.10+, standard library only) is a single self-contained file that your agent runs from the skill's <code>scripts/</code> folder or with the file on standard input (<code>python - prep.md paper.md &lt; check_numbers.py</code>). It writes nothing; it reads the prep sheet and your material (text files or folders; PDFs need a text extraction first) and reports every number in the Answers, Backup slides and Lectern card sections:</p>
 <div class="doc-table"><table>
 <thead>
 <tr>
@@ -192,7 +192,7 @@
 </tr>
 <tr>
 <td>A text extraction of a PDF or slide file</td>
-<td>Written to a temporary file for the number check and deleted at the end.</td>
+<td>Written to a temporary file outside your project for the number check and deleted at the end.</td>
 </tr>
 </tbody>
 </table></div>
@@ -209,6 +209,8 @@
 <p>Yes. Tell it your examiners' fields and anything you know about their work; it never guesses an examiner's views.</p>
 <h3 id="can-i-rehearse-with-it">Can I rehearse with it?</h3>
 <p>Yes. Ask for a mock Q&amp;A. It is text-based unless your agent can take voice.</p>
+<h3 id="does-it-work-through-agensis-mcp-connection-without-a-skill-folder">Does it work through Agensi's MCP connection, without a skill folder?</h3>
+<p>Yes. Your agent loads the instructions and the number check on request and runs the check in-session. The only file it writes into your project is the prep sheet; nothing from the skill is copied there. Version 1.1 was tested this way.</p>
 <h3 id="will-it-change-my-slides-or-paper">Will it change my slides or paper?</h3>
 <p>No. It suggests wording for the lines that will draw hard questions and leaves the edits to you.</p>
 <h3 id="how-long-does-it-take">How long does it take?</h3>
@@ -225,6 +227,7 @@
 </ul>
 </section>
 <section id="changelog"><h2>Changelog</h2>
+<p><strong>1.1.0</strong> · October 2026 · Works when the skill is delivered without a local folder (Agensi's MCP connection): the instructions say how to run the number check from the skill folder, standard input or a temporary copy, and never to copy a skill file into your project. The script is unchanged; the prep sheet and the number check work exactly as in 1.0.</p>
 <p><strong>1.0.0</strong> · October 2026 · First release.</p></section>
 
       </article>
