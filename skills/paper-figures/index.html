@@ -38,7 +38,7 @@
         <p class="crumbs"><a href="../../">Aurora Lab</a> / <a href="../../#skills">Skills</a> / Paper Figures</p>
         <h1>Paper Figures</h1>
         <p class="lede">Publication-ready scientific figures from your results. Your agent decides what to plot for the claim you&#x27;re making, applies a colour-blind-safe journal style, checks the figure before calling it done, and writes a caption and spec file next to it.</p>
-        <ul class="meta" aria-label="Skill facts"><li>v1.1.0</li><li>Python 3.10+ · matplotlib</li><li>No network access</li><li>Works with any SKILL.md agent</li></ul>
+        <ul class="meta" aria-label="Skill facts"><li>v1.2.0</li><li>Python 3.10+ · matplotlib</li><li>No network access</li><li>Works with any SKILL.md agent</li></ul>
         <div class="cta">
           <a class="btn" href="https://www.agensi.io/skills/paper-figures-publication-ready-figures">Get it on Agensi · $9</a>
           <a class="btn btn-ghost" href="#overview">Read the docs</a>
@@ -76,7 +76,7 @@
 <li><em>"Panel c hides the replicates. Fix it and keep the colours."</em></li>
 </ul>
 <div class="callout">
-<p>No data at hand? The skill ships a complete worked example: <code>python paper-figures/examples/make_example_figure.py --out research/figures</code> builds a two-panel figure with its caption and spec.</p>
+<p>No data at hand? The skill ships a complete worked example: ask your agent to run it, and it builds a two-panel figure with its caption and spec in <code>research/figures/</code>.</p>
 </div>
 </section>
 <section id="gallery"><h2>What you get</h2>
@@ -136,15 +136,12 @@
 <p>By default these go to <code>research/figures/</code>. Without a <code>research/</code> folder the agent asks where figures belong. It writes nothing else.</p>
 </section>
 <section id="helper"><h2>Style helper</h2>
-<p><code>scripts/figure_style.py</code> is a single file with no dependencies beyond matplotlib. Your agent copies it next to the figure script.</p>
-<pre><code class="language-python">import matplotlib.pyplot as plt
-import figure_style as fs
-
-fs.apply(font_size=7)                                     # Okabe-Ito, Type 42 fonts, print sizes
-fig, axs = plt.subplots(1, 2, figsize=fs.figsize(&quot;nature&quot;, &quot;single&quot;, aspect=0.6))
-fs.panel_label(axs[0], &quot;a&quot;)
-fs.save(fig, &quot;research/figures/fig2&quot;)                     # fig2.pdf + fig2.png
+<p>Every figure script your agent writes for you is <strong>self-contained</strong>. It opens with a short style block (Okabe–Ito colours, print sizes, TrueType font embedding, exact column width in mm, and a <code>save()</code> that writes the PDF and PNG) and runs with matplotlib alone. Nothing from the skill is copied into your project, so the script keeps working after you share the project or remove the skill.</p>
+<pre><code class="language-python">fig, axs = plt.subplots(1, 2, figsize=mm(89, 55))         # Nature single column
+panel_label(axs[0], &quot;a&quot;)
+save(fig, &quot;research/figures/fig2&quot;)                        # fig2.pdf + fig2.png
 </code></pre>
+<p>The skill also ships <code>scripts/figure_style.py</code>, the same style as a helper module with no dependencies beyond matplotlib. Your agent runs it for the font check and for quick mock-ups; it never becomes part of your code.</p>
 <div class="doc-table"><table>
 <thead>
 <tr>
@@ -183,7 +180,7 @@ fs.save(fig, &quot;research/figures/fig2&quot;)                     # fig2.pdf +
 </tr>
 </tbody>
 </table></div>
-<p>From the command line: <code>python figure_style.py fonts fig2.pdf</code> exits with an error if any Type 3 font is present, and <code>python figure_style.py widths</code> prints the width table.</p>
+<p>From the command line: <code>python figure_style.py fonts fig2.pdf</code> exits with an error if any Type 3 font is present, and <code>python figure_style.py widths</code> prints the width table. Both also run with the file on standard input (<code>python - fonts fig2.pdf</code>).</p>
 </section>
 <section id="widths"><h2>Journal widths</h2>
 <div class="doc-table"><table>
@@ -234,7 +231,7 @@ fs.save(fig, &quot;research/figures/fig2&quot;)                     # fig2.pdf +
 </tr>
 </tbody>
 </table></div>
-<p>Any other width works with <code>figsize(width=&lt;mm&gt;)</code>. Publishers update their guidelines, so check your journal's current author guide before final submission.</p>
+<p>Any other width works with <code>mm(&lt;width&gt;, &lt;height&gt;)</code> in your figure script, or <code>figsize(width=&lt;mm&gt;)</code> in the helper. Publishers update their guidelines, so check your journal's current author guide before final submission.</p>
 </section>
 <section id="research-folder"><h2>The <code>research/</code> folder</h2>
 <p>Paper Figures works on its own. If you keep your project in a <code>research/</code> folder, it uses the same plain-file convention as the other Aurora Lab research skills, so they cooperate without calling each other:</p>
@@ -261,6 +258,8 @@ fs.save(fig, &quot;research/figures/fig2&quot;)                     # fig2.pdf +
 <p>No. It plots what you give it and names every interval. If no interval is provided, the figure and caption say so instead of inventing one.</p>
 <h3 id="can-i-use-it-with-figures-i-already-made">Can I use it with figures I already made?</h3>
 <p>Yes. Ask "is this figure ready to submit?" and it runs the verification and integrity review on your existing PDF and plotting code, then proposes fixes.</p>
+<h3 id="does-it-work-through-agensis-mcp-connection-without-a-skill-folder">Does it work through Agensi's MCP connection, without a skill folder?</h3>
+<p>Yes. Your agent loads the instructions and each helper file on request, runs helpers in-session and writes only your figures, their spec files and the figure script into your project. Version 1.2 was tested this way.</p>
 <h3 id="do-i-need-the-other-aurora-lab-skills">Do I need the other Aurora Lab skills?</h3>
 <p>No. They share the <code>research/</code> folder convention if you want to use them together.</p>
 </section>
@@ -272,6 +271,7 @@ fs.save(fig, &quot;research/figures/fig2&quot;)                     # fig2.pdf +
 </ul>
 </section>
 <section id="changelog"><h2>Changelog</h2>
+<p><strong>1.2.0</strong> · October 2026 · Works when the skill is delivered without a local folder (Agensi's MCP connection): helpers run in-session and write only their outputs, figure scripts you keep carry a short inline style block instead of importing the helper, and no skill file is copied into your project.</p>
 <p><strong>1.1.0</strong> · October 2026 · Clearer description; no change to how the skill works.</p>
 <p><strong>1.0.0</strong> · October 2026 · First release.</p></section>
 
