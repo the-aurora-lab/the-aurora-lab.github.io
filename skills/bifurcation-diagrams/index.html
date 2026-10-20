@@ -38,7 +38,7 @@
         <p class="crumbs"><a href="../../">Aurora Lab</a> / <a href="../../#skills">Skills</a> / Bifurcation Diagrams</p>
         <h1>Bifurcation Diagrams</h1>
         <p class="lede">Publication-ready bifurcation diagrams computed from your ODE model. Your agent traces every branch of equilibria through its folds, classifies stability from the Jacobian, locates fold, branch and Hopf points against their exact values, checks each branch by simulation, and draws it all at journal column width.</p>
-        <ul class="meta" aria-label="Skill facts"><li>v1.0.0</li><li>Python 3.10+ · numpy, matplotlib</li><li>No network access</li><li>Works with any SKILL.md agent</li></ul>
+        <ul class="meta" aria-label="Skill facts"><li>v1.1.0</li><li>Python 3.10+ · numpy, matplotlib</li><li>No network access</li><li>Works with any SKILL.md agent</li></ul>
         <div class="cta">
           <a class="btn" href="https://www.agensi.io/skills/bifurcation-diagrams-publication-ready-figures-from-odes">Get it on Agensi · $9</a>
           <a class="btn btn-ghost" href="#overview">Read the docs</a>
@@ -49,7 +49,7 @@
     <div class="wrap docs">
       <nav class="toc" aria-label="On this page">
         <p>On this page</p>
-        <ol><li><a href="#overview">Overview</a></li><li><a href="#quick-start">Quick start</a></li><li><a href="#gallery">What you get</a></li><li><a href="#workflow">How it works</a></li><li><a href="#outputs">Files it reads and writes</a></li><li><a href="#helper">Helper API</a></li><li><a href="#faq">FAQ</a></li><li><a href="#limitations">Limitations</a></li><li><a href="#changelog">Changelog</a></li></ol>
+        <ol><li><a href="#overview">Overview</a></li><li><a href="#quick-start">Quick start</a></li><li><a href="#gallery">What you get</a></li><li><a href="#workflow">How it works</a></li><li><a href="#outputs">Files it reads and writes</a></li><li><a href="#helper">Helper and diagram script</a></li><li><a href="#faq">FAQ</a></li><li><a href="#limitations">Limitations</a></li><li><a href="#changelog">Changelog</a></li></ol>
       </nav>
       <article class="prose-doc">
 <section id="overview"><h2>Overview</h2>
@@ -80,7 +80,7 @@
 </ul>
 </section>
 <section id="gallery"><h2>What you get</h2>
-<p>The first four images come from a real run: a fresh agent session with only this skill installed, given the request in the session card. The input was ours: a <code>model.py</code> with a textbook predator-prey model (logistic prey, Holling type II predation, the Rosenzweig–MacArthur model), chosen because its bifurcation points have closed forms, and different from the skill's bundled examples. The run wrote its own script, traced the prey-only and coexistence branches, located the transcritical point at K = 2/3 and the Hopf point at K = 7/3 (both within about 1e-12 of the exact values, which the agent derived), confirmed all five stability segments by simulation, checked that the Hopf is supercritical, and looked at the figure before reporting. We checked the located points and the cycle extent at K = 4 independently. The last image shows two of the bundled examples, rendered by their own scripts.</p>
+<p>The first four images come from a real run: a fresh agent session with only this skill installed, given the request in the session card. The input was ours: a <code>model.py</code> with a textbook predator-prey model (logistic prey, Holling type II predation, the Rosenzweig–MacArthur model), chosen because its bifurcation points have closed forms, and different from the skill's bundled examples. The run wrote its own script, traced the prey-only and coexistence branches, located the transcritical point at K = 2/3 and the Hopf point at K = 7/3 (both within about 1e-12 of the exact values, which the agent derived), confirmed all five stability segments by simulation, checked that the Hopf is supercritical, and looked at the figure before reporting. We checked the located points and the cycle extent at K = 4 independently. Version 1.1 was rerun on the same request, installed and through Agensi's MCP connection without a skill folder: the same points (within 4e-12 of the exact values), all five segments confirmed, the same figure, and a diagram script that redraws it with numpy and matplotlib alone. The last image shows two of the bundled examples, rendered by their own scripts.</p>
 <div class="shots"><figure><img src="../../assets/shots/bifurcation-diagrams/01-diagram.png" alt="Bifurcation diagram of a predator-prey model in carrying capacity K: the prey-only branch along P = 0 (solid, then dashed after BP), the coexistence branch rising from BP (solid, then dashed after H), and the limit-cycle maximum and minimum opening from H." loading="lazy"><figcaption>rosenzweig_macarthur_K.png from the demo run: predator density against carrying capacity K, with the transcritical point (BP) and the Hopf point (H) located and the attracting limit cycle shown.</figcaption></figure><figure><img src="../../assets/shots/bifurcation-diagrams/02-points.png" alt="The agent&#x27;s report: a table of the two located points (BP at K = 2/3, H at K = 7/3) with numerical and exact values, then the checks it ran." loading="lazy"><figcaption>The top of the agent&#x27;s final report from the demo run, verbatim.</figcaption></figure><figure><img src="../../assets/shots/bifurcation-diagrams/03-caption.png" alt="The caption and spec file the skill wrote next to the figure." loading="lazy"><figcaption>rosenzweig_macarthur_K.md from the demo run, verbatim. The located points also went to results/rosenzweig_macarthur_K-bifurcations.json.</figcaption></figure><figure><img src="../../assets/shots/bifurcation-diagrams/04-session.png" alt="Excerpt of the agent session: reading the model, writing the script, the checks it printed and the report." loading="lazy"><figcaption>The agent&#x27;s steps, the checks its script printed and a line from its report (paraphrased from the demo transcript).</figcaption></figure><figure><img src="../../assets/shots/bifurcation-diagrams/05-examples.png" alt="Left: S-shaped curve of steady states with two saddle-node points. Right: a symmetric branch losing stability at a pitchfork where an asymmetric pair of branches appears." loading="lazy"><figcaption>Two of the three worked examples shipped with the skill, rendered by their own scripts (our command, not the demo run).</figcaption></figure></div>
 </section>
 <section id="workflow"><h2>How it works</h2>
@@ -145,6 +145,14 @@
 </tr>
 <tr>
 <td>Writes</td>
+<td><code>research/figures/&lt;name&gt;.py</code>, the diagram script: your model, the branches to compute and the drawing; it redraws the figure with numpy and matplotlib alone</td>
+</tr>
+<tr>
+<td></td>
+<td><code>research/figures/&lt;name&gt;-branches.json</code>, the computed branches, stability, located points, simulation checks and limit cycles the script draws from</td>
+</tr>
+<tr>
+<td></td>
 <td><code>research/figures/&lt;name&gt;.pdf</code> and <code>.png</code>, the diagram</td>
 </tr>
 <tr>
@@ -155,64 +163,46 @@
 <td></td>
 <td><code>research/results/&lt;name&gt;-bifurcations.json</code>, one entry per located point: kind, parameter value, state, residual, frequency for Hopf points, and the exact value and error when known</td>
 </tr>
-<tr>
-<td></td>
-<td>the script that reproduces all of the above</td>
-</tr>
 </tbody>
 </table></div>
-<p>Without a <code>research/</code> folder it writes where you say. Your model file is never modified.</p>
+<p>Without a <code>research/</code> folder it writes where you say. Your model file is never modified, and no file of the skill itself is copied into your project.</p>
 </section>
-<section id="helper"><h2>Helper API</h2>
-<p>The skill ships a small Python library the agent uses. You can call it yourself too.</p>
+<section id="helper"><h2>Helper and diagram script</h2>
+<p>The skill ships one helper, <code>bifurcation_plot.py</code>, a single file the agent runs from the skill folder, on standard input or from a temporary copy. Its <code>compute</code> command reads the diagram script's <code>DIAGRAM</code> description and writes the branch data; the diagram script then draws from that data.</p>
 <div class="doc-table"><table>
 <thead>
 <tr>
-<th>Function</th>
-<th>Purpose</th>
+<th><code>DIAGRAM</code> key</th>
+<th>What it holds</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td><code>continue_branch(F, x0, p0, p_range, jac=...)</code></td>
-<td>Pseudo-arclength continuation of equilibria; returns the branch with stability and located events</td>
+<td><code>name</code>, <code>parameter</code>, <code>p_range</code>, <code>model</code></td>
+<td>Output name, the parameter and its range, a one-line model description</td>
 </tr>
 <tr>
-<td><code>branch_from_curve(F, X, P)</code></td>
-<td>Classify a curve you already have (for example p solved as a function of x)</td>
+<td><code>families</code></td>
+<td>One entry per branch family: a seed (<code>x0</code> at <code>p0</code>, optionally simulated first with <code>settle</code>), continuation options, or a curve you already have</td>
 </tr>
 <tr>
-<td><code>find_equilibrium</code>, <code>integrate</code></td>
-<td>Newton's method at fixed parameter; simulation (scipy if installed, RK4 otherwise)</td>
+<td><code>cycles</code></td>
+<td>Limit cycles past a Hopf point: range, number of runs, simulation length; joined to the Hopf point, with a run on the other side to tell supercritical from subcritical</td>
 </tr>
 <tr>
-<td><code>spot_check(F, branch)</code></td>
-<td>Simulation check of every stability segment</td>
+<td><code>sweeps</code></td>
+<td>Runs driven by a time-varying parameter (slow passage, hysteresis sweep) to overlay</td>
 </tr>
 <tr>
-<td><code>cycle_amplitude(simulate, params)</code></td>
-<td>Limit-cycle maximum and minimum from simulation</td>
-</tr>
-<tr>
-<td><code>segments</code>, <code>draw_branch</code>, <code>mark_bifurcations</code>, <code>stability_legend</code></td>
-<td>Drawing with the encoding above</td>
-</tr>
-<tr>
-<td><code>operating_point</code>, <code>overlay_trajectory</code></td>
-<td>Mark the parameter value in use; overlay a slow-passage or sweep trajectory</td>
-</tr>
-<tr>
-<td><code>write_figure_md</code>, <code>write_bifurcations_json</code></td>
-<td>Caption-and-spec file; results JSON</td>
-</tr>
-<tr>
-<td><code>use_style</code>, <code>figure_for</code>, <code>save</code></td>
-<td>Publication style, journal column widths, PDF and PNG output</td>
+<td><code>analytic</code></td>
+<td>Exact values to compare the located points with</td>
 </tr>
 </tbody>
 </table></div>
-<pre><code class="language-bash">python bifurcation-diagrams/scripts/bifurcation_plot.py selftest
-python bifurcation-diagrams/examples/fold_cubic.py --out research
+<p>The diagram script carries a short drawing block (no import of the skill): <code>draw_family</code>, <code>mark_points</code>, <code>draw_cycle</code>, <code>stability_legend</code>, <code>operating_point</code>, <code>overlay_trajectory</code>, <code>mm</code> for column widths and <code>save</code> for PDF plus 600-dpi PNG.</p>
+<pre><code class="language-bash">python bifurcation_plot.py compute research/figures/&lt;name&gt;.py --out research   # compute (the agent runs this)
+python research/figures/&lt;name&gt;.py                                              # redraw, numpy + matplotlib only
+python bifurcation_plot.py selftest
 </code></pre>
 </section>
 <section id="faq"><h2>FAQ</h2>
@@ -224,8 +214,12 @@ python bifurcation-diagrams/examples/fold_cubic.py --out research
 <p>At a supercritical Hopf the cycle is born with zero amplitude at the Hopf point, so joining its maximum and minimum curves there is the standard drawing. The simulations start just past the point, and the caption states that the curves are joined.</p>
 <h3 id="does-it-draw-unstable-limit-cycles">Does it draw unstable limit cycles?</h3>
 <p>No. Cycles come from forward simulation, which reaches only attracting ones. For a subcritical Hopf, period-doubling or two-parameter diagrams, the method notes point you to dedicated continuation packages (AUTO-07p, MatCont, PyDSTool, BifurcationKit.jl).</p>
+<h3 id="can-i-change-the-figure-later">Can I change the figure later?</h3>
+<p>Yes. Labels, colours, limits and sizes live in the diagram script, which redraws the figure with numpy and matplotlib alone: edit it and run <code>python research/figures/&lt;name&gt;.py</code>. To change the model, the parameter range or the branches, ask your agent to rerun the compute step; the caption draft is never overwritten by a redraw.</p>
+<h3 id="does-it-work-through-agensis-mcp-connection-without-a-skill-folder">Does it work through Agensi's MCP connection, without a skill folder?</h3>
+<p>Yes. Your agent loads the instructions and the helper on request, runs the helper in-session and writes only the diagram script, the branch data, the figure, the caption draft and the results JSON into your project. The diagram script you keep is self-contained, and no skill file is copied into your project. Version 1.1 was tested this way.</p>
 <h3 id="will-it-change-my-files">Will it change my files?</h3>
-<p>No. It writes new figure, caption, results and script files; your model file is never modified.</p>
+<p>No. It writes new figure, caption, results, branch-data and diagram-script files; your model file is never modified.</p>
 </section>
 <section id="limitations"><h2>Limitations</h2>
 <ul>
@@ -239,6 +233,7 @@ python bifurcation-diagrams/examples/fold_cubic.py --out research
 </ul>
 </section>
 <section id="changelog"><h2>Changelog</h2>
+<p><strong>1.1.0</strong> · October 2026 · Works when the skill is delivered without a local folder (Agensi's MCP connection): the helper is one self-contained file that runs in-session, and its new <code>compute</code> command writes the branch data as JSON, so the diagram script you keep draws on its own and never imports or copies the skill. The compute step also checks a supplied Jacobian against finite differences and runs once on the stable side of a Hopf point to tell supercritical from subcritical. Same mathematics and the same located points as 1.0.</p>
 <p><strong>1.0.0</strong> · October 2026 · First release.</p></section>
 
       </article>
