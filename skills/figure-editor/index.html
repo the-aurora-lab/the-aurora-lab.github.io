@@ -38,7 +38,7 @@
         <p class="crumbs"><a href="../../">Aurora Lab</a> / <a href="../../#skills">Skills</a> / Figure Editor</p>
         <h1>Figure Editor</h1>
         <p class="lede">Multi-panel journal figures from the images you already have. Your agent inspects every panel, lays them out at an exact column width with a, b, c labels, keeps a slot for panels you haven&#x27;t made yet, tells you which ones won&#x27;t print sharply, and drafts the caption.</p>
-        <ul class="meta" aria-label="Skill facts"><li>v1.0.0</li><li>Python 3.10+ · matplotlib, Pillow, numpy</li><li>No network access</li><li>Works with any SKILL.md agent</li></ul>
+        <ul class="meta" aria-label="Skill facts"><li>v1.1.0</li><li>Python 3.10+ · matplotlib, Pillow, numpy</li><li>No network access</li><li>Works with any SKILL.md agent</li></ul>
         <div class="cta">
           <a class="btn" href="https://www.agensi.io/skills/figure-editor-multi-panel-journal-figures-from-your-images">Get it on Agensi · $9</a>
           <a class="btn btn-ghost" href="#overview">Read the docs</a>
@@ -49,7 +49,7 @@
     <div class="wrap docs">
       <nav class="toc" aria-label="On this page">
         <p>On this page</p>
-        <ol><li><a href="#overview">Overview</a></li><li><a href="#quick-start">Quick start</a></li><li><a href="#gallery">What you get</a></li><li><a href="#workflow">How it works</a></li><li><a href="#outputs">Files it reads and writes</a></li><li><a href="#helper">Command line and Python API</a></li><li><a href="#vector">Optional: PDF and SVG panels</a></li><li><a href="#widths">Journal sizes</a></li><li><a href="#research-folder">The <code>research/</code> folder</a></li><li><a href="#faq">FAQ</a></li><li><a href="#limitations">Limitations</a></li><li><a href="#changelog">Changelog</a></li></ol>
+        <ol><li><a href="#overview">Overview</a></li><li><a href="#quick-start">Quick start</a></li><li><a href="#gallery">What you get</a></li><li><a href="#workflow">How it works</a></li><li><a href="#outputs">Files it reads and writes</a></li><li><a href="#helper">Command line</a></li><li><a href="#vector">Optional: PDF and SVG panels</a></li><li><a href="#widths">Journal sizes</a></li><li><a href="#research-folder">The <code>research/</code> folder</a></li><li><a href="#faq">FAQ</a></li><li><a href="#limitations">Limitations</a></li><li><a href="#changelog">Changelog</a></li></ol>
       </nav>
       <article class="prose-doc">
 <section id="overview"><h2>Overview</h2>
@@ -67,7 +67,7 @@
 <section id="quick-start"><h2>Quick start</h2>
 <ol>
 <li><strong>Get the skill</strong> from <a href="https://www.agensi.io/creators/aurora-lab">Agensi</a> and add it to your agent (Claude Code, Codex CLI, Cursor, Gemini CLI or any agent that loads SKILL.md skills).</li>
-<li><strong>Have Python 3.10+ with matplotlib, Pillow and numpy</strong> in the project's environment. The <code>panelkit</code> library ships inside the skill.</li>
+<li><strong>Have Python 3.10+ with matplotlib, Pillow and numpy</strong> in the project's environment. The assembly script ships inside the skill; nothing else to install.</li>
 <li><strong>Ask in plain words.</strong></li>
 </ol>
 <p>Example requests:</p>
@@ -187,7 +187,8 @@
 </table></div>
 <p>It never modifies, moves or overwrites an input image (it refuses to write over one), and never overwrites an existing caption draft unless asked, so your edits survive a rebuild. The caption draft also records each panel's printed size and effective dpi, every warning, and the exact command to rebuild the figure.</p>
 </section>
-<section id="helper"><h2>Command line and Python API</h2>
+<section id="helper"><h2>Command line</h2>
+<p>Your agent runs this for you. <code>assemble_figure.py</code> is a single self-contained file: it runs from the skill's <code>scripts/</code> folder or with the file on standard input (<code>python - --inspect a.png b.tif</code>), and writes only the figure and caption draft you name.</p>
 <pre><code class="language-bash">python figure-editor/scripts/assemble_figure.py --inspect a.png b.tif c.png
 python figure-editor/scripts/assemble_figure.py a.png b.tif none d.png \
     --layout &quot;2x2 grid&quot; --width double --labels lower -o research/figures/fig1.pdf
@@ -225,39 +226,16 @@ python figure-editor/scripts/assemble_figure.py a.png b.tif none d.png \
 <td>raster output resolution; resolution warning threshold (both default 300)</td>
 </tr>
 <tr>
+<td><code>--span A=2x2</code></td>
+<td>in a grid layout, panel A covers 2 columns x 2 rows (<code>A=2</code>: two columns)</td>
+</tr>
+<tr>
+<td><code>--panel-label "C=B'"</code></td>
+<td>a custom label for one panel</td>
+</tr>
+<tr>
 <td><code>none</code></td>
 <td>in place of a path: a placeholder panel</td>
-</tr>
-</tbody>
-</table></div>
-<p>For a re-runnable script, the bundled <code>panelkit</code> library exposes the same steps:</p>
-<div class="doc-table"><table>
-<thead>
-<tr>
-<th>Function or class</th>
-<th>Purpose</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><code>get_image_dims(paths)</code></td>
-<td>pixel size of each panel</td>
-</tr>
-<tr>
-<td><code>suggest_layout(dims)</code></td>
-<td>a layout, fit mode and the reason, to discuss with you</td>
-</tr>
-<tr>
-<td><code>assemble(images=…, layout=…, output=…, width=…)</code></td>
-<td>builds the figure and returns sizes, effective dpi and warnings per panel</td>
-</tr>
-<tr>
-<td><code>Panel(image, label, colspan, rowspan, caption)</code></td>
-<td>per-panel spans, custom labels and draft captions</td>
-</tr>
-<tr>
-<td><code>write_caption_draft(result)</code></td>
-<td>writes the caption draft and spec; never overwrites unless asked</td>
 </tr>
 </tbody>
 </table></div>
@@ -308,7 +286,9 @@ python figure-editor/scripts/assemble_figure.py a.png b.tif none d.png \
 <h3 id="does-it-check-against-my-journals-rules">Does it check against my journal's rules?</h3>
 <p>It checks resolution, shrinking text and figure height automatically, with an adjustable threshold. The reference table covers Nature, Elsevier and IEEE plus typical values for others. Confirm with your journal's current guidelines.</p>
 <h3 id="can-i-change-the-figure-later">Can I change the figure later?</h3>
-<p>Yes. The caption draft records the rebuild command. Replace a file, or swap <code>none</code> for the finished panel, and run it again; your caption edits are kept.</p>
+<p>Yes. The caption draft records the exact command that built the figure. Replace a file, or swap <code>none</code> for the finished panel, and ask your agent to run it again; your caption edits are kept.</p>
+<h3 id="does-it-work-through-agensis-mcp-connection-without-a-skill-folder">Does it work through Agensi's MCP connection, without a skill folder?</h3>
+<p>Yes. Your agent loads the instructions and the script on request, runs the script in-session and writes only the figure and its caption draft into your project. No skill file is copied into your project. Version 1.1 was tested this way.</p>
 <h3 id="do-i-need-the-other-aurora-lab-skills">Do I need the other Aurora Lab skills?</h3>
 <p>No. They share the <code>research/</code> folder convention if you want to use them together.</p>
 </section>
@@ -321,6 +301,7 @@ python figure-editor/scripts/assemble_figure.py a.png b.tif none d.png \
 </ul>
 </section>
 <section id="changelog"><h2>Changelog</h2>
+<p><strong>1.1.0</strong> · October 2026 · Works when the skill is delivered without a local folder (Agensi's MCP connection): the bundled <code>panelkit</code> library is merged into <code>assemble_figure.py</code>, one self-contained script that runs in-session and writes only the figure and its caption draft. It draws the same figures as 1.0, byte for byte. Spans and custom labels are now command-line options (<code>--span</code>, <code>--panel-label</code>) instead of a Python API, and no skill file is copied into your project. The rebuild command in the caption draft never carries <code>--overwrite-captions</code>, so re-running it keeps your caption edits.</p>
 <p><strong>1.0.0</strong> · October 2026 · First release.</p></section>
 
       </article>
