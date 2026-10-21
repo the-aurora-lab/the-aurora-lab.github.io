@@ -232,7 +232,7 @@ figcaption b { color: var(--paper-text); }
 .footer { border-top: 1px solid var(--line); padding: 28px 0 36px; color: var(--muted); font-size: 14px; }
 .footer-inner { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 12px; }
 .footer .brand { color: var(--muted); font-weight: 500; }
-.footer nav { display: flex; gap: 18px; }
+.footer nav { display: flex; flex-wrap: wrap; gap: 8px 18px; }
 .footer nav a { color: var(--muted); }
 
 /* ---------- Docs pages ---------- */
