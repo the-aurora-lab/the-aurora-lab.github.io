@@ -292,3 +292,9 @@ figcaption b { color: var(--paper-text); }
 .prose-doc h2 code { font-size: .8em; }
 @media (prefers-color-scheme: dark) { .prose-doc pre { background: #141c33; border: 1px solid var(--line); } }
 @media (max-width: 600px) { .doc-table td code { white-space: normal; overflow-wrap: anywhere; } .doc-table th, .doc-table td { padding: 8px 10px; } }
+
+/* bundles page */
+.bundle-buy { display: flex; flex-wrap: wrap; gap: 8px; }
+.bundle-buy .btn { text-decoration: none; }
+.docs-single { grid-template-columns: minmax(0, 760px) !important; }
+.docs-single .bundle-buy { margin-top: 4px; }
