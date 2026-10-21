@@ -35,13 +35,13 @@ for name, (gum, pol) in STORES.items():
     items = "".join(f'<li><a href="../skills/{SLUG[s]}/">{html.escape(s)}</a></li>' for s in b["skills"])
     sections.append(f"""      <section id="{name}">
         <h2>{html.escape(b["name"])}</h2>
-        <p><strong>${b["price"]}</strong> · {len(b["skills"])} skills</p>
+        <p><strong>${b["price"]} on Agensi</strong> · ${2 * b["price"]} as a direct download · {len(b["skills"])} skills</p>
         <p>{lede}</p>
         <ul>{items}</ul>
         <p class="bundle-buy">
-          <a class="btn btn-small" href="https://www.agensi.io/bundles/{AGENSI[name]}">On Agensi</a>
-          <a class="btn btn-small btn-ghost" href="{gum}">Download via Gumroad</a>
-          <a class="btn btn-small btn-ghost" href="{pol}">Download via Polar</a>
+          <a class="btn btn-small" href="https://www.agensi.io/bundles/{AGENSI[name]}">On Agensi (${b["price"]})</a>
+          <a class="btn btn-small btn-ghost" href="{gum}">Download via Gumroad (${2 * b["price"]})</a>
+          <a class="btn btn-small btn-ghost" href="{pol}">Download via Polar (${2 * b["price"]})</a>
         </p>
       </section>""")
 
@@ -83,7 +83,7 @@ page = f"""<!doctype html>
       <div class="wrap">
         <p class="crumbs"><a href="../">Aurora Lab</a> / Bundles</p>
         <h1>Bundles</h1>
-        <p class="lede">Four bundles, one research job each. Use them through Agensi, or buy a direct download (a zip of skill folders with install steps for Claude Code, Codex, Cursor and Gemini CLI) via Gumroad or Polar. Same price everywhere.</p>
+        <p class="lede">Four bundles, one research job each. Use them through Agensi, the simplest and cheapest way: your agent loads the latest version whenever you need it. Or buy a direct download you keep (a zip of skill folders with install steps for Claude Code, Codex, Cursor and Gemini CLI, for offline use) via Gumroad or Polar.</p>
       </div>
     </section>
     <div class="wrap docs docs-single">
