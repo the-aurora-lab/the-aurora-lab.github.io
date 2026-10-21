@@ -10,6 +10,8 @@ from pathlib import Path
 
 SITE = Path(__file__).resolve().parent.parent
 BUNDLES = SITE.parent / "research-pipeline" / "listings" / "_bundles"
+AGENSI = {"figures-tables": "publication-ready-figures-tables", "submission-manuscript": "submission-ready-manuscript",
+          "talks-posters": "talks-posters-present-your-research", "research-code": "research-code-ready-to-share"}
 STORES = {  # name: (gumroad, polar)
     "figures-tables": ("https://theauroralab.gumroad.com/l/figures-tables",
                        "https://buy.polar.sh/polar_cl_kRFA2xypRjnMjlXTKgywf3q2o8btjW7sYyrmB3r4Iar"),
@@ -37,7 +39,7 @@ for name, (gum, pol) in STORES.items():
         <p>{lede}</p>
         <ul>{items}</ul>
         <p class="bundle-buy">
-          <a class="btn btn-small" href="https://www.agensi.io/creators/aurora-lab">On Agensi</a>
+          <a class="btn btn-small" href="https://www.agensi.io/bundles/{AGENSI[name]}">On Agensi</a>
           <a class="btn btn-small btn-ghost" href="{gum}">Download via Gumroad</a>
           <a class="btn btn-small btn-ghost" href="{pol}">Download via Polar</a>
         </p>
