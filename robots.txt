@@ -1,4 +1,5 @@
 User-agent: *
 Allow: /
+Disallow: /tools/reference-verifier/samples/
 
 Sitemap: https://the-aurora-lab.github.io/sitemap.xml

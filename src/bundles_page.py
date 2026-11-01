@@ -103,6 +103,7 @@ page = f"""<!doctype html>
       </nav>
     </div>
   </footer>
+  <script data-goatcounter="https://auroralabskills.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
 </body>
 </html>
 """

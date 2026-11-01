@@ -1,0 +1,14 @@
+Reference Verifier 0.2.1: 9 references from refs.bib
+
+  6 found · 1 not found · 1 wrong DOI · 1 unregistered DOI
+
+  WRONG DOI  he2016          Deep Residual Learning for Image Recognition (2016)
+                             DOI 10.1109/cvpr.2016.91 belongs to a different work: "You Only Look Once: Unified, Real-Time Object Detection"; the cited work itself exists (found in Crossref)
+  BAD DOI    hochreiter1997  Long Short-Term Memory (1997)
+                             DOI 10.1162/neco.1997.9.8.1736 is not registered; the work itself exists (found in Crossref), so the DOI is wrong
+  NOT FOUND  ramirez2021     Social media use and adolescent sleep: a longitudinal meta-analysis (2021)
+                             no matching work in Crossref, OpenAlex or arXiv; DBLP could not be reached
+
+  Not found means no registry lists a matching work. Check those entries by hand before
+  changing anything: books, theses, reports and very new papers are often missing.
+  Requests: api.crossref.org 11, api.openalex.org 1, dblp.org 1, doi.org 1, export.arxiv.org 2 (repeat runs use the local cache)

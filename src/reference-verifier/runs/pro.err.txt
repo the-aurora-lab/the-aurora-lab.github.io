@@ -1,0 +1,1 @@
+refverify-pro: Downloading the Retraction Watch database from Crossref (about 70 MB, at most once a day)

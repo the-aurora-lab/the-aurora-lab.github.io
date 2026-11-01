@@ -298,3 +298,10 @@ figcaption b { color: var(--paper-text); }
 .bundle-buy .btn { text-decoration: none; }
 .docs-single { grid-template-columns: minmax(0, 760px) !important; }
 .docs-single .bundle-buy { margin-top: 4px; }
+
+/* tool pages */
+.prose-doc pre.term { white-space: pre-wrap; overflow-wrap: anywhere; font-size: 12.5px; line-height: 1.55; }
+pre.term .p { color: #7dd3c7; }
+.prose-doc details { margin: 14px 0 18px; border: 1px solid var(--line); border-radius: 12px; padding: 10px 14px; background: var(--surface); }
+.prose-doc details summary { cursor: pointer; color: var(--text); font-weight: 500; }
+.prose-doc details pre { margin-top: 12px; }

@@ -1,0 +1,283 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Reference Verifier: Every Reference Checked · Aurora Lab</title>
+  <meta name="description" content="Check every reference in your paper before a reviewer does: invented papers, wrong DOIs, retracted work and field errors against Crossref, OpenAlex, DBLP, arXiv and PubMed. Free core on GitHub, held-out benchmark published.">
+  <meta property="og:title" content="Reference Verifier: Every Reference Checked · Aurora Lab">
+  <meta property="og:description" content="Check every reference in your paper before a reviewer does: invented papers, wrong DOIs, retracted work and field errors against Crossref, OpenAlex, DBLP, arXiv and PubMed. Free core on GitHub, held-out benchmark published.">
+  <meta property="og:image" content="https://the-aurora-lab.github.io/assets/img/reference-verifier.png">
+  <meta property="og:url" content="https://the-aurora-lab.github.io/tools/reference-verifier/">
+  <link rel="canonical" href="https://the-aurora-lab.github.io/tools/reference-verifier/">
+  <meta name="theme-color" content="#0b1020">
+  <link rel="icon" type="image/png" href="../../assets/img/avatar.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../../assets/css/site.css">
+</head>
+<body>
+  <a class="skip" href="#main">Skip to content</a>
+  <header class="nav">
+    <div class="wrap nav-inner">
+      <a class="brand" href="../../" aria-label="Aurora Lab home">
+        <img src="../../assets/img/avatar.png" alt="" width="32" height="32">
+        <span>Aurora Lab</span>
+      </a>
+      <nav aria-label="Primary">
+        <a href="../../#skills">Skills</a>
+        <a href="../../#tools">Tools</a>
+        <a class="btn btn-small" href="https://github.com/the-aurora-lab/reference-verifier">Free on GitHub</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main">
+    <section class="docs-hero">
+      <div class="aurora" aria-hidden="true"></div>
+      <div class="wrap">
+        <p class="crumbs"><a href="../../">Aurora Lab</a> / <a href="../../#tools">Tools</a> / Reference Verifier</p>
+        <h1>Reference Verifier: Every Reference Checked</h1>
+        <p class="lede">Check every reference in your paper before a reviewer does. The free core finds references no
+        registry lists and DOIs that point nowhere or to another paper. Pro adds retractions, field-by-field checks
+        against the publisher's record, fixes you review, audit reports and a mode for a whole class's papers.</p>
+        <ul class="meta" aria-label="Tool facts"><li>v0.2.1</li><li>Python 3.10+</li><li>Runs on your machine</li><li>Free core: MIT</li></ul>
+        <div class="cta">
+          <a class="btn" href="#install">Install the free core</a>
+          <a class="btn btn-ghost" href="#real-run">See a real run</a>
+        </div>
+      </div>
+    </section>
+
+    <div class="wrap docs">
+      <nav class="toc" aria-label="On this page">
+        <p>On this page</p>
+        <ol><li><a href="#what-it-checks">What it checks</a></li><li><a href="#real-run">A real run</a></li><li><a href="#how-well">How well it works</a></li><li><a href="#install">Install and use</a></li><li><a href="#workflow">In your workflow</a></li><li><a href="#privacy">What it sends where</a></li><li><a href="#limits">Limits</a></li></ol>
+      </nav>
+      <article class="prose-doc">
+
+<section id="what-it-checks">
+<h2>What it checks</h2>
+<p>Reference Verifier reads your <code>.bib</code> file, or your LaTeX paper and the bibliography it uses, and looks every
+cited entry up in Crossref, OpenAlex, DBLP, arXiv and PubMed. The free core answers one question: does each reference
+exist as written? Pro checks each one against the publisher's record and the retraction databases, and fixes what the
+record settles.</p>
+<div class="doc-table"><table><thead><tr><th>Check</th><th>Free core</th><th>Pro</th></tr></thead><tbody><tr><td>References no registry lists (invented papers, garbled titles)</td><td>Yes</td><td>Yes</td></tr><tr><td>DOIs that are not registered, or belong to another paper</td><td>Yes</td><td>Yes, with the likely correct DOI</td></tr><tr><td>Retracted, withdrawn and corrected papers, expressions of concern</td><td>—</td><td>Yes: Crossref's notices and the Retraction Watch database</td></tr><tr><td>Authors, year, venue, pages, volume and issue against the publisher's record</td><td>—</td><td>Yes</td></tr><tr><td>The same work under two keys; cite keys that are missing, mistyped or unused</td><td>—</td><td>Yes</td></tr><tr><td>Preprints that have since been published</td><td>—</td><td>Yes, with the DOI and venue to cite</td></tr><tr><td>A corrected copy of your <code>.bib</code> and a diff to review (<code>--fix</code>)</td><td>—</td><td>Yes</td></tr><tr><td>A dated HTML audit report to keep or share</td><td>—</td><td>Yes</td></tr><tr><td>A class's papers (<code>.docx</code>, <code>.odt</code>, PDF, text, Markdown) in any citation style</td><td>—</td><td>Yes</td></tr><tr><td>Source support: the passages of each open-access cited work that best match your sentence</td><td>—</td><td>Yes</td></tr><tr><td>Pre-commit hook, GitHub Actions annotations, a SKILL.md and read-only MCP tools for your agent</td><td>—</td><td>Yes</td></tr><tr><td>Licence</td><td>MIT, free</td><td>Paid licence key</td></tr></tbody></table></div>
+</section>
+
+<section id="real-run">
+<h2>A real run</h2>
+<p>A ten-entry demo paper with eight planted problems: a DOI with a typo, ResNet cited with the DOI of the paper next to
+it (YOLO), an invented paper, Wakefield's 1998 <em>Lancet</em> paper (retracted in 2010), one paper under two keys, a
+wrong volume, a 2018 arXiv preprint that has since been published, and a cite key typed in the wrong case. Download it
+and run it yourself: <a href="demo/paper.tex">paper.tex</a>, <a href="demo/refs.bib">refs.bib</a>.</p>
+<p>Both runs below used the released 0.2.1 builds and an empty cache, on 1 November 2026. DBLP's search was
+turning automated requests away that day; the tool says so and carries on with the other registries.</p>
+
+<h3>Free core: 4 seconds</h3>
+<pre class="term"><span class="p">$ refverify paper.tex</span>
+Reference Verifier 0.2.1: 9 references from refs.bib
+
+  6 found · 1 not found · 1 wrong DOI · 1 unregistered DOI
+
+  WRONG DOI  he2016          Deep Residual Learning for Image Recognition (2016)
+                             DOI 10.1109/cvpr.2016.91 belongs to a different work: &quot;You Only Look Once: Unified, Real-Time Object Detection&quot;; the cited work itself exists (found in Crossref)
+  BAD DOI    hochreiter1997  Long Short-Term Memory (1997)
+                             DOI 10.1162/neco.1997.9.8.1736 is not registered; the work itself exists (found in Crossref), so the DOI is wrong
+  NOT FOUND  ramirez2021     Social media use and adolescent sleep: a longitudinal meta-analysis (2021)
+                             no matching work in Crossref, OpenAlex or arXiv; DBLP could not be reached
+
+  Not found means no registry lists a matching work. Check those entries by hand before
+  changing anything: books, theses, reports and very new papers are often missing.
+  Requests: api.crossref.org 11, api.openalex.org 1, dblp.org 1, doi.org 1, export.arxiv.org 2 (repeat runs use the local cache)</pre>
+<p>Three of the eight problems are about existence, and the free core flags all three. The other five are not: Wakefield
+1998 exists (it was retracted), and so do the duplicated paper, the paper with the wrong volume, the preprint and the
+entry behind the mistyped key.</p>
+
+<h3>Pro: 10 seconds, all eight</h3>
+<div class="shots">
+<figure><a href="samples/audit.html"><img src="../../assets/shots/reference-verifier/01-audit-findings.png" alt="The audit report&#x27;s summary and its Needs attention list: the mistyped key, the two wrong DOIs with their likely correct DOIs, the invented paper, the retraction with its date, notice and reasons, the duplicate and the wrong volume." loading="lazy"></a><figcaption>The top of the audit report from <code>--html</code>: every high and medium problem, the record it was compared with, and the value to use.</figcaption></figure>
+<figure><a href="samples/audit.html"><img src="../../assets/shots/reference-verifier/02-audit-fixes.png" alt="The Fixes section of the audit report: a diff that corrects the two DOIs, turns the BERT preprint into the published NAACL 2019 entry and sets the volume to 529." loading="lazy"></a><figcaption><code>--fix --fix-published</code> wrote <code>refs.fixed.bib</code> and this diff (<a href="demo/refs.fix.diff">refs.fix.diff</a>); <code>refs.bib</code> itself was not touched. The retraction, the duplicate and the key are left to you.</figcaption></figure>
+</div>
+<p><a href="samples/audit.html">Open the whole audit report</a> (every reference, the sources consulted and the input
+files with their SHA-256).</p>
+<details>
+<summary>The terminal output</summary>
+<pre class="term"><span class="p">$ refverify-pro paper.tex --fix --fix-published --html audit.html --json pro.json</span>
+refverify-pro: Downloading the Retraction Watch database from Crossref (about 70 MB, at most once a day)
+Reference Verifier Pro 0.2.1: 9 references from refs.bib (cited in paper.tex)
+
+  Existence:     6 found · 1 not found · 1 wrong DOI · 1 unregistered DOI
+  Notices:       1 retracted
+  Field checks:  2 wrong DOI · 1 missing entry · 1 duplicate · 1 volume · 1 published version
+
+  BAD DOI    hochreiter1997  Long Short-Term Memory (1997)
+                             DOI 10.1162/neco.1997.9.8.1736 is not registered with any DOI agency; likely correct DOI: 10.1162/neco.1997.9.8.1735 (Crossref, looks like a typo)
+  WRONG DOI  he2016          Deep Residual Learning for Image Recognition (2016)
+                             DOI 10.1109/cvpr.2016.91 belongs to &quot;You Only Look Once: Unified, Real-Time Object Detection&quot; (Redmon et al., 2016, 2016 IEEE Conference on Computer Vision and Pattern Recognition (CVPR)); likely correct DOI: 10.1109/cvpr.2016.90 (Crossref, looks like a typo)
+                                      entry                                          DOI 10.1109/cvpr.2016.91 points to
+                             title    Deep Residual Learning for Image Recognition   You Only Look Once: Unified, Real-Time Obje…
+                             authors  He, Zhang, Ren, Sun                            Redmon, Divvala, Girshick, Farhadi
+                             year     2016                                           2016
+                             venue    Proceedings of the IEEE Conference on Compu…   2016 IEEE Conference on Computer Vision and…
+  NOT FOUND  ramirez2021     Social media use and adolescent sleep: a longitudinal meta-analysis (2021)
+                             no matching work in Crossref, OpenAlex or arXiv; DBLP could not be reached
+  RETRACTED  wakefield1998   Ileal-lymphoid-nodular hyperplasia, non-specific colitis, and pervasive develop… (1998)
+                             retracted on 2010-02-06 (notice 10.1016/s0140-6736(10)60175-4, reasons given by Retraction Watch: Falsification/Fabrication of Data; Investigation by Company/Institution; Investigation by Third Party; Lack of Approval from Company/Institution). Do not cite it as support; if the text discusses it, say it was retracted and cite the notice too
+  DUPLICATE  lecun2015       Deep learning (2015)
+                             cited under 2 keys (lecun2015, lecun2015review), so the reference list shows it twice: the same DOI
+  VOLUME     silver2016      Mastering the game of Go with deep neural networks and tree search (2016)
+                             volume: the entry says 530, Crossref says 529
+  PUBLISHED  devlin2018      BERT: Pre-training of Deep Bidirectional Transformers for Language Understanding (2018)
+                             [low] the arXiv preprint was published in Proceedings of the 2019 Conference of the North American Chapter of the Association for Computational Linguistics: Human Language Technologies, Volume 1 (Long and Short Papers), DOI 10.18653/v1/n19-1423; cite the published version (found through a Crossref search)
+
+  Citations
+  NO ENTRY   bengio2003  cited as &quot;bengio2003&quot;, but the .bib defines &quot;Bengio2003&quot;: Biber will not find it and BibTeX reports a case mismatch (paper.tex:7)
+
+  Not found means no registry lists a matching work. Check those entries by hand before
+  changing anything: books, theses, reports and very new papers are often missing.
+  Field findings compare each entry with the publisher&#x27;s record (Crossref, by DOI) or the
+  registry that found it; the suggested values are what that record says.
+  Retractions and corrections: Crossref&#x27;s notices and the Retraction Watch database (copy of 2026-11-01, 73,519 records).
+  DBLP stopped answering during this run and was skipped; rerun later to include it.
+  Requests: api.crossref.org 14, api.openalex.org 1, dblp.org 2, doi.org 1, export.arxiv.org 2 (repeat runs use the local cache)
+  Fixes: 8 fields in 4 entries (3 corrected, 5 turned into published versions) -&gt; refs.fixed.bib; review refs.fix.diff
+  Left to you: 1 retracted · 1 missing entry · 1 duplicate (see the entries above)
+  Audit report: audit.html</pre>
+</details>
+
+<h3>A class's papers</h3>
+<p><code>refverify-batch</code> takes a folder, or the <code>.zip</code> your learning platform downloads, finds each
+paper's reference list and looks up every reference as written, whatever the citation style.</p>
+<div class="shots">
+<figure><a href="samples/class/index.html"><img src="../../assets/shots/reference-verifier/03-class-summary.png" alt="The class summary: 12 papers, 2 that could not be read (a scan and an old .doc), 109 references checked, 76 found, and per paper the number of high, medium and low results." loading="lazy"></a><figcaption>The summary page for a class of 12 papers. Unreadable files are listed with the reason.</figcaption></figure>
+<figure><a href="samples/class/papers/Student-02_1002_assignsubmission_file___essay-final.docx.html"><img src="../../assets/shots/reference-verifier/04-paper-report.png" alt="One paper&#x27;s report: a retracted paper with its notice and reasons, a DOI that belongs to another work with the likely correct DOI, and two conference papers no registry lists." loading="lazy"></a><figcaption>One paper's report: each problem reference as written, and what the registries say about it.</figcaption></figure>
+</div>
+<p><a href="samples/class/index.html">Open the class summary</a>. This class is synthetic: twelve papers we made in
+<code>.docx</code>, <code>.odt</code>, PDF, text and Markdown, plus a scan and an old <code>.doc</code>, zipped the way
+Moodle downloads submissions. Their references come from our development data, in six citation styles: real ones,
+invented ones taken from public compilations of hallucinated citations, wrong DOIs and retracted papers. It shows what
+you get, not how accurate the tool is; the next section does that.</p>
+</section>
+
+<section id="how-well">
+<h2>How well it works</h2>
+<p>Every number here comes from a held-out set: references collected and labelled by an independent agent that never
+ran the tool, with no overlap with the data the rules were tuned on, scored once with no changes afterwards. Intervals
+are 95% Wilson intervals. Measured with 0.2.0; 0.2.1 changes only how output is shown.</p>
+
+<h3>Free core: does each reference exist?</h3>
+<div class="doc-table"><table><thead><tr><th>Measure</th><th>Result</th><th>95% CI</th></tr></thead><tbody><tr><td>Real references found</td><td>94 of 95</td><td>94.3–99.8%</td></tr><tr><td>Fabricated references flagged</td><td>54 of 54</td><td>93.4–100%</td></tr><tr><td>Wrong DOIs flagged as a DOI problem</td><td>30 of 30</td><td>88.6–100%</td></tr><tr><td>Retracted papers found (they exist; flagging the retraction is Pro's job)</td><td>35 of 35</td><td>90.1–100%</td></tr><tr><td>Precision: flags that were on a fabricated or wrong-DOI entry</td><td>84 of 85</td><td>93.6–99.8%</td></tr></tbody></table></div>
+<ul>
+<li>246 references. The real ones were drawn across computer science, biomedicine, physics, mathematics, the social
+sciences and the humanities, written the messy ways real <code>.bib</code> files are.</li>
+<li>The one real reference it missed is a DOI-less ICLR 2022 paper that only DBLP indexes; DBLP's search turned the tool
+away during the run.</li>
+<li>The fabricated references come from public compilations of hallucinated citations found in ACL-family papers and
+ICLR 2026 submissions, so all 54 are computer science. "Fabricated" means listed there and found neither in any registry
+nor by a web search for the exact title.</li>
+<li>Sources, licences and labelling rules: <a href="https://github.com/the-aurora-lab/reference-verifier/blob/main/benchmark/heldout-0.2/HELDOUT.md">HELDOUT.md</a>;
+rerun it with the command in the <a href="https://github.com/the-aurora-lab/reference-verifier#how-well-it-works">README</a>.</li>
+</ul>
+
+<h3>Pro: field checks, notices, duplicates, keys</h3>
+<div class="doc-table"><table><thead><tr><th>Check</th><th>Result</th><th>95% CI</th></tr></thead><tbody><tr><td>Wrong pages, volumes and issues reported with the publisher's value</td><td>40 of 40</td><td>91–100%</td></tr><tr><td>Wrong year or first author reported</td><td>16 of 16</td><td>81–100%</td></tr><tr><td>Wrong venue reported</td><td>6 of 8</td><td>41–93%</td></tr><tr><td>Wrong title words reported</td><td>7 of 8</td><td>53–98%</td></tr><tr><td>Wrong DOI: the likely correct DOI offered</td><td>28 of 30</td><td>79–98%</td></tr><tr><td>Preprints linked to their published version</td><td>13 of 14</td><td>69–99%</td></tr><tr><td>Retractions, expressions of concern, corrections and notice DOIs exactly right</td><td>34 of 34</td><td>90–100%</td></tr><tr><td>Retracted papers cited with their DOI: retraction reported</td><td>35 of 35</td><td>90–100%</td></tr><tr><td>Clean look-alikes of retracted papers left alone</td><td>5 of 6</td><td>44–97%</td></tr><tr><td>Duplicates and look-alikes told apart</td><td>10 of 10</td><td>72–100%</td></tr><tr><td>Cite-key cases (missing, mistyped, case-mismatched, unused)</td><td>6 of 6</td><td>61–100%</td></tr><tr><td>Genuine entries given a medium-or-worse finding (false alarms)</td><td>1 of 130</td><td>0–4%</td></tr><tr><td>Fabricated entries given field findings</td><td>0 of 54</td><td>0–7%</td></tr></tbody></table></div>
+<p><code>--fix</code> on the same items restored 40 of 40 pages, volumes and issues, 28 of 30 DOIs and 12 of 14
+published versions, and changed 1 of 130 genuine entries it should have left alone.</p>
+
+<h3>Pro: a class's reference lists</h3>
+<div class="doc-table"><table><thead><tr><th>Reference strings</th><th>Result</th><th>95% CI</th></tr></thead><tbody><tr><td>Real references found</td><td>59 of 60</td><td>91–99.7%</td></tr><tr><td>Real references given a high result</td><td>0 of 60</td><td>0–6%</td></tr><tr><td>Fabricated references flagged (19 high, 5 medium)</td><td>24 of 25</td><td>80–99%</td></tr><tr><td>Wrong DOIs reported as the DOI of another work</td><td>10 of 10</td><td>72–100%</td></tr><tr><td>Retracted papers found and reported retracted</td><td>10 of 10</td><td>72–100%</td></tr><tr><td>A real title with invented authors reported as "other authors"</td><td>7 of 8</td><td>53–98%</td></tr></tbody></table></div>
+<ul>
+<li>120 reference strings: 60 real ones copied from open-access articles' reference lists (Vancouver, APA, Harvard,
+Chicago, IEEE, Nature and ACS styles) and constructed ones checked absent from every registry.</li>
+<li>Misses: a real reference with a typo in its author's name (reported as other authors), an invented title matched to
+a real paper with a longer title, and a web page written like an article, which got a high "not found".</li>
+<li>Small sets: one item moves a rate by several points; the intervals say how much.</li>
+</ul>
+</section>
+
+<section id="install">
+<h2>Install and use</h2>
+<h3>Free core</h3>
+<pre><code>pip install git+https://github.com/the-aurora-lab/reference-verifier@v0.2.1
+
+refverify refs.bib                  # every entry in a .bib
+refverify main.tex                  # only the keys main.tex cites
+refverify main.tex --json out.json  # machine-readable results too</code></pre>
+<p>Python 3.10 or newer. The exit status is 1 when a journal or conference reference is missing or has a bad DOI, so
+it can gate a script or a CI job. Set <code>REFVERIFY_MAILTO</code> to your email for Crossref's and PubMed's polite
+pools, and <code>OPENALEX_API_KEY</code> (free at openalex.org) for your own OpenAlex budget. Source and issues:
+<a href="https://github.com/the-aurora-lab/reference-verifier">GitHub</a>.</p>
+<h3>Pro</h3>
+<p><strong>Pro goes on sale soon on Gumroad and Polar</strong>: one Python wheel and a licence key. Until then, the free core is the way to try it.</p>
+<pre><code>pip install reference_verifier_pro-0.2.1-py3-none-any.whl   # also installs the free core
+refverify-setup licence activate &lt;KEY&gt;
+
+refverify-pro paper.tex                      # every check, cited entries only
+refverify-pro paper.tex --fix --html audit.html
+refverify-batch "Essay 2 - Download all submissions.zip"
+refverify-support paper.tex                  # source support: an evidence pack</code></pre>
+<p>The key is checked with the store that sold it, then once a week; offline, Pro keeps working for 30 days from the
+last check. Only the key, the store's product id and a random install id are sent.</p>
+</section>
+
+<section id="workflow">
+<h2>In your workflow</h2>
+<ul>
+<li><strong>Before each commit.</strong> <code>refverify-setup hook</code> installs a git pre-commit hook that checks only
+the <code>.bib</code> entries a commit adds or changes, in seconds, and stops the commit on a wrong DOI, a reference no
+registry lists, a retracted paper or an undefined key. Offline, it says so and lets the commit through.</li>
+<li><strong>On every pull request.</strong> <code>refverify-setup ci</code> writes a GitHub Actions workflow: problems
+appear as annotations on the changed lines, the job summary lists them, and the audit report is kept with the run.</li>
+<li><strong>In your AI agent.</strong> <code>refverify-setup skill</code> installs a SKILL.md that tells your agent when
+to check and how to report ("no registry lists it", never "fake"; fixes as copies you review), and
+<code>refverify-mcp</code> gives it five read-only tools: the reference checks and source support.</li>
+</ul>
+</section>
+
+<section id="privacy">
+<h2>What it sends where</h2>
+<ul>
+<li>Titles, author names, years and identifiers from your bibliography go to the public registries: Crossref, doi.org,
+OpenAlex, DBLP, arXiv and PubMed. Your <code>.tex</code> files and your papers' text never leave your machine.</li>
+<li>Pro downloads the Retraction Watch database from Crossref's public repository at most once a day; retraction lookups
+are local. Batch mode sends each reference string, never the paper around it.</li>
+<li>Answers are cached for 30 days on your machine, and every registry gets polite request rates (arXiv: one request
+every three seconds, as it asks).</li>
+<li>Reports name files relative to your working folder and are dated in UTC, so you can share them.</li>
+</ul>
+</section>
+
+<section id="limits">
+<h2>Limits</h2>
+<ul>
+<li>"Not found" means no registry lists it, not that it was invented: books, theses, reports, regional journals and
+very new papers are often missing. Check before you change anything.</li>
+<li>Registries make mistakes too; every finding names the record it was compared with.</li>
+<li>Many computer science venues publish without DOIs. When DBLP turns automated requests away, those papers can go
+unconfirmed for the run; the report says so.</li>
+<li>Batch mode reads PDFs with a text layer (no OCR) and common reference-list layouts; each report shows the list as
+read, so a misread is visible. Web pages are not checked unless you ask for <code>--check-links</code>.</li>
+<li>Source support works only with open-access full texts, and ranks passages by shared words: it finds evidence for
+you or your agent to judge; it does not judge claims itself.</li>
+</ul>
+</section>
+
+      </article>
+    </div>
+  </main>
+
+  <footer class="footer">
+    <div class="wrap footer-inner">
+      <span class="brand"><img src="../../assets/img/avatar.png" alt="" width="24" height="24"> Aurora Lab</span>
+      <nav aria-label="Footer">
+        <a href="https://github.com/the-aurora-lab/reference-verifier">Reference Verifier on GitHub</a>
+        <a href="https://www.agensi.io/creators/aurora-lab">Skills on Agensi</a>
+        <a href="https://x.com/theauroralab">X</a>
+      </nav>
+    </div>
+  </footer>
+  <script data-goatcounter="https://auroralabskills.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
+</body>
+</html>

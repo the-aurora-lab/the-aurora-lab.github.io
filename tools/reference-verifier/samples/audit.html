@@ -1,0 +1,150 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Reference audit: paper.tex</title>
+<style>
+:root{--bg:#fbfaf7;--fg:#1d1d1b;--muted:#6b6a64;--line:#e4e1d8;--card:#ffffff;--code:#f3f1ea;
+--high:#b42318;--high-bg:#fdecea;--medium:#9a5b00;--medium-bg:#fdf3e0;--low:#1f5f99;--low-bg:#e8f1fa;
+--info:#5d5c57;--info-bg:#efeee9;--ok:#2f6b3a;--ok-bg:#e8f3ea;--add:#1f6b35;--del:#a3241b;--link:#1f5f99}
+@media (prefers-color-scheme: dark){:root{--bg:#141413;--fg:#ecebe6;--muted:#a3a198;--line:#2e2d29;--card:#1c1c1a;
+--code:#22221f;--high:#ff8a7a;--high-bg:#3a1a16;--medium:#f2b65a;--medium-bg:#372a12;--low:#8cc1f2;--low-bg:#15283a;
+--info:#bdbbb2;--info-bg:#2a2a26;--ok:#8fd19e;--ok-bg:#172a1b;--add:#8fd19e;--del:#ff8a7a;--link:#8cc1f2}}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--fg);font:15px/1.5 -apple-system,BlinkMacSystemFont,"Segoe UI",
+Roboto,Helvetica,Arial,sans-serif}
+main{max-width:1080px;margin:0 auto;padding:40px 24px 64px}
+h1{font-size:28px;margin:0 0 4px;letter-spacing:-.01em}
+h2{font-size:19px;margin:40px 0 12px;padding-bottom:6px;border-bottom:1px solid var(--line)}
+.sub{color:var(--muted);margin:0}
+.meta{color:var(--muted);font-size:13px;margin-top:6px}
+.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px;margin:24px 0 8px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:12px 14px}
+.card b{display:block;font-size:24px;line-height:1.2}
+.card span{color:var(--muted);font-size:13px}
+.card.alert b{color:var(--high)}
+table{width:100%;border-collapse:collapse;background:var(--card);border:1px solid var(--line);border-radius:10px;
+font-size:14px}
+.scroll{overflow-x:auto;border-radius:10px}
+th,td{text-align:left;vertical-align:top;padding:8px 10px;border-bottom:1px solid var(--line);overflow-wrap:break-word}
+th{font-size:12px;text-transform:uppercase;letter-spacing:.04em;color:var(--muted);font-weight:600}
+tr:last-child td{border-bottom:0}
+td.key{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:13px;white-space:nowrap}
+.badge{display:inline-block;padding:1px 8px;border-radius:999px;font-size:12px;font-weight:600;white-space:nowrap;
+print-color-adjust:exact;-webkit-print-color-adjust:exact}
+.high{color:var(--high);background:var(--high-bg)}.medium{color:var(--medium);background:var(--medium-bg)}
+.low{color:var(--low);background:var(--low-bg)}.info{color:var(--info);background:var(--info-bg)}
+.ok{color:var(--ok);background:var(--ok-bg)}
+.muted{color:var(--muted)}
+a{color:var(--link);text-decoration:none}a:hover{text-decoration:underline}
+pre.diff{background:var(--code);border:1px solid var(--line);border-radius:10px;padding:12px;overflow-x:auto;
+font:12.5px/1.45 ui-monospace,SFMono-Regular,Menlo,monospace;white-space:pre}
+.diff .add{color:var(--add)}.diff .del{color:var(--del)}.diff .hunk{color:var(--muted)}
+code{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:.92em;background:var(--code);padding:0 4px;
+border-radius:4px}
+ul.notes{padding-left:18px}ul.notes li{margin:4px 0}
+footer{margin-top:48px;color:var(--muted);font-size:13px}
+@media (max-width:640px){main{padding:24px 14px 48px}td.key{white-space:normal}}
+@media (max-width:900px){td{overflow-wrap:anywhere}
+table.stack thead{display:none}table.stack tr{display:block;border-bottom:1px solid var(--line);padding:6px 0}
+table.stack tr:last-child{border-bottom:0}table.stack td{display:block;border:0;padding:3px 12px}
+table.stack td.inline{display:inline-block;padding-right:2px}table.stack td:empty{display:none}
+table.stack td[data-label]:before{content:attr(data-label) ": ";color:var(--muted);font-size:12px;
+text-transform:uppercase;letter-spacing:.04em}}
+@media print{:root{--bg:#fff;--card:#fff}main{max-width:none;padding:0}h2{break-after:avoid}
+tr,.card{break-inside:avoid}a{color:inherit}}
+</style></head><body><main>
+<h1>Reference audit</h1>
+<p class="sub">paper.tex</p>
+<p class="meta">Checked <time datetime="2026-11-01T13:08:18Z">1 November 2026, 13:08 UTC</time> · Reference Verifier Pro 0.2.1 (engine 0.2.1)</p>
+<div class="cards">
+<div class="card"><b>9</b><span>references checked of 10 entries</span></div>
+<div class="card"><b>6</b><span>found in a registry</span></div>
+<div class="card alert"><b>3</b><span>missing, wrong DOI or uncertain</span></div>
+<div class="card alert"><b>4</b><span>high-severity findings</span></div>
+<div class="card"><b>2</b><span>medium-severity findings</span></div>
+<div class="card alert"><b>1</b><span>retracted works cited</span></div>
+<div class="card"><b>8</b><span>fields fixed (in copies)</span></div>
+</div>
+<h2>Needs attention</h2>
+<div class="scroll"><table class="stack"><thead><tr><th>Severity</th><th>Key</th><th>Finding</th><th>Compared with</th><th>Suggested</th></tr></thead><tbody>
+<tr><td class="inline"><span class="badge high">Missing entry</span></td><td class="key inline">bengio2003</td><td>cited as &quot;bengio2003&quot;, but the .bib defines &quot;Bengio2003&quot;: Biber will not find it and BibTeX reports a case mismatch</td><td data-label="Compared with"></td><td data-label="Suggested"><code>cite = Bengio2003</code></td></tr>
+<tr><td class="inline"><span class="badge high">Wrong DOI</span></td><td class="key inline">he2016</td><td>DOI 10.1109/cvpr.2016.91 belongs to &quot;You Only Look Once: Unified, Real-Time Object Detection&quot; (Redmon et al., 2016, 2016 IEEE Conference on Computer Vision and Pattern Recognition (CVPR)); likely correct DOI: 10.1109/cvpr.2016.90 (Crossref, looks like a typo)</td><td data-label="Compared with">Crossref 10.1109/cvpr.2016.91</td><td data-label="Suggested"><code>doi = 10.1109/cvpr.2016.90</code></td></tr>
+<tr><td class="inline"><span class="badge high">Wrong DOI</span></td><td class="key inline">hochreiter1997</td><td>DOI 10.1162/neco.1997.9.8.1736 is not registered with any DOI agency; likely correct DOI: 10.1162/neco.1997.9.8.1735 (Crossref, looks like a typo)</td><td data-label="Compared with">doi.org</td><td data-label="Suggested"><code>doi = 10.1162/neco.1997.9.8.1735</code></td></tr>
+<tr><td class="inline"><span class="badge high">Not found</span></td><td class="key inline">ramirez2021</td><td>Social media use and adolescent sleep: a longitudinal meta-analysis (2021)<br><span class="muted">no matching work in Crossref, OpenAlex or arXiv; DBLP could not be reached</span></td><td data-label="Compared with"></td><td></td></tr>
+<tr><td class="inline"><span class="badge high">Retracted</span></td><td class="key inline">wakefield1998</td><td>retracted on 2010-02-06 (notice 10.1016/s0140-6736(10)60175-4, reasons given by Retraction Watch: Falsification/Fabrication of Data; Investigation by Company/Institution; Investigation by Third Party; Lack of Approval from Company/Institution). Do not cite it as support; if the text discusses it, say it was retracted and cite the notice too</td><td data-label="Compared with">Retraction Watch record 4036</td><td data-label="Suggested"></td></tr>
+<tr><td class="inline"><span class="badge medium">Duplicate</span></td><td class="key inline">lecun2015</td><td>cited under 2 keys (lecun2015, lecun2015review), so the reference list shows it twice: the same DOI</td><td data-label="Compared with"></td><td data-label="Suggested"></td></tr>
+<tr><td class="inline"><span class="badge medium">Volume</span></td><td class="key inline">silver2016</td><td>volume: the entry says 530, Crossref says 529</td><td data-label="Compared with">Crossref</td><td data-label="Suggested"><code>volume = 529</code></td></tr>
+</tbody></table></div>
+<h2>Minor notes</h2><ul class="notes">
+<li><span class="badge low">Low</span> <code>devlin2018</code> the arXiv preprint was published in Proceedings of the 2019 Conference of the North American Chapter of the Association for Computational Linguistics: Human Language Technologies, Volume 1 (Long and Short Papers), DOI 10.18653/v1/n19-1423; cite the published version (found through a Crossref search)</li>
+</ul>
+<h2>Fixes</h2>
+<p>8 fields written to <code>refs.fixed.bib</code>; the original <code>refs.bib</code> is unchanged.</p>
+<pre class="diff">--- refs.bib
++++ refs.fixed.bib
+<span class="hunk">@@ -37,7 +37,7 @@</span>
+   number  = {8},
+   pages   = {1735--1780},
+   year    = {1997},
+<span class="del">-  doi     = {10.1162/neco.1997.9.8.1736}</span>
+<span class="add">+  doi     = {10.1162/neco.1997.9.8.1735}</span>
+ }
+ 
+ @inproceedings{he2016,
+<span class="hunk">@@ -46,21 +46,22 @@</span>
+   booktitle = {Proceedings of the IEEE Conference on Computer Vision and Pattern Recognition (CVPR)},
+   pages     = {770--778},
+   year      = {2016},
+<span class="del">-  doi       = {10.1109/CVPR.2016.91}</span>
+<span class="add">+  doi       = {10.1109/cvpr.2016.90}</span>
+ }
+ 
+<span class="del">-@article{devlin2018,</span>
+<span class="add">+@inproceedings{devlin2018,</span>
+   author  = {Devlin, Jacob and Chang, Ming-Wei and Lee, Kenton and Toutanova, Kristina},
+   title   = {{BERT}: Pre-training of Deep Bidirectional Transformers for Language Understanding},
+<span class="del">-  journal = {arXiv preprint arXiv:1810.04805},</span>
+<span class="del">-  year    = {2018}</span>
+<span class="add">+  year    = {2019},</span>
+<span class="add">+  doi = {10.18653/v1/n19-1423},</span>
+<span class="add">+  booktitle = {Proceedings of the 2019 Conference of the North American Chapter of the Association for Computational Linguistics: Human Language Technologies, Volume 1 (Long and Short Papers)}</span>
+ }
+ 
+ @article{silver2016,
+   author  = {Silver, David and Huang, Aja and Maddison, Chris J. and Guez, Arthur and others},
+   title   = {Mastering the game of {Go} with deep neural networks and tree search},
+   journal = {Nature},
+<span class="del">-  volume  = {530},</span>
+<span class="add">+  volume  = {529},</span>
+   number  = {7587},
+   pages   = {484--489},
+   year    = {2016},</pre>
+<p>Left to you: 1 retracted · 1 missing entry · 1 duplicate.</p>
+<h2>Every reference</h2><div class="scroll"><table class="stack"><thead><tr><th>Key</th><th>Reference</th><th>Existence</th><th>Checked against</th><th>Findings</th></tr></thead><tbody>
+<tr><td class="key">lecun2015</td><td>Deep learning (2015)<br><span class="muted">cited at paper.tex:6</span></td><td><span class="badge ok">Found</span></td><td data-label="Checked against">Crossref <a href="https://doi.org/10.1038/nature14539">10.1038/nature14539</a><br><span class="muted">answered: Crossref</span></td><td data-label="Findings"><span class="badge medium">1 medium</span></td></tr>
+<tr><td class="key">lecun2015review</td><td>Deep Learning (2015)<br><span class="muted">cited at paper.tex:11</span></td><td><span class="badge ok">Found</span></td><td data-label="Checked against">Crossref <a href="https://doi.org/10.1038/nature14539">10.1038/nature14539</a><br><span class="muted">answered: Crossref</span></td><td data-label="Findings"><span class="muted">none</span></td></tr>
+<tr><td class="key">hochreiter1997</td><td>Long Short-Term Memory (1997)<br><span class="muted">cited at paper.tex:7</span></td><td><span class="badge high">DOI not registered</span></td><td data-label="Checked against">Crossref <a href="https://doi.org/10.1162/neco.1997.9.8.1735">10.1162/neco.1997.9.8.1735</a><br><span class="muted">answered: doi.org, Crossref</span></td><td data-label="Findings"><span class="badge high">1 high</span></td></tr>
+<tr><td class="key">he2016</td><td>Deep Residual Learning for Image Recognition (2016)<br><span class="muted">cited at paper.tex:8</span></td><td><span class="badge high">DOI of another work</span></td><td data-label="Checked against">Crossref <a href="https://doi.org/10.1109/cvpr.2016.90">10.1109/cvpr.2016.90</a><br><span class="muted">answered: Crossref</span></td><td data-label="Findings"><span class="badge high">1 high</span></td></tr>
+<tr><td class="key">devlin2018</td><td>BERT: Pre-training of Deep Bidirectional Transformers for Language Understanding (2018)<br><span class="muted">cited at paper.tex:9</span></td><td><span class="badge ok">Found</span></td><td data-label="Checked against">arXiv <a href="https://arxiv.org/abs/1810.04805">arxiv.org/abs/1810.04805</a><br><span class="muted">answered: arXiv</span></td><td data-label="Findings"><span class="badge low">1 low</span></td></tr>
+<tr><td class="key">silver2016</td><td>Mastering the game of Go with deep neural networks and tree search (2016)<br><span class="muted">cited at paper.tex:10</span></td><td><span class="badge ok">Found</span></td><td data-label="Checked against">Crossref <a href="https://doi.org/10.1038/nature16961">10.1038/nature16961</a><br><span class="muted">answered: Crossref</span></td><td data-label="Findings"><span class="badge medium">1 medium</span></td></tr>
+<tr><td class="key">jumper2021</td><td>Highly accurate protein structure prediction with AlphaFold (2021)<br><span class="muted">cited at paper.tex:11</span></td><td><span class="badge ok">Found</span></td><td data-label="Checked against">Crossref <a href="https://doi.org/10.1038/s41586-021-03819-2">10.1038/s41586-021-03819-2</a><br><span class="muted">answered: Crossref</span></td><td data-label="Findings"><span class="muted">none</span></td></tr>
+<tr><td class="key">ramirez2021</td><td>Social media use and adolescent sleep: a longitudinal meta-analysis (2021)<br><span class="muted">cited at paper.tex:12</span></td><td><span class="badge high">Not found</span></td><td data-label="Checked against"><span class="muted">no matching record</span><br><span class="muted">answered: Crossref, OpenAlex, arXiv</span></td><td data-label="Findings"><span class="muted">none</span></td></tr>
+<tr><td class="key">wakefield1998</td><td>Ileal-lymphoid-nodular hyperplasia, non-specific colitis, and pervasive developmental disorder in children (1998)<br><span class="muted">cited at paper.tex:13</span></td><td><span class="badge ok">Found</span></td><td data-label="Checked against">Crossref <a href="https://doi.org/10.1016/s0140-6736(97)11096-0">10.1016/s0140-6736(97)11096-0</a><br><span class="muted">answered: Crossref</span></td><td data-label="Findings"><span class="badge high">1 high</span></td></tr>
+</tbody></table></div>
+<h2>Sources consulted</h2><div class="scroll"><table><thead><tr><th>Source</th><th>Used for</th><th>Requests this run</th></tr></thead><tbody>
+<tr><td>Crossref<br><span class="muted">api.crossref.org</span></td><td>DOI lookups, title searches, publishers&#x27; notices</td><td>14</td></tr>
+<tr><td>doi.org<br><span class="muted">doi.org</span></td><td>DOIs registered with other agencies (DataCite, mEDRA...)</td><td>1</td></tr>
+<tr><td>OpenAlex<br><span class="muted">api.openalex.org</span></td><td>title searches, page numbers</td><td>1</td></tr>
+<tr><td>DBLP search<br><span class="muted">dblp.org</span></td><td>computer science titles</td><td>2</td></tr>
+<tr><td>DBLP query service<br><span class="muted">sparql.dblp.org</span></td><td>conference papers without DOIs</td><td>0</td></tr>
+<tr><td>arXiv<br><span class="muted">export.arxiv.org</span></td><td>preprint identifiers and titles</td><td>2</td></tr>
+<tr><td>PubMed<br><span class="muted">eutils.ncbi.nlm.nih.gov</span></td><td>PubMed identifiers</td><td>0</td></tr>
+<tr><td>Semantic Scholar<br><span class="muted">api.semanticscholar.org</span></td><td>title searches (with a key)</td><td>0</td></tr>
+<tr><td>Retraction Watch database</td><td>retractions, expressions of concern, corrections</td><td>copy of 2026-11-01, 73,519 records, from <a href="https://gitlab.com/crossref/retraction-watch-data">Crossref's repository</a></td></tr></tbody></table></div>
+<ul class="notes"><li>Answers kept in the local cache (up to 30 days old) are reused and not counted as requests.</li><li>Stopped answering during the run and skipped: dblp.</li></ul>
+<h2>Inputs</h2><div class="scroll"><table><thead><tr><th>File</th><th>Size</th><th>SHA-256</th></tr></thead><tbody>
+<tr><td><code>paper.tex</code></td><td>920 bytes</td><td><code>27dfc586ee0218939107ff467b15381434ee0c199a2aa583b569873b80df3a26</code></td></tr>
+<tr><td><code>refs.bib</code></td><td>3,140 bytes</td><td><code>a392b6a7734e93f077f530e3519abe9775f369fa96410e0d2fa6cab24b316208</code></td></tr>
+</tbody></table></div>
+<p class="muted">10 keys cited in the .tex files; 10 .bib entries. Command: <code>refverify-pro paper.tex --fix --fix-published --html audit.html --json pro.json</code></p>
+<footer><p><b>Reading this report.</b> High: a reference that does not exist as written, a retracted work, a wrong DOI or first author. Medium: other differences from the publisher's record, an expression of concern, a work cited twice. Low and notes: small differences and advice.</p><p>Each finding compares an entry with a registry's record; registries are sometimes wrong, so check before changing anything. Reference Verifier Pro by Aurora Lab.</p></footer></main></body></html>

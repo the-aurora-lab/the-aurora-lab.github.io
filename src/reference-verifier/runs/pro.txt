@@ -1,0 +1,39 @@
+Reference Verifier Pro 0.2.1: 9 references from refs.bib (cited in paper.tex)
+
+  Existence:     6 found · 1 not found · 1 wrong DOI · 1 unregistered DOI
+  Notices:       1 retracted
+  Field checks:  2 wrong DOI · 1 missing entry · 1 duplicate · 1 volume · 1 published version
+
+  BAD DOI    hochreiter1997  Long Short-Term Memory (1997)
+                             DOI 10.1162/neco.1997.9.8.1736 is not registered with any DOI agency; likely correct DOI: 10.1162/neco.1997.9.8.1735 (Crossref, looks like a typo)
+  WRONG DOI  he2016          Deep Residual Learning for Image Recognition (2016)
+                             DOI 10.1109/cvpr.2016.91 belongs to "You Only Look Once: Unified, Real-Time Object Detection" (Redmon et al., 2016, 2016 IEEE Conference on Computer Vision and Pattern Recognition (CVPR)); likely correct DOI: 10.1109/cvpr.2016.90 (Crossref, looks like a typo)
+                                      entry                                          DOI 10.1109/cvpr.2016.91 points to
+                             title    Deep Residual Learning for Image Recognition   You Only Look Once: Unified, Real-Time Obje…
+                             authors  He, Zhang, Ren, Sun                            Redmon, Divvala, Girshick, Farhadi
+                             year     2016                                           2016
+                             venue    Proceedings of the IEEE Conference on Compu…   2016 IEEE Conference on Computer Vision and…
+  NOT FOUND  ramirez2021     Social media use and adolescent sleep: a longitudinal meta-analysis (2021)
+                             no matching work in Crossref, OpenAlex or arXiv; DBLP could not be reached
+  RETRACTED  wakefield1998   Ileal-lymphoid-nodular hyperplasia, non-specific colitis, and pervasive develop… (1998)
+                             retracted on 2010-02-06 (notice 10.1016/s0140-6736(10)60175-4, reasons given by Retraction Watch: Falsification/Fabrication of Data; Investigation by Company/Institution; Investigation by Third Party; Lack of Approval from Company/Institution). Do not cite it as support; if the text discusses it, say it was retracted and cite the notice too
+  DUPLICATE  lecun2015       Deep learning (2015)
+                             cited under 2 keys (lecun2015, lecun2015review), so the reference list shows it twice: the same DOI
+  VOLUME     silver2016      Mastering the game of Go with deep neural networks and tree search (2016)
+                             volume: the entry says 530, Crossref says 529
+  PUBLISHED  devlin2018      BERT: Pre-training of Deep Bidirectional Transformers for Language Understanding (2018)
+                             [low] the arXiv preprint was published in Proceedings of the 2019 Conference of the North American Chapter of the Association for Computational Linguistics: Human Language Technologies, Volume 1 (Long and Short Papers), DOI 10.18653/v1/n19-1423; cite the published version (found through a Crossref search)
+
+  Citations
+  NO ENTRY   bengio2003  cited as "bengio2003", but the .bib defines "Bengio2003": Biber will not find it and BibTeX reports a case mismatch (paper.tex:7)
+
+  Not found means no registry lists a matching work. Check those entries by hand before
+  changing anything: books, theses, reports and very new papers are often missing.
+  Field findings compare each entry with the publisher's record (Crossref, by DOI) or the
+  registry that found it; the suggested values are what that record says.
+  Retractions and corrections: Crossref's notices and the Retraction Watch database (copy of 2026-11-01, 73,519 records).
+  DBLP stopped answering during this run and was skipped; rerun later to include it.
+  Requests: api.crossref.org 14, api.openalex.org 1, dblp.org 2, doi.org 1, export.arxiv.org 2 (repeat runs use the local cache)
+  Fixes: 8 fields in 4 entries (3 corrected, 5 turned into published versions) -> refs.fixed.bib; review refs.fix.diff
+  Left to you: 1 retracted · 1 missing entry · 1 duplicate (see the entries above)
+  Audit report: audit.html
