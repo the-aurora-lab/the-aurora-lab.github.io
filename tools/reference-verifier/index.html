@@ -46,6 +46,7 @@
         <div class="cta">
           <a class="btn" href="#install">Install the free core</a>
           <a class="btn btn-ghost" href="#real-run">See a real run</a>
+          <a class="btn btn-ghost" href="#pro">Get Pro</a>
         </div>
       </div>
     </section>
@@ -63,7 +64,7 @@
 cited entry up in Crossref, OpenAlex, DBLP, arXiv and PubMed. The free core answers one question: does each reference
 exist as written? Pro checks each one against the publisher's record and the retraction databases, and fixes what the
 record settles.</p>
-<div class="doc-table"><table><thead><tr><th>Check</th><th>Free core</th><th>Pro</th></tr></thead><tbody><tr><td>References no registry lists (invented papers, garbled titles)</td><td>Yes</td><td>Yes</td></tr><tr><td>DOIs that are not registered, or belong to another paper</td><td>Yes</td><td>Yes, with the likely correct DOI</td></tr><tr><td>Retracted, withdrawn and corrected papers, expressions of concern</td><td>—</td><td>Yes: Crossref's notices and the Retraction Watch database</td></tr><tr><td>Authors, year, venue, pages, volume and issue against the publisher's record</td><td>—</td><td>Yes</td></tr><tr><td>The same work under two keys; cite keys that are missing, mistyped or unused</td><td>—</td><td>Yes</td></tr><tr><td>Preprints that have since been published</td><td>—</td><td>Yes, with the DOI and venue to cite</td></tr><tr><td>A corrected copy of your <code>.bib</code> and a diff to review (<code>--fix</code>)</td><td>—</td><td>Yes</td></tr><tr><td>A dated HTML audit report to keep or share</td><td>—</td><td>Yes</td></tr><tr><td>A class's papers (<code>.docx</code>, <code>.odt</code>, PDF, text, Markdown) in any citation style</td><td>—</td><td>Yes</td></tr><tr><td>Source support: the passages of each open-access cited work that best match your sentence</td><td>—</td><td>Yes</td></tr><tr><td>Pre-commit hook, GitHub Actions annotations, a SKILL.md and read-only MCP tools for your agent</td><td>—</td><td>Yes</td></tr><tr><td>Licence</td><td>MIT, free</td><td>Paid licence key</td></tr></tbody></table></div>
+<div class="doc-table"><table><thead><tr><th>Check</th><th>Free core</th><th>Pro</th></tr></thead><tbody><tr><td>References no registry lists (invented papers, garbled titles)</td><td>Yes</td><td>Yes</td></tr><tr><td>DOIs that are not registered, or belong to another paper</td><td>Yes</td><td>Yes, with the likely correct DOI</td></tr><tr><td>Retracted, withdrawn and corrected papers, expressions of concern</td><td>—</td><td>Yes: Crossref's notices and the Retraction Watch database</td></tr><tr><td>Authors, year, venue, pages, volume and issue against the publisher's record</td><td>—</td><td>Yes</td></tr><tr><td>The same work under two keys; cite keys that are missing, mistyped or unused</td><td>—</td><td>Yes</td></tr><tr><td>Preprints that have since been published</td><td>—</td><td>Yes, with the DOI and venue to cite</td></tr><tr><td>A corrected copy of your <code>.bib</code> and a diff to review (<code>--fix</code>)</td><td>—</td><td>Yes</td></tr><tr><td>A dated HTML audit report to keep or share</td><td>—</td><td>Yes</td></tr><tr><td>A class's papers (<code>.docx</code>, <code>.odt</code>, PDF, text, Markdown) in any citation style</td><td>—</td><td>Yes</td></tr><tr><td>Source support: the passages of each open-access cited work that best match your sentence</td><td>—</td><td>Yes</td></tr><tr><td>Pre-commit hook, GitHub Actions annotations, a SKILL.md and read-only MCP tools for your agent</td><td>—</td><td>Yes</td></tr><tr><td>Licence</td><td>MIT, free</td><td>Licence key, from $24</td></tr></tbody></table></div>
 </section>
 
 <section id="real-run">
@@ -209,8 +210,8 @@ refverify main.tex --json out.json  # machine-readable results too</code></pre>
 it can gate a script or a CI job. Set <code>REFVERIFY_MAILTO</code> to your email for Crossref's and PubMed's polite
 pools, and <code>OPENALEX_API_KEY</code> (free at openalex.org) for your own OpenAlex budget. Source and issues:
 <a href="https://github.com/the-aurora-lab/reference-verifier">GitHub</a>.</p>
-<h3>Pro</h3>
-<p><strong>Pro goes on sale soon on Gumroad and Polar</strong>: one Python wheel and a licence key. Until then, the free core is the way to try it.</p>
+<h3 id="pro">Pro</h3>
+<div class="doc-table"><table><thead><tr><th>Licence</th><th>For</th><th>Computers</th><th>Price</th></tr></thead><tbody><tr><td><strong>Personal</strong></td><td>one person, for their own work</td><td>3</td><td>$24</td></tr><tr><td><strong>Course</strong></td><td>one instructor, for checking their students' work</td><td>3</td><td>$99</td></tr><tr><td><strong>Lab</strong></td><td>one research group</td><td>10</td><td>$149</td></tr></tbody></table></div><p>Every licence includes all of Pro, a licence key, and 12 months of updates. You get a zip with the Python wheel, a quickstart, the full guide and the licence terms. Pick the licence at checkout:</p><p class="bundle-buy"><a class="btn btn-small" href="https://theauroralab.gumroad.com/l/reference-verifier-pro">Buy on Gumroad</a> <a class="btn btn-small btn-ghost" href="https://buy.polar.sh/polar_cl_MTAwd6EOC2wKKewaLmLvxkOETpuChf4Y0oVPD47vr1s">Buy on Polar</a></p>
 <pre><code>pip install reference_verifier_pro-0.2.1-py3-none-any.whl   # also installs the free core
 refverify-setup licence activate &lt;KEY&gt;
 

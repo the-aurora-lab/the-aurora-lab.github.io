@@ -22,6 +22,11 @@ STORES = {  # name: (gumroad, polar)
     "research-code": ("https://theauroralab.gumroad.com/l/research-code",
                       "https://buy.polar.sh/polar_cl_vcqlGQmHwOeqqUiaqb7plqDT1z3G1WMGFBpo40a9M1C"),
 }
+ADDON = {  # a tool sold beside a bundle ("add a product"), never inside it
+    "submission-manuscript": '<p class="bundle-addon">Add <a href="../tools/reference-verifier/">Reference Verifier Pro</a>: '
+                             "every reference checked against the publisher's record and the retraction databases before "
+                             "you submit (from $24, sold separately).</p>",
+}
 SLUG = {"Paper Figures": "paper-figures", "Figure Editor": "figure-editor", "Figure Audit": "figure-audit",
         "Table Design": "table-design", "Claim Check": "claim-check", "Scientific Voice": "scientific-voice",
         "Journal House Style": "journal-house-style", "Slide Architect": "slide-architect", "Talk Coach": "talk-coach",
@@ -42,7 +47,7 @@ for name, (gum, pol) in STORES.items():
           <a class="btn btn-small" href="https://www.agensi.io/bundles/{AGENSI[name]}">On Agensi (${b["price"]})</a>
           <a class="btn btn-small btn-ghost" href="{gum}">Download via Gumroad (${2 * b["price"]})</a>
           <a class="btn btn-small btn-ghost" href="{pol}">Download via Polar (${2 * b["price"]})</a>
-        </p>
+        </p>{("\n        " + ADDON[name]) if name in ADDON else ""}
       </section>""")
 
 page = f"""<!doctype html>

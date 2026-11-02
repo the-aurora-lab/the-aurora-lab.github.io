@@ -4,7 +4,7 @@ Run from the site root: ../.venv/bin/python src/reference-verifier/page.py
 The terminal transcripts come from runs/ (real runs of the released builds on tools/reference-verifier/demo/, copied
 verbatim); the screenshots in assets/shots/reference-verifier/ and the sample reports in tools/reference-verifier/samples/
 are outputs of the same runs. Benchmark numbers are copied from the two READMEs ("How well it works"): held-out sets only.
-When the store products exist (build-plan step 11), fill STORES and rerun.
+Store links live in STORES; rerun after any change.
 """
 import html
 from pathlib import Path
@@ -14,7 +14,13 @@ SITE = HERE.parent.parent
 OUT = SITE / "tools" / "reference-verifier" / "index.html"
 REPO = "https://github.com/the-aurora-lab/reference-verifier"
 VERSION = "0.2.1"
-STORES = {}  # {"Gumroad": url, "Polar": url} once step 11 creates the products
+STORES = {  # the store products (step 11, 2026-11-02): Gumroad's page has the three versions, Polar's link the three products
+    "Gumroad": "https://theauroralab.gumroad.com/l/reference-verifier-pro",
+    "Polar": "https://buy.polar.sh/polar_cl_MTAwd6EOC2wKKewaLmLvxkOETpuChf4Y0oVPD47vr1s",
+}
+TIERS = [("Personal", "one person, for their own work", "3", "$24"),
+         ("Course", "one instructor, for checking their students' work", "3", "$99"),
+         ("Lab", "one research group", "10", "$149")]
 GOATCOUNTER = ('<script data-goatcounter="https://auroralabskills.goatcounter.com/count" async '
                'src="//gc.zgo.at/count.js"></script>')
 
@@ -37,8 +43,12 @@ def shot(file: str, alt: str, caption: str, href: str) -> str:
 
 
 if STORES:
-    buy = " ".join(f'<a class="btn btn-small" href="{u}">Buy Pro on {s}</a>' for s, u in STORES.items())
-    pro_get = f'<p class="bundle-buy">{buy}</p>'
+    buy = " ".join(f'<a class="btn btn-small{"" if i == 0 else " btn-ghost"}" href="{u}">Buy on {s}</a>'
+                   for i, (s, u) in enumerate(STORES.items()))
+    pro_get = (table(["Licence", "For", "Computers", "Price"], [[f"<strong>{t}</strong>", w, c, p] for t, w, c, p in TIERS])
+               + "<p>Every licence includes all of Pro, a licence key, and 12 months of updates. You get a zip with the "
+               "Python wheel, a quickstart, the full guide and the licence terms. Pick the licence at checkout:</p>"
+               f'<p class="bundle-buy">{buy}</p>')
 else:
     pro_get = ("<p><strong>Pro goes on sale soon on Gumroad and Polar</strong>: one Python wheel and a licence key. Until "
                "then, the free core is the way to try it.</p>")
@@ -55,7 +65,7 @@ CHECKS = table(["Check", "Free core", "Pro"], [
     ["A class's papers (<code>.docx</code>, <code>.odt</code>, PDF, text, Markdown) in any citation style", "—", "Yes"],
     ["Source support: the passages of each open-access cited work that best match your sentence", "—", "Yes"],
     ["Pre-commit hook, GitHub Actions annotations, a SKILL.md and read-only MCP tools for your agent", "—", "Yes"],
-    ["Licence", "MIT, free", "Paid licence key"],
+    ["Licence", "MIT, free", "Licence key, from $24" if STORES else "Paid licence key"],
 ])
 
 FREE_HELDOUT = table(["Measure", "Result", "95% CI"], [
@@ -194,7 +204,7 @@ refverify main.tex --json out.json  # machine-readable results too</code></pre>
 it can gate a script or a CI job. Set <code>REFVERIFY_MAILTO</code> to your email for Crossref's and PubMed's polite
 pools, and <code>OPENALEX_API_KEY</code> (free at openalex.org) for your own OpenAlex budget. Source and issues:
 <a href="{REPO}">GitHub</a>.</p>
-<h3>Pro</h3>
+<h3 id="pro">Pro</h3>
 {pro_get}
 <pre><code>pip install reference_verifier_pro-{VERSION}-py3-none-any.whl   # also installs the free core
 refverify-setup licence activate &lt;KEY&gt;
@@ -250,6 +260,7 @@ you or your agent to judge; it does not judge claims itself.</li>
 </section>
 """
 
+PRO_CTA = '\n          <a class="btn btn-ghost" href="#pro">Get Pro</a>' if STORES else ""
 SECTIONS = [("what-it-checks", "What it checks"), ("real-run", "A real run"), ("how-well", "How well it works"),
             ("install", "Install and use"), ("workflow", "In your workflow"), ("privacy", "What it sends where"),
             ("limits", "Limits")]
@@ -305,7 +316,7 @@ PAGE = f"""<!doctype html>
         <ul class="meta" aria-label="Tool facts"><li>v{VERSION}</li><li>Python 3.10+</li><li>Runs on your machine</li><li>Free core: MIT</li></ul>
         <div class="cta">
           <a class="btn" href="#install">Install the free core</a>
-          <a class="btn btn-ghost" href="#real-run">See a real run</a>
+          <a class="btn btn-ghost" href="#real-run">See a real run</a>{PRO_CTA}
         </div>
       </div>
     </section>
