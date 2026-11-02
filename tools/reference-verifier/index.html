@@ -42,7 +42,7 @@
         <p class="lede">Check every reference in your paper before a reviewer does. The free core finds references no
         registry lists and DOIs that point nowhere or to another paper. Pro adds retractions, field-by-field checks
         against the publisher's record, fixes you review, audit reports and a mode for a whole class's papers.</p>
-        <ul class="meta" aria-label="Tool facts"><li>v0.2.1</li><li>Python 3.10+</li><li>Runs on your machine</li><li>Free core: MIT</li></ul>
+        <ul class="meta" aria-label="Tool facts"><li>v0.2.2</li><li>Python 3.10+</li><li>Runs on your machine</li><li>Free core: MIT</li></ul>
         <div class="cta">
           <a class="btn" href="#install">Install the free core</a>
           <a class="btn btn-ghost" href="#real-run">See a real run</a>
@@ -74,7 +74,8 @@ it (YOLO), an invented paper, Wakefield's 1998 <em>Lancet</em> paper (retracted 
 wrong volume, a 2018 arXiv preprint that has since been published, and a cite key typed in the wrong case. Download it
 and run it yourself: <a href="demo/paper.tex">paper.tex</a>, <a href="demo/refs.bib">refs.bib</a>.</p>
 <p>Both runs below used the released 0.2.1 builds and an empty cache, on 1 November 2026. DBLP's search was
-turning automated requests away that day; the tool says so and carries on with the other registries.</p>
+turning automated requests away that day; the tool says so and carries on with the other registries. 0.2.2
+changes only how the tools are installed; rerun on this paper, it gives the same results.</p>
 
 <h3>Free core: 4 seconds</h3>
 <pre class="term"><span class="p">$ refverify paper.tex</span>
@@ -166,7 +167,7 @@ you get, not how accurate the tool is; the next section does that.</p>
 <h2>How well it works</h2>
 <p>Every number here comes from a held-out set: references collected and labelled by an independent agent that never
 ran the tool, with no overlap with the data the rules were tuned on, scored once with no changes afterwards. Intervals
-are 95% Wilson intervals. Measured with 0.2.0; 0.2.1 changes only how output is shown.</p>
+are 95% Wilson intervals. Measured with 0.2.0; 0.2.1 changes only how output is shown, and 0.2.2 only how the tools are installed.</p>
 
 <h3>Free core: does each reference exist?</h3>
 <div class="doc-table"><table><thead><tr><th>Measure</th><th>Result</th><th>95% CI</th></tr></thead><tbody><tr><td>Real references found</td><td>94 of 95</td><td>94.3–99.8%</td></tr><tr><td>Fabricated references flagged</td><td>54 of 54</td><td>93.4–100%</td></tr><tr><td>Wrong DOIs flagged as a DOI problem</td><td>30 of 30</td><td>88.6–100%</td></tr><tr><td>Retracted papers found (they exist; flagging the retraction is Pro's job)</td><td>35 of 35</td><td>90.1–100%</td></tr><tr><td>Precision: flags that were on a fabricated or wrong-DOI entry</td><td>84 of 85</td><td>93.6–99.8%</td></tr></tbody></table></div>
@@ -201,7 +202,7 @@ a real paper with a longer title, and a web page written like an article, which 
 <section id="install">
 <h2>Install and use</h2>
 <h3>Free core</h3>
-<pre><code>pip install git+https://github.com/the-aurora-lab/reference-verifier@v0.2.1
+<pre><code>pip install reference-verifier
 
 refverify refs.bib                  # every entry in a .bib
 refverify main.tex                  # only the keys main.tex cites
@@ -209,10 +210,10 @@ refverify main.tex --json out.json  # machine-readable results too</code></pre>
 <p>Python 3.10 or newer. The exit status is 1 when a journal or conference reference is missing or has a bad DOI, so
 it can gate a script or a CI job. Set <code>REFVERIFY_MAILTO</code> to your email for Crossref's and PubMed's polite
 pools, and <code>OPENALEX_API_KEY</code> (free at openalex.org) for your own OpenAlex budget. Source and issues:
-<a href="https://github.com/the-aurora-lab/reference-verifier">GitHub</a>.</p>
+<a href="https://github.com/the-aurora-lab/reference-verifier">GitHub</a>; package: <a href="https://pypi.org/project/reference-verifier/">PyPI</a>.</p>
 <h3 id="pro">Pro</h3>
 <div class="doc-table"><table><thead><tr><th>Licence</th><th>For</th><th>Computers</th><th>Price</th></tr></thead><tbody><tr><td><strong>Personal</strong></td><td>one person, for their own work</td><td>3</td><td>$24</td></tr><tr><td><strong>Course</strong></td><td>one instructor, for checking their students' work</td><td>3</td><td>$99</td></tr><tr><td><strong>Lab</strong></td><td>one research group</td><td>10</td><td>$149</td></tr></tbody></table></div><p>Every licence includes all of Pro, a licence key, and 12 months of updates. You get a zip with the Python wheel, a quickstart, the full guide and the licence terms. Pick the licence at checkout:</p><p class="bundle-buy"><a class="btn btn-small" href="https://theauroralab.gumroad.com/l/reference-verifier-pro">Buy on Gumroad</a> <a class="btn btn-small btn-ghost" href="https://buy.polar.sh/polar_cl_MTAwd6EOC2wKKewaLmLvxkOETpuChf4Y0oVPD47vr1s">Buy on Polar</a></p>
-<pre><code>pip install reference_verifier_pro-0.2.1-py3-none-any.whl   # also installs the free core
+<pre><code>pip install reference_verifier_pro-0.2.2-py3-none-any.whl   # also installs the free core from PyPI
 refverify-setup licence activate &lt;KEY&gt;
 
 refverify-pro paper.tex                      # every check, cited entries only

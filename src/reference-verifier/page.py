@@ -13,7 +13,9 @@ HERE = Path(__file__).resolve().parent
 SITE = HERE.parent.parent
 OUT = SITE / "tools" / "reference-verifier" / "index.html"
 REPO = "https://github.com/the-aurora-lab/reference-verifier"
-VERSION = "0.2.1"
+VERSION = "0.2.2"
+RUN_VERSION = "0.2.1"  # the builds the demo runs, screenshots and sample reports on this page came from
+PYPI = "https://pypi.org/project/reference-verifier/"
 STORES = {  # the store products (step 11, 2026-11-02): Gumroad's page has the three versions, Polar's link the three products
     "Gumroad": "https://theauroralab.gumroad.com/l/reference-verifier-pro",
     "Polar": "https://buy.polar.sh/polar_cl_MTAwd6EOC2wKKewaLmLvxkOETpuChf4Y0oVPD47vr1s",
@@ -117,8 +119,9 @@ record settles.</p>
 it (YOLO), an invented paper, Wakefield's 1998 <em>Lancet</em> paper (retracted in 2010), one paper under two keys, a
 wrong volume, a 2018 arXiv preprint that has since been published, and a cite key typed in the wrong case. Download it
 and run it yourself: <a href="demo/paper.tex">paper.tex</a>, <a href="demo/refs.bib">refs.bib</a>.</p>
-<p>Both runs below used the released {VERSION} builds and an empty cache, on 1 November 2026. DBLP's search was
-turning automated requests away that day; the tool says so and carries on with the other registries.</p>
+<p>Both runs below used the released {RUN_VERSION} builds and an empty cache, on 1 November 2026. DBLP's search was
+turning automated requests away that day; the tool says so and carries on with the other registries. {VERSION}
+changes only how the tools are installed; rerun on this paper, it gives the same results.</p>
 
 <h3>Free core: 4 seconds</h3>
 <pre class="term"><span class="p">$ refverify paper.tex</span>
@@ -160,7 +163,7 @@ you get, not how accurate the tool is; the next section does that.</p>
 <h2>How well it works</h2>
 <p>Every number here comes from a held-out set: references collected and labelled by an independent agent that never
 ran the tool, with no overlap with the data the rules were tuned on, scored once with no changes afterwards. Intervals
-are 95% Wilson intervals. Measured with 0.2.0; {VERSION} changes only how output is shown.</p>
+are 95% Wilson intervals. Measured with 0.2.0; 0.2.1 changes only how output is shown, and 0.2.2 only how the tools are installed.</p>
 
 <h3>Free core: does each reference exist?</h3>
 {FREE_HELDOUT}
@@ -195,7 +198,7 @@ a real paper with a longer title, and a web page written like an article, which 
 <section id="install">
 <h2>Install and use</h2>
 <h3>Free core</h3>
-<pre><code>pip install git+{REPO}@v{VERSION}
+<pre><code>pip install reference-verifier
 
 refverify refs.bib                  # every entry in a .bib
 refverify main.tex                  # only the keys main.tex cites
@@ -203,10 +206,10 @@ refverify main.tex --json out.json  # machine-readable results too</code></pre>
 <p>Python 3.10 or newer. The exit status is 1 when a journal or conference reference is missing or has a bad DOI, so
 it can gate a script or a CI job. Set <code>REFVERIFY_MAILTO</code> to your email for Crossref's and PubMed's polite
 pools, and <code>OPENALEX_API_KEY</code> (free at openalex.org) for your own OpenAlex budget. Source and issues:
-<a href="{REPO}">GitHub</a>.</p>
+<a href="{REPO}">GitHub</a>; package: <a href="{PYPI}">PyPI</a>.</p>
 <h3 id="pro">Pro</h3>
 {pro_get}
-<pre><code>pip install reference_verifier_pro-{VERSION}-py3-none-any.whl   # also installs the free core
+<pre><code>pip install reference_verifier_pro-{VERSION}-py3-none-any.whl   # also installs the free core from PyPI
 refverify-setup licence activate &lt;KEY&gt;
 
 refverify-pro paper.tex                      # every check, cited entries only
