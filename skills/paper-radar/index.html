@@ -1,0 +1,265 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>paper-radar · Aurora Lab</title>
+  <meta name="description" content="Documentation for the paper-radar agent skill: the new papers on a topic from the last week, found on arXiv, bioRxiv, medRxiv and OpenAlex, ranked, and sorted by your agent into read first, worth a look and on the edge, with a reason for each pick.">
+  <meta property="og:title" content="paper-radar · Aurora Lab">
+  <meta property="og:description" content="Documentation for the paper-radar agent skill: the new papers on a topic from the last week, found on arXiv, bioRxiv, medRxiv and OpenAlex, ranked, and sorted by your agent into read first, worth a look and on the edge, with a reason for each pick.">
+  <meta property="og:image" content="https://the-aurora-lab.github.io/assets/shots/paper-radar/01-read-first.png">
+  <meta name="theme-color" content="#0b1020">
+  <link rel="icon" type="image/png" href="../../assets/img/avatar.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../../assets/css/site.css">
+</head>
+<body>
+  <a class="skip" href="#main">Skip to content</a>
+  <header class="nav">
+    <div class="wrap nav-inner">
+      <a class="brand" href="../../" aria-label="Aurora Lab home">
+        <img src="../../assets/img/avatar.png" alt="" width="32" height="32">
+        <span>Aurora Lab</span>
+      </a>
+      <nav aria-label="Primary">
+        <a href="../../#skills">Skills</a>
+        <a href="../../#examples">Examples</a>
+        <a class="btn btn-small" href="">Get it on Agensi</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main">
+    <section class="docs-hero">
+      <div class="aurora" aria-hidden="true"></div>
+      <div class="wrap">
+        <p class="crumbs"><a href="../../">Aurora Lab</a> / <a href="../../#skills">Skills</a> / paper-radar</p>
+        <h1>paper-radar</h1>
+        <p class="lede">This week&#x27;s papers on your topic, sorted for you. Your agent searches arXiv, bioRxiv, medRxiv and OpenAlex for what came out, reads the best-matching abstracts, and tells you which to read first and why.</p>
+        <ul class="meta" aria-label="Skill facts"><li>v1.0.0</li><li>Free</li><li>Python 3.10+, nothing to install</li><li>Works with any SKILL.md agent</li></ul>
+        <div class="cta">
+          <a class="btn" href="">Get it on Agensi · Free</a>
+          <a class="btn btn-ghost" href="#overview">Read the docs</a>
+        </div>
+      </div>
+    </section>
+
+    <div class="wrap docs">
+      <nav class="toc" aria-label="On this page">
+        <p>On this page</p>
+        <ol><li><a href="#overview">Overview</a></li><li><a href="#quick-start">Quick start</a></li><li><a href="#gallery">What you get</a></li><li><a href="#benchmark">How well it works</a></li><li><a href="#workflow">How it works</a></li><li><a href="#tiers">The tiers</a></li><li><a href="#outputs">Files it reads and writes</a></li><li><a href="#network">Network and privacy</a></li><li><a href="#faq">FAQ</a></li><li><a href="#limitations">Limitations</a></li><li><a href="#changelog">Changelog</a></li></ol>
+      </nav>
+      <article class="prose-doc">
+<section id="overview"><h2>Overview</h2>
+<p>A single week brings hundreds of new papers, and keyword alerts list them newest first, so the ones that matter sit between dozens that only share a word. paper-radar searches the open scholarly sources for what came out in a date window, ranks it by fit to your topic, and has your agent read the abstracts and sort them.</p>
+<ul>
+<li><strong>Four sources in one search.</strong> arXiv, bioRxiv and medRxiv for preprints, and OpenAlex for journals, conference papers and most other preprint servers. The same paper found twice is merged into one entry.</li>
+<li><strong>Only what is new.</strong> Papers first posted or published in the window: the last 7 days by default, or any window up to 62 days ("since my last check"). Revised versions of older preprints and older journal articles given a new issue date are left out.</li>
+<li><strong>Ranked, then read.</strong> Papers are ranked by how well their titles and abstracts fit your topic; your agent reads the top 40 abstracts (and any title further down that looks on the topic) and sorts them into <strong>read first</strong>, <strong>worth a look</strong> and <strong>on the edge</strong>, with one line on why for each.</li>
+<li><strong>Nothing invented.</strong> Titles, authors, venues, dates and links in the report come from the records. A script checks every paper your agent picks against what was fetched and refuses anything else.</li>
+<li><strong>Honest about empty weeks.</strong> When nothing is squarely on your topic, it says so instead of padding the list.</li>
+</ul>
+</section>
+<section id="quick-start"><h2>Quick start</h2>
+<ol>
+<li><strong>Get the skill</strong> from <a href="https://www.agensi.io/creators/aurora-lab">Agensi</a> (free) and add it to your agent (Claude Code, Codex CLI, Cursor, Gemini CLI or any agent that loads SKILL.md skills).</li>
+<li><strong>Nothing to install.</strong> The search is one Python script that uses only the standard library (Python 3.10 or newer). It needs internet access to the sources listed below.</li>
+<li><strong>Ask in plain words</strong>, naming your topic as specifically as you can.</li>
+</ol>
+<p>Example requests:</p>
+<ul>
+<li><em>"What came out this week on machine-learning weather forecasting?"</em></li>
+<li><em>"Any new papers on prime editing in the last two weeks? Check bioRxiv too."</em></li>
+<li><em>"I was away for the conference. Catch me up on long COVID since 1 May."</em></li>
+<li><em>"Find this week's papers on soil microplastics for Friday's journal club."</em></li>
+</ul>
+<div class="callout">
+<p>Want to see a report first? The skill ships the report and the tiers from a real run: <code>examples/report.md</code> and <code>examples/scores.json</code>.</p>
+</div>
+</section>
+<section id="gallery"><h2>What you get</h2>
+<p>These come from a real run: a fresh agent session with only this skill installed, asked the question in the last image on 2 November 2026. It searched the week of 26 October to 2 November, found 185 new papers, read 48 abstracts and picked six to read first, in 61 seconds. The report images come from the file it saved; the second image is from the agent's answer.</p>
+<div class="shots"><figure><img src="../../assets/shots/paper-radar/01-read-first.png" alt="The report the demo run saved: the week, 185 papers matched, 48 read and sorted, 6 to read first, then the first three read-first papers on machine-learning weather forecasting, each with authors, venue, date and a one-line reason." loading="lazy"><figcaption>The top of the report the demo run saved (the first three of six read-first papers), rendered as a Markdown viewer shows it.</figcaption></figure><figure><img src="../../assets/shots/paper-radar/02-answer.png" alt="The agent&#x27;s answer in the demo run: the window and sources, 185 matches, 48 abstracts read, the first three of six read-first papers with one detail each from the abstract, the worth-a-look and on-the-edge counts, and the limits of a word search." loading="lazy"><figcaption>From the agent&#x27;s answer in the demo run (three of the six read-first papers shown, each shortened).</figcaption></figure><figure><img src="../../assets/shots/paper-radar/03-benchmark.png" alt="Held-out results on 24 past weeks: of 64 on-topic papers that later reviews cite, 48 in paper-radar&#x27;s top 10 against 13 newest first, 56 in the reading list of 40 against 30, in weeks with more than 40 papers 34 of 41 against 8, and 58 found at all." loading="lazy"><figcaption>The held-out results, with the caveats published alongside them.</figcaption></figure><figure><img src="../../assets/shots/paper-radar/04-how.png" alt="The report&#x27;s last section: the topic, the eight search phrases, arXiv 29 matches, OpenAlex 274 matches with the 200 most relevant fetched and 22 older records left out, how papers were ranked and sorted, and the version and time of the run." loading="lazy"><figcaption>The report&#x27;s last section from the demo run.</figcaption></figure><figure><img src="../../assets/shots/paper-radar/05-session.png" alt="The demo session: the buyer&#x27;s request, the search on arXiv and OpenAlex, the reading list, the agent pulling abstracts for on-topic titles below the list, the tiers, the report and the agent&#x27;s summary." loading="lazy"><figcaption>The demo session, a fresh agent with only this skill installed (steps from the run&#x27;s transcript, condensed); 61 seconds.</figcaption></figure></div>
+</section>
+<section id="benchmark"><h2>How well it works</h2>
+<p>We scored paper-radar once on 24 past weeks it was never developed on. A published review of each topic tells us which papers mattered: the ones it later cites that came out that week. An independent builder, who never ran the tool, chose 12 reviews from 2024 and 2025 on 12 topics in nine fields (3D Gaussian splatting, LLM hallucination, speech deepfake detection, lactylation, extrachromosomal DNA in cancer, CAR-T for autoimmune disease, anti-amyloid antibodies, altermagnetism, sodium-ion cathodes, flash drought, airborne eDNA and speech brain-computer interfaces), wrote each search from the review's title and abstract the way the skill tells an agent to, and judged which cited papers are on the topic: 64 of 86, since reviews also cite background from other topics. We then ran the search for the review's two busiest weeks and looked up where each cited paper landed.</p>
+<div class="doc-table"><table>
+<thead>
+<tr>
+<th>Measure, on-topic cited papers</th>
+<th>paper-radar</th>
+<th>Newest first (a keyword alert)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>In the top 10</td>
+<td>48 of 64 (75.0%, 95% interval 63.2–84.0%)</td>
+<td>13 of 64 (20.3%, 12.3–31.7%)</td>
+</tr>
+<tr>
+<td>In the reading list (top 40)</td>
+<td>56 of 64 (87.5%, 77.2–93.5%)</td>
+<td>30 of 64 (46.9%, 35.2–58.9%)</td>
+</tr>
+<tr>
+<td>In the reading list, in the 17 weeks with more than 40 papers</td>
+<td>34 of 41 (82.9%, 68.7–91.5%)</td>
+<td>8 of 41 (19.5%, 10.2–34.0%)</td>
+</tr>
+<tr>
+<td>Found at all</td>
+<td>58 of 64 (90.6%, 81.0–95.6%)</td>
+<td></td>
+</tr>
+</tbody>
+</table></div>
+<ul>
+<li>Counting every cited paper, off-topic background included, 59 of 86 (68.6%, 58.2–77.4%) reached the reading list.</li>
+<li>The six on-topic papers it never found do not use the topic's words in their title or abstract ("Binary Opacity Grids" for Gaussian splatting, "Detection of human DNA in the air" for airborne eDNA).</li>
+<li>This measures the ranking: what reaches your agent's reading list. Your agent's tiers are not scored here.</li>
+<li>In 7 of the 24 weeks fewer than 40 papers matched, so the whole week fit in the reading list in any order; that is why newest-first order does better on the reading-list line. The top 10 and the busy weeks show what the ranking adds.</li>
+<li>During the run OpenAlex timed out once (one week of the CAR-T review, whose cited papers that week were all judged off the topic), as can happen to you; OpenAlex was searched with a free key. Labels come from reviews, so they lean towards papers that later became well known. The run was made once, on 2 November 2026, and nothing was changed afterwards. Ranking weights were tuned on 12 other weeks from six other reviews.</li>
+</ul>
+</section>
+<section id="workflow"><h2>How it works</h2>
+<ol>
+<li><strong>Your request becomes a search.</strong> Your agent writes the topic as one sentence and three to eight phrases a relevant paper would use: the topic's names and abbreviations, its main methods, and one or two broader terms. For the life sciences and medicine it also picks bioRxiv and medRxiv categories.</li>
+<li><strong>The search.</strong> arXiv (title and abstract), OpenAlex (title and abstract) and, when named, bioRxiv and medRxiv categories are asked for papers in the window that contain every word of at least one phrase.</li>
+<li><strong>Merging and filtering.</strong> Records of the same paper (by DOI, arXiv id or title) become one; revised versions of older preprints and articles OpenAlex has known for more than a month before the window are dropped.</li>
+<li><strong>Ranking.</strong> Papers are ranked by the words of the phrases and the topic in their titles (weighted) and abstracts, with a bonus for each exact phrase and a small one for arXiv, bioRxiv, medRxiv and journals OpenAlex lists as core sources. A record without an abstract is ranked on its title.</li>
+<li><strong>Your agent reads.</strong> It reads the top 40 abstracts, skims the rest by title, and gives each paper it reads a tier and a reason grounded in the abstract.</li>
+<li><strong>The report.</strong> A script checks the tiers against the fetched papers and writes <code>report.md</code>: read first and worth a look with reasons, on the edge, the next 50 papers by title, and how the list was made.</li>
+</ol>
+</section>
+<section id="tiers"><h2>The tiers</h2>
+<div class="doc-table"><table>
+<thead>
+<tr>
+<th>Tier</th>
+<th>Meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Read first</td>
+<td>Squarely on the topic: you would be sorry to miss it.</td>
+</tr>
+<tr>
+<td>Worth a look</td>
+<td>The same problem from another angle; a method, dataset or result that transfers; a substantial review.</td>
+</tr>
+<tr>
+<td>On the edge</td>
+<td>Touches the topic: an application in another field, or the topic as a side issue.</td>
+</tr>
+<tr>
+<td>Off the topic</td>
+<td>Shares words only; listed with everything else found.</td>
+</tr>
+</tbody>
+</table></div>
+</section>
+<section id="outputs"><h2>Files it reads and writes</h2>
+<p>One folder per run: <code>research/radar/&lt;date&gt;-&lt;topic&gt;/</code> when your project has a <code>research/</code> folder, otherwise <code>paper-radar-&lt;date&gt;-&lt;topic&gt;/</code> in the working folder.</p>
+<div class="doc-table"><table>
+<thead>
+<tr>
+<th>File</th>
+<th>What it holds</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>report.md</code></td>
+<td>The sorted list with reasons, the next 50 papers by title, and how the list was made.</td>
+</tr>
+<tr>
+<td><code>to-read.md</code></td>
+<td>The reading list your agent worked from: the top 40 with abstracts, then the rest by title.</td>
+</tr>
+<tr>
+<td><code>candidates.json</code></td>
+<td>Every paper found, ranked, with its record, and the search settings (reuse them next week).</td>
+</tr>
+<tr>
+<td><code>scores.json</code></td>
+<td>Your agent's tier and reason for each paper it read.</td>
+</tr>
+</tbody>
+</table></div>
+<p>It reads none of your files and writes nothing outside that folder.</p>
+</section>
+<section id="network"><h2>Network and privacy</h2>
+<p>The script sends your search phrases, the categories and the dates, nothing else, to:</p>
+<div class="doc-table"><table>
+<thead>
+<tr>
+<th>Service</th>
+<th>Used for</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>export.arxiv.org</code></td>
+<td>arXiv's search, one request every three seconds as arXiv asks</td>
+</tr>
+<tr>
+<td><code>api.openalex.org</code></td>
+<td>OpenAlex's search of journals, conference papers and other preprint servers. Without a key it shares a small free daily budget with your network; a free key (<code>OPENALEX_API_KEY</code>) gives you your own.</td>
+</tr>
+<tr>
+<td><code>api.biorxiv.org</code></td>
+<td>bioRxiv and medRxiv postings by date and category, only when you name categories</td>
+</tr>
+</tbody>
+</table></div>
+<p>A source that cannot be reached is named in the output and the report, and the others still count. Set <code>PAPER_RADAR_MAILTO</code> to your email if you want OpenAlex to know who is asking; nothing is sent otherwise.</p>
+</section>
+<section id="faq"><h2>FAQ</h2>
+<h3 id="which-agents-does-it-work-with">Which agents does it work with?</h3>
+<p>Any agent that loads SKILL.md skills and can run Python, including Claude Code, Codex CLI, Cursor and Gemini CLI.</p>
+<h3 id="how-is-this-different-from-an-arxiv-or-journal-alert">How is this different from an arXiv or journal alert?</h3>
+<p>Alerts list everything that matches a keyword, newest first, from one source. paper-radar searches four sources at once, merges duplicates, ranks by fit to your topic, and has your agent read the abstracts and tell you which few to read first, with a reason for each. On 24 held-out weeks, 75% of the papers that later reviews cite were in paper-radar's top 10, against 20% newest first.</p>
+<h3 id="can-it-miss-papers">Can it miss papers?</h3>
+<p>Yes. The search matches words, so a paper that describes your topic in other terms can be missed or ranked low; broader phrases help, and your agent also skims the titles below the reading list. Very new arXiv papers can take a day or two to appear in arXiv's search, and each run reads arXiv's 600 and OpenAlex's 200 most relevant matches.</p>
+<h3 id="does-it-judge-whether-a-paper-is-good">Does it judge whether a paper is good?</h3>
+<p>No. The tiers say how close a paper is to your topic, judged from its abstract. The venue is shown, but a preprint can be read first.</p>
+<h3 id="can-it-run-every-week-by-itself">Can it run every week by itself?</h3>
+<p>It runs when you ask. Next week, ask again: the topic, phrases and categories are saved in <code>candidates.json</code>, so your agent can reuse them.</p>
+<h3 id="how-long-does-it-take">How long does it take?</h3>
+<p>The search itself usually takes 5 to 30 seconds (each bioRxiv or medRxiv category adds a few). In our demo the whole request, reading included, took 61 seconds.</p>
+<h3 id="do-i-need-the-other-aurora-lab-skills">Do I need the other Aurora Lab skills?</h3>
+<p>No. It pairs well with bib-check (every reference in a bibliography checked against the registries), but it works on its own and never calls another skill.</p>
+</section>
+<section id="limitations"><h2>Limitations</h2>
+<ul>
+<li>Word matching: a paper that describes the topic in other words can be missed or ranked low.</li>
+<li>The ranking puts papers in front of your agent; it does not judge quality. Tiers come from abstracts only.</li>
+<li>OpenAlex has no abstract for some publishers' papers; those are ranked and judged by their titles.</li>
+<li>Journal papers are dated by OpenAlex's publication date. An article online for more than a month before its issue date is left out as not new; one online for less can appear in the week of either date.</li>
+<li>arXiv's last day or two in a window can be thin; a later run catches them.</li>
+<li>Papers that exist only on a publisher's or conference's own site without a DOI, and sources outside arXiv, bioRxiv, medRxiv and OpenAlex, are not searched.</li>
+</ul>
+</section>
+<section id="changelog"><h2>Changelog</h2>
+<p><strong>1.0.0</strong> · November 2026 · First release.</p></section>
+
+      </article>
+    </div>
+  </main>
+
+  <footer class="footer">
+    <div class="wrap footer-inner">
+      <span class="brand"><img src="../../assets/img/avatar.png" alt="" width="24" height="24"> Aurora Lab</span>
+      <nav aria-label="Footer">
+        <a href="https://www.agensi.io/creators/aurora-lab">Agensi</a>
+        <a href="https://github.com/the-aurora-lab">GitHub</a>
+      </nav>
+    </div>
+  </footer>
+  <script data-goatcounter="https://auroralabskills.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
+</body>
+</html>
