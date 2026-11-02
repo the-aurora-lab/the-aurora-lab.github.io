@@ -1,0 +1,302 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>bib-check · Aurora Lab</title>
+  <meta name="description" content="Documentation for the bib-check agent skill: every entry of a .bib, or every reference a LaTeX paper cites, looked up in Crossref, arXiv, PubMed, OpenAlex and DBLP, with references no registry knows and wrong DOIs reported.">
+  <meta property="og:title" content="bib-check · Aurora Lab">
+  <meta property="og:description" content="Documentation for the bib-check agent skill: every entry of a .bib, or every reference a LaTeX paper cites, looked up in Crossref, arXiv, PubMed, OpenAlex and DBLP, with references no registry knows and wrong DOIs reported.">
+  <meta property="og:image" content="https://the-aurora-lab.github.io/assets/shots/bib-check/01-problems.png">
+  <meta name="theme-color" content="#0b1020">
+  <link rel="icon" type="image/png" href="../../assets/img/avatar.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../../assets/css/site.css">
+</head>
+<body>
+  <a class="skip" href="#main">Skip to content</a>
+  <header class="nav">
+    <div class="wrap nav-inner">
+      <a class="brand" href="../../" aria-label="Aurora Lab home">
+        <img src="../../assets/img/avatar.png" alt="" width="32" height="32">
+        <span>Aurora Lab</span>
+      </a>
+      <nav aria-label="Primary">
+        <a href="../../#skills">Skills</a>
+        <a href="../../#examples">Examples</a>
+        <a class="btn btn-small" href="https://www.agensi.io/creators/aurora-lab">Get it on Agensi</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main">
+    <section class="docs-hero">
+      <div class="aurora" aria-hidden="true"></div>
+      <div class="wrap">
+        <p class="crumbs"><a href="../../">Aurora Lab</a> / <a href="../../#skills">Skills</a> / bib-check</p>
+        <h1>bib-check</h1>
+        <p class="lede">Catch invented references and wrong DOIs before a reviewer does. Your agent looks up every entry of your bibliography in the public scholarly registries, reports the ones none of them knows, and double-checks those on the web before telling you.</p>
+        <ul class="meta" aria-label="Skill facts"><li>v1.0.0</li><li>Free</li><li>Python 3.10+, nothing to install</li><li>Works with any SKILL.md agent</li></ul>
+        <div class="cta">
+          <a class="btn" href="https://www.agensi.io/creators/aurora-lab">Get it on Agensi · Free</a>
+          <a class="btn btn-ghost" href="#overview">Read the docs</a>
+        </div>
+      </div>
+    </section>
+
+    <div class="wrap docs">
+      <nav class="toc" aria-label="On this page">
+        <p>On this page</p>
+        <ol><li><a href="#overview">Overview</a></li><li><a href="#quick-start">Quick start</a></li><li><a href="#gallery">What you get</a></li><li><a href="#benchmark">How well it works</a></li><li><a href="#workflow">How it works</a></li><li><a href="#results">What the results mean</a></li><li><a href="#outputs">Files it reads and writes</a></li><li><a href="#network">Network and privacy</a></li><li><a href="#research-folder">The <code>research/</code> folder</a></li><li><a href="#faq">FAQ</a></li><li><a href="#limitations">Limitations</a></li><li><a href="#changelog">Changelog</a></li></ol>
+      </nav>
+      <article class="prose-doc">
+<section id="overview"><h2>Overview</h2>
+<p>An invented reference looks exactly like a real one: plausible authors, a fitting title, a real journal. They now turn up in submitted papers, theses and student work, often after an AI tool helped with the bibliography, and journals and preprint servers have started rejecting papers for them. bib-check finds them by asking the registries that index scholarly work.</p>
+<ul>
+<li><strong>Every entry looked up.</strong> DOIs are resolved (Crossref, then doi.org for DataCite and other agencies), arXiv and PubMed identifiers are checked, and the rest are searched by title in Crossref, OpenAlex, DBLP and arXiv, stopping at the first registry that lists the work.</li>
+<li><strong>Problems named precisely.</strong> References no registry lists, DOIs that are not registered, DOIs that belong to a different paper (with that paper's title), arXiv identifiers that belong to another paper, and real titles cited with other authors.</li>
+<li><strong>Your paper, not just your .bib.</strong> Given a LaTeX paper it follows <code>\input</code>, finds the bibliography files and checks only the keys you cite, and the report says where each problem entry is cited (<code>file:line</code>).</li>
+<li><strong>A second look before any verdict.</strong> For every entry the registries could not confirm, your agent searches the exact title on the web and tells you whether it exists elsewhere (a book, a thesis, a very new paper), resembles a different real work, or has no trace at all.</li>
+<li><strong>Careful wording, your files untouched.</strong> "No registry lists it", never "fake". The <code>.bib</code> is only changed if you ask, and then only with fixes a registry record supports.</li>
+</ul>
+</section>
+<section id="quick-start"><h2>Quick start</h2>
+<ol>
+<li><strong>Get the skill</strong> from <a href="https://www.agensi.io/creators/aurora-lab">Agensi</a> (free) and add it to your agent (Claude Code, Codex CLI, Cursor, Gemini CLI or any agent that loads SKILL.md skills).</li>
+<li><strong>Nothing to install.</strong> The check is one Python script that uses only the standard library (Python 3.10 or newer). It needs internet access to the registries listed below.</li>
+<li><strong>Ask in plain words</strong>, naming the paper or the bibliography.</li>
+</ol>
+<p>Example requests:</p>
+<ul>
+<li><em>"Check the references in paper/main.tex before I submit."</em></li>
+<li><em>"Are all the entries in refs.bib real? An AI tool helped me write some of them."</em></li>
+<li><em>"A student sent me this reference list (pasted below). Which of these can't be found?"</em></li>
+</ul>
+<div class="callout">
+<p>Want to see a report first? The skill ships a seeded bibliography and the report a real run wrote on it: <code>examples/sample-refs.bib</code> and <code>examples/sample-report.md</code>.</p>
+</div>
+</section>
+<section id="gallery"><h2>What you get</h2>
+<p>These come from a real run: a fresh agent session with only this skill installed, given a synthetic 15-reference LaTeX paper on citizen-science bird monitoring with five planted problems (an invented paper, an invented preprint carrying another paper's arXiv id, a real title with invented authors, a DOI copied from another entry and a DOI with two digits swapped) and the request shown in the last image. The run took 82 seconds and found all five. The report images come from the file it saved; the second image is from the agent's answer.</p>
+<div class="shots"><figure><img src="../../assets/shots/bib-check/01-problems.png" alt="The report the demo run saved: counts for the 15 references, then the four high-severity entries: an unregistered DOI, two papers no registry lists (one carrying the arXiv id of a different paper), and a DOI that belongs to another work." loading="lazy"><figcaption>From the report the demo run saved: the counts and three of the four high-severity entries (each report line shown as a bullet, the entry&#x27;s title, authors and venue left out; links shown as DOIs).</figcaption></figure><figure><img src="../../assets/shots/bib-check/02-second-look.png" alt="The agent&#x27;s answer for the two references no registry listed: no trace on the web either, the closest real work named, and the arXiv id shown to belong to another paper already cited." loading="lazy"><figcaption>From the agent&#x27;s answer in the demo run (one sentence shortened).</figcaption></figure><figure><img src="../../assets/shots/bib-check/03-benchmark.png" alt="Held-out results: real references found 189 of 190, invented references flagged 108 of 108, wrong DOIs 60 of 60, retracted papers found 70 of 70, flags right 168 of 168, with 95% intervals." loading="lazy"><figcaption>The held-out results, with the caveats published alongside them.</figcaption></figure><figure><img src="../../assets/shots/bib-check/04-found.png" alt="The Found table from the demo report: each key with the registry record it matched and a DOI link, all eight found entries." loading="lazy"><figcaption>The report&#x27;s Found table, rendered as a Markdown viewer shows it.</figcaption></figure><figure><img src="../../assets/shots/bib-check/05-session.png" alt="The demo session: the buyer&#x27;s request, the check run on paper/main.tex, two web searches for the references no registry listed, and the agent&#x27;s summary." loading="lazy"><figcaption>The demo session, a fresh agent with only this skill installed (steps from the run&#x27;s transcript, condensed).</figcaption></figure></div>
+</section>
+<section id="benchmark"><h2>How well it works</h2>
+<p>We scored bib-check once on 492 labelled references it was never developed on: two independently built sets of 246. The real references were drawn at random from seven fields (journal articles, books, conference papers without a DOI, arXiv-only preprints), written in the messy forms real <code>.bib</code> files use. The invented ones come from two published compilations of fabricated citations found in real conference submissions: <a href="https://aclanthology.org/2026.acl-long.2189/">HalluCitation</a> (ACL 2026) and the <a href="https://huggingface.co/datasets/Afrostnova/Hallucinated_Citation">CiteTracer</a> set from ICLR 2026 desk rejections. Wrong-DOI items are real entries given another work's DOI, and the retracted papers come from the Retraction Watch data; they exist, so the right answer for them is "found".</p>
+<div class="doc-table"><table>
+<thead>
+<tr>
+<th>Measure</th>
+<th>Result</th>
+<th>95% interval</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Real references found</td>
+<td>189 of 190 (99.5%)</td>
+<td>97.1–99.9%</td>
+</tr>
+<tr>
+<td>Invented references flagged</td>
+<td>108 of 108</td>
+<td>96.6–100%</td>
+</tr>
+<tr>
+<td>Wrong DOIs reported as a DOI problem</td>
+<td>60 of 60</td>
+<td>94.0–100%</td>
+</tr>
+<tr>
+<td>Retracted papers found (they exist)</td>
+<td>70 of 70</td>
+<td>94.8–100%</td>
+</tr>
+<tr>
+<td>Flags that were right (precision)</td>
+<td>168 of 168</td>
+<td>97.8–100%</td>
+</tr>
+</tbody>
+</table></div>
+<ul>
+<li>The one real reference it did not find, a physics paper whose title is written with LaTeX dashes ("Li--He collisions"), came out as <em>uncertain</em>, not as a false "not found".</li>
+<li>105 of the 108 invented references are from computer science, where the compilations come from; the flag rate is best established there.</li>
+<li>During the run arXiv answered slowly and was skipped partway through, as can happen to you; OpenAlex was searched with a free key. Intervals are Wilson 95% intervals. The run was made once, on 2 November 2026, and the rules were not changed afterwards.</li>
+</ul>
+</section>
+<section id="workflow"><h2>How it works</h2>
+<ol>
+<li><strong>Inputs.</strong> The main <code>.tex</code> file (its <code>\input</code> files and bibliographies come along, and only cited keys are checked), one or more <code>.bib</code> files, or a reference list in another format, which the agent first writes into a temporary BibTeX file exactly as printed.</li>
+<li><strong>Identifiers first.</strong> A DOI is resolved and the record's title and authors compared with the entry. arXiv and PubMed identifiers are looked up the same way.</li>
+<li><strong>Then a title search</strong> in Crossref, OpenAlex, DBLP and arXiv, in that order, stopping at the first registry that lists the work. A match needs a near-identical title (typos, punctuation, LaTeX and a dropped subtitle are tolerated) and the same authors, or the same year when the entry has no authors.</li>
+<li><strong>The agent's check.</strong> Entries no registry lists, and close matches with other authors, are searched on the web by exact title; the agent reports what it found, separately from the registries' results.</li>
+<li><strong>The report.</strong> A Markdown file with the counts, the entries that need attention by severity (with where each is cited, what the registries said and links to the closest records), every found entry with a link to its record, the skipped entries and why, and which registries were asked.</li>
+</ol>
+</section>
+<section id="results"><h2>What the results mean</h2>
+<div class="doc-table"><table>
+<thead>
+<tr>
+<th>Result</th>
+<th>Meaning</th>
+<th>Severity</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>found</td>
+<td>A registry lists a work with this title and these authors (or this year, when there are no authors).</td>
+<td>ok</td>
+</tr>
+<tr>
+<td>not found</td>
+<td>No registry lists a matching work. Strong evidence for journal and conference papers; weak for books, reports and theses.</td>
+<td>high for papers, low otherwise</td>
+</tr>
+<tr>
+<td>wrong DOI</td>
+<td>The DOI is registered, but to a different work; its title is shown.</td>
+<td>high</td>
+</tr>
+<tr>
+<td>unregistered DOI</td>
+<td>No registration agency knows the DOI.</td>
+<td>high</td>
+</tr>
+<tr>
+<td>uncertain</td>
+<td>A close title with different authors, or a near but different title.</td>
+<td>medium</td>
+</tr>
+<tr>
+<td>skipped</td>
+<td>Web pages, software and code releases without a DOI, which registries do not index.</td>
+<td>ok</td>
+</tr>
+<tr>
+<td>could not check</td>
+<td>No registry could be reached for the entry.</td>
+<td>medium</td>
+</tr>
+</tbody>
+</table></div>
+</section>
+<section id="outputs"><h2>Files it reads and writes</h2>
+<div class="doc-table"><table>
+<thead>
+<tr>
+<th>File</th>
+<th>Read or written</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>The <code>.tex</code> or <code>.bib</code> you point to</td>
+<td>Read. A <code>.tex</code> file brings in its <code>\input</code> files and the bibliographies it names.</td>
+</tr>
+<tr>
+<td><code>research/paper/</code>, <code>research/refs.bib</code></td>
+<td>Read, when you name no file and the project has a <code>research/</code> folder.</td>
+</tr>
+<tr>
+<td><code>research/reviews/bib-check-&lt;name&gt;-&lt;date&gt;.md</code></td>
+<td>Written: the report. Without a <code>research/</code> folder it goes next to your file.</td>
+</tr>
+<tr>
+<td>A JSON file</td>
+<td>Written only if you ask for machine-readable results.</td>
+</tr>
+</tbody>
+</table></div>
+<p>It never changes your <code>.bib</code> or paper unless you ask.</p>
+</section>
+<section id="network"><h2>Network and privacy</h2>
+<p>For each entry the script sends the title, the first author's family name, the year and any DOI, arXiv or PubMed identifier, never your paper's text, to these services:</p>
+<div class="doc-table"><table>
+<thead>
+<tr>
+<th>Service</th>
+<th>Used for</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>api.crossref.org</code></td>
+<td>DOI lookups and bibliographic search</td>
+</tr>
+<tr>
+<td><code>doi.org</code></td>
+<td>DOIs registered with other agencies (DataCite: arXiv, Zenodo...)</td>
+</tr>
+<tr>
+<td><code>export.arxiv.org</code></td>
+<td>arXiv identifiers and title search, one request every three seconds as arXiv asks</td>
+</tr>
+<tr>
+<td><code>eutils.ncbi.nlm.nih.gov</code></td>
+<td>PubMed identifiers</td>
+</tr>
+<tr>
+<td><code>api.openalex.org</code></td>
+<td>Title search. Without a key it shares a small free daily budget with your network; a free key (<code>OPENALEX_API_KEY</code>) gives you your own.</td>
+</tr>
+<tr>
+<td><code>sparql.dblp.org</code></td>
+<td>DBLP's query service, for computer-science papers without a DOI</td>
+</tr>
+</tbody>
+</table></div>
+<p>A service that stops answering is skipped for the rest of the run and named in the report. Set <code>BIB_CHECK_MAILTO</code> to your email if you want Crossref's and PubMed's polite pools; nothing is sent otherwise.</p>
+</section>
+<section id="research-folder"><h2>The <code>research/</code> folder</h2>
+<p>bib-check works on its own. If you keep your project in a <code>research/</code> folder, it uses the same plain-file convention as the other Aurora Lab research skills:</p>
+<pre><code>research/
+  paper/      manuscript sections            (read)
+  refs.bib    bibliography                   (read)
+  reviews/    reports                        (written)
+</code></pre>
+</section>
+<section id="faq"><h2>FAQ</h2>
+<h3 id="which-agents-does-it-work-with">Which agents does it work with?</h3>
+<p>Any agent that loads SKILL.md skills and can run Python, including Claude Code, Codex CLI, Cursor and Gemini CLI. Web search in the agent is optional: with it, the agent double-checks the entries the registries could not confirm.</p>
+<h3 id="does-it-say-a-reference-is-fake">Does it say a reference is fake?</h3>
+<p>No. It says what it can know: no registry lists the work, or the DOI points elsewhere. The agent's web search then tells you whether the work exists outside the registries. Whether an entry was invented, garbled or simply obscure is for you to judge, and when you check someone else's paper the report describes references, not people.</p>
+<h3 id="will-it-fix-my-bibliography">Will it fix my bibliography?</h3>
+<p>Only if you ask, and only with what a registry record supports: a wrong or unregistered DOI can be replaced with the DOI of the record the work was found as, and the agent shows each change first. It never invents a DOI or swaps an entry for a different paper without your confirmation.</p>
+<h3 id="my-reference-list-is-in-word-not-bibtex-can-it-check-it">My reference list is in Word, not BibTeX. Can it check it?</h3>
+<p>Yes. The agent writes each reference into a temporary BibTeX file exactly as printed, without correcting anything, and runs the same check. The temporary file is deleted afterwards.</p>
+<h3 id="how-long-does-it-take">How long does it take?</h3>
+<p>About a second per entry; entries that need arXiv take longer because arXiv allows one request every three seconds. In our demo, 15 references plus the agent's web checks took 82 seconds.</p>
+<h3 id="do-i-need-the-other-aurora-lab-skills">Do I need the other Aurora Lab skills?</h3>
+<p>No. It pairs well with claim-check (every result in the text backed by its data) and journal-house-style (a venue's author guidelines) before a submission, but it works on its own and never calls another skill.</p>
+</section>
+<section id="limitations"><h2>Limitations</h2>
+<ul>
+<li>Existence and DOIs only. An entry can be found and still have the wrong year, pages, volume, venue or part of the author list; bib-check does not compare those fields, look for retractions, or read the cited works.</li>
+<li>Registries cover journal articles, conference papers and preprints well, and books, theses, standards, patents, reports and web pages poorly. "Not found" for those is a weak signal, which is why it is reported at low severity and double-checked on the web.</li>
+<li>A badly garbled title can show as not found or uncertain even when the work exists.</li>
+<li>OpenAlex without a key shares a small daily budget per network, and a registry that stops answering is skipped for the run; the report says when that happened, and a rerun later fills the gap.</li>
+<li>Tested on English-language bibliographies.</li>
+</ul>
+</section>
+<section id="changelog"><h2>Changelog</h2>
+<p><strong>1.0.0</strong> · November 2026 · First release.</p></section>
+
+      </article>
+    </div>
+  </main>
+
+  <footer class="footer">
+    <div class="wrap footer-inner">
+      <span class="brand"><img src="../../assets/img/avatar.png" alt="" width="24" height="24"> Aurora Lab</span>
+      <nav aria-label="Footer">
+        <a href="https://www.agensi.io/creators/aurora-lab">Agensi</a>
+        <a href="https://github.com/the-aurora-lab">GitHub</a>
+      </nav>
+    </div>
+  </footer>
+  <script data-goatcounter="https://auroralabskills.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
+</body>
+</html>
