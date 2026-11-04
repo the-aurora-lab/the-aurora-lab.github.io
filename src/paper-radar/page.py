@@ -13,7 +13,10 @@ SITE = HERE.parent.parent
 OUT = SITE / "tools" / "paper-radar" / "index.html"
 VERSION = "1.0.0"
 PRICE = "$19"
-STORES = {}   # filled when the products are published: {"Gumroad": url, "Polar": url}
+STORES = {    # published by the owner 2026-11-04 (step 16d)
+    "Gumroad": "https://theauroralab.gumroad.com/l/paper-radar",
+    "Polar": "https://buy.polar.sh/polar_cl_lnzlbGYsxvfq2rnCeZxGV3cdWCAmH9rqbonYR2KPQiv",
+}
 FREE_DOOR = "../../skills/paper-radar/"
 GOATCOUNTER = ('<script data-goatcounter="https://auroralabskills.goatcounter.com/count" async '
                'src="//gc.zgo.at/count.js"></script>')
