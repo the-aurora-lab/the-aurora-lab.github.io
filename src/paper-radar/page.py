@@ -1,0 +1,317 @@
+"""Write tools/paper-radar/index.html, the docs page for the Paper Radar kit (paid, $19).
+
+Run from the site root: ../.venv/bin/python src/paper-radar/page.py
+The real morning comes from one daily run of the released kit (REAL below; its digest and the email it sent are in
+tools/paper-radar/samples/, the screenshots in assets/shots/paper-radar/). Evaluation numbers are copied from the
+kit's README ("How well it works"): held-out sets only. Store links live in STORES; rerun after any change.
+"""
+import html
+from pathlib import Path
+
+HERE = Path(__file__).resolve().parent
+SITE = HERE.parent.parent
+OUT = SITE / "tools" / "paper-radar" / "index.html"
+VERSION = "1.0.0"
+PRICE = "$19"
+STORES = {}   # filled when the products are published: {"Gumroad": url, "Polar": url}
+FREE_DOOR = "../../skills/paper-radar/"
+GOATCOUNTER = ('<script data-goatcounter="https://auroralabskills.goatcounter.com/count" async '
+               'src="//gc.zgo.at/count.js"></script>')
+
+
+def run(name):
+    return html.escape((HERE / "runs" / name).read_text(encoding="utf-8").rstrip("\n"))
+
+
+def table(head, rows, num_cols=()):
+    th = "".join(f"<th>{h}</th>" for h in head)
+    trs = "".join("<tr>" + "".join(f'<td class="num">{c}</td>' if i in num_cols else f"<td>{c}</td>"
+                                   for i, c in enumerate(r)) + "</tr>" for r in rows)
+    return f'<div class="doc-table"><table><thead><tr>{th}</tr></thead><tbody>{trs}</tbody></table></div>'
+
+
+def shot(file, alt, caption, href):
+    return (f'<figure><a href="{href}"><img src="../../assets/shots/paper-radar/{file}" alt="{html.escape(alt)}" '
+            f'loading="lazy"></a><figcaption>{caption}</figcaption></figure>')
+
+
+if STORES:
+    buy = " ".join(f'<a class="btn btn-small{"" if i == 0 else " btn-ghost"}" href="{u}">Buy on {s}</a>'
+                   for i, (s, u) in enumerate(STORES.items()))
+    get = (f"<p><strong>{PRICE}, once.</strong> For your own research, on your own computers and in your own scheduled "
+           "jobs; no licence key, no subscription; updates for 12 months. You get a zip with the Python wheel, a "
+           "quickstart, the full guide, the agent skill and the licence terms.</p>"
+           f'<p class="bundle-buy">{buy}</p>')
+else:
+    get = (f"<p><strong>On sale soon on Gumroad and Polar, {PRICE} once</strong>: a zip with the Python wheel, a "
+           "quickstart, the full guide, the agent skill and the licence terms. No licence key, no subscription.</p>")
+
+LABS_HELDOUT = table(["Later-cited lab papers (16)", "Your agent's digest", "The ranking alone, same number of picks"], [
+    ["In the digest (changes your work, worth trying, good to know)",
+     "<strong>14 (88%, 95% CI 64–97%)</strong>, median 2 picks a week", "12"],
+    ["At \"changes your work\" or \"worth trying\"", "<strong>12 (75%, 51–90%)</strong>, median 1 pick a week", "10"],
+])
+
+PAPERS_HELDOUT = table(["Later-cited papers (61)", "Paper Radar", "Keyword search from the library", "Random order"], [
+    ["In the top 10% of that day's new papers", "<strong>47 (77%, 95% CI 65–86%)</strong>", "34 (56%)", "10%"],
+    ["In the top 10 of that day", "52 (85%, 74–92%)", "44 (72%)", "13.5 of 61"],
+])
+
+ROUTES = table(["Route", "Runs on", "Your agent's pass"], [
+    ["<code>launchd</code>", "your Mac, while it is on (a missed time runs when it wakes)", "Claude Code on your Mac, your Claude plan"],
+    ["<code>cron</code>", "a Linux computer that is on", "the same"],
+    ["<code>github</code>", "GitHub Actions, in a private repository", "a <code>claude setup-token</code> secret (your Claude plan) or an API key; without one, the ranking's picks"],
+    ["<code>cloud</code>", "a Claude Code routine in Anthropic's cloud, your computer off", "the routine itself"],
+])
+
+BODY = f"""
+<section id="what-you-get">
+<h2>What arrives each morning</h2>
+<ul>
+<li><strong>From the labs.</strong> Blog posts, news, model releases, new code and the papers the labs led, from
+OpenAI, Google DeepMind, Google Research, Anthropic, Microsoft Research, NVIDIA, Meta, Mistral AI, DeepSeek, Alibaba
+(Qwen), Apple, Amazon, IBM Research, Ai2 and Hugging Face. Your agent sorts each into <em>changes your work</em>,
+<em>worth trying</em>, <em>good to know</em> or <em>skip</em>, with two sentences on why it matters to you, including
+ideas that carry over from another field. On most days, for most researchers outside AI, nothing the labs released
+matters, and the digest says so instead of padding.</li>
+<li><strong>Papers for you.</strong> New papers from arXiv, bioRxiv/medRxiv and journals (through OpenAlex), ranked
+against the papers in your own library (a <code>.bib</code> file or Zotero); your agent reads the closest abstracts and
+sorts them into <em>read first</em>, <em>worth a look</em> and <em>on the edge</em>, with a reason each.</li>
+<li><strong>New citations of your papers</strong>, each reported once, and <strong>retractions and corrections</strong>
+of papers you cite.</li>
+<li><strong>Where you read.</strong> The whole digest by email, or its short form in Telegram or Slack, on a schedule:
+your Mac, a Linux machine, GitHub Actions, or a Claude Code routine with your computer off.</li>
+</ul>
+<p>The agent is yours: Claude Code by default, on your own Claude plan. The kit fetches, ranks and delivers; your
+agent judges, following the skill that comes with it. Want a one-off list for a topic instead? The free
+<a href="{FREE_DOOR}">paper-radar skill</a> does that on demand.</p>
+</section>
+
+<section id="real-morning">
+<h2>A real morning</h2>
+<p>One morning, start to finish: the kit {VERSION} installed from its wheel on Python 3.9, a flood-forecasting
+researcher's library of 40 published papers (hydrological models, ensemble weather forecasts, LSTM rainfall-runoff
+models), three sentences describing the work, and Claude Code as the agent. The library and the description are ours,
+standing in for a hydrologist's own; everything else is what the run fetched on 3 November 2026.</p>
+<pre class="term"><span class="p">$ paper-radar-kit daily --no-send</span>
+{run("flood-daily.txt")}
+<span class="p">$ paper-radar-kit send</span>
+{run("flood-send.txt")}</pre>
+<p>Of the 135 releases from 13 labs that day, the agent kept one, as good to know and from another field: an NVIDIA
+neural-operator surrogate for an oil-reservoir simulator, whose split between fixed spatial inputs and time-varying
+controls could carry over to emulating a hydrological model for each ensemble member. It read 35 new journal papers and
+put one first: 100 LSTMs whose ensemble spread estimates their own skill at groundwater sites left out of training,
+a check that, as the agent noted, fits LSTM models for ungauged catchments.</p>
+<div class="shots">
+{shot("01-flood-email.png", "The flood-forecasting digest open in Gmail: the subject says 1 lab release good to know, 1 paper to read first and 1 worth a look; the good-to-know NVIDIA surrogate with the agent's reason, then the paper to read first and the one worth a look, each with its reason.", "The email as it arrived in Gmail. The labs' other 134 releases follow further down, by title.", "samples/flood-forecasting.html")}
+</div>
+<p>The same morning for an AI researcher (the 89 references of a large-language-model paper as the library) looked
+very different. One lab release changed the work: a Google DeepMind paper showing that the usual way of fitting
+scaling laws hides near-best fits whose extrapolations diverge. Two were worth trying (INT8 training with structured
+stochastic rounding from Google Research; Anthropic's backdoors planted through pretraining data) and 11 good to know.
+Of 701 new arXiv papers, two were to read first, both on scaling, and eight worth a look; the agent found six of those
+eight by searching beyond the 40 closest abstracts. Its pass took 223 seconds. <a href="samples/ai-research.html">Open
+that digest</a> or the <a href="samples/flood-forecasting.html">flood-forecasting one</a>, as the email reads.</p>
+<div class="shots">
+{shot("02-ai-email.png", "The AI researcher's digest of the same morning in Gmail: one lab paper that changes the work, on fitting scaling laws, and two worth trying, each with two sentences on why.", "The same morning for an AI researcher's library.", "samples/ai-research.html")}
+</div>
+</section>
+
+<section id="how-well">
+<h2>How well it works</h2>
+<p>Both tests use papers a researcher later cited: did the kit put them in front of that researcher the week, or the
+day, they appeared? Each was measured once on a held-out set built and checked by someone who never ran the kit, after
+every setting had been fixed on separate development data. Intervals are 95% Wilson intervals.</p>
+<h3>From the labs</h3>
+{LABS_HELDOUT}
+<ul>
+<li>16 researchers in 14 fields (chemistry, ecology, plant genomics, journalism, HCI, nanophotonics, optics, memristive
+devices, phage genomics, biosecurity, oncology, information systems, statistics, networking, neuroscience, ML systems).
+For each, a lab paper they cited later, among the 39 to 151 papers the labs led that week; their library was their 12
+most recent works and the works those cite. One Claude Sonnet agent per researcher followed the kit's skill, with no
+description of the researcher.</li>
+<li>The ranking alone put 13 of the 16 in the top 10% of their week (81%, 57–93%), against 8 for a keyword search
+built from the library. Half of the 16 come from another field than the researcher's library; 5 of those 8 reached
+"changes your work" or "worth trying".</li>
+<li>16 papers is a small sample: the intervals are wide. 6 of the 16 are journal or conference versions of preprints
+from 6–18 months earlier; on the 10 that were new that week, the agent put 8 at "changes your work" or "worth
+trying".</li>
+<li>Blog posts, model releases and code have no record of who later used them, so they are not measured.</li>
+</ul>
+<h3>New papers</h3>
+{PAPERS_HELDOUT}
+<ul>
+<li>61 papers from 12 researchers, each ranked among every arXiv paper posted that day in the categories the kit
+watches for that researcher, with a library of what they had cited in their 12 most recent papers before that day.</li>
+<li>Most of these researchers work in fields with a few dozen new papers a day (high-energy and nuclear theory,
+gravitation, probability); the held-out set has only 7 papers from busy categories (hundreds a day), 4 of them in the
+top 10%. Fields that rarely cite fresh preprints could not be measured this way.</li>
+</ul>
+</section>
+
+<section id="every-morning">
+<h2>Delivery and a schedule</h2>
+<h3>Delivery</h3>
+<ul>
+<li><strong>Email</strong> gets the whole digest, with a subject that says what matters. Gmail needs an app password,
+which needs 2-Step Verification with an authenticator app or a phone; any other provider's SMTP server works the same
+way.</li>
+<li><strong>Telegram</strong> gets the short form (a one-line summary, the agent's tiers, notices and citations) and the
+whole digest as a file, through a bot you make with @BotFather in two minutes.</li>
+<li><strong>Slack</strong> gets the short form through an incoming webhook (some workspaces need an administrator's
+approval for new apps).</li>
+</ul>
+<p>Email was tested end to end through Gmail (the screenshots above). Telegram and Slack were tested against local stand-ins that follow their published APIs, not on live accounts.</p>
+<h3>A schedule</h3>
+<p><code>paper-radar-kit daily</code> is one morning's run: fetch and rank, your agent's pass (Claude Code, allowed only
+to read the run's files, write its scores and run the kit's <code>show</code>, <code>find</code> and <code>digest</code>),
+then delivery. If the agent's pass does not finish, the digest says so at the top and the ranking's picks still go out;
+if no source answers, you get a short note instead. One command, <code>paper-radar-kit schedule &lt;route&gt;</code>, sets up each route:</p>
+{ROUTES}
+<p>Run for real before release, November 2026: GitHub Actions in a private repository (about two minutes a run, the
+agent's pass under half a minute; the email arrived and the state was committed back); a Claude Code routine (two and
+a half minutes, the state pushed back); and a launchd job on a Mac (two and a half minutes, the agent's pass with the Mac's own Claude Code login, the email delivered; from inside the Documents folder macOS stopped the job, as the kit warns when you set it up). Two limits of routines showed up: their network lets only
+web traffic out, so a routine's digest goes by Telegram or Slack, not email; and GitHub's API answers only for the
+routine's own repository, so the labs' new GitHub repositories are not read there. The cron line comes from the same
+code as the launchd job, untried on a Linux machine.</p>
+</section>
+
+<section id="get-it">
+<h2>Get it and start</h2>
+{get}
+<pre><code>pip install paper_radar_kit-{VERSION}-py3-none-any.whl     # Python 3.9+, nothing else installed
+paper-radar-kit init                     # radar.ini: your .bib or Zotero, a few sentences on your research
+paper-radar-kit library                  # reads your library, shows what will be watched
+paper-radar-kit run                      # today's digest
+paper-radar-kit setup skill              # then ask Claude Code to "run the paper radar"
+paper-radar-kit send --test              # after choosing email, Telegram or Slack
+paper-radar-kit schedule launchd         # or cron, github, cloud</code></pre>
+<p>With the skill installed, you can also ask Claude Code to "set up my paper radar": it asks for your library, your
+description and how you want the digest delivered. Keys (OpenAlex, your mail password, a bot token) stay in your
+environment, a <code>secrets.env</code> only you can read, or your scheduler's secrets; never in the settings file.</p>
+</section>
+
+<section id="privacy">
+<h2>What it sends where</h2>
+<ul>
+<li>To the public sources (arXiv, OpenAlex, bioRxiv, Crossref): the categories and dates watched, and the DOIs and arXiv
+ids in your library, to fill in abstracts and check for notices. To the labs' sites, Hugging Face and GitHub: nothing
+but requests for their public feeds and listings.</li>
+<li>Your <code>.bib</code> files, notes and PDFs never leave your machine. Your agent reads the day's reading list,
+which holds your description and your library's recent titles: with Claude Code, that reading goes to Anthropic like
+any other Claude Code session.</li>
+<li>The digest goes only to the channels you set: your mail server, Telegram or Slack.</li>
+<li>Meta is covered through its Hugging Face models and its papers only, because ai.meta.com's robots.txt forbids
+automated collection; X is not read. Every request names the kit and is paced politely (arXiv: one every three
+seconds).</li>
+</ul>
+</section>
+
+<section id="limits">
+<h2>Limits</h2>
+<ul>
+<li>Ranking is by words: a paper that describes your problem in other words ranks lower. Your agent's pass over the
+closest abstracts and the titles below them is there for that.</li>
+<li>Lab papers come from OpenAlex's affiliations, which lag days to weeks and are sometimes wrong (a side paper by a lab
+employee); the kit leaves out what it can recognise and your agent sets the rest aside.</li>
+<li>New citations come from OpenAlex: journal and conference papers within a day or two, preprints only when OpenAlex
+has their reference list.</li>
+<li>Your agent's judgments are only as good as what the sources say: it works from titles, descriptions and abstracts,
+and says when a record has none.</li>
+<li>A source that changes its feed can stop answering until an update; the digest names any source that did not answer.</li>
+</ul>
+</section>
+"""
+
+SECTIONS = [("what-you-get", "What arrives"), ("real-morning", "A real morning"), ("how-well", "How well it works"),
+            ("every-morning", "Delivery and a schedule"), ("get-it", "Get it and start"),
+            ("privacy", "What it sends where"), ("limits", "Limits")]
+TOC = "".join(f'<li><a href="#{i}">{t}</a></li>' for i, t in SECTIONS)
+TITLE = "Paper Radar: What Matters to Your Research, Every Morning"
+DESC = ("Every morning, what the frontier AI labs released and the day's new papers, judged against your own library by "
+        "your agent, by email, Telegram or Slack. Held-out evaluation published.")
+BUY_CTA = '\n          <a class="btn" href="#get-it">Get it, ' + PRICE + '</a>' if STORES else ""
+
+PAGE = f"""<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{TITLE} · Aurora Lab</title>
+  <meta name="description" content="{html.escape(DESC)}">
+  <meta property="og:title" content="{TITLE} · Aurora Lab">
+  <meta property="og:description" content="{html.escape(DESC)}">
+  <meta property="og:image" content="https://the-aurora-lab.github.io/assets/img/paper-radar-kit.png">
+  <meta property="og:url" content="https://the-aurora-lab.github.io/tools/paper-radar/">
+  <link rel="canonical" href="https://the-aurora-lab.github.io/tools/paper-radar/">
+  <meta name="theme-color" content="#0b1020">
+  <link rel="icon" type="image/png" href="../../assets/img/avatar.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../../assets/css/site.css">
+</head>
+<body>
+  <a class="skip" href="#main">Skip to content</a>
+  <header class="nav">
+    <div class="wrap nav-inner">
+      <a class="brand" href="../../" aria-label="Aurora Lab home">
+        <img src="../../assets/img/avatar.png" alt="" width="32" height="32">
+        <span>Aurora Lab</span>
+      </a>
+      <nav aria-label="Primary">
+        <a href="../../#skills">Skills</a>
+        <a href="../../#tools">Tools</a>
+        <a class="btn btn-small" href="#get-it">Get Paper Radar</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main">
+    <section class="docs-hero">
+      <div class="aurora" aria-hidden="true"></div>
+      <div class="wrap">
+        <p class="crumbs"><a href="../../">Aurora Lab</a> / <a href="../../#tools">Tools</a> / Paper Radar</p>
+        <h1>{TITLE}</h1>
+        <p class="lede">Each morning, your own agent reads what the frontier AI labs released and the day's new papers,
+        and tells you which ones bear on your research and why, in your inbox, Telegram or Slack. Ranked against your
+        own library; new citations of your papers and retractions of papers you cite included. On a quiet day it says
+        so.</p>
+        <ul class="meta" aria-label="Tool facts"><li>v{VERSION}</li><li>Python 3.9+, standard library only</li><li>Runs on your machine or your scheduler</li><li>{PRICE} once</li></ul>
+        <div class="cta">{BUY_CTA}
+          <a class="btn{' btn-ghost' if STORES else ''}" href="#real-morning">See a real morning</a>
+          <a class="btn btn-ghost" href="#how-well">How well it works</a>
+        </div>
+      </div>
+    </section>
+
+    <div class="wrap docs">
+      <nav class="toc" aria-label="On this page">
+        <p>On this page</p>
+        <ol>{TOC}</ol>
+      </nav>
+      <article class="prose-doc">
+{BODY}
+      </article>
+    </div>
+  </main>
+
+  <footer class="footer">
+    <div class="wrap footer-inner">
+      <span class="brand"><img src="../../assets/img/avatar.png" alt="" width="24" height="24"> Aurora Lab</span>
+      <nav aria-label="Footer">
+        <a href="https://www.agensi.io/creators/aurora-lab">Skills on Agensi</a>
+        <a href="https://github.com/the-aurora-lab">GitHub</a>
+        <a href="https://x.com/theauroralab">X</a>
+      </nav>
+    </div>
+  </footer>
+  {GOATCOUNTER}
+</body>
+</html>
+"""
+
+if __name__ == "__main__":
+    OUT.parent.mkdir(parents=True, exist_ok=True)
+    OUT.write_text(PAGE, encoding="utf-8")
+    print(f"wrote {OUT.relative_to(SITE)}")

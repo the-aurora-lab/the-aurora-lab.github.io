@@ -1,0 +1,9 @@
+library 40 papers; window 2026-11-01 to 2026-11-03; arXiv -; 15 labs
+35 new papers ranked (0 shown before)
+135 lab releases from 13 labs
+agent: Claude Code is reading to-read.md ...
+agent: done (167 s)
+radar/2026-11-03/digest-2026-11-03.md
+digest-2026-11-03.md: 6 of 135 lab releases scored; 0 change your work, 0 worth trying, 1 good to know, 5 skipped
+digest-2026-11-03.md: 35 papers scored; 1 read first, 1 worth a look, 10 on the edge, 23 not for this researcher
+radar/2026-11-03/digest-2026-11-03.md (not sent: --no-send)
