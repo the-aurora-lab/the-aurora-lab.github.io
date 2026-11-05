@@ -17,7 +17,10 @@ OUT = SITE / "tools" / "research-starter-kit" / "index.html"
 RUNS = HERE / "runs"
 VERSION = "1.0.0"
 PRICE = "Pay what you want"
-STORES = {}  # filled when the owner publishes (step 17)
+STORES = {    # published by the owner 2026-11-05 (step 17)
+    "Gumroad": "https://theauroralab.gumroad.com/l/research-starter-kit",
+    "Polar": "https://buy.polar.sh/polar_cl_9ie2DAXVNtoOvRcbShswIiOFe8fErbo0A4hCq0tStDs",
+}
 GOATCOUNTER = ('<script data-goatcounter="https://auroralabskills.goatcounter.com/count" async '
                'src="//gc.zgo.at/count.js"></script>')
 
