@@ -1,0 +1,214 @@
+[
+ {
+  "name": "01-clean",
+  "session": "54937d9d-1845-46e6-9e52-516e3623280a",
+  "seconds": 30,
+  "cost_usd": 0.0688291,
+  "turns": 4,
+  "changed": [
+   "data/processed/sensors_2026-09_clean.csv",
+   "results/calibration.json",
+   "src/clean_sensors.py"
+  ],
+  "named": [
+   "data/processed/sensors_2026-09_clean.csv",
+   "results/calibration.json",
+   "src/clean_sensors.py"
+  ],
+  "missing": [],
+  "records": 7,
+  "events": [
+   "changed",
+   "command",
+   "end",
+   "prompt",
+   "start"
+  ],
+  "denials": []
+ },
+ {
+  "name": "02-methods",
+  "session": "c8209955-7420-47d5-9ead-d4c8bce7b5d4",
+  "seconds": 31,
+  "cost_usd": 0.08763919999999999,
+  "turns": 10,
+  "changed": [
+   "paper/main.tex",
+   "paper/refs.bib"
+  ],
+  "named": [
+   "paper/main.tex",
+   "paper/refs.bib"
+  ],
+  "missing": [],
+  "records": 11,
+  "events": [
+   "changed",
+   "check",
+   "command",
+   "edit",
+   "end",
+   "prompt",
+   "read",
+   "start"
+  ],
+  "denials": []
+ },
+ {
+  "name": "03-r2",
+  "session": "00c9098a-a044-4cb0-949e-c8941dc0c2c1",
+  "seconds": 24,
+  "cost_usd": 0.070775,
+  "turns": 6,
+  "changed": [
+   "paper/main.tex",
+   "results/calibration.json",
+   "src/calibrate.py"
+  ],
+  "named": [
+   "paper/main.tex",
+   "results/calibration.json",
+   "src/calibrate.py"
+  ],
+  "missing": [],
+  "records": 9,
+  "events": [
+   "changed",
+   "check",
+   "command",
+   "edit",
+   "end",
+   "prompt",
+   "read",
+   "start"
+  ],
+  "denials": []
+ },
+ {
+  "name": "04-notebook",
+  "session": "8ffc543d-fffd-4bc3-bdee-9cd40ebff273",
+  "seconds": 16,
+  "cost_usd": 0.0643625,
+  "turns": 7,
+  "changed": [
+   "notebooks/explore.ipynb"
+  ],
+  "named": [
+   "notebooks/explore.ipynb"
+  ],
+  "missing": [],
+  "records": 8,
+  "events": [
+   "command",
+   "edit",
+   "end",
+   "prompt",
+   "read",
+   "start"
+  ],
+  "denials": []
+ },
+ {
+  "name": "05-fake-ref",
+  "session": "b960dfe2-f617-49ce-b8e6-aad415956e7d",
+  "seconds": 26,
+  "cost_usd": 0.08810670000000001,
+  "turns": 7,
+  "changed": [],
+  "named": [],
+  "missing": [],
+  "records": 6,
+  "events": [
+   "command",
+   "end",
+   "prompt",
+   "read",
+   "search",
+   "start"
+  ],
+  "denials": []
+ },
+ {
+  "name": "06-radar",
+  "session": "ecc0ec0f-8301-4e36-bb2c-28caf9cd48d2",
+  "seconds": 51,
+  "cost_usd": 0.1988616,
+  "turns": 6,
+  "changed": [
+   "paper-radar-2026-11-05-soil-moisture-calibration/candidates.json",
+   "paper-radar-2026-11-05-soil-moisture-calibration/report.md",
+   "paper-radar-2026-11-05-soil-moisture-calibration/scores.json",
+   "paper-radar-2026-11-05-soil-moisture-calibration/to-read.md"
+  ],
+  "named": [
+   "paper-radar-2026-11-05-soil-moisture-calibration/candidates.json",
+   "paper-radar-2026-11-05-soil-moisture-calibration/report.md",
+   "paper-radar-2026-11-05-soil-moisture-calibration/scores.json",
+   "paper-radar-2026-11-05-soil-moisture-calibration/to-read.md"
+  ],
+  "missing": [],
+  "records": 8,
+  "events": [
+   "changed",
+   "command",
+   "end",
+   "prompt",
+   "read",
+   "skill",
+   "start"
+  ],
+  "denials": []
+ },
+ {
+  "name": "07-readers",
+  "session": "2ee64659-064f-4a4c-a04c-abe81cf95137",
+  "seconds": 20,
+  "cost_usd": 0.059695700000000004,
+  "turns": 3,
+  "changed": [],
+  "named": [],
+  "missing": [],
+  "records": 4,
+  "events": [
+   "end",
+   "prompt",
+   "read",
+   "start"
+  ],
+  "denials": []
+ },
+ {
+  "name": "08-figure",
+  "session": "ca250721-807f-4e1c-b834-8229fbf909e4",
+  "seconds": 73,
+  "cost_usd": 0.2030921,
+  "turns": 11,
+  "changed": [
+   "figures/calibration.pdf",
+   "figures/calibration.svg",
+   "paper/main.pdf",
+   "paper/main.tex",
+   "src/plot_calibration.py"
+  ],
+  "named": [
+   "figures/calibration.pdf",
+   "figures/calibration.svg",
+   "paper/main.pdf",
+   "paper/main.tex",
+   "src/plot_calibration.py"
+  ],
+  "missing": [],
+  "records": 13,
+  "events": [
+   "changed",
+   "check",
+   "command",
+   "edit",
+   "end",
+   "prompt",
+   "start",
+   "write"
+  ],
+  "denials": []
+ }
+]

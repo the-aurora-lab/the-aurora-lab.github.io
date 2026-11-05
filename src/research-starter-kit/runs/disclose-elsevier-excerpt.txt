@@ -1,0 +1,7 @@
+## Declaration of generative AI and AI-assisted technologies in the manuscript preparation process
+
+During the preparation of this work, the author(s) used Claude Code (Anthropic; version 2.1.318; model Claude Sonnet 5.5), an AI coding agent, in order to edit the manuscript text in Methods, Introduction and Results (17 lines added, 7 removed) and add or change entries in the bibliography (paper/refs.bib, 1 entry). After using this tool/service, the author(s) reviewed and edited the content as needed and take(s) full responsibility for the content of the published article.
+
+## For the Methods
+
+We used Claude Code (Anthropic; version 2.1.318; model Claude Sonnet 5.5), an AI coding agent, on 5 November 2026, to write and revise analysis code (src/calibrate.py, src/clean_sensors.py, src/plot_calibration.py), run the analysis scripts (src/calibrate.py, src/clean_sensors.py), work in notebooks (notebooks/explore.ipynb), prepare derived data files (data/processed/sensors_2026-09_clean.csv, results/calibration.json), produce figures (figures/calibration.pdf, figures/calibration.svg) and search the web and the literature (1 web search, paper-radar's reading lists). The new bibliography entry was checked against bibliographic registries (Crossref, OpenAlex, DBLP, arXiv) and the manuscript was rebuilt after each session that changed it. [Say how you checked the agent's work: for example, every change was reviewed, and the analysis rerun.]

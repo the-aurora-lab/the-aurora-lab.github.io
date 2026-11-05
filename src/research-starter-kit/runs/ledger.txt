@@ -1,0 +1,22 @@
+AI-use ledger: 66 records, 8 sessions on 5 November 2026
+  models: Claude Sonnet 5.5 (claude-sonnet-5-5)
+  Claude Code: 2.1.318
+  prompts 8, edits 6, commands 19, searches 1, pages read 0, subagents 0
+  text:
+    paper/main.tex (+17/-7): Methods › Sensor calibration; Introduction; Results
+  references:
+    paper/refs.bib: entry topp1980electromagnetic
+  code:
+    src/plot_calibration.py (+176/-0)
+  notebook:
+    notebooks/explore.ipynb: cell cell-1
+  literature:
+    paper-radar-2026-11-05-soil-moisture-calibration/report.md (+65/-0): Paper radar: Calibrating low-cost capacitive soil moisture sensors
+    paper-radar-2026-11-05-soil-moisture-calibration/to-read.md (+243/-0): Papers to read: Calibrating low-cost capacitive soil moisture sensors
+  written by commands:
+    build: paper/main.pdf
+    code: src/calibrate.py, src/clean_sensors.py
+    data: data/processed/sensors_2026-09_clean.csv, results/calibration.json
+    figures: figures/calibration.pdf, figures/calibration.svg
+    literature: paper-radar-2026-11-05-soil-moisture-calibration/candidates.json, paper-radar-2026-11-05-soil-moisture-calibration/scores.json
+  checks: 3 paper builds (0 with problems), 1 reference checked (0 with problems)

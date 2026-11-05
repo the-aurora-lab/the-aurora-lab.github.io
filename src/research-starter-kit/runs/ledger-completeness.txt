@@ -1,0 +1,1 @@
+In the eight sessions above (4 min 31 s in all, $0.84 of Claude usage), git saw 18 files change, and the ledger named 18 of them: edits made through shell commands and scripts included, with the section of the paper each text change touched. Each session started from a commit, so the files git saw change are exactly that session's.

@@ -1,0 +1,57 @@
+# AI-use statement: Elsevier journals
+
+A draft made from the AI-use ledger (`ai-use/ledger.jsonl`): 8 sessions on 5 November 2026. Read every sentence and change what is not true before you submit; text in [brackets] is yours to write.
+
+## Where it goes
+
+- Writing uses: a separate section at the end of the manuscript, immediately before the references, headed "Declaration of generative AI and AI-assisted technologies in the manuscript preparation process".
+- Research uses: the Methods section, in detail (model or tool, version, developer).
+- Need not be declared here: basic checks of grammar, spelling and punctuation; basic reference-manager functions.
+- Elsevier also asks authors to keep the tool's logs, prompts and outputs, and evidence of how the content was reviewed, for editors who ask: this ledger is that record.
+- Cell Press journals follow Elsevier's policy; some name the section "Declaration of generative AI in scientific writing" (we could not read cell.com's pages on 2026-11-05).
+
+## Declaration of generative AI and AI-assisted technologies in the manuscript preparation process
+
+During the preparation of this work, the author(s) used Claude Code (Anthropic; version 2.1.318; model Claude Sonnet 5.5), an AI coding agent, in order to edit the manuscript text in Methods, Introduction and Results (17 lines added, 7 removed) and add or change entries in the bibliography (paper/refs.bib, 1 entry). After using this tool/service, the author(s) reviewed and edited the content as needed and take(s) full responsibility for the content of the published article.
+
+## For the Methods
+
+We used Claude Code (Anthropic; version 2.1.318; model Claude Sonnet 5.5), an AI coding agent, on 5 November 2026, to write and revise analysis code (src/calibrate.py, src/clean_sensors.py, src/plot_calibration.py), run the analysis scripts (src/calibrate.py, src/clean_sensors.py), work in notebooks (notebooks/explore.ipynb), prepare derived data files (data/processed/sensors_2026-09_clean.csv, results/calibration.json), produce figures (figures/calibration.pdf, figures/calibration.svg) and search the web and the literature (1 web search, paper-radar's reading lists). The new bibliography entry was checked against bibliographic registries (Crossref, OpenAlex, DBLP, arXiv) and the manuscript was rebuilt after each session that changed it. [Say how you checked the agent's work: for example, every change was reviewed, and the analysis rerun.]
+
+## What the policy asks for
+
+- [x] tool name
+- [x] purpose
+- [ ] the authors' oversight (yours to add)
+- [x] for research use: model, version and developer
+
+## The record behind it
+
+| Use | Files and places | Sessions |
+|---|---|---|
+| Manuscript text | `paper/main.tex`: Methods › Sensor calibration; Introduction; Results (+17 / -7 lines) | 3 |
+| Bibliography | `paper/refs.bib`: entry topp1980electromagnetic | 1 |
+| Code | `src/plot_calibration.py` (+176 / -0 lines) | 1 |
+| Notebooks | `notebooks/explore.ipynb`: cell cell-1 | 1 |
+| Literature searches | `paper-radar-2026-11-05-soil-moisture-calibration/report.md`: Paper radar: Calibrating low-cost capacitive soil moisture sensors (+65 / -0 lines) | 1 |
+| Literature searches | `paper-radar-2026-11-05-soil-moisture-calibration/to-read.md`: Papers to read: Calibrating low-cost capacitive soil moisture sensors (+243 / -0 lines) | 1 |
+| Written by commands: the compiled paper | paper/main.pdf | |
+| Written by commands: code | src/calibrate.py, src/clean_sensors.py | |
+| Written by commands: data files | data/processed/sensors_2026-09_clean.csv, results/calibration.json | |
+| Written by commands: figures | figures/calibration.pdf, figures/calibration.svg | |
+| Written by commands: literature lists | paper-radar-2026-11-05-soil-moisture-calibration/candidates.json, paper-radar-2026-11-05-soil-moisture-calibration/scores.json | |
+| Scripts run | `src/calibrate.py` (3x), `src/clean_sensors.py` (2x), `.claude/skills/paper-radar/scripts/paper_radar.py` (2x), `notebooks/explore.ipynb` (1x) | |
+| Web | 1 search: "Ramirez Okafor 2023 "Long-term drift of low-cost capacitance soil moisture sensors under field conditions" Vadose Zone Journal"; 0 pages read | |
+| Skills | paper-radar | |
+| Checks | 1 bibliography entry checked by bib-check; 3 paper builds (0 with problems) | |
+
+## What the record cannot know
+
+- AI used outside Claude Code or outside this project: chat assistants in a browser, Copilot, grammar and translation tools. Add it yourself.
+- Sessions before the kit was installed (none imported): `kit.py ledger import` reads earlier Claude Code sessions of this project.
+- Which of the agent's changes survived your own editing: the ledger records what happened, not what is in the final version.
+- Ideas, hypotheses or interpretations that came out of conversations: only you can judge whether they count as the venue's "substantial" use.
+- How you checked the output: say it in your own words where the [brackets] ask.
+
+---
+Policy: https://www.elsevier.com/about/policies-and-standards/generative-ai-policies-for-journals (read 2026-11-05). Made by Research Starter Kit 1.0.0 from the ledger; it never writes paper text.

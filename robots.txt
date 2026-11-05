@@ -2,5 +2,6 @@ User-agent: *
 Allow: /
 Disallow: /tools/reference-verifier/samples/
 Disallow: /tools/paper-radar/samples/
+Disallow: /tools/research-starter-kit/samples/
 
 Sitemap: https://the-aurora-lab.github.io/sitemap.xml
