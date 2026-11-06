@@ -1,0 +1,23 @@
+The response is refreshed and checked, and it isn't ready to resubmit. I didn't change your replies or the paper.
+
+The letter splits into 9 comments: 1 from the editor, 3 from Reviewer 1 and 3 from Reviewer 2, plus an opening summary for each reviewer.
+
+**Answered by a change**
+- **E.1:** C1 adds "from June to August 2025" to the abstract (page 1, line 6).
+- **R1.1:** C4 describes the three-day side-by-side comparison of the twelve sensors, agreeing within 0.2 degrees (Section 2.1, page 1, lines 17-19).
+- **R1.2:** C5 removes readings taken while a bicycle stood still for more than a minute (Section 2.2, page 1, lines 21-23).
+- **R1.3:** C6 changes the Figure 1 caption to say the routes are in grey (page 2).
+- **R1.0 and R2.0:** these are praise, so I marked them as needing no change.
+
+**Partly answered**
+- **R2.1:** C7 is a single sentence in the Discussion (page 2, lines 30-31). It says one summer in one city can't show how the pattern changes and that a second season is planned. The reviewer asked you to "discuss how general the result is", so this may be thin.
+- **R2.2:** C3 gives an advantage of bicycles: they move slowly enough for a shielded sensor to follow air temperature (Section 1, page 1, lines 12-13). It never compares them with cars.
+
+**Problems the check found**
+1. **R2.3, uncertainty of the 1.4 degree difference:** your reply says you added "the 95% confidence interval of the difference (1.4 +/- 0.3 degrees) to the Results". The revised paper has no such text. The only change near that number, C2, adds "1.4 degrees … at midday" to the abstract, with no interval. Either the interval never made it into `revised/paper.tex`, or the reply is ahead of the manuscript.
+2. **R2.2 has no reply.** The Reply field is empty.
+3. **R1.3 reply:** you quote "the routes of all twelve bicycles in grey" as new text. The manuscript only has ", with the twelve bicycles' routes in grey" in the caption. Reword the quote, or check the wording.
+4. **Figure 1 (not yet checked):** your reply says you redrew it. A caption edit is the only change I can see, so I haven't confirmed the figure itself shows the routes.
+5. **C2 matches no comment.** It adds "1.4 degrees … at midday" to the abstract, which no reviewer asked for. It's harmless, but the response doesn't mention it.
+
+`revision/check.md` and `revision/report.html` have the details. After you fix these, run `every-comment diff`, then `every-comment scaffold`, then `every-comment check` again.

@@ -1,0 +1,238 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Every Comment Answered: Each Reviewer Point Matched to Your Changes · Aurora Lab</title>
+  <meta name="description" content="Split the decision letter into numbered comments, see every change in your LaTeX or Word manuscript with its page and line, link each comment to the changes that answer it, and check before resubmitting that every promised change is there. It never writes your replies. Held-out evaluation published.">
+  <meta property="og:title" content="Every Comment Answered: Each Reviewer Point Matched to Your Changes · Aurora Lab">
+  <meta property="og:description" content="Split the decision letter into numbered comments, see every change in your LaTeX or Word manuscript with its page and line, link each comment to the changes that answer it, and check before resubmitting that every promised change is there. It never writes your replies. Held-out evaluation published.">
+  <meta property="og:image" content="https://the-aurora-lab.github.io/assets/img/every-comment-answered.png">
+  <meta property="og:url" content="https://the-aurora-lab.github.io/tools/every-comment-answered/">
+  <link rel="canonical" href="https://the-aurora-lab.github.io/tools/every-comment-answered/">
+  <meta name="theme-color" content="#0b1020">
+  <link rel="icon" type="image/png" href="../../assets/img/avatar.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../../assets/css/site.css">
+</head>
+<body>
+  <a class="skip" href="#main">Skip to content</a>
+  <header class="nav">
+    <div class="wrap nav-inner">
+      <a class="brand" href="../../" aria-label="Aurora Lab home">
+        <img src="../../assets/img/avatar.png" alt="" width="32" height="32">
+        <span>Aurora Lab</span>
+      </a>
+      <nav aria-label="Primary">
+        <a href="../../#skills">Skills</a>
+        <a href="../../#tools">Tools</a>
+        <a class="btn btn-small" href="#get-it">Get it</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main">
+    <section class="docs-hero">
+      <div class="aurora" aria-hidden="true"></div>
+      <div class="wrap">
+        <p class="crumbs"><a href="../../">Aurora Lab</a> / <a href="../../#tools">Tools</a> / Every Comment Answered</p>
+        <h1>Every Comment Answered: Each Reviewer Point Matched to Your Changes</h1>
+        <p class="lede">For papers coming back from review: the decision letter split into numbered comments, every
+        change in your LaTeX or Word manuscript with its page and line, each comment linked to the changes that answer
+        it, and a check before you resubmit that every comment has a reply and every promised change is really in the
+        paper. Your replies stay your own.</p>
+        <ul class="meta" aria-label="Tool facts"><li>v1.0.1</li><li>Python 3.9+, standard library only</li><li>Runs on your computer</li><li>Claude Code skill included</li><li>$19 once</li></ul>
+        <div class="cta">
+          <a class="btn" href="#a-revision">See a revision</a>
+          <a class="btn btn-ghost" href="#how-well">How well it works</a>
+        </div>
+      </div>
+    </section>
+
+    <div class="wrap docs">
+      <nav class="toc" aria-label="On this page">
+        <p>On this page</p>
+        <ol><li><a href="#what-it-does">What it does</a></li><li><a href="#a-revision">A revision, start to finish</a></li><li><a href="#how-well">How well it works</a></li><li><a href="#formats">What it reads</a></li><li><a href="#get-it">Get it and start</a></li><li><a href="#privacy">What it sends where</a></li><li><a href="#limits">Limits</a></li></ol>
+      </nav>
+      <article class="prose-doc">
+
+<section id="what-it-does">
+<h2>What it does</h2>
+<ol>
+<li><strong>Splits the decision letter into numbered comments.</strong> E.1 for the editor, R1.3 for reviewer 1's
+third point, each quoted exactly. It reads the layouts journals send: Editorial Manager and ScholarOne letters, PLOS
+questionnaires, eLife reviews, SciPost reports, Copernicus comments, F1000Research reports, OJS, with numbered,
+lettered, bulleted, line-referenced and section-referenced points.</li>
+<li><strong>Finds every change</strong> between the version you submitted and the revised one: LaTeX from a git
+tag, a folder or an Overleaf zip (following <code>\input</code> and <code>\include</code>), or Word, from a file with
+tracked changes or two files. Each change knows its place: section, figure, table, equation, and the page and line
+of the revised PDF.</li>
+<li><strong>Links each comment to the changes that answer it.</strong> It ranks the likely changes for every comment;
+you, or Claude Code with the included skill, confirm each link after reading it.</li>
+<li><strong>Writes the response scaffold</strong> in Markdown, LaTeX or Word: every comment quoted, room for your
+reply, and the changes listed with their places, kept up to date as you keep editing.</li>
+<li><strong>Checks before you resubmit</strong> that every comment has a reply, that every change a reply promises is
+linked to a real change, that text a reply quotes is in the paper, that numbers a reply gives are in the paper, and
+that the section, figure or page a reply names is where the change is. It also lists changes no comment
+explains.</li>
+</ol>
+<p>It never writes your replies. JAMA's 2026 guidance lists author responses to reviewer and editor comments as not
+an acceptable use of AI, and other journals ask authors to disclose AI-written text; Springer Nature lists
+structuring reviewer comments as a permitted use. Every Comment Answered stays on the tracking side of that line.</p>
+</section>
+
+<section id="a-revision">
+<h2>A revision, start to finish</h2>
+<p>A short paper made up for this demonstration (bicycle-mounted temperature sensors and urban heat), its submitted
+and revised LaTeX versions with line numbers, and a decision letter from an editor and two reviewers. The authors'
+replies were written into the scaffold with three mistakes planted for the check to find.</p>
+<pre class="term"><span class="p">$ every-comment start decision-letter.txt --old submitted --new revised</span>
+9 comments: Editor 1, Reviewer 1 4, Reviewer 2 4
+  summaries (a reply, usually no change): R1.0, R2.0
+  read revision/comments.md against the letter; fix a split with `every-comment merge` or `split-comment`
+7 changes (6 added, 1 changed; 0 punctuation or markup only) between submitted and revised
+  main file: paper.tex; pages from SyncTeX
+revision/to-link.md: candidates for 9 of 9 comments
+revision/response.md written
+next: link each comment to its changes (revision/to-link.md; `every-comment link`), write the replies in revision/response.md, then `every-comment scaffold` and `every-comment check`</pre>
+<p>Every change with its place in the revised PDF:</p>
+<pre class="term"><span class="p">$ every-comment changes</span>
+C1 · the abstract, page 1, line 6 · paper.tex:13 · added “, from June to August 2025”
+C2 · the abstract, page 1, line 7 · paper.tex:13 · “cooler than streets without trees” → “1.4 degrees cooler than streets without trees at midday”
+C3 · Section 1 (Introduction), page 1, lines 12-13 · paper.tex:21 · added “Bicycles also move slowly enough for a shielded sensor to follow changes in air temperature.”
+C4 · Section 2.1 (Sensors), page 1, lines 17-19 · paper.tex:26-27 · added “Before the campaign, all twelve sensors were compared side by side with a reference thermometer for three days; they agreed within 0.2 degrees.”
+C5 · Section 2.2 (Processing), page 1, lines 21-23 · paper.tex:30-32 · added “Readings taken while a bicycle stood still for more than a minute were removed, because the shield then heats up in the sun.”
+C6 · Figure 1 (caption), page 2 · paper.tex:41 · added “, with the twelve bicycles&#x27; routes in grey”
+C7 · Section 4 (Discussion), page 2, lines 30-31 · paper.tex:48-49 · added “One summer in one city cannot show how the pattern changes between years or climates; a second season is planned.”</pre>
+<h3>Claude Code links the comments</h3>
+<p>Then one unattended Claude Code session (Claude Sonnet 5.5) with the skill installed got the request an author
+would type: link each comment to the changes that answer it, refresh the response, check it and say what is missing.
+It took 27 seconds and cost $0.10. Its answer, word for word:</p>
+<blockquote class="agent">
+<p>The response is refreshed and checked, and it isn&#x27;t ready to resubmit. I didn&#x27;t change your replies or the paper.</p>
+<p>The letter splits into 9 comments: 1 from the editor, 3 from Reviewer 1 and 3 from Reviewer 2, plus an opening summary for each reviewer.</p>
+<p><strong>Answered by a change</strong></p>
+<ul><li><strong>E.1:</strong> C1 adds &quot;from June to August 2025&quot; to the abstract (page 1, line 6).</li><li><strong>R1.1:</strong> C4 describes the three-day side-by-side comparison of the twelve sensors, agreeing within 0.2 degrees (Section 2.1, page 1, lines 17-19).</li><li><strong>R1.2:</strong> C5 removes readings taken while a bicycle stood still for more than a minute (Section 2.2, page 1, lines 21-23).</li><li><strong>R1.3:</strong> C6 changes the Figure 1 caption to say the routes are in grey (page 2).</li><li><strong>R1.0 and R2.0:</strong> these are praise, so I marked them as needing no change.</li></ul>
+<p><strong>Partly answered</strong></p>
+<ul><li><strong>R2.1:</strong> C7 is a single sentence in the Discussion (page 2, lines 30-31). It says one summer in one city can&#x27;t show how the pattern changes and that a second season is planned. The reviewer asked you to &quot;discuss how general the result is&quot;, so this may be thin.</li><li><strong>R2.2:</strong> C3 gives an advantage of bicycles: they move slowly enough for a shielded sensor to follow air temperature (Section 1, page 1, lines 12-13). It never compares them with cars.</li></ul>
+<p><strong>Problems the check found</strong></p>
+<ul><li><strong>R2.3, uncertainty of the 1.4 degree difference:</strong> your reply says you added &quot;the 95% confidence interval of the difference (1.4 +/- 0.3 degrees) to the Results&quot;. The revised paper has no such text. The only change near that number, C2, adds &quot;1.4 degrees … at midday&quot; to the abstract, with no interval. Either the interval never made it into <code>revised/paper.tex</code>, or the reply is ahead of the manuscript.</li><li><strong>R2.2 has no reply.</strong> The Reply field is empty.</li><li><strong>R1.3 reply:</strong> you quote &quot;the routes of all twelve bicycles in grey&quot; as new text. The manuscript only has &quot;, with the twelve bicycles&#x27; routes in grey&quot; in the caption. Reword the quote, or check the wording.</li><li><strong>Figure 1 (not yet checked):</strong> your reply says you redrew it. A caption edit is the only change I can see, so I haven&#x27;t confirmed the figure itself shows the routes.</li><li><strong>C2 matches no comment.</strong> It adds &quot;1.4 degrees … at midday&quot; to the abstract, which no reviewer asked for. It&#x27;s harmless, but the response doesn&#x27;t mention it.</li></ul>
+<p><code>revision/check.md</code> and <code>revision/report.html</code> have the details. After you fix these, run <code>every-comment diff</code>, then <code>every-comment scaffold</code>, then <code>every-comment check</code> again.</p>
+</blockquote>
+<h3>The check</h3>
+<pre class="term"><span class="p">$ every-comment check</span>
+8 of 9 comments have a reply; 6 of 7 changes linked to a comment
+  3 high, 1 medium:
+  high   R1.3   the reply quotes “the routes of all twelve bicycles in grey”, which is not in the revised manuscript
+  high   R2.2   no reply
+  high   R2.3   the reply says the manuscript changed (“We added the 95% confidence interval of the difference (1.4 +/- 0.3 degrees) to the …”) but no change is linked
+  medium R2.3   the reply gives 95%, 0.3, which are not in the revised manuscript
+  1 change no comment explains: C2
+  details: revision/check.md, revision/report.html</pre>
+<p>The same results on one page, <code>revision/report.html</code>:</p>
+<p><a href="samples/report.html"><img class="shot" src="../../assets/shots/every-comment-answered/report-summary.png"
+alt="Revision check summary: comments with a reply, high and medium problems, changes linked" width="760"></a></p>
+<p><a href="samples/report.html"><img class="shot" src="../../assets/shots/every-comment-answered/report-problems.png"
+alt="Rows of the revision check with the problems found: a quote not in the paper, no reply, a promised change missing"
+width="760"></a></p>
+<p>Open them as they came out: <a href="samples/report.html">report.html</a>,
+<a href="samples/response.md">response.md</a> (the scaffold with the changes filled in),
+<a href="samples/check.md">check.md</a>, <a href="samples/decision-letter.txt">the decision letter</a> and
+<a href="samples/revised-paper.pdf">the revised PDF</a>.</p>
+</section>
+
+<section id="how-well">
+<h2>How well it works</h2>
+<p>Measured once, on 13 real revisions the tool was never tuned on: 9 SciPost papers (LaTeX from arXiv;
+astronomy, mathematical physics, particle physics, condensed matter, cosmology) and 4 F1000Research papers (Word, with
+the tracked changes made by Microsoft Word's own Compare; pharmacognosy, biochemistry, clinical pharmacy,
+bioinformatics). The reviewers' reports, the authors' real replies and both versions of each paper are public
+(CC BY). An independent agent, which never ran the tool or read its code, labelled 278 reviewer points: where each
+point is, what the authors replied, and phrases of the revised text that show each change. In a copy of each paper it
+then took out again the changes that answer 37 points whose replies still promise them. One Claude Code session
+per paper (Sonnet 5.5, a median of 55 seconds, $3.30 for all 13) got the request a user would type, then
+<code>every-comment check</code> ran.</p>
+<div class="doc-table"><table><thead><tr><th>Version 1.0.0, held-out</th><th>All 278 points</th><th>95% CI</th><th>Points with their own comment</th></tr></thead><tbody><tr><td>Reviewer points found by the split</td><td>276 / 278 (99%)</td><td>97–100%</td><td></td></tr><tr><td>… given a comment of their own</td><td>165 / 278 (59%)</td><td>54–65%</td><td></td></tr><tr><td>A change holding the answer among the top 3 suggestions</td><td>44 / 64 (69%)</td><td>57–79%</td><td>35 / 45 (78%)</td></tr><tr><td>Claude Code linked a change holding the answer</td><td><strong>58 / 64 (91%)</strong></td><td>81–96%</td><td>43 / 45 (96%)</td></tr><tr><td>Missing promised changes flagged by the check</td><td>21 / 37 (57%)</td><td>41–71%</td><td><strong>13 / 22 (59%)</strong></td></tr><tr><td>Points flagged although nothing was missing</td><td>64 / 239 (27%)</td><td>22–33%</td><td>23 / 143 (16%)</td></tr></tbody></table></div>
+<p>"Points with their own comment" is the cleaner measure of the check: when the split puts several points in one
+comment, the authors' replies to all of them sit together, and a flag earned by one is charged to all. The seven
+points the authors left without any reply were all flagged as such; those flags are right and not counted above.</p>
+<ul>
+<li><strong>Every miss among the missing changes</strong> (9 of 22) was a reply the check did not read as a promise:
+terse ones such as "Addressed", "→ fixed", "Removed from paper.", "Stated that explicitly", and "we propose to change
+…". Version 1.0.1 reads these too; that has not been re-measured, and the next held-out set will.</li>
+<li><strong>Splitting</strong> finds the points but often keeps neighbours together: reports written as paragraphs
+that hold several requests (most F1000Research reports) gave 21 of 65 points a comment of their own, SciPost 144 of
+213. Read <code>comments.md</code> once and split by hand where needed.</li>
+<li><strong>False alarms</strong> (23): the agent's own "only partly answered" notes on links the labels count as
+answers; promises about software or figures, which the tool cannot see; quotes of a paper's title or of text with
+math; numbers and places a reply names.</li>
+<li>Links to changes the labels do not name are not judged: the labels give one to three phrases per point, not every
+change. Page and line numbers were not part of this test (the held-out sources were not compiled); the test suite
+checks them against compiled PDFs.</li>
+</ul>
+<p>The guide in the download carries the same results.</p>
+</section>
+
+<section id="formats">
+<h2>What it reads</h2>
+<div class="doc-table"><table><thead><tr><th>Input</th><th>Accepted</th></tr></thead><tbody><tr><td>Decision letter</td><td>Text, Markdown, a saved email (.eml), HTML, Word, or PDF (with <code>pdftotext</code>)</td></tr><tr><td>LaTeX manuscript</td><td>The current folder against a git tag or commit, another folder, a .tex file or an Overleaf zip; <code>\input</code>, <code>\include</code>, <code>\subfile</code> and <code>\import</code> followed; the .aux file's numbers and pages used when present</td></tr><tr><td>Word manuscript</td><td>One .docx with tracked changes (insertions, deletions, moves; Word's author and date kept), or two .docx files without them</td></tr><tr><td>Page and line numbers</td><td>From the revised PDF built with SyncTeX (<code>pdflatex -synctex=1</code>, latexmk's default), with <code>\usepackage{{lineno}}</code> for line numbers; Word gives the page as it last laid the file out</td></tr><tr><td>Response</td><td>Markdown, LaTeX or Word; your replies are kept every time it is refreshed</td></tr></tbody></table></div>
+<p>You can tag a change yourself, <code>% R1.3</code> beside it in LaTeX or a Word comment saying R1.3, and it is
+suggested first for that comment.</p>
+</section>
+
+<section id="get-it">
+<h2>Get it and start</h2>
+<p><strong>Coming to Gumroad and Polar at $19, once</strong>: a zip with the Python wheel (the <code>every-comment</code> command and the Claude Code skill), a quickstart and the full guide. Updates for 12 months. Personal-use licence; no licence key.</p>
+<pre><code>pip install every_comment_answered-1.0.1-py3-none-any.whl
+cd my-paper
+every-comment start decision-letter.pdf --old submitted     # a git tag, a folder or an Overleaf zip
+every-comment setup skill                                    # then ask Claude Code to "help me answer the reviewers"
+every-comment check                                          # before resubmitting</code></pre>
+<p>Python 3.9 or newer, nothing else installed with it. Works without Claude Code: <code>every-comment changes --near
+R1.3</code> and <code>every-comment link R1.3 C12</code> do the linking by hand.</p>
+</section>
+
+<section id="privacy">
+<h2>What it sends where</h2>
+<ul>
+<li>Nothing. The command reads your letter and your manuscript and writes a <code>revision/</code> folder beside them;
+it makes no network requests and has no telemetry.</li>
+<li>With Claude Code, the skill runs the same commands on your computer. Claude Code sends what the agent reads to
+Anthropic as it always does; the tool adds nothing to that.</li>
+</ul>
+</section>
+
+<section id="limits">
+<h2>Limits</h2>
+<ul>
+<li>LaTeX and Word only; a manuscript that exists only as a PDF cannot be compared.</li>
+<li>Splitting follows the letter's layout; a letter written as unbroken prose splits by paragraph. Read
+<code>comments.md</code> once and merge or split what needs it.</li>
+<li>Suggestions come from shared words, quoted phrases, the places a comment names and your tags. A person or the
+agent confirms each link; a wrong link hides a missing change from the check.</li>
+<li>The check recognises the usual ways of saying the manuscript changed; a promise in unusual words may pass.</li>
+<li>Figure images and software are not compared: a redrawn figure shows only through its caption.</li>
+<li>Tested on macOS with Python 3.9 and 3.14, TeX Live 2026, Microsoft Word for Mac and Claude Code 2.1.319. Windows is
+untested.</li>
+</ul>
+</section>
+
+      </article>
+    </div>
+  </main>
+
+  <footer class="footer">
+    <div class="wrap footer-inner">
+      <span class="brand"><img src="../../assets/img/avatar.png" alt="" width="24" height="24"> Aurora Lab</span>
+      <nav aria-label="Footer">
+        <a href="https://www.agensi.io/creators/aurora-lab">Skills on Agensi</a>
+        <a href="https://github.com/the-aurora-lab">GitHub</a>
+        <a href="https://x.com/theauroralab">X</a>
+      </nav>
+    </div>
+  </footer>
+  <script data-goatcounter="https://auroralabskills.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
+</body>
+</html>

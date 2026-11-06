@@ -1,0 +1,7 @@
+C1 · the abstract, page 1, line 6 · paper.tex:13 · added “, from June to August 2025”
+C2 · the abstract, page 1, line 7 · paper.tex:13 · “cooler than streets without trees” → “1.4 degrees cooler than streets without trees at midday”
+C3 · Section 1 (Introduction), page 1, lines 12-13 · paper.tex:21 · added “Bicycles also move slowly enough for a shielded sensor to follow changes in air temperature.”
+C4 · Section 2.1 (Sensors), page 1, lines 17-19 · paper.tex:26-27 · added “Before the campaign, all twelve sensors were compared side by side with a reference thermometer for three days; they agreed within 0.2 degrees.”
+C5 · Section 2.2 (Processing), page 1, lines 21-23 · paper.tex:30-32 · added “Readings taken while a bicycle stood still for more than a minute were removed, because the shield then heats up in the sun.”
+C6 · Figure 1 (caption), page 2 · paper.tex:41 · added “, with the twelve bicycles' routes in grey”
+C7 · Section 4 (Discussion), page 2, lines 30-31 · paper.tex:48-49 · added “One summer in one city cannot show how the pattern changes between years or climates; a second season is planned.”

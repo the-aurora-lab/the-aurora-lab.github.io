@@ -1,0 +1,8 @@
+8 of 9 comments have a reply; 6 of 7 changes linked to a comment
+  3 high, 1 medium:
+  high   R1.3   the reply quotes “the routes of all twelve bicycles in grey”, which is not in the revised manuscript
+  high   R2.2   no reply
+  high   R2.3   the reply says the manuscript changed (“We added the 95% confidence interval of the difference (1.4 +/- 0.3 degrees) to the …”) but no change is linked
+  medium R2.3   the reply gives 95%, 0.3, which are not in the revised manuscript
+  1 change no comment explains: C2
+  details: revision/check.md, revision/report.html

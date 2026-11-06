@@ -1,0 +1,31 @@
+Dear Dr. Demo,
+
+Manuscript ID UHC-2026-0187 entitled "Street-level heat mapped by bicycle-mounted sensors", which you submitted
+to Urban Climate Letters, has been reviewed. The comments of the reviewers are included at the bottom of this
+letter. (This letter is a demonstration: the journal, the manuscript and the reviewers are invented.)
+
+Please also:
+1. State the dates of the measurement campaign in the abstract.
+
+Sincerely,
+Editor
+
+Reviewer(s)' Comments to Author:
+
+Reviewer: 1
+
+Comments to the Author
+The authors map urban heat with sensors on shared bicycles. The idea is good and the paper is short and clear.
+
+1. How were the sensors calibrated? Twelve sensors can drift apart; please describe an intercomparison.
+2. Readings taken while a bicycle is parked in the sun are likely biased. How were they handled?
+3. Figure 1 would be easier to read with the bicycles' routes shown.
+
+Reviewer: 2
+
+Comments to the Author
+This is a useful demonstration of low-cost mobile sensing.
+
+1. One summer in one city is a narrow basis for the conclusions. Please discuss how general the result is.
+2. Why bicycles rather than cars? A sentence on the advantages would help.
+3. Please give the uncertainty of the 1.4 degree difference.

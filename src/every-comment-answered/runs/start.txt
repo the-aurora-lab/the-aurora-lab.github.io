@@ -1,0 +1,8 @@
+9 comments: Editor 1, Reviewer 1 4, Reviewer 2 4
+  summaries (a reply, usually no change): R1.0, R2.0
+  read revision/comments.md against the letter; fix a split with `every-comment merge` or `split-comment`
+7 changes (6 added, 1 changed; 0 punctuation or markup only) between submitted and revised
+  main file: paper.tex; pages from SyncTeX
+revision/to-link.md: candidates for 9 of 9 comments
+revision/response.md written
+next: link each comment to its changes (revision/to-link.md; `every-comment link`), write the replies in revision/response.md, then `every-comment scaffold` and `every-comment check`
