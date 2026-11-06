@@ -17,7 +17,10 @@ OUT = SITE / "tools" / "every-comment-answered" / "index.html"
 RUNS = HERE / "runs"
 VERSION = "1.0.1"
 PRICE = "$19 once"
-STORES = {}   # filled when the owner publishes (step 18)
+STORES = {    # published by the owner 2026-11-06 (step 18)
+    "Gumroad": "https://theauroralab.gumroad.com/l/every-comment-answered",
+    "Polar": "https://buy.polar.sh/polar_cl_BB0hKEoHAf45E3ZIudWovwK71uI1pAi3S4xkR0FtYyw",
+}
 GOATCOUNTER = ('<script data-goatcounter="https://auroralabskills.goatcounter.com/count" async '
                'src="//gc.zgo.at/count.js"></script>')
 HELDOUT_ROWS = [
