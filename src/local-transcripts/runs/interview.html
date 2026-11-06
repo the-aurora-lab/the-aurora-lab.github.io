@@ -1,0 +1,95 @@
+
+<p>A mock GP consultation from <a href="https://github.com/babylonhealth/primock57">PriMock57</a> (Babylon Health, CC BY 4.0; a real clinician and an actor patient, recorded on separate channels and mixed here into one file), run with the released build on an Apple Silicon Mac. Nobody is named in it, so its shareable copy differs only in the header; the next example shows the pseudonymising.
+</p>
+<pre class="term">$ local-transcripts interview recordings --speakers 2 --project transcripts
+[1/1] c01.wav:
+  transcribing 7.6 min of audio ...
+  words: 1228, transcribed in 19 s (mlx-whisper, whisper-large-v3-turbo, language en)
+  speakers: 2 (as given), found in 4 s
+  67 turns -&gt; transcripts/c01/
+  pseudonymised (nothing to replace) -&gt; transcripts/shareable/
+Check transcripts/anonymisation/suspects.csv and the key before sharing anything from transcripts/shareable/.
+
+$ local-transcripts speakers transcripts/c01
+S1  Speaker 1              34 turns,   3.2 min
+S2  Speaker 2              33 turns,   3.7 min
+
+$ local-transcripts speakers transcripts/c01 S1=Patient S2=Doctor
+Speakers updated; outputs rewritten (nothing to replace in the shareable copy).</pre>
+<p>The opening of the transcript (<code>c01/c01.txt</code>, also the file you edit):</p>
+<pre class="term">[00:00:02] Patient: Hello. Hi.
+
+[00:00:08] Doctor: How can I help you this morning?
+
+[00:00:12] Patient: Hi. I&#x27;ve just had some diarrhoea for the last three days and it&#x27;s been affecting me. I need to stay close to the toilet and it&#x27;s been affecting my day-to-day activities.
+
+[00:00:25] Doctor: Yeah, I&#x27;m sorry to hear that. And when you say diarrhoea, what do you mean by diarrhoea? Do you mean you&#x27;re going to the toilet more often or are your stools more loose?
+
+[00:00:34] Patient: Yeah, so it&#x27;s like loose and watery stool, going to the toilet quite often, and like some pain in my lower stomach. Okay.
+
+[00:00:44] Doctor: And how many times a day are you going, let&#x27;s say, in the last couple of days?
+
+[00:00:48] Patient: Probably like six, seven times a day.
+
+[00:00:50] Doctor: Six, seven times a day. And you mentioned it&#x27;s mainly watery. Have you noticed any other things, like blood in your stools?</pre>
+<p>The review page: click a time to hear that moment, unsure words underlined (the recording itself is not
+included in the sample):</p>
+<p><a href="samples/review.html"><img class="shot" src="../../assets/shots/local-transcripts/review.png"
+alt="Review page: turns with speakers in colour, times on the left, unsure words underlined" width="760"></a></p>
+<p>For MAXQDA's focus-group import (<code>shareable/c01.maxqda.txt</code>):</p>
+<pre class="term">#00:00:02-7#
+
+Patient: Hello. Hi. #00:00:04-3#
+
+Doctor: How can I help you this morning? #00:00:11-8#
+
+Patient: Hi. I&#x27;ve just had some diarrhoea for the last three days and it&#x27;s been affecting me. I need to stay close to the toilet and it&#x27;s been affecting my day-to-day activities. #00:00:25-3#</pre>
+<p>For NVivo on Windows (<code>shareable/c01.nvivo.tsv</code>):</p>
+<pre class="term">Timespan	Speaker	Content
+00:00:02.7-00:00:04.3	Patient	Hello. Hi.
+00:00:08.4-00:00:11.8	Doctor	How can I help you this morning?
+00:00:12.6-00:00:25.3	Patient	Hi. I&#x27;ve just had some diarrhoea for the last three days and it&#x27;s been affecting me. I need to stay close to the toilet and it&#x27;s been affecting my day-to-day activities.</pre>
+<p>Open them whole: <a href="samples/c01-pseudonymised.txt">the transcript</a>,
+<a href="samples/c01-pseudonymised.docx">as Word</a>, <a href="samples/review.html">the review page</a>.</p>
+<h3>Pseudonymising</h3>
+<p>An interview we made up for this page, spoken by two macOS voices, with names planted in it; the researcher's names list gives two of them, and the name finder found the rest.
+</p>
+<pre class="term"># people the participant may name
+Margaret Okafor
+place: Kimberworth</pre>
+<pre class="term">$ local-transcripts interview recordings --speakers 2 --roles &quot;Interviewer,Participant 7&quot; --names names.txt --project transcripts
+Names list: 3 new line(s) copied into transcripts/anonymisation/names.txt (your own file is unchanged; the project keeps its own copy beside the key)
+[1/1] p07.wav:
+  transcribing 0.9 min of audio ...
+  words: 154, transcribed in 3 s (mlx-whisper, whisper-large-v3-turbo, language en)
+  speakers: 2 (as given), found in 1 s
+  9 turns -&gt; transcripts/p07/
+  pseudonymised (3 persons, 3 places, 1 organisation) -&gt; transcripts/shareable/
+Check transcripts/anonymisation/suspects.csv and the key before sharing anything from transcripts/shareable/.</pre>
+<p>As said (<code>p07/p07.txt</code>):</p>
+<pre class="term">[00:00:00] Interviewer: Thank you for joining me today. Could you start by telling me a little about your role?
+
+[00:00:04] Participant 7: Sure. My name is Margaret Okafor and I have worked as a community nurse in Rotherham for about 11 years, mostly with the Sheffield Teaching Hospitals Trust.
+
+[00:00:14] Interviewer: And how did the pandemic change your day-to-day work?
+
+[00:00:17] Participant 7: Honestly, everything moved to the phone. My manager, Peter Lindqvist, set up a rotor so that two of us covered the whole of Kimberworth on weekends. It was exhausting.</pre>
+<p>As shared (<code>shareable/p07.txt</code>):</p>
+<pre class="term">[00:00:00] Interviewer: Thank you for joining me today. Could you start by telling me a little about your role?
+
+[00:00:04] Participant 7: Sure. My name is [Person 1] and I have worked as a community nurse in [Place 2] for about 11 years, mostly with the [Organisation 1].
+
+[00:00:14] Interviewer: And how did the pandemic change your day-to-day work?
+
+[00:00:17] Participant 7: Honestly, everything moved to the phone. My manager, [Person 2], set up a rotor so that two of us covered the whole of [Place 1] on weekends. It was exhausting.</pre>
+<p>The key, kept apart from the shareable files (<code>anonymisation/key.csv</code>; edit a replacement to write
+<code>[a town in the north]</code> instead, or empty it to keep the word):</p>
+<pre class="term">original,replacement,kind,source
+Sheffield Teaching Hospitals Trust,[Organisation 1],organisation,found
+Margaret Okafor,[Person 1],person,list
+Peter Lindqvist,[Person 2],person,found
+Amara Singh,[Person 3],person,found
+Kimberworth,[Place 1],place,list
+Rotherham,[Place 2],place,found
+Wath Road Clinic,[Place 3],place,found</pre>
+<p><a href="samples/p07-pseudonymised.txt">The whole shareable transcript</a>.</p>

@@ -1,0 +1,41 @@
+
+<p>The talk "Quantum Mechanics" by sri at the 35th Chaos Communication Congress (2018), from <a href="https://media.ccc.de/v/35c3-9792-quantum_mechanics">media.ccc.de</a> (CC BY 4.0): 57 minutes, a broadcast that cuts between the slides, the speaker's camera and the stage. Stills, transcript and notes below are adaptations of it under the same licence.</p>
+<pre class="term">$ local-transcripts lecture videos/quantum-mechanics.mp4 --project transcripts --prompt &quot;Hilbert space, eigenvalue, Schrödinger, Hamiltonian, bra-ket&quot;
+[1/1] quantum-mechanics.mp4:
+  transcribing 57.5 min of audio ...
+  ... 38%
+  ... 76%
+  words: 7820, transcribed in 121 s (mlx-whisper, whisper-large-v3-turbo, language en)
+  37 slides (202 camera or graphic moments set aside) -&gt; transcripts/quantum-mechanics/lecture.html
+For study notes with equations in LaTeX, ask your coding agent (the local-transcripts skill) to write them from notes-pack.md: that step sends the transcript and the stills to your AI provider.</pre>
+<p><code>lecture.html</code>: each slide's still with what was said while it was on screen:</p>
+<p><a href="samples/lecture.html"><img class="shot" src="../../assets/shots/local-transcripts/lecture.png"
+alt="Lecture page: a slide still with the transcript of what was said under it" width="760"></a></p>
+<p>Then one unattended Claude Code session (Claude Sonnet 5.5) with the skill installed got the request a student would
+type: write study notes with the equations in LaTeX. It took 188 seconds and cost
+$0.73; <code>notes check</code> then reported 37 of 37 slides referenced, 82 of 82 compile; 0 problem(s). One
+section of its <code>notes.md</code>, as written:</p>
+<pre class="term">## Slide 14: Crash Course: Complex Numbers (00:15:49)
+
+![Slide 14](slides/slide-014.png)
+
+The figure shows the complex plane with modulus $\rho$ and angle $\varphi$. The slide gives the definition, the polar form, addition (component-wise), multiplication (angles add, lengths multiply), the Cartesian product formula, and conjugation with the modulus. It closes with &quot;complex numbers make everything cool&quot; (Euler&#x27;s formula, the fundamental theorem of algebra, function theory).
+
+$$\mathbb{C} = \{a + bi \mid a, b \in \mathbb{R}\}, \quad i^2 = -1$$
+
+$$z = \rho\left(\cos\varphi + i\sin\varphi\right) = \rho\, e^{i\varphi}$$
+
+$$z_1 z_2 = \rho_1 \rho_2\, e^{i(\varphi_1 + \varphi_2)}$$
+
+$$(a + bi)(c + di) = (ac - bd) + i(ad + cb)$$
+
+$$(a + bi)^* = a - bi, \qquad |z| = \sqrt{z^* z}$$
+
+$$e^{ix} = \cos x + i \sin x$$
+
+The speaker added two facts: an algebraic equation has exactly as many complex solutions as its degree (counted correctly), and a complex function that is differentiable once is differentiable infinitely often.</pre>
+<p>And a page of <code>notes.pdf</code> from <code>notes tex --pdf</code>:</p>
+<p><a href="samples/notes.pdf"><img class="shot" src="../../assets/shots/local-transcripts/notes-page-03.png"
+alt="A page of the notes PDF: a slide still, the notes and equations typeset" width="760"></a></p>
+<p>Open them whole: <a href="samples/lecture.html">lecture.html</a>, <a href="samples/notes.md">notes.md</a>,
+<a href="samples/notes.pdf">notes.pdf</a>.</p>

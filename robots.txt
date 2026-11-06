@@ -4,5 +4,6 @@ Disallow: /tools/reference-verifier/samples/
 Disallow: /tools/paper-radar/samples/
 Disallow: /tools/research-starter-kit/samples/
 Disallow: /tools/every-comment-answered/samples/
+Disallow: /tools/local-transcripts/samples/
 
 Sitemap: https://the-aurora-lab.github.io/sitemap.xml

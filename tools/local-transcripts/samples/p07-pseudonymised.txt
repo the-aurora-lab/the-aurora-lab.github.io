@@ -1,0 +1,20 @@
+# Local Transcripts: p07.wav (00:00:54), language en, 2 speakers, pseudonymised (names replaced by tags)
+# Edit the words freely; keep each turn's [time] Speaker: at the start of its line.
+
+[00:00:00] Interviewer: Thank you for joining me today. Could you start by telling me a little about your role?
+
+[00:00:04] Participant 7: Sure. My name is [Person 1] and I have worked as a community nurse in [Place 2] for about 11 years, mostly with the [Organisation 1].
+
+[00:00:14] Interviewer: And how did the pandemic change your day-to-day work?
+
+[00:00:17] Participant 7: Honestly, everything moved to the phone. My manager, [Person 2], set up a rotor so that two of us covered the whole of [Place 1] on weekends. It was exhausting.
+
+[00:00:28] Interviewer: That sounds hard. Did you get any support from the trust?
+
+[00:00:32] Participant 7: Some. There was a well-being service run by a psychologist called [Person 3], and she was brilliant. But the waiting list was six weeks.
+
+[00:00:41] Interviewer: What would you change if you could?
+
+[00:00:43] Participant 7: More staff, obviously. And I would keep the Thursday team meetings at the [Place 3]. Those kept us sane.
+
+[00:00:51] Interviewer: Thank you. That is really helpful.

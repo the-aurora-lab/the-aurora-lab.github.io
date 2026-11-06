@@ -1,0 +1,84 @@
+{
+ "intro": "Measured once, on version 1.0.0, against recordings the tool was never tuned on, gathered and labelled by an independent agent that never ran it: 10 interviews (4.9 hours; CDC and NOAA podcasts, simulated clinical interviews, a meeting, an oral history, a telephone oral history; 2 to 6 speakers) and 6 lectures with their slide PDFs (FOSDEM, PAKE&rsquo;26, a quantum gravity seminar), all openly licensed. Each interview ran twice, with the number of speakers given and estimated, and with no names list, so only the name finder and the patterns worked. For the lectures, one Claude Code session per talk (Sonnet 5.5) wrote the notes, and a judge agent compared every still with the PDF and every equation with the builder&rsquo;s LaTeX. Intervals are 95%.",
+ "interview_head": [
+  "Interviews",
+  "Result",
+  "95% CI"
+ ],
+ "interview_rows": [
+  [
+   "People&rsquo;s names replaced in the shareable copy",
+   "<strong>86 / 96 (90%)</strong>",
+   "82\u201394%"
+  ],
+  [
+   "Places replaced",
+   "97 / 110 (88%)",
+   "81\u201393%"
+  ],
+  [
+   "Organisations replaced",
+   "101 / 115 (88%)",
+   "81\u201393%"
+  ],
+  [
+   "Word error rate (9 recordings with a verbatim reference)",
+   "8.3% on average (0.9\u201324.7%)",
+   ""
+  ],
+  [
+   "Words with the right speaker: two-person interviews, count given",
+   "0.975\u20130.997",
+   ""
+  ],
+  [
+   "Words with the right speaker: programmes with minor voices, count estimated",
+   "0.945\u20130.996",
+   ""
+  ],
+  [
+   "Processing time on an M3 Max",
+   "2.4 minutes per hour of audio",
+   ""
+  ]
+ ],
+ "interview_after": "<ul><li><strong>The speaker count.</strong> For two people, giving it is best (0.975\u20130.997 against 0.73\u20130.75 estimated). Where an announcer or a short clip adds voices that say a sentence or two, forcing that count split the main speakers (0.53\u20130.69) while the estimate found them; version 1.0.1 added <code>--max-speakers</code> for that case.</li><li><strong>What leaked:</strong> names Whisper wrote in lower case (&ldquo;nicole&rdquo;; matched since 1.0.1), long agency names worded differently, and names misheard as ordinary words (&ldquo;Fran&rdquo; as &ldquo;friend&rdquo;). Names on the published keep list (CDC, FDA, NOAA, US states) were kept as designed and not counted.</li><li><strong>Over-replacement:</strong> 199 of 511 replacements hit something that is not a name, mostly technical acronyms and Latin genus names (one acronym, 50 times); some were names the builder had not labelled. Clear them in <code>key.csv</code>.</li><li><strong>The failure:</strong> a loud, noisy 48-minute telephone recording gave 489 words; the speech filter heard almost no speech. Since 1.0.1 the whole recording is read in that case (6,915 words on this file). Fixes after the run are not re-measured; the next held-out set will.</li></ul>",
+ "lecture_head": [
+  "Lectures",
+  "Result",
+  "95% CI"
+ ],
+ "lecture_rows": [
+  [
+   "Slide pages shown that got a still",
+   "78 / 134 (58%)",
+   "50\u201366%"
+  ],
+  [
+   "\u2026 per talk",
+   "14/23, 21/25, 13/15, 13/17, 13/29, 4/25",
+   ""
+  ],
+  [
+   "Stills that are not slides",
+   "4 / 100",
+   ""
+  ],
+  [
+   "Notes passing <code>notes check</code>",
+   "6 / 6 (99 of 99 equations compile)",
+   ""
+  ],
+  [
+   "Equations correct in the notes, on slides that got a still",
+   "<strong>31 / 33 (94%)</strong>",
+   "80\u201398%"
+  ],
+  [
+   "Equations correct, all",
+   "32 / 48 (67%)",
+   "52\u201378%"
+  ]
+ ],
+ "lecture_after": "<p>The notes read what is on the stills well; the misses are slides with no still. Most uncaptured pages were section dividers and outline repeats, but one deck in light, thin grey text on white gave 4 of 25 stills: its slides read as camera footage. The transcript of such a talk is complete; only stills are missing. The notes cost $2.49 for the six talks.</p>"
+}

@@ -1,0 +1,15 @@
+$ local-transcripts interview recordings --speakers 2 --project transcripts
+[1/1] c01.wav:
+  transcribing 7.6 min of audio ...
+  words: 1228, transcribed in 19 s (mlx-whisper, whisper-large-v3-turbo, language en)
+  speakers: 2 (as given), found in 4 s
+  67 turns -> transcripts/c01/
+  pseudonymised (nothing to replace) -> transcripts/shareable/
+Check transcripts/anonymisation/suspects.csv and the key before sharing anything from transcripts/shareable/.
+
+$ local-transcripts speakers transcripts/c01
+S1  Speaker 1              34 turns,   3.2 min
+S2  Speaker 2              33 turns,   3.7 min
+
+$ local-transcripts speakers transcripts/c01 S1=Patient S2=Doctor
+Speakers updated; outputs rewritten (nothing to replace in the shareable copy).

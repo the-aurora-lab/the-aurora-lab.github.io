@@ -1,0 +1,307 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Local Transcripts: Interviews Ready to Code, Lectures to Study · Aurora Lab</title>
+  <meta name="description" content="Transcribe interviews and lectures on your own computer: who said what with timestamps, a pseudonymised copy for MAXQDA, NVivo, ATLAS.ti or QualCoder, and lectures laid out under their slides, with study notes and LaTeX equations when you ask your coding agent. Held-out evaluation published.">
+  <meta property="og:title" content="Local Transcripts: Interviews Ready to Code, Lectures to Study · Aurora Lab">
+  <meta property="og:description" content="Transcribe interviews and lectures on your own computer: who said what with timestamps, a pseudonymised copy for MAXQDA, NVivo, ATLAS.ti or QualCoder, and lectures laid out under their slides, with study notes and LaTeX equations when you ask your coding agent. Held-out evaluation published.">
+  <meta property="og:image" content="https://the-aurora-lab.github.io/assets/img/local-transcripts.png">
+  <meta property="og:url" content="https://the-aurora-lab.github.io/tools/local-transcripts/">
+  <link rel="canonical" href="https://the-aurora-lab.github.io/tools/local-transcripts/">
+  <meta name="theme-color" content="#0b1020">
+  <link rel="icon" type="image/png" href="../../assets/img/avatar.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../../assets/css/site.css">
+</head>
+<body>
+  <a class="skip" href="#main">Skip to content</a>
+  <header class="nav">
+    <div class="wrap nav-inner">
+      <a class="brand" href="../../" aria-label="Aurora Lab home">
+        <img src="../../assets/img/avatar.png" alt="" width="32" height="32">
+        <span>Aurora Lab</span>
+      </a>
+      <nav aria-label="Primary">
+        <a href="../../#skills">Skills</a>
+        <a href="../../#tools">Tools</a>
+        <a class="btn btn-small" href="#get-it">Get it</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main">
+    <section class="docs-hero">
+      <div class="aurora" aria-hidden="true"></div>
+      <div class="wrap">
+        <p class="crumbs"><a href="../../">Aurora Lab</a> / <a href="../../#tools">Tools</a> / Local Transcripts</p>
+        <h1>Local Transcripts: Interviews Ready to Code, Lectures to Study</h1>
+        <p class="lede">Your recordings, transcribed on your own computer. Interviews become who-said-what transcripts
+        with timestamps, a pseudonymised copy and files your analysis software imports. Lectures become the transcript
+        under each slide, and study notes with the equations in LaTeX when you ask your coding agent. Nothing leaves
+        your computer after a one-time model download.</p>
+        <ul class="meta" aria-label="Tool facts"><li>v1.0.3</li><li>Runs on your computer</li><li>MAXQDA · NVivo · ATLAS.ti · QualCoder</li><li>Claude Code skill included</li><li>$29 once · lab $99</li></ul>
+        <div class="cta">
+          <a class="btn" href="#an-interview">See an interview</a>
+          <a class="btn btn-ghost" href="#how-well">How well it works</a>
+        </div>
+      </div>
+    </section>
+
+    <div class="wrap docs">
+      <nav class="toc" aria-label="On this page">
+        <p>On this page</p>
+        <ol><li><a href="#what-it-does">What it does</a></li><li><a href="#privacy">What stays on your computer</a></li><li><a href="#an-interview">An interview</a></li><li><a href="#a-lecture">A lecture</a></li><li><a href="#software">Into your software</a></li><li><a href="#how-well">How well it works</a></li><li><a href="#get-it">Get it and start</a></li><li><a href="#limits">Limits</a></li></ol>
+      </nav>
+      <article class="prose-doc">
+
+<section id="what-it-does">
+<h2>What it does</h2>
+<h3>Interviews and focus groups</h3>
+<ul>
+<li><strong>Transcribes on your computer</strong> with Whisper large-v3-turbo: on the GPU of an Apple Silicon Mac
+(about 2 minutes for an hour of audio on an M3 Max) or on any CPU.</li>
+<li><strong>Finds who spoke when</strong> with pyannote's segmentation model and WeSpeaker voice prints, then gives
+every word its speaker. Give the number of speakers, or let it estimate them; name them (Interviewer, Participant 7)
+and merge or fix them afterwards.</li>
+<li><strong>Makes a pseudonymised copy</strong>: people, places, organisations, full dates, emails and phone numbers
+become <code>[Person 1]</code>, <code>[Place 2]</code>…, the same tag for the same person across every interview of
+the project. Your own list of names is matched even when Whisper misspells them. The key and the log stay apart from
+the shareable files; a list of suspects shows what to check by eye; <code>forget-key</code> deletes the link when
+the study no longer needs it.</li>
+<li><strong>Writes the files your software imports</strong>, timestamped and with speakers, and a review page where
+any time plays that moment of the recording and unsure words are underlined.</li>
+</ul>
+<h3>Lectures and seminars</h3>
+<ul>
+<li><strong>Lays the transcript out under a still of each slide</strong>, in the order shown. Camera cuts make no
+still, builds are followed to the fullest version, a slide shown twice keeps one still, and the slide is cropped out
+of a speaker-beside-slides layout.</li>
+<li><strong>Study notes, when you want them</strong>: your coding agent (Claude Code with the included skill) reads
+the stills and the transcript and writes notes with every equation in LaTeX; <code>notes check</code> confirms every
+slide is covered and every equation compiles, and <code>notes tex --pdf</code> makes a document.</li>
+</ul>
+</section>
+
+<section id="privacy">
+<h2>What stays on your computer</h2>
+<p><code>local-transcripts setup</code> downloads the models once, each from its publisher with a pinned checksum or
+revision: Whisper from huggingface.co, the speaker models and the name finder from github.com. After that <strong>no
+command uses the network</strong>: no account, no licence key, no telemetry. We ran an interview and a lecture with
+the network blocked by the operating system (macOS <code>sandbox-exec</code>, deny network): both finished.</p>
+<p>The one step that sends anything anywhere is optional and yours: <strong>lecture notes</strong> are written by your
+own coding agent, which reads the lecture's transcript and stills and so sends them to the AI service it runs on.
+Interview transcripts are never part of that; the included skill tells the agent not to open interview files and not
+to ask you for names.</p>
+</section>
+
+<section id="an-interview">
+<h2>An interview, start to finish</h2>
+
+<p>A mock GP consultation from <a href="https://github.com/babylonhealth/primock57">PriMock57</a> (Babylon Health, CC BY 4.0; a real clinician and an actor patient, recorded on separate channels and mixed here into one file), run with the released build on an Apple Silicon Mac. Nobody is named in it, so its shareable copy differs only in the header; the next example shows the pseudonymising.
+</p>
+<pre class="term">$ local-transcripts interview recordings --speakers 2 --project transcripts
+[1/1] c01.wav:
+  transcribing 7.6 min of audio ...
+  words: 1228, transcribed in 19 s (mlx-whisper, whisper-large-v3-turbo, language en)
+  speakers: 2 (as given), found in 4 s
+  67 turns -&gt; transcripts/c01/
+  pseudonymised (nothing to replace) -&gt; transcripts/shareable/
+Check transcripts/anonymisation/suspects.csv and the key before sharing anything from transcripts/shareable/.
+
+$ local-transcripts speakers transcripts/c01
+S1  Speaker 1              34 turns,   3.2 min
+S2  Speaker 2              33 turns,   3.7 min
+
+$ local-transcripts speakers transcripts/c01 S1=Patient S2=Doctor
+Speakers updated; outputs rewritten (nothing to replace in the shareable copy).</pre>
+<p>The opening of the transcript (<code>c01/c01.txt</code>, also the file you edit):</p>
+<pre class="term">[00:00:02] Patient: Hello. Hi.
+
+[00:00:08] Doctor: How can I help you this morning?
+
+[00:00:12] Patient: Hi. I&#x27;ve just had some diarrhoea for the last three days and it&#x27;s been affecting me. I need to stay close to the toilet and it&#x27;s been affecting my day-to-day activities.
+
+[00:00:25] Doctor: Yeah, I&#x27;m sorry to hear that. And when you say diarrhoea, what do you mean by diarrhoea? Do you mean you&#x27;re going to the toilet more often or are your stools more loose?
+
+[00:00:34] Patient: Yeah, so it&#x27;s like loose and watery stool, going to the toilet quite often, and like some pain in my lower stomach. Okay.
+
+[00:00:44] Doctor: And how many times a day are you going, let&#x27;s say, in the last couple of days?
+
+[00:00:48] Patient: Probably like six, seven times a day.
+
+[00:00:50] Doctor: Six, seven times a day. And you mentioned it&#x27;s mainly watery. Have you noticed any other things, like blood in your stools?</pre>
+<p>The review page: click a time to hear that moment, unsure words underlined (the recording itself is not
+included in the sample):</p>
+<p><a href="samples/review.html"><img class="shot" src="../../assets/shots/local-transcripts/review.png"
+alt="Review page: turns with speakers in colour, times on the left, unsure words underlined" width="760"></a></p>
+<p>For MAXQDA's focus-group import (<code>shareable/c01.maxqda.txt</code>):</p>
+<pre class="term">#00:00:02-7#
+
+Patient: Hello. Hi. #00:00:04-3#
+
+Doctor: How can I help you this morning? #00:00:11-8#
+
+Patient: Hi. I&#x27;ve just had some diarrhoea for the last three days and it&#x27;s been affecting me. I need to stay close to the toilet and it&#x27;s been affecting my day-to-day activities. #00:00:25-3#</pre>
+<p>For NVivo on Windows (<code>shareable/c01.nvivo.tsv</code>):</p>
+<pre class="term">Timespan	Speaker	Content
+00:00:02.7-00:00:04.3	Patient	Hello. Hi.
+00:00:08.4-00:00:11.8	Doctor	How can I help you this morning?
+00:00:12.6-00:00:25.3	Patient	Hi. I&#x27;ve just had some diarrhoea for the last three days and it&#x27;s been affecting me. I need to stay close to the toilet and it&#x27;s been affecting my day-to-day activities.</pre>
+<p>Open them whole: <a href="samples/c01-pseudonymised.txt">the transcript</a>,
+<a href="samples/c01-pseudonymised.docx">as Word</a>, <a href="samples/review.html">the review page</a>.</p>
+<h3>Pseudonymising</h3>
+<p>An interview we made up for this page, spoken by two macOS voices, with names planted in it; the researcher's names list gives two of them, and the name finder found the rest.
+</p>
+<pre class="term"># people the participant may name
+Margaret Okafor
+place: Kimberworth</pre>
+<pre class="term">$ local-transcripts interview recordings --speakers 2 --roles &quot;Interviewer,Participant 7&quot; --names names.txt --project transcripts
+Names list: 3 new line(s) copied into transcripts/anonymisation/names.txt (your own file is unchanged; the project keeps its own copy beside the key)
+[1/1] p07.wav:
+  transcribing 0.9 min of audio ...
+  words: 154, transcribed in 3 s (mlx-whisper, whisper-large-v3-turbo, language en)
+  speakers: 2 (as given), found in 1 s
+  9 turns -&gt; transcripts/p07/
+  pseudonymised (3 persons, 3 places, 1 organisation) -&gt; transcripts/shareable/
+Check transcripts/anonymisation/suspects.csv and the key before sharing anything from transcripts/shareable/.</pre>
+<p>As said (<code>p07/p07.txt</code>):</p>
+<pre class="term">[00:00:00] Interviewer: Thank you for joining me today. Could you start by telling me a little about your role?
+
+[00:00:04] Participant 7: Sure. My name is Margaret Okafor and I have worked as a community nurse in Rotherham for about 11 years, mostly with the Sheffield Teaching Hospitals Trust.
+
+[00:00:14] Interviewer: And how did the pandemic change your day-to-day work?
+
+[00:00:17] Participant 7: Honestly, everything moved to the phone. My manager, Peter Lindqvist, set up a rotor so that two of us covered the whole of Kimberworth on weekends. It was exhausting.</pre>
+<p>As shared (<code>shareable/p07.txt</code>):</p>
+<pre class="term">[00:00:00] Interviewer: Thank you for joining me today. Could you start by telling me a little about your role?
+
+[00:00:04] Participant 7: Sure. My name is [Person 1] and I have worked as a community nurse in [Place 2] for about 11 years, mostly with the [Organisation 1].
+
+[00:00:14] Interviewer: And how did the pandemic change your day-to-day work?
+
+[00:00:17] Participant 7: Honestly, everything moved to the phone. My manager, [Person 2], set up a rotor so that two of us covered the whole of [Place 1] on weekends. It was exhausting.</pre>
+<p>The key, kept apart from the shareable files (<code>anonymisation/key.csv</code>; edit a replacement to write
+<code>[a town in the north]</code> instead, or empty it to keep the word):</p>
+<pre class="term">original,replacement,kind,source
+Sheffield Teaching Hospitals Trust,[Organisation 1],organisation,found
+Margaret Okafor,[Person 1],person,list
+Peter Lindqvist,[Person 2],person,found
+Amara Singh,[Person 3],person,found
+Kimberworth,[Place 1],place,list
+Rotherham,[Place 2],place,found
+Wath Road Clinic,[Place 3],place,found</pre>
+<p><a href="samples/p07-pseudonymised.txt">The whole shareable transcript</a>.</p>
+
+</section>
+
+<section id="a-lecture">
+<h2>A lecture, start to finish</h2>
+
+<p>The talk "Quantum Mechanics" by sri at the 35th Chaos Communication Congress (2018), from <a href="https://media.ccc.de/v/35c3-9792-quantum_mechanics">media.ccc.de</a> (CC BY 4.0): 57 minutes, a broadcast that cuts between the slides, the speaker's camera and the stage. Stills, transcript and notes below are adaptations of it under the same licence.</p>
+<pre class="term">$ local-transcripts lecture videos/quantum-mechanics.mp4 --project transcripts --prompt &quot;Hilbert space, eigenvalue, Schrödinger, Hamiltonian, bra-ket&quot;
+[1/1] quantum-mechanics.mp4:
+  transcribing 57.5 min of audio ...
+  ... 38%
+  ... 76%
+  words: 7820, transcribed in 121 s (mlx-whisper, whisper-large-v3-turbo, language en)
+  37 slides (202 camera or graphic moments set aside) -&gt; transcripts/quantum-mechanics/lecture.html
+For study notes with equations in LaTeX, ask your coding agent (the local-transcripts skill) to write them from notes-pack.md: that step sends the transcript and the stills to your AI provider.</pre>
+<p><code>lecture.html</code>: each slide's still with what was said while it was on screen:</p>
+<p><a href="samples/lecture.html"><img class="shot" src="../../assets/shots/local-transcripts/lecture.png"
+alt="Lecture page: a slide still with the transcript of what was said under it" width="760"></a></p>
+<p>Then one unattended Claude Code session (Claude Sonnet 5.5) with the skill installed got the request a student would
+type: write study notes with the equations in LaTeX. It took 188 seconds and cost
+$0.73; <code>notes check</code> then reported 37 of 37 slides referenced, 82 of 82 compile; 0 problem(s). One
+section of its <code>notes.md</code>, as written:</p>
+<pre class="term">## Slide 14: Crash Course: Complex Numbers (00:15:49)
+
+![Slide 14](slides/slide-014.png)
+
+The figure shows the complex plane with modulus $\rho$ and angle $\varphi$. The slide gives the definition, the polar form, addition (component-wise), multiplication (angles add, lengths multiply), the Cartesian product formula, and conjugation with the modulus. It closes with &quot;complex numbers make everything cool&quot; (Euler&#x27;s formula, the fundamental theorem of algebra, function theory).
+
+$$\mathbb{C} = \{a + bi \mid a, b \in \mathbb{R}\}, \quad i^2 = -1$$
+
+$$z = \rho\left(\cos\varphi + i\sin\varphi\right) = \rho\, e^{i\varphi}$$
+
+$$z_1 z_2 = \rho_1 \rho_2\, e^{i(\varphi_1 + \varphi_2)}$$
+
+$$(a + bi)(c + di) = (ac - bd) + i(ad + cb)$$
+
+$$(a + bi)^* = a - bi, \qquad |z| = \sqrt{z^* z}$$
+
+$$e^{ix} = \cos x + i \sin x$$
+
+The speaker added two facts: an algebraic equation has exactly as many complex solutions as its degree (counted correctly), and a complex function that is differentiable once is differentiable infinitely often.</pre>
+<p>And a page of <code>notes.pdf</code> from <code>notes tex --pdf</code>:</p>
+<p><a href="samples/notes.pdf"><img class="shot" src="../../assets/shots/local-transcripts/notes-page-03.png"
+alt="A page of the notes PDF: a slide still, the notes and equations typeset" width="760"></a></p>
+<p>Open them whole: <a href="samples/lecture.html">lecture.html</a>, <a href="samples/notes.md">notes.md</a>,
+<a href="samples/notes.pdf">notes.pdf</a>.</p>
+
+</section>
+
+<section id="software">
+<h2>Into your analysis software</h2>
+<div class="doc-table"><table><thead><tr><th>Software</th><th>File</th><th>How</th></tr></thead><tbody><tr><td>MAXQDA</td><td><code>p07.txt</code> or <code>.docx</code></td><td>Import › Transcripts › Transcript with Timestamps, then the recording</td></tr><tr><td>MAXQDA, speakers as codes</td><td><code>p07.maxqda.txt</code></td><td>Import › Focus Group Transcripts (f4 timestamps <code>#hh:mm:ss-x#</code>)</td></tr><tr><td>NVivo, Windows</td><td><code>p07.nvivo.tsv</code></td><td>Open the audio, edit mode, Import Rows: tab-delimited, header row; map Timespan, Speaker, Content</td></tr><tr><td>NVivo, Mac</td><td><code>p07.maxqda.txt</code></td><td>Import › Files › Transcript Rows</td></tr><tr><td>ATLAS.ti</td><td><code>p07.docx</code> or <code>.vtt</code></td><td>Import Transcript with the recording; the .vtt codes each speaker</td></tr><tr><td>QualCoder</td><td><code>p07.txt</code></td><td>Paste into the recording's transcript; <code>[hh:mm:ss]</code> and <code>Name:</code> are recognised</td></tr><tr><td>Anything else</td><td><code>.srt</code>, <code>.vtt</code>, <code>.csv</code></td><td>Subtitles, spreadsheets, R, Python</td></tr></tbody></table></div>
+<p>The formats follow each vendor's manual (2026); put the recording beside the transcript with the same base name
+and the software finds it. We did not import into every program ourselves.</p>
+</section>
+
+<section id="how-well">
+<h2>How well it works</h2>
+<p>Measured once, on version 1.0.0, against recordings the tool was never tuned on, gathered and labelled by an independent agent that never ran it: 10 interviews (4.9 hours; CDC and NOAA podcasts, simulated clinical interviews, a meeting, an oral history, a telephone oral history; 2 to 6 speakers) and 6 lectures with their slide PDFs (FOSDEM, PAKE&rsquo;26, a quantum gravity seminar), all openly licensed. Each interview ran twice, with the number of speakers given and estimated, and with no names list, so only the name finder and the patterns worked. For the lectures, one Claude Code session per talk (Sonnet 5.5) wrote the notes, and a judge agent compared every still with the PDF and every equation with the builder&rsquo;s LaTeX. Intervals are 95%.</p>
+<div class="doc-table"><table><thead><tr><th>Interviews</th><th>Result</th><th>95% CI</th></tr></thead><tbody><tr><td>People&rsquo;s names replaced in the shareable copy</td><td><strong>86 / 96 (90%)</strong></td><td>82–94%</td></tr><tr><td>Places replaced</td><td>97 / 110 (88%)</td><td>81–93%</td></tr><tr><td>Organisations replaced</td><td>101 / 115 (88%)</td><td>81–93%</td></tr><tr><td>Word error rate (9 recordings with a verbatim reference)</td><td>8.3% on average (0.9–24.7%)</td><td></td></tr><tr><td>Words with the right speaker: two-person interviews, count given</td><td>0.975–0.997</td><td></td></tr><tr><td>Words with the right speaker: programmes with minor voices, count estimated</td><td>0.945–0.996</td><td></td></tr><tr><td>Processing time on an M3 Max</td><td>2.4 minutes per hour of audio</td><td></td></tr></tbody></table></div>
+<ul><li><strong>The speaker count.</strong> For two people, giving it is best (0.975–0.997 against 0.73–0.75 estimated). Where an announcer or a short clip adds voices that say a sentence or two, forcing that count split the main speakers (0.53–0.69) while the estimate found them; version 1.0.1 added <code>--max-speakers</code> for that case.</li><li><strong>What leaked:</strong> names Whisper wrote in lower case (&ldquo;nicole&rdquo;; matched since 1.0.1), long agency names worded differently, and names misheard as ordinary words (&ldquo;Fran&rdquo; as &ldquo;friend&rdquo;). Names on the published keep list (CDC, FDA, NOAA, US states) were kept as designed and not counted.</li><li><strong>Over-replacement:</strong> 199 of 511 replacements hit something that is not a name, mostly technical acronyms and Latin genus names (one acronym, 50 times); some were names the builder had not labelled. Clear them in <code>key.csv</code>.</li><li><strong>The failure:</strong> a loud, noisy 48-minute telephone recording gave 489 words; the speech filter heard almost no speech. Since 1.0.1 the whole recording is read in that case (6,915 words on this file). Fixes after the run are not re-measured; the next held-out set will.</li></ul>
+<div class="doc-table"><table><thead><tr><th>Lectures</th><th>Result</th><th>95% CI</th></tr></thead><tbody><tr><td>Slide pages shown that got a still</td><td>78 / 134 (58%)</td><td>50–66%</td></tr><tr><td>… per talk</td><td>14/23, 21/25, 13/15, 13/17, 13/29, 4/25</td><td></td></tr><tr><td>Stills that are not slides</td><td>4 / 100</td><td></td></tr><tr><td>Notes passing <code>notes check</code></td><td>6 / 6 (99 of 99 equations compile)</td><td></td></tr><tr><td>Equations correct in the notes, on slides that got a still</td><td><strong>31 / 33 (94%)</strong></td><td>80–98%</td></tr><tr><td>Equations correct, all</td><td>32 / 48 (67%)</td><td>52–78%</td></tr></tbody></table></div>
+<p>The notes read what is on the stills well; the misses are slides with no still. Most uncaptured pages were section dividers and outline repeats, but one deck in light, thin grey text on white gave 4 of 25 stills: its slides read as camera footage. The transcript of such a talk is complete; only stills are missing. The notes cost $2.49 for the six talks.</p>
+</section>
+
+<section id="get-it">
+<h2>Get it and start</h2>
+<p><strong>Coming to Gumroad and Polar: $29 once for one person, $99 for a lab of up to five.</strong> A zip with the Python wheel (the <code>local-transcripts</code> command and the Claude Code skill), a quickstart and the full guide. Updates for 12 months. No licence key.</p>
+<pre><code>pip install "local_transcripts-1.0.3-py3-none-any.whl[mac]"   # Apple Silicon; without [mac] elsewhere
+local-transcripts setup                                  # once: the models, about 2 GB
+local-transcripts interview recordings/ --speakers 2 --roles "Interviewer,Participant" --names names.txt
+local-transcripts lecture lecture-07.mp4
+local-transcripts setup skill                            # then ask Claude Code to "transcribe the interviews in recordings/"</code></pre>
+<p>Python 3.10–3.13 and ffmpeg. macOS, Windows and Linux. Works without Claude Code.</p>
+</section>
+
+<section id="limits">
+<h2>Limits</h2>
+<ul>
+<li>Transcripts are drafts: names, numbers and technical terms need a human check, which the review page is made for.
+Overlapping speech goes to one speaker.</li>
+<li>Speaker labels are best with the number of speakers given; similar voices, phone lines and meetings of many people
+give more mistakes.</li>
+<li>Pseudonymisation is a strong first pass, not a guarantee: read the shareable copy before sharing. Indirect
+identifiers (a job title, a rare event) are not detected, and a name Whisper misheard badly may be missed.</li>
+<li>Slide stills need slides on screen; a filmed whiteboard gives none, and a scrolled document gives one still per
+scroll stop.</li>
+<li>Name finders for English, German, Spanish and French; other languages use a multilingual one.</li>
+<li>Works on files you have; it does not download from YouTube or the web.</li>
+<li>Tested on macOS (Apple Silicon) with Python 3.10–3.14 and ffmpeg 8; Windows and Linux are untested.</li>
+</ul>
+</section>
+
+      </article>
+    </div>
+  </main>
+
+  <footer class="footer">
+    <div class="wrap footer-inner">
+      <span class="brand"><img src="../../assets/img/avatar.png" alt="" width="24" height="24"> Aurora Lab</span>
+      <nav aria-label="Footer">
+        <a href="https://www.agensi.io/creators/aurora-lab">Skills on Agensi</a>
+        <a href="https://github.com/the-aurora-lab">GitHub</a>
+        <a href="https://x.com/theauroralab">X</a>
+      </nav>
+    </div>
+  </footer>
+  <script data-goatcounter="https://auroralabskills.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
+</body>
+</html>
