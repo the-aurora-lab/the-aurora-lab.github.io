@@ -17,7 +17,10 @@ OUT = SITE / "tools" / "local-transcripts" / "index.html"
 RUNS = HERE / "runs"
 VERSION = "1.0.3"
 PRICE = "$29 once · lab $99"
-STORES = {}   # filled when the owner publishes (step 19)
+STORES = {    # published by the owner 2026-11-06 (step 19)
+    "Gumroad": "https://theauroralab.gumroad.com/l/local-transcripts",
+    "Polar": "https://buy.polar.sh/polar_cl_RVhDknqZx3cFxYTuzCnuFCxxkXrRFyZpKMX6M1dRMmD",
+}
 GOATCOUNTER = ('<script data-goatcounter="https://auroralabskills.goatcounter.com/count" async '
                'src="//gc.zgo.at/count.js"></script>')
 HELDOUT = json.loads((RUNS / "heldout.json").read_text(encoding="utf-8")) if (RUNS / "heldout.json").exists() else {}
