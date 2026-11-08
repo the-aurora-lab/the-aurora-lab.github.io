@@ -1,0 +1,7 @@
+$ sandbox-exec -p '(version 1)(allow default)(deny network*)' curl -s -m 5 https://huggingface.co -o /dev/null; echo $?
+6
+$ HF_HUB_OFFLINE=1 sandbox-exec -p '(version 1)(allow default)(deny network*)' \
+    whisper-env/bin/python transcribe.py first-minute.wav
+language: en, audio: 60 s
+[00:00:02] Hello. Hello, how are you? Hi. Shall we stop? Yeah, okay. Hello. Good morning, sir. How can I help you this morning?
+[00:00:12] Hi. I've just had some diarrhoea for the last three days, and it's been affecting me. I need to stay close to the toilet, and yeah, it's been affecting my day-to-day activities.

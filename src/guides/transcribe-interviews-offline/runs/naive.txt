@@ -1,0 +1,5 @@
+$ python3 -m venv naive-env
+$ naive-env/bin/pip install faster-whisper
+$ naive-env/bin/python transcribe.py interview.wav
+...
+TypeError: open() got an unexpected keyword argument 'metadata_errors'

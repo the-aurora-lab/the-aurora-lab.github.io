@@ -1,0 +1,14 @@
+$ local-transcripts interview recordings --speakers 2 --project transcripts
+[1/1] c01.wav:
+  transcribing 7.6 min of audio ...
+  words: 1228, transcribed in 19 s (mlx-whisper, whisper-large-v3-turbo, language en)
+$ head -9 transcripts/shareable/c01.txt
+# Local Transcripts: c01.wav (00:07:37), language en, 2 speakers, pseudonymised (names replaced by tags)
+# Edit the words freely; keep each turn's [time] Speaker: at the start of its line.
+
+[00:00:02] Patient: Hello. Hi.
+
+[00:00:08] Doctor: How can I help you this morning?
+
+[00:00:12] Patient: Hi. I've just had some diarrhoea for the last three days and it's been affecting me. I need to stay close to the toilet and it's been affecting my day-to-day activities.
+

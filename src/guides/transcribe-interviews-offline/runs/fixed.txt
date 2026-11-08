@@ -1,0 +1,18 @@
+$ python3 -m venv whisper-env
+$ whisper-env/bin/pip install faster-whisper "av<17"
+$ whisper-env/bin/pip list | grep -E '^(faster-whisper|av|ctranslate2) '
+av                16.1.0
+ctranslate2       4.8.5
+faster-whisper    1.2.1
+$ time whisper-env/bin/python transcribe.py interview.wav > interview.txt
+
+real	2m31.399s
+user	8m11.287s
+sys	0m18.926s
+$ head -6 interview.txt
+language: en, audio: 458 s
+[00:00:02] Hello. Hello, how are you? Hi. Shall we stop? Yeah, okay. Hello. Good morning, sir. How can I help you this morning?
+[00:00:12] Hi. I've just had some diarrhoea for the last three days, and it's been affecting me. I need to stay close to the toilet, and yeah, it's been affecting my day-to-day activities.
+[00:00:25] Yeah, I'm sorry to hear that. And when you say diarrhoea, what do you mean by diarrhoea? Do you mean you're going to the toilet more often, or are your stools more loose?
+[00:00:34] Yeah, so it's like loose and watery stool, going to the toilet quite often, and like some pain in my lower stomach.
+[00:00:43] Okay. And how many times a day are you going, let's say, over the last couple of days?
