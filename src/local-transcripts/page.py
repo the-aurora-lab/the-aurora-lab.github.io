@@ -10,7 +10,11 @@ come from the tool's held-out results (scored once). Store links live in STORES;
 import html
 import json
 from pathlib import Path
+import importlib.util as _ilu
 
+_spec = _ilu.spec_from_file_location("seo", Path(__file__).resolve().parent.parent / "seo.py")
+_seo = _ilu.module_from_spec(_spec)
+_spec.loader.exec_module(_seo)
 HERE = Path(__file__).resolve().parent
 SITE = HERE.parent.parent
 OUT = SITE / "tools" / "local-transcripts" / "index.html"
@@ -178,6 +182,8 @@ DESC = ("Transcribe interviews and lectures on your own computer: who said what 
         "equations when you ask your coding agent. Held-out evaluation published.")
 BUY_CTA = '\n          <a class="btn" href="#get-it">Get it, from $29</a>' if STORES else ""
 
+LD = _seo.software_ld("local-transcripts", TITLE, DESC)
+
 PAGE = f"""<!doctype html>
 <html lang="en">
 <head>
@@ -190,6 +196,7 @@ PAGE = f"""<!doctype html>
   <meta property="og:image" content="https://the-aurora-lab.github.io/assets/img/local-transcripts.png">
   <meta property="og:url" content="https://the-aurora-lab.github.io/tools/local-transcripts/">
   <link rel="canonical" href="https://the-aurora-lab.github.io/tools/local-transcripts/">
+  {LD}
   <meta name="theme-color" content="#0b1020">
   <link rel="icon" type="image/png" href="../../assets/img/avatar.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">

@@ -10,7 +10,11 @@ scored once). Store links live in STORES; rerun after any change.
 import html
 import json
 from pathlib import Path
+import importlib.util as _ilu
 
+_spec = _ilu.spec_from_file_location("seo", Path(__file__).resolve().parent.parent / "seo.py")
+_seo = _ilu.module_from_spec(_spec)
+_spec.loader.exec_module(_seo)
 HERE = Path(__file__).resolve().parent
 SITE = HERE.parent.parent
 OUT = SITE / "tools" / "research-starter-kit" / "index.html"
@@ -221,6 +225,8 @@ DESC = ("Rules your AI agent reads, guards that keep raw data, the paper and the
         "published.")
 BUY_CTA = '\n          <a class="btn" href="#get-it">Get it, pay what you want</a>' if STORES else ""
 
+LD = _seo.software_ld("research-starter-kit", TITLE, DESC)
+
 PAGE = f"""<!doctype html>
 <html lang="en">
 <head>
@@ -233,6 +239,7 @@ PAGE = f"""<!doctype html>
   <meta property="og:image" content="https://the-aurora-lab.github.io/assets/img/research-starter-kit.png">
   <meta property="og:url" content="https://the-aurora-lab.github.io/tools/research-starter-kit/">
   <link rel="canonical" href="https://the-aurora-lab.github.io/tools/research-starter-kit/">
+  {LD}
   <meta name="theme-color" content="#0b1020">
   <link rel="icon" type="image/png" href="../../assets/img/avatar.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">

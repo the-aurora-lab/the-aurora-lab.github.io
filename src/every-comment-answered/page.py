@@ -10,7 +10,11 @@ scored once). Store links live in STORES; rerun after any change.
 import html
 import json
 from pathlib import Path
+import importlib.util as _ilu
 
+_spec = _ilu.spec_from_file_location("seo", Path(__file__).resolve().parent.parent / "seo.py")
+_seo = _ilu.module_from_spec(_spec)
+_spec.loader.exec_module(_seo)
 HERE = Path(__file__).resolve().parent
 SITE = HERE.parent.parent
 OUT = SITE / "tools" / "every-comment-answered" / "index.html"
@@ -255,6 +259,8 @@ DESC = ("Split the decision letter into numbered comments, see every change in y
         "promised change is there. It never writes your replies. Held-out evaluation published.")
 BUY_CTA = '\n          <a class="btn" href="#get-it">Get it, $19</a>' if STORES else ""
 
+LD = _seo.software_ld("every-comment-answered", TITLE, DESC)
+
 PAGE = f"""<!doctype html>
 <html lang="en">
 <head>
@@ -267,6 +273,7 @@ PAGE = f"""<!doctype html>
   <meta property="og:image" content="https://the-aurora-lab.github.io/assets/img/every-comment-answered.png">
   <meta property="og:url" content="https://the-aurora-lab.github.io/tools/every-comment-answered/">
   <link rel="canonical" href="https://the-aurora-lab.github.io/tools/every-comment-answered/">
+  {LD}
   <meta name="theme-color" content="#0b1020">
   <link rel="icon" type="image/png" href="../../assets/img/avatar.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
